@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ГУСЬ ПЕРЕВОДИЛА — видеоконвейер</title>
+<link rel="stylesheet" href="/static/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪿</text></svg>">
+</head>
+<body data-page="index">
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="/">
+      <span class="brand__mark">🪿</span>
+      <span class="brand__text">
+        <b>ГУСЬ ПЕРЕВОДИЛА</b>
+        <small>видеоконвейер для Shorts</small>
+      </span>
+    </a>
+
+    <nav class="nav">
+      <a href="/" class="nav__link {{ 'is-active' if active == 'run' }}">Сборка</a>
+      <a href="/results" class="nav__link {{ 'is-active' if active == 'results' }}">Готовые ролики</a>
+    </nav>
+
+    <div class="topbar__right">
+      <span class="status" id="conn"><i class="dot"></i><span>соединение…</span></span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap layout">
+
+  <!-- ================= FORM ================= -->
+  <section class="col-main">
+
+    <form id="runForm" class="card" autocomplete="off">
+
+      <!-- 1. SOURCE -->
+      <div class="card__head">
+        <span class="step">1</span>
+        <div>
+          <h2>Источник</h2>
+          <p>Перетащите b-roll или укажите ссылку</p>
+        </div>
+      </div>
+
+      <div class="card__body">
+        <div class="drop" id="drop">
+          <input type="file" id="fileInput" accept="video/*,.mp4,.webm,.mov,.mkv" hidden>
+          <div class="drop__icon">⬆</div>
+          <div class="drop__title">Перетащите видео сюда</div>
+          <div class="drop__sub">или <button type="button" class="link" id="pickBtn">выберите файл</button> · mp4, webm, mov</div>
+          <div class="drop__file" id="dropFile" hidden></div>
+        </div>
+
+        <div class="row row--2">
+          <label class="field">
+            <span class="field__label">Ссылка на b-roll <em>v.redd.it</em></span>
+            <input type="text" name="video_url" placeholder="https://v.redd.it/xxxxxx" autocomplete="off">
+          </label>
+          <label class="field">
+            <span class="field__label">Локальный путь к файлу</span>
+            <input type="text" name="asset" placeholder="D:\AI\F5-TTS\assets\news.mp4" autocomplete="off">
+          </label>
+        </div>
+      </div>
+
+      <!-- 2. SCRIPT -->
+      <div class="card__head">
+        <span class="step">2</span>
+        <div>
+          <h2>Сценарий</h2>
+          <p>Текст закадрового голоса — по нему соберётся озвучка</p>
+        </div>
+      </div>
+
+      <div class="card__body">
+        <textarea name="script" rows="9" spellcheck="false"
+          placeholder="Вставьте готовый сценарий. Проверка оригинальности пройдёт автоматически перед публикацией."></textarea>
+        <div class="hint">
+          <span id="scriptLen">0</span> символов ·
+          <span id="scriptWords">0</span> слов ·
+          ориентир 60–90 секунд озвучки
+        </div>
+      </div>
+
+      <!-- 3. SETTINGS -->
+      <div class="card__head">
+        <span class="step">3</span>
+        <div>
+          <h2>Настройки</h2>
+          <p>Монтаж, ведущий и публикация</p>
+        </div>
+      </div>
+
+      <div class="card__body">
+        <div class="row row--2">
+          <label class="field">
+            <span class="field__label">Сегменты <em>start:длительность,…</em></span>
+            <input type="text" name="segments" value="0.8:2.9,5.0:2.9,9.5:2.9,17.5:2.9,22.5:2.9">
+          </label>
+          <label class="field">
+            <span class="field__label">Темп речи <em>factor</em></span>
+            <input type="number" name="factor" value="1.15" step="0.05" min="0.8" max="2.0">
+          </label>
+        </div>
+
+        <div class="row row--3">
+          <label class="field">
+            <span class="field__label">Приватность</span>
+            <select name="privacy">
+              <option value="unlisted" selected>По ссылке</option>
+              <option value="public">Открытый</option>
+              <option value="private">Приватный</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field__label">Категория YouTube</span>
+            <select name="category">
+              <option value="25" selected>25 — Новости</option>
+              <option value="27">27 — Образование</option>
+              <option value="24">24 — Развлечения</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field__label">Музыка</span>
+            <select name="bed">
+              <option value="auto" selected>Авто</option>
+              <option value="am">Am</option>
+              <option value="c">C</option>
+              <option value="em">Em</option>
+              <option value="dm">Dm</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="row row--2">
+          <label class="field">
+            <span class="field__label">Позиция гуся-соведущего</span>
+            <select name="goose_pos">
+              <option value="top-right" selected>Справа сверху</option>
+              <option value="mid-right">Справа по центру</option>
+              <option value="low-right">Справа снизу</option>
+              <option value="top-left">Слева сверху</option>
+              <option value="mid-left">Слева по центру</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field__label">Sharpen для мелкого b-roll</span>
+            <input type="text" name="sharpen" placeholder="напр. 5:5:1.0:5:5:0.0">
+          </label>
+        </div>
+
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="no_goose"><span>Без гуся-соведущего</span></label>
+          <label class="check"><input type="checkbox" name="skip_voice"><span>Готовая озвучка (не синтезировать)</span></label>
+          <label class="check"><input type="checkbox" name="skip_download"><span>Не скачивать b-roll</span></label>
+          <label class="check"><input type="checkbox" name="skip_publish"><span>Не публиковать</span></label>
+        </div>
+
+        <details class="advanced">
+          <summary>Продвинутое</summary>
+          <label class="field">
+            <span class="field__label">Файл брифа</span>
+            <input type="text" name="brief_file" placeholder="D:\AI\VIDEO_PIPELINE\brief.txt">
+          </label>
+        </details>
+      </div>
+
+      <!-- RUN -->
+      <div class="card__foot">
+        <button type="submit" class="btn btn--run" id="runBtn">
+          <span class="btn__label">Собрать ролик</span>
+          <span class="btn__sub">~5–8 минут · F5-TTS + FFmpeg</span>
+        </button>
+        <button type="button" class="btn btn--ghost" id="clearBtn">Очистить</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ================= LOG ================= -->
+  <aside class="col-side">
+    <div class="card card--log">
+      <div class="card__head card__head--tight">
+        <span class="step step--live" id="liveDot">●</span>
+        <div>
+          <h2>Лог конвейера</h2>
+          <p id="logMeta">ожидание запуска</p>
+        </div>
+      </div>
+
+      <div class="terminal" id="log">
+        <div class="terminal__body" id="logBody">
+          <div class="term-line term-line--dim">// Здесь появится вывод auto_news.py в реальном времени</div>
+        </div>
+      </div>
+
+      <div class="card__foot card__foot--tight">
+        <button type="button" class="btn btn--mini" id="copyLog">Копировать лог</button>
+        <button type="button" class="btn btn--mini" id="clearLog">Очистить</button>
+      </div>
+    </div>
+
+    <div class="card card--stats">
+      <div class="stat"><span class="stat__num" id="statVideos">—</span><span class="stat__label">готовых роликов</span></div>
+      <div class="stat"><span class="stat__num" id="statJobs">0</span><span class="stat__label">запусков сегодня</span></div>
+      <a class="btn btn--ghost btn--block" href="/results">Открыть готовые ролики →</a>
+    </div>
+  </aside>
+
+</main>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

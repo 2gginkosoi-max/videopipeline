@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Готовые ролики — ГУСЬ ПЕРЕВОДИЛА</title>
+<link rel="stylesheet" href="/static/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪿</text></svg>">
+</head>
+<body data-page="results">
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="/">
+      <span class="brand__mark">🪿</span>
+      <span class="brand__text">
+        <b>ГУСЬ ПЕРЕВОДИЛА</b>
+        <small>видеоконвейер для Shorts</small>
+      </span>
+    </a>
+
+    <nav class="nav">
+      <a href="/" class="nav__link {{ 'is-active' if active == 'run' }}">Сборка</a>
+      <a href="/results" class="nav__link {{ 'is-active' if active == 'results' }}">Готовые ролики</a>
+    </nav>
+
+    <div class="topbar__right">
+      <span class="status" id="conn"><i class="dot"></i><span>соединение…</span></span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="pagehead">
+    <div>
+      <h1>Готовые ролики</h1>
+      <p>Файлы из <code>output/</code> и архива <code>output/archive/</code></p>
+    </div>
+    <div class="pagehead__actions">
+      <button type="button" class="btn btn--ghost" id="openFolder">📂 Открыть папку output</button>
+      <button type="button" class="btn btn--mini" id="reload">Обновить</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid">
+    {% if videos %}
+      {% for v in videos %}
+      <article class="vcard">
+        <div class="vcard__thumb" data-video="{{ v.name }}">
+          <video data-src="/api/video/{{ v.name }}" preload="none" muted loop playsinline></video>
+          <button class="vcard__play" type="button" aria-label="Смотреть">▶</button>
+          {% if v.archived %}<span class="badge badge--arch">архив</span>{% endif %}
+        </div>
+        <div class="vcard__body">
+          <h3 title="{{ v.name }}">{{ v.name }}</h3>
+          <div class="vcard__meta">
+            <span>{{ v.size_h }}</span>
+            <span class="sep">·</span>
+            <span>{{ v.mtime }}</span>
+          </div>
+        </div>
+        <div class="vcard__foot">
+          <a class="btn btn--mini" href="/api/download/{{ v.name }}">Скачать</a>
+          <button type="button" class="btn btn--mini btn--ghost"
+                  data-open="{{ v.folder }}">В папке</button>
+        </div>
+      </article>
+      {% endfor %}
+    {% else %}
+      <div class="empty">
+        <div class="empty__icon">🎬</div>
+        <h3>Пока пусто</h3>
+        <p>Соберите первый ролик на главной странице — он появится здесь.</p>
+        <a class="btn btn--run" href="/">Перейти к сборке</a>
+      </div>
+    {% endif %}
+  </div>
+
+</main>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
