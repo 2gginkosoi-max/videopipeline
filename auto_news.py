@@ -113,7 +113,19 @@ def main():
                     help="где в кадре живёт гусь-соведущий")
     ap.add_argument("--no-goose", action="store_true",
                     help="не добавлять гуся-соведущего (по умолчанию добавляется)")
+    ap.add_argument("--voice-ref", default="",
+                    help="референс голоса для F5-TTS (wav 5-10 c) — свой клон")
+    ap.add_argument("--voice-ref-text", default="",
+                    help="точный текст референса (если задан --voice-ref)")
+    ap.add_argument("--final", default="",
+                    help="куда сохранить готовый ролик (по умолчанию output\\final_video.mp4)")
     a = ap.parse_args()
+
+    # Финальный файл можно перенаправить (веб-интерфейс: свой файл на пользователя).
+    final_path = Path(a.final) if a.final else Path(FINAL)
+    final_str = str(final_path)
+    final_goose = str(final_path.with_name(final_path.stem + "_goose.mp4"))
+    final_path.parent.mkdir(parents=True, exist_ok=True)
 
     asset = Path(a.asset)
 
@@ -154,7 +166,13 @@ def main():
         run([PY, rf"{VP}\prep_voice.py", "--src", a.script_file,
              "--voice-out", VOICE_TXT, "--script-out", SCRIPT_CLEAN,
              "--overrides", STRESS_OVR], "Подготовка текста (ударения RUAccent)")
-        run([PY, rf"{F5}\say_f5.py", "--file", VOICE_TXT], "Озвучка F5-TTS")
+        say_cmd = [PY, rf"{F5}\say_f5.py", "--file", VOICE_TXT]
+        if a.voice_ref and Path(a.voice_ref).exists():
+            say_cmd += ["--ref", a.voice_ref]
+            if a.voice_ref_text:
+                say_cmd += ["--ref-text", a.voice_ref_text]
+            print(f"[VOICE] свой голос: {a.voice_ref}")
+        run(say_cmd, "Озвучка F5-TTS")
 
     # 4. ускорение
     run([PY, rf"{VP}\speed_up.py", "--in", VOICEOVER, "--out", VOICEOVER_FAST,
@@ -181,7 +199,7 @@ def main():
     # 9.5 АРХИВ предыдущего ролика. Монтаж всегда пишет в output\final_video.mp4,
     # поэтому без архива готовый ролик прошлого выпуска исчезает (так потерялся
     # ролик про робота Рокки). Сохраняем копию до перезаписи.
-    prev = Path(FINAL)
+    prev = final_path
     if prev.exists():
         archive = prev.parent / "archive"
         archive.mkdir(parents=True, exist_ok=True)
@@ -210,7 +228,7 @@ def main():
         pass
     compose_cmd = ([PY, rf"{VP}\compose_segments.py", "--source", str(asset),
                     "--audio", VOICEOVER_MIX, "--ass", SUBS_ASS] + extra +
-                   ["--segments", a.segments, "--out", FINAL])
+                   ["--segments", a.segments, "--out", final_str])
     if a.sharpen:
         compose_cmd += ["--sharpen", a.sharpen]
     run(compose_cmd, "Монтаж видео")
@@ -225,18 +243,18 @@ def main():
         print(f"\n[WARN] нет клипа гуся: {a.goose_file} — ролик без гуся")
     else:
         rc_goose = run_allow_fail(
-            [PY, rf"{VP}\goose_overlay.py", "--video", FINAL, "--goose", a.goose_file,
-             "--out", FINAL_GOOSE, "--pos", a.goose_pos],
+            [PY, rf"{VP}\goose_overlay.py", "--video", final_str, "--goose", a.goose_file,
+             "--out", final_goose, "--pos", a.goose_pos],
             "Гусь-соведущий (круглый оверлей)")
-        if rc_goose == 0 and Path(FINAL_GOOSE).exists():
-            os.replace(FINAL_GOOSE, FINAL)     # атомарная подмена готового ролика
-            print(f"[GOOSE] гусь вписан в {FINAL}")
+        if rc_goose == 0 and Path(final_goose).exists():
+            os.replace(final_goose, final_str)     # атомарная подмена готового ролика
+            print(f"[GOOSE] гусь вписан в {final_str}")
         else:
             print("[WARN] гусь не вписан — ролик без него")
 
     # 11. автопроверка оригинальности (Правило 5)
     rc = run_allow_fail([PY, rf"{VP}\originality_check.py", "--asset", str(asset),
-                         "--video", FINAL, "--overlays", "",
+                         "--video", final_str, "--overlays", "",
                          "--visual-state", "on"],
                         "Автопроверка оригинальности")
 
@@ -247,7 +265,7 @@ def main():
         print("[BLOCK] Публикация запрещена: автопроверка оригинальности НЕ пройдена.")
         sys.exit(1)
     else:
-        run([PY, rf"{VP}\publish.py", "--video", FINAL, "--privacy", a.privacy,
+        run([PY, rf"{VP}\publish.py", "--video", final_str, "--privacy", a.privacy,
              "--category", a.category, "--wait"], "Публикация")
 
     print("\n[DONE] Конвейер завершён.")

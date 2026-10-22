@@ -58,6 +58,11 @@ output/archive/*
 web/uploads/*
 !web/uploads/.gitkeep
 
+# ===== Web: база, сессии, пользовательские файлы =====
+web/data/
+web/users/
+web/voices/user/
+
 # ===== Скачанный b-roll (не наш исходник) =====
 temp_news/
 assets_news/

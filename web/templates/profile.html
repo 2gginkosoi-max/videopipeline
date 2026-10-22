@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Профиль — ГУСЬ ПЕРЕВОДИЛА</title>
+<link rel="stylesheet" href="/static/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪿</text></svg>">
+</head>
+<body data-page="profile">
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="/">
+      <span class="brand__mark">🪿</span>
+      <span class="brand__text">
+        <b>ГУСЬ ПЕРЕВОДИЛА</b>
+        <small>видеоконвейер для Shorts</small>
+      </span>
+    </a>
+    <nav class="nav">
+      <a href="/" class="nav__link">Сборка</a>
+      <a href="/results" class="nav__link">Архив</a>
+      <a href="/profile" class="nav__link is-active">Профиль</a>
+    </nav>
+    <div class="topbar__right">
+      <span class="status" id="conn"><i class="dot"></i><span>соединение…</span></span>
+      <div class="usermenu" id="userMenu" hidden>
+        <button type="button" class="usermenu__btn" id="userBtn">
+          <span class="avatar" id="userAvatar">?</span>
+          <span id="userName">—</span>
+        </button>
+        <div class="usermenu__pop" id="userPop" hidden>
+          <a href="/">Собрать ролик</a>
+          <a href="/results">Общий архив</a>
+          <button type="button" id="logoutBtn">Выйти</button>
+        </div>
+      </div>
+      <a class="btn btn--mini btn--accent" href="/login" id="loginBtn">Войти</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" style="padding:28px 0 60px">
+
+  <div class="pagehead">
+    <div>
+      <h1 id="profTitle">Профиль</h1>
+      <p>Личное хранилище: ролики, клоны голоса и сценарии.</p>
+    </div>
+    <div class="pagehead__actions">
+      <a class="btn btn--accent" href="/">Собрать новый ролик →</a>
+    </div>
+  </div>
+
+  <div class="tabs3" id="profTabs">
+    <button type="button" class="seg is-on" data-tab="videos">🎬 Ролики</button>
+    <button type="button" class="seg" data-tab="voices">🎙 Голоса</button>
+    <button type="button" class="seg" data-tab="scenarios">📝 Сценарии</button>
+  </div>
+
+  <section id="tab-videos">
+    <h2 class="sectitle">Мои готовые ролики</h2>
+    <div class="mygrid" id="myVideos"></div>
+  </section>
+
+  <section id="tab-voices" hidden>
+    <h2 class="sectitle">Мои голоса</h2>
+    <div class="mygrid" id="myVoices"></div>
+  </section>
+
+  <section id="tab-scenarios" hidden>
+    <h2 class="sectitle">Мои сценарии</h2>
+    <div class="mygrid" id="myScenarios"></div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function () {
+  "use strict";
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const state = { user: null };
+
+  let toastTimer = null;
+  function toast(msg, kind) {
+    const t = $("#toast");
+    t.textContent = msg;
+    t.className = "toast is-show" + (kind ? " is-" + kind : "");
+    t.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      t.classList.remove("is-show");
+      setTimeout(() => { t.hidden = true; }, 250);
+    }, 3600);
+  }
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+
+  async function api(path, opts) {
+    opts = opts || {};
+    const init = { method: opts.method || "GET", headers: {} };
+    if (opts.body !== undefined) {
+      init.headers["Content-Type"] = "application/json";
+      init.body = JSON.stringify(opts.body);
+    }
+    return fetch(path, init).then(async (r) => {
+      const d = await r.json().catch(() => null);
+      if (!r.ok) throw new Error((d && d.detail) || ("Ошибка " + r.status));
+      return d;
+    });
+  }
+
+  /* ---------------- auth ---------------- */
+
+  async function loadMe() {
+    try {
+      const d = await api("/api/auth/me");
+      state.user = d.user;
+    } catch (e) { state.user = null; }
+
+    const menu = $("#userMenu"), loginBtn = $("#loginBtn");
+    if (state.user) {
+      menu.hidden = false;
+      loginBtn.hidden = true;
+      $("#userName").textContent = state.user.username;
+      $("#userAvatar").textContent = state.user.username.slice(0, 1).toUpperCase();
+      $("#profTitle").textContent = state.user.username;
+      loadAll();
+    } else {
+      menu.hidden = true;
+      loginBtn.hidden = false;
+      $("#profTitle").textContent = "Профиль";
+      $("#myVideos").innerHTML =
+        '<div class="empty__inline">Войдите, чтобы видеть свои ролики. <a class="link" href="/login">Войти</a></div>';
+    }
+  }
+
+  function initUserMenu() {
+    const btn = $("#userBtn"), pop = $("#userPop");
+    if (btn && pop) {
+      btn.addEventListener("click", (e) => { e.stopPropagation(); pop.hidden = !pop.hidden; });
+      document.addEventListener("click", () => { pop.hidden = true; });
+    }
+    const out = $("#logoutBtn");
+    if (out) out.addEventListener("click", async () => {
+      await api("/api/auth/logout", { method: "POST" });
+      location.reload();
+    });
+  }
+
+  /* ---------------- вкладки ---------------- */
+
+  function initTabs() {
+    $("#profTabs").addEventListener("click", (e) => {
+      const b = e.target.closest(".seg");
+      if (!b) return;
+      $$("#profTabs .seg").forEach(x => x.classList.remove("is-on"));
+      b.classList.add("is-on");
+      ["videos", "voices", "scenarios"].forEach(t => {
+        $("#tab-" + t).hidden = (t !== b.dataset.tab);
+      });
+    });
+  }
+
+  /* ---------------- ролики ---------------- */
+
+  async function loadVideos() {
+    const box = $("#myVideos");
+    if (!state.user) return;
+    try {
+      const d = await api("/api/videos");
+      const items = d.videos || [];
+      if (!items.length) {
+        box.innerHTML = '<div class="empty__inline">Пока нет роликов. <a class="link" href="/">Собрать первый →</a></div>';
+        return;
+      }
+      box.innerHTML = "";
+      items.forEach((v) => {
+        const el = document.createElement("div");
+        el.className = "myitem";
+        el.innerHTML =
+          '<div class="myitem__top">' +
+            '<div class="myitem__title">' + esc(v.title || v.filename) + '</div>' +
+            '<span class="pill">' + (v.exists ? "готов" : "нет файла") + '</span>' +
+          '</div>' +
+          '<div class="myitem__meta">' + esc(v.size_h) + ' · ' + esc(v.created_at) + '</div>' +
+          (v.url ? '<video controls preload="none" style="width:100%;border-radius:8px;background:#06080d" src="' + v.url + '"></video>' : "") +
+          '<div class="myitem__actions">' +
+            (v.url ? '<a class="btn btn--mini" href="' + v.url + '" target="_blank">Открыть</a>' +
+                     '<a class="btn btn--mini btn--accent" href="/api/download/' + v.id + '">Скачать</a>' : "") +
+            '<button type="button" class="btn btn--mini btn--ghost" data-del="' + v.id + '">Удалить</button>' +
+          '</div>';
+        box.appendChild(el);
+      });
+      $$("[data-del]", box).forEach((b) => b.addEventListener("click", async () => {
+        if (!confirm("Удалить ролик?")) return;
+        try {
+          await api("/api/videos/" + b.dataset.del, { method: "DELETE" });
+          toast("Удалено", "ok");
+          loadVideos();
+        } catch (e) { toast(e.message, "err"); }
+      }));
+    } catch (e) {
+      box.innerHTML = '<div class="empty__inline">' + esc(e.message) + '</div>';
+    }
+  }
+
+  /* ---------------- голоса ---------------- */
+
+  const GL = { male: "Мужской", female: "Женский", neutral: "Нейтральный", unknown: "Не определён" };
+
+  async function loadVoices() {
+    const box = $("#myVoices");
+    if (!state.user) return;
+    try {
+      const d = await api("/api/voices");
+      const items = (d.voices || []).filter(v => !v.builtin);
+      if (!items.length) {
+        box.innerHTML =
+          '<div class="empty__inline">Клонов пока нет. <a class="link" href="/">Клонировать голос →</a></div>';
+        return;
+      }
+      box.innerHTML = "";
+      items.forEach((v) => {
+        const el = document.createElement("div");
+        el.className = "myitem";
+        el.innerHTML =
+          '<div class="myitem__top">' +
+            '<div class="myitem__title">' + esc(v.name) + '</div>' +
+            '<span class="pill pill--' + esc(v.gender || "unknown") + '">' +
+              esc((GL[v.gender] || v.gender || "?").slice(0, 8)) + '</span>' +
+          '</div>' +
+          '<div class="myitem__meta">клон · ' + esc(v.created_at || "") + '</div>' +
+          '<div class="myitem__text">' + esc(v.ref_text || "") + '</div>' +
+          '<div class="myitem__actions">' +
+            '<button type="button" class="btn btn--mini" data-play="' + esc(v.id) + '">▶ Проба</button>' +
+            '<button type="button" class="btn btn--mini btn--ghost" data-del="' + esc(v.id) + '">Удалить</button>' +
+          '</div>';
+        box.appendChild(el);
+      });
+
+      $$("[data-play]", box).forEach((b) => b.addEventListener("click", async () => {
+        b.disabled = true;
+        b.textContent = "Синтез…";
+        try {
+          const d2 = await api("/api/voices/preview", {
+            method: "POST", body: { voice_id: b.dataset.play }
+          });
+          const a = new Audio(d2.url);
+          a.play();
+          toast("Проба играет", "ok");
+        } catch (e) { toast(e.message, "err"); }
+        finally { b.disabled = false; b.textContent = "▶ Проба"; }
+      }));
+
+      $$("[data-del]", box).forEach((b) => b.addEventListener("click", async () => {
+        if (!confirm("Удалить голос?")) return;
+        try {
+          await api("/api/voices/" + b.dataset.del, { method: "DELETE" });
+          toast("Удалено", "ok");
+          loadVoices();
+        } catch (e) { toast(e.message, "err"); }
+      }));
+    } catch (e) {
+      box.innerHTML = '<div class="empty__inline">' + esc(e.message) + '</div>';
+    }
+  }
+
+  /* ---------------- сценарии ---------------- */
+
+  async function loadScenarios() {
+    const box = $("#myScenarios");
+    if (!state.user) return;
+    try {
+      const d = await api("/api/scenarios");
+      const items = d.scenarios || [];
+      if (!items.length) {
+        box.innerHTML = '<div class="empty__inline">Сохранённых сценариев нет.</div>';
+        return;
+      }
+      box.innerHTML = "";
+      items.forEach((s) => {
+        const el = document.createElement("div");
+        el.className = "myitem";
+        el.innerHTML =
+          '<div class="myitem__top">' +
+            '<div class="myitem__title">' + esc(s.title || "Без названия") + '</div>' +
+            '<span class="pill">' + esc(s.source || "manual") + '</span>' +
+          '</div>' +
+          '<div class="myitem__meta">' + esc(s.created_at) + '</div>' +
+          '<div class="myitem__text">' + esc(s.text) + '</div>' +
+          '<div class="myitem__actions">' +
+            '<button type="button" class="btn btn--mini btn--accent" data-use="' + esc(s.id) + '">В сборку</button>' +
+            '<button type="button" class="btn btn--mini btn--ghost" data-del="' + esc(s.id) + '">Удалить</button>' +
+          '</div>';
+        box.appendChild(el);
+      });
+      $$("[data-use]", box).forEach((b) => b.addEventListener("click", () => {
+        const s = items.find(x => x.id === b.dataset.use);
+        if (!s) return;
+        sessionStorage.setItem("goose_script", s.text);
+        location.href = "/";
+      }));
+      $$("[data-del]", box).forEach((b) => b.addEventListener("click", async () => {
+        if (!confirm("Удалить сценарий?")) return;
+        try {
+          await api("/api/scenarios/" + b.dataset.del, { method: "DELETE" });
+          toast("Удалено", "ok");
+          loadScenarios();
+        } catch (e) { toast(e.message, "err"); }
+      }));
+    } catch (e) {
+      box.innerHTML = '<div class="empty__inline">' + esc(e.message) + '</div>';
+    }
+  }
+
+  function loadAll() {
+    loadVideos();
+    loadVoices();
+    loadScenarios();
+  }
+
+  /* ---------------- ws (только индикатор) ---------------- */
+
+  function connectWS() {
+    const proto = location.protocol === "https:" ? "wss:" : "ws:";
+    let ws;
+    try { ws = new WebSocket(proto + "//" + location.host + "/ws"); }
+    catch (e) { return; }
+    const set = (on, t) => {
+      const el = $("#conn");
+      el.className = "status" + (on ? " is-on" : "");
+      $("span", el).textContent = t;
+    };
+    ws.onopen = () => set(true, "на связи");
+    ws.onclose = () => set(false, "нет связи");
+    ws.onerror = () => set(false, "нет связи");
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initTabs();
+    initUserMenu();
+    connectWS();
+    loadMe();
+  });
+})();
+</script>
+</body>
+</html>

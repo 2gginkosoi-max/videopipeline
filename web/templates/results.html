@@ -21,11 +21,24 @@
 
     <nav class="nav">
       <a href="/" class="nav__link {{ 'is-active' if active == 'run' }}">Сборка</a>
-      <a href="/results" class="nav__link {{ 'is-active' if active == 'results' }}">Готовые ролики</a>
+      <a href="/results" class="nav__link {{ 'is-active' if active == 'results' }}">Архив</a>
+      <a href="/profile" class="nav__link {{ 'is-active' if active == 'profile' }}">Профиль</a>
     </nav>
 
     <div class="topbar__right">
       <span class="status" id="conn"><i class="dot"></i><span>соединение…</span></span>
+      <div class="usermenu" id="userMenu" hidden>
+        <button type="button" class="usermenu__btn" id="userBtn">
+          <span class="avatar" id="userAvatar">?</span>
+          <span id="userName">—</span>
+        </button>
+        <div class="usermenu__pop" id="userPop" hidden>
+          <a href="/profile">Мои ролики и голоса</a>
+          <a href="/">Собрать ролик</a>
+          <button type="button" id="logoutBtn">Выйти</button>
+        </div>
+      </div>
+      <a class="btn btn--mini btn--accent" href="/login" id="loginBtn">Войти</a>
     </div>
   </div>
 </header>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вход — ГУСЬ ПЕРЕВОДИЛА</title>
+<link rel="stylesheet" href="/static/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪿</text></svg>">
+</head>
+<body data-page="login">
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="/">
+      <span class="brand__mark">🪿</span>
+      <span class="brand__text">
+        <b>ГУСЬ ПЕРЕВОДИЛА</b>
+        <small>видеоконвейер для Shorts</small>
+      </span>
+    </a>
+    <nav class="nav">
+      <a href="/" class="nav__link">Сборка</a>
+      <a href="/results" class="nav__link">Архив</a>
+      <a href="/profile" class="nav__link">Профиль</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="authbox">
+    <h1 id="authTitle">Вход в профиль</h1>
+    <p class="sub" id="authSub">Свои ролики, свои голоса, свои сценарии — у каждого свой профиль.</p>
+
+    <div class="tabs2" id="authTabs">
+      <button type="button" class="seg is-on" data-mode="login">Вход</button>
+      <button type="button" class="seg" data-mode="register">Регистрация</button>
+    </div>
+
+    <div class="autherr" id="authErr" hidden></div>
+
+    <form id="authForm" autocomplete="on">
+      <label class="field">
+        <span class="field__label">Имя пользователя</span>
+        <input type="text" id="fUser" name="username" required minlength="3" maxlength="32"
+               placeholder="ivan" autocomplete="username">
+      </label>
+
+      <label class="field" id="emailField" hidden>
+        <span class="field__label">E-mail <em>необязательно</em></span>
+        <input type="email" id="fMail" name="email" placeholder="ivan@example.com" autocomplete="email">
+      </label>
+
+      <label class="field">
+        <span class="field__label">Пароль</span>
+        <input type="password" id="fPass" name="password" required minlength="6"
+               placeholder="минимум 6 символов" autocomplete="current-password">
+      </label>
+
+      <button type="submit" class="btn btn--accent" id="authSubmit">Войти</button>
+    </form>
+
+    <p class="hint" style="margin-top:16px;text-align:center">
+      Демо-доступ без регистрации: <a class="link" href="/">сборка ролика</a>
+      работает и для гостя — но ролики и голоса сохраняются только в профиле.
+    </p>
+  </div>
+</main>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function () {
+  "use strict";
+  const $ = (s) => document.querySelector(s);
+  let mode = "login";
+
+  const title = $("#authTitle"), sub = $("#authSub"), err = $("#authErr");
+  const btn = $("#authSubmit"), mail = $("#emailField"), pass = $("#fPass");
+
+  function setMode(m) {
+    mode = m;
+    document.querySelectorAll("#authTabs .seg").forEach(b =>
+      b.classList.toggle("is-on", b.dataset.mode === m));
+    if (m === "register") {
+      title.textContent = "Регистрация";
+      sub.textContent = "Создайте профиль — и ваши ролики, голоса и сценарии будут только вашими.";
+      btn.textContent = "Создать профиль";
+      mail.hidden = false;
+      pass.setAttribute("autocomplete", "new-password");
+    } else {
+      title.textContent = "Вход в профиль";
+      sub.textContent = "Свои ролики, свои голоса, свои сценарии — у каждого свой профиль.";
+      btn.textContent = "Войти";
+      mail.hidden = true;
+      pass.setAttribute("autocomplete", "current-password");
+    }
+    err.hidden = true;
+  }
+
+  $("#authTabs").addEventListener("click", (e) => {
+    const b = e.target.closest(".seg");
+    if (b) setMode(b.dataset.mode);
+  });
+
+  $("#authForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    err.hidden = true;
+    btn.disabled = true;
+    const old = btn.textContent;
+    btn.textContent = "Минуту…";
+    try {
+      const res = await fetch("/api/auth/" + mode, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: $("#fUser").value.trim(),
+          password: $("#fPass").value,
+          email: $("#fMail").value.trim()
+        })
+      });
+      const d = await res.json().catch(() => null);
+      if (!res.ok) throw new Error((d && d.detail) || ("Ошибка " + res.status));
+      // cookie выставляет сервер (httponly) — просто уходим в профиль
+      location.href = "/profile";
+    } catch (ex) {
+      err.textContent = ex.message;
+      err.hidden = false;
+      btn.disabled = false;
+      btn.textContent = old;
+    }
+  });
+
+  // если уже вошли — сразу в профиль
+  fetch("/api/auth/me").then(r => r.json()).then(d => {
+    if (d && d.user) location.replace("/profile");
+  }).catch(() => {});
+})();
+</script>
+</body>
+</html>

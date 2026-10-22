@@ -21,28 +21,78 @@
 
     <nav class="nav">
       <a href="/" class="nav__link {{ 'is-active' if active == 'run' }}">Сборка</a>
-      <a href="/results" class="nav__link {{ 'is-active' if active == 'results' }}">Готовые ролики</a>
+      <a href="/results" class="nav__link {{ 'is-active' if active == 'results' }}">Архив</a>
+      <a href="/profile" class="nav__link {{ 'is-active' if active == 'profile' }}">Профиль</a>
     </nav>
 
     <div class="topbar__right">
       <span class="status" id="conn"><i class="dot"></i><span>соединение…</span></span>
+      <div class="usermenu" id="userMenu" hidden>
+        <button type="button" class="usermenu__btn" id="userBtn">
+          <span class="avatar" id="userAvatar">?</span>
+          <span id="userName">—</span>
+        </button>
+        <div class="usermenu__pop" id="userPop" hidden>
+          <a href="/profile">Мои ролики и голоса</a>
+          <a href="/results">Общий архив</a>
+          <button type="button" id="logoutBtn">Выйти</button>
+        </div>
+      </div>
+      <a class="btn btn--mini btn--accent" href="/login" id="loginBtn">Войти</a>
     </div>
   </div>
 </header>
 
 <main class="wrap layout">
 
-  <!-- ================= FORM ================= -->
+  <!-- ================= LEFT COLUMN ================= -->
   <section class="col-main">
 
+    <!-- ---------- 1. REDDIT ---------- -->
     <form id="runForm" class="card" autocomplete="off">
 
-      <!-- 1. SOURCE -->
       <div class="card__head">
         <span class="step">1</span>
         <div>
-          <h2>Источник</h2>
-          <p>Перетащите b-roll или укажите ссылку</p>
+          <h2>Найти новость</h2>
+          <p>Reddit → свежие посты с видео → готовый сценарий</p>
+        </div>
+        <button type="button" class="btn btn--mini btn--ghost card__head-act" id="toggleNews">Открыть</button>
+      </div>
+
+      <div class="card__body" id="newsBlock" hidden>
+        <div class="row row--2">
+          <label class="field">
+            <span class="field__label">Сабреддиты</span>
+            <select id="newsSubs" multiple size="6"></select>
+            <span class="hint">Ctrl+клик — выбрать несколько. Reddit режет частоту, поэтому не больше 3 за раз.</span>
+          </label>
+          <div class="field">
+            <span class="field__label">Сортировка</span>
+            <div class="segmented" id="newsMode">
+              <button type="button" class="seg is-on" data-mode="hot">hot</button>
+              <button type="button" class="seg" data-mode="new">new</button>
+              <button type="button" class="seg" data-mode="top">top</button>
+            </div>
+            <button type="button" class="btn btn--accent btn--block" id="searchNews">
+              🔍 Найти новости
+            </button>
+            <div class="hint" id="newsHint">Reddit отдаёт RSS без ключа. Поиск идёт в фоне.</div>
+          </div>
+        </div>
+
+        <div class="newswrap" id="newsList" hidden>
+          <div class="newswrap__head">Найдено постов</div>
+          <div id="newsItems"></div>
+        </div>
+      </div>
+
+      <!-- ---------- 2. SOURCE ---------- -->
+      <div class="card__head">
+        <span class="step">2</span>
+        <div>
+          <h2>Источник видео</h2>
+          <p>Перетащите b-roll или возьмите из найденной новости</p>
         </div>
       </div>
 
@@ -67,28 +117,68 @@
         </div>
       </div>
 
-      <!-- 2. SCRIPT -->
+      <!-- ---------- 3. SCENARIO ---------- -->
       <div class="card__head">
-        <span class="step">2</span>
+        <span class="step">3</span>
         <div>
           <h2>Сценарий</h2>
           <p>Текст закадрового голоса — по нему соберётся озвучка</p>
         </div>
-      </div>
-
-      <div class="card__body">
-        <textarea name="script" rows="9" spellcheck="false"
-          placeholder="Вставьте готовый сценарий. Проверка оригинальности пройдёт автоматически перед публикацией."></textarea>
-        <div class="hint">
-          <span id="scriptLen">0</span> символов ·
-          <span id="scriptWords">0</span> слов ·
-          ориентир 60–90 секунд озвучки
+        <div class="card__head-actions">
+          <button type="button" class="btn btn--mini btn--ghost" id="genScenario">✨ Варианты по теме</button>
+          <button type="button" class="btn btn--mini btn--ghost" id="myScenariosBtn">Мои сценарии</button>
         </div>
       </div>
 
-      <!-- 3. SETTINGS -->
+      <div class="card__body">
+        <label class="field">
+          <span class="field__label">Тема ролика <em>для заголовка и SEO</em></span>
+          <input type="text" name="topic" placeholder="например: робот-собака учит параллельную парковку" autocomplete="off">
+        </label>
+
+        <textarea name="script" rows="9" spellcheck="false"
+          placeholder="Вставьте готовый сценарий, сгенерируйте его по теме или возьмите из новости."></textarea>
+        <div class="hint">
+          <span id="scriptLen">0</span> символов ·
+          <span id="scriptWords">0</span> слов ·
+          ориентир 60–140 слов (25–50 секунд)
+        </div>
+
+        <div class="variants" id="variants" hidden></div>
+      </div>
+
+      <!-- ---------- 4. VOICE ---------- -->
       <div class="card__head">
-        <span class="step">3</span>
+        <span class="step">4</span>
+        <div>
+          <h2>Голос</h2>
+          <p>Выберите диктора или сделайте клон своего</p>
+        </div>
+        <div class="card__head-actions">
+          <button type="button" class="btn btn--mini btn--accent" id="cloneBtn">+ Клонировать голос</button>
+        </div>
+      </div>
+
+      <div class="card__body">
+        <div class="segmented segmented--tabs" id="voiceTabs">
+          <button type="button" class="seg is-on" data-gender="all">Все</button>
+          <button type="button" class="seg" data-gender="male">Мужские</button>
+          <button type="button" class="seg" data-gender="female">Женские</button>
+          <button type="button" class="seg" data-gender="mine">Мои</button>
+        </div>
+
+        <div class="voicegrid" id="voiceGrid"></div>
+
+        <input type="hidden" name="voice_id" id="voiceId">
+        <div class="voicepreview" id="voicePreview" hidden>
+          <audio id="voiceAudio" controls></audio>
+          <span class="hint" id="voicePreviewName"></span>
+        </div>
+      </div>
+
+      <!-- ---------- 5. SETTINGS ---------- -->
+      <div class="card__head">
+        <span class="step">5</span>
         <div>
           <h2>Настройки</h2>
           <p>Монтаж, ведущий и публикация</p>
@@ -169,7 +259,6 @@
         </details>
       </div>
 
-      <!-- RUN -->
       <div class="card__foot">
         <button type="submit" class="btn btn--run" id="runBtn">
           <span class="btn__label">Собрать ролик</span>
@@ -180,7 +269,7 @@
     </form>
   </section>
 
-  <!-- ================= LOG ================= -->
+  <!-- ================= RIGHT COLUMN ================= -->
   <aside class="col-side">
     <div class="card card--log">
       <div class="card__head card__head--tight">
@@ -204,13 +293,55 @@
     </div>
 
     <div class="card card--stats">
-      <div class="stat"><span class="stat__num" id="statVideos">—</span><span class="stat__label">готовых роликов</span></div>
-      <div class="stat"><span class="stat__num" id="statJobs">0</span><span class="stat__label">запусков сегодня</span></div>
-      <a class="btn btn--ghost btn--block" href="/results">Открыть готовые ролики →</a>
+      <div class="stat"><span class="stat__num" id="statVideos">—</span><span class="stat__label">моих роликов</span></div>
+      <div class="stat"><span class="stat__num" id="statVoices">0</span><span class="stat__label">моих голосов</span></div>
+      <a class="btn btn--ghost btn--block" href="/profile">Открыть профиль →</a>
     </div>
   </aside>
 
 </main>
+
+<!-- ================= CLONE DIALOG ================= -->
+<div class="modal" id="cloneModal" hidden>
+  <div class="modal__box">
+    <div class="modal__head">
+      <h3>Клонировать голос</h3>
+      <button type="button" class="modal__x" id="cloneClose">✕</button>
+    </div>
+    <div class="modal__body">
+      <p class="hint">Загрузите запись голоса (аудио или видео). Конвейер сам вырежет чистый
+      фрагмент 8 секунд, определит тембр и запишет текст референса. Нужен доступ к голос —
+      это законно только с вашего голоса или с разрешения правообладателя.</p>
+
+      <label class="field">
+        <span class="field__label">Файл</span>
+        <input type="file" id="cloneFile" accept="audio/*,video/*,.wav,.mp3,.m4a,.ogg,.mp4,.webm,.mov">
+      </label>
+
+      <div class="row row--2">
+        <label class="field">
+          <span class="field__label">Название голоса</span>
+          <input type="text" id="cloneName" placeholder="Мой голос" maxlength="40">
+        </label>
+        <label class="field">
+          <span class="field__label">Пол</span>
+          <select id="cloneGender">
+            <option value="auto">Определить автоматически</option>
+            <option value="male">Мужской</option>
+            <option value="female">Женский</option>
+            <option value="neutral">Нейтральный</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="modal__log" id="cloneLog" hidden></div>
+    </div>
+    <div class="modal__foot">
+      <button type="button" class="btn btn--ghost" id="cloneCancel">Отмена</button>
+      <button type="button" class="btn btn--accent" id="cloneGo">Клонировать</button>
+    </div>
+  </div>
+</div>
 
 <div class="toast" id="toast" hidden></div>
 

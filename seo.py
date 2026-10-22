@@ -34,6 +34,7 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 POLL_LEGACY = "https://text.pollinations.ai/"
+POLL_OPENAI = POLL_LEGACY + "openai"
 POLL_MODEL = "openai-fast"
 
 ROOT = Path(r"D:\AI\VIDEO_PIPELINE")
@@ -227,19 +228,57 @@ def norm_title(t: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-def call_llm(prompt: str, retries: int = 3, timeout: int = 120) -> str:
+def _poll_openai(prompt: str, timeout: int) -> str:
+    """Основной путь: OpenAI-совместимый POST — он стабильнее GET."""
+    body = json.dumps({
+        "model": POLL_MODEL,
+        "messages": [{"role": "user", "content": prompt}],
+        "seed": random.randint(1, 10 ** 9),
+        # без этого модель уходит в рассуждения и не отдаёт content
+        "reasoning_effort": "low",
+    }).encode("utf-8")
+    req = urllib.request.Request(POLL_OPENAI, data=body, headers={
+        "User-Agent": "Mozilla/5.0",
+        "Content-Type": "application/json",
+        "Accept": "application/json, text/plain, */*",
+    })
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        raw = r.read().decode("utf-8", "replace")
+    try:
+        d = json.loads(raw)
+        msg = d["choices"][0]["message"]
+        text = (msg.get("content") or "").strip()
+        if not text and (msg.get("reasoning") or msg.get("tool_calls")):
+            return ""
+        if text:
+            return text
+    except (KeyError, IndexError, TypeError, ValueError):
+        pass
+    return raw
+
+
+def _poll_legacy(prompt: str, timeout: int) -> str:
+    """Запасной путь: старый GET /{prompt}."""
     url = (POLL_LEGACY + urllib.parse.quote(prompt)
            + f"?model={POLL_MODEL}&seed={random.randint(1, 10**9)}")
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read().decode("utf-8", "replace")
+
+
+def call_llm(prompt: str, retries: int = 4, timeout: int = 120) -> str:
     last = ""
     for attempt in range(1, retries + 1):
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                return r.read().decode("utf-8", "replace")
-        except Exception as e:  # noqa: BLE001
-            last = f"{type(e).__name__}: {e}"
-            print(f"   [LLM] попытка {attempt}/{retries}: {last}")
-            time.sleep(4 * attempt)
+        for fn in (_poll_openai, _poll_legacy):
+            try:
+                text = fn(prompt, timeout).strip()
+                if text:
+                    return text
+                last = "пустой ответ (модель ушла в рассуждения)"
+            except Exception as e:  # noqa: BLE001
+                last = f"{type(e).__name__}: {e}"
+        print(f"   [LLM] попытка {attempt}/{retries}: {last}")
+        time.sleep(min(4 * attempt, 20))
     raise RuntimeError(last)
 
 
