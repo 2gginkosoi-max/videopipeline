@@ -1,0 +1,1532 @@
+﻿
+########## intro ##########
+
+=== artificial intelligence robot (10) ===
+  [wikimedia video] 512x512 2.2MB d=12.1s | File:AI generated Video Clip.webm
+      https://upload.wikimedia.org/wikipedia/commons/7/70/AI_generated_Video_Clip.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=o
+  [wikimedia video] 812x1280 1.7MB d=18.8s | File:AI generated video clip -New creative video.webm
+      https://upload.wikimedia.org/wikipedia/commons/5/52/AI_generated_video_clip_-New_creative_video.webm?utm_source=commons.wikimedia.org&utm_campaign=api
+  [wikimedia video] 640x360 6.7MB d=143.5s | File:Artificial intelligence explained in 2 minutes - What exactly is AI?.webm
+      https://upload.wikimedia.org/wikipedia/commons/9/98/Artificial_intelligence_explained_in_2_minutes_-_What_exactly_is_AI%3F.webm?utm_source=commons.wik
+  [wikimedia video] 1920x1080 183.4MB d=977.2s | File:Will robots outsmart us.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/1/17/Will_robots_outsmart_us.webm/Will_robots_outsmart_us.webm.480p.vp9.webm
+  [wikimedia image] 748x748 0.3MB d=0.0s | File:AI Humans and Robots.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d6/AI_Humans_and_Robots.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=origi
+  [wikimedia image] 7754x5169 7.6MB d=0.0s | File:Artificial Intelligence (AI) and Robotics exhibition at the Heinz Nixdorf MuseumsForum.jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/2d/Artificial_Intelligence_%28AI%29_and_Robotics_exhibition_at_the_Heinz_Nixdorf_MuseumsForum.jpg?utm
+  [wikimedia image] 6000x4000 6.5MB d=0.0s | File:Dax Delivery Robot with Groceries.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/98/Dax_Delivery_Robot_with_Groceries.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_
+  [wikimedia image] 3088x1652 0.7MB d=0.0s | File:Is artificial intelligence our future.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/f2/Is_artificial_intelligence_our_future.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&
+  [wikimedia image] 459x492 0.3MB d=0.0s | File:Korean Robot.png
+      https://upload.wikimedia.org/wikipedia/commons/a/a7/Korean_Robot.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 1024x768 0.2MB d=0.0s | File:Sunderland University Experimental Robot Arm.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/6e/Sunderland_University_Experimental_Robot_Arm.jpg?utm_source=commons.wikimedia.org&utm_campaign=ima
+
+=== server room data center (11) ===
+  [wikimedia video] 3840x2160 3388.6MB d=1791.7s | File:Data Center Tour & Technical Deep Dive into the Power, Data and Cooling Infrastructure!.we
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c3/Data_Center_Tour_%26_Technical_Deep_Dive_into_the_Power%2C_Data_and_Cooling_Infrastruct
+  [wikimedia video] 2000x2000 16.4MB d=25.0s | File:Lunar sun-synchronous data centers 02.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/5/5a/Lunar_sun-synchronous_data_centers_02.webm/Lunar_sun-synchronous_data_centers_02.webm.1
+  [wikimedia video] 2000x2000 87.4MB d=25.0s | File:Sun-sunchronous orbit of AI data centers.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f6/Sun-sunchronous_orbit_of_AI_data_centers.webm/Sun-sunchronous_orbit_of_AI_data_centers.
+  [wikimedia video] 2000x2000 68.6MB d=25.0s | File:Sun-synchronous orbit.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f2/Sun-synchronous_orbit.webm/Sun-synchronous_orbit.webm.1080p.vp9.webm
+  [wikimedia video] 3840x2160 1055.3MB d=547.2s | File:What's Inside This Decommissioned Data Center-.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/5/5e/What%27s_Inside_This_Decommissioned_Data_Center-.webm/What%27s_Inside_This_Decommission
+  [wikimedia image] 2048x1360 0.4MB d=0.0s | File:BalticServers data center.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/5d/BalticServers_data_center.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=
+  [wikimedia image] 3000x4000 2.8MB d=0.0s | File:Data Center 2 (UNC).jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/80/Data_Center_2_%28UNC%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=or
+  [wikimedia image] 3000x4000 2.8MB d=0.0s | File:Data Center 3 (UNC).jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/e3/Data_Center_3_%28UNC%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=or
+  [wikimedia image] 4096x3072 10.2MB d=0.0s | File:Data center roof.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/f5/Data_center_roof.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 5456x3632 8.2MB d=0.0s | File:Duga-1 radar data center interior server room 2018.jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b0/Duga-1_radar_data_center_interior_server_room_2018.jpg?utm_source=commons.wikimedia.org&utm_campai
+  [wikimedia image] 3264x2448 2.9MB d=0.0s | File:Virginia Tech - data center.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d5/Virginia_Tech_-_data_center.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_conten
+
+=== bee macro flower (12) ===
+  [wikimedia video] 1080x1920 3.0MB d=15.0s | File:Kin Wikipedia 25 15 9x16 Caption.webm
+      https://upload.wikimedia.org/wikipedia/commons/e/e9/Kin_Wikipedia_25_15_9x16_Caption.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_conten
+  [wikimedia video] 1080x1920 31.2MB d=90.0s | File:Kin Wikipedia 25 ANTHEM 9x16 Caption.webm
+      https://upload.wikimedia.org/wikipedia/commons/5/55/Kin_Wikipedia_25_ANTHEM_9x16_Caption.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_co
+  [wikimedia video] 1920x1080 2.8MB d=15.0s | File:Kin Wikipedia 25 Anthem 15" 16x9 Caption.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/4/40/Kin_Wikipedia_25_Anthem_15%22_16x9_Caption.webm/Kin_Wikipedia_25_Anthem_15%22_16x9_Capt
+  [wikimedia video] 1080x1920 30.3MB d=90.0s | File:Kin Wikipedia 25 Anthem 90" 9x16 only SFX.webm
+      https://upload.wikimedia.org/wikipedia/commons/9/90/Kin_Wikipedia_25_Anthem_90%22_9x16_only_SFX.webm?utm_source=commons.wikimedia.org&utm_campaign=api
+  [wikimedia video] 3840x2160 162.0MB d=90.0s | File:WP25 Anthem video.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/0/09/WP25_Anthem_video.webm/WP25_Anthem_video.webm.480p.vp9.webm
+  [wikimedia video] 2304x1980 16.7MB d=30.0s | File:WP25 Times Square billboard.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/cd/WP25_Times_Square_billboard.webm/WP25_Times_Square_billboard.webm.1080p.vp9.webm
+  [wikimedia image] 1200x941 0.2MB d=0.0s | File:Bee-Purple-Flower-Macro ForestWander.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/36/Bee-Purple-Flower-Macro_ForestWander.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&u
+  [wikimedia image] 3815x2585 1.1MB d=0.0s | File:Bee-flower-macro - West Virginia - ForestWander.jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/1d/Bee-flower-macro_-_West_Virginia_-_ForestWander.jpg?utm_source=commons.wikimedia.org&utm_campaign=
+  [wikimedia image] 4264x2466 5.9MB d=0.0s | File:Bee on orange flower in macro (Unsplash).jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b0/Bee_on_orange_flower_in_macro_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=ima
+  [wikimedia image] 1315x820 0.2MB d=0.0s | File:Bumble-Bee-Macro-Flower ForestWander.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/32/Bumble-Bee-Macro-Flower_ForestWander.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&u
+  [wikimedia image] 2215x2215 2.6MB d=0.0s | File:Crab spider with bee prey (Andrena sp.), Romania (34641704253) (cropped).jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/df/Crab_spider_with_bee_prey_%28Andrena_sp.%29%2C_Romania_%2834641704253%29_%28cropped%29.jpg?utm_sou
+  [wikimedia image] 1912x1128 2.1MB d=0.0s | File:Macro bee on flower.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/5d/Macro_bee_on_flower.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=origin
+
+=== milky way night sky timelapse (9) ===
+  [wikimedia video] 3840x2160 138.1MB d=10.0s | File:Air traffic in the Swiss night sky as seen from Oeschinensee Video by Giles Laurent.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/cf/Air_traffic_in_the_Swiss_night_sky_as_seen_from_Oeschinensee_Video_by_Giles_Laurent.web
+  [wikimedia video] 3840x2160 549.9MB d=264.1s | File:JAPAN Milk Way 4K - Beautiful Star and Sky at Night Time Lapse.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/8/80/JAPAN_Milk_Way_4K_-_Beautiful_Star_and_Sky_at_Night_Time_Lapse.webm/JAPAN_Milk_Way_4K_-
+  [wikimedia video] 1920x1080 2.9MB d=5.6s | File:Milky Way over a Joshua tree (30865856965).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/9/92/Milky_Way_over_a_Joshua_tree_%2830865856965%29.webm/Milky_Way_over_a_Joshua_tree_%28308
+  [wikimedia video] 1920x1080 2.7MB d=6.8s | File:The Milky Way over the Oasis of Mara (29954101654).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7c/The_Milky_Way_over_the_Oasis_of_Mara_%2829954101654%29.webm/The_Milky_Way_over_the_Oasi
+  [wikimedia video] 1080x1920 21.4MB d=62.7s | File:WP25Jimmy.webm
+      https://upload.wikimedia.org/wikipedia/commons/2/22/WP25Jimmy.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia video] 1080x1920 20.3MB d=50.8s | File:WP25Yuriko.webm
+      https://upload.wikimedia.org/wikipedia/commons/a/a0/WP25Yuriko.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia image] 1920x1278 0.3MB d=0.0s | File:Milky Way rises over Anderson Butte (51040022471).jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/8e/Milky_Way_rises_over_Anderson_Butte_%2851040022471%29.jpg?utm_source=commons.wikimedia.org&utm_cam
+  [wikimedia image] 19228x5467 27.7MB d=0.0s | File:The UHD Universe (potw2023a).jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/a0/The_UHD_Universe_%28potw2023a%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_c
+  [wikimedia image] 4256x2832 3.4MB d=0.0s | File:Under the Spell of the Magellanic Clouds.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/62/Under_the_Spell_of_the_Magellanic_Clouds.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagein
+
+=== city traffic timelapse night (3) ===
+  [wikimedia video] 2304x1980 16.7MB d=30.0s | File:WP25 Times Square billboard.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/cd/WP25_Times_Square_billboard.webm/WP25_Times_Square_billboard.webm.1080p.vp9.webm
+  [wikimedia video] 1920x1080 211.8MB d=235.6s | File:Wikipedia - 25 years of humanity at its best.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c1/Wikipedia_-_25_years_of_humanity_at_its_best.webm/Wikipedia_-_25_years_of_humanity_at_i
+  [wikimedia image] 5472x3648 4.8MB d=0.0s | File:Car light trails at night (Unsplash).jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/55/Car_light_trails_at_night_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagein
+
+########## tech ##########
+
+=== robot humanoid laboratory (6) ===
+  [wikimedia image] 800x673 0.1MB d=0.0s | File:Bristol robotics laboratory (2871380648).jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d7/Bristol_robotics_laboratory_%282871380648%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=ima
+  [wikimedia image] 563x604 0.1MB d=0.0s | File:Cronos humanoid robot.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/94/Cronos_humanoid_robot.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=orig
+  [wikimedia image] 3648x2592 3.0MB d=0.0s | File:Flickr - Official U.S. Navy Imagery - Rear Adm. Klunder introduces CHARLI-2 robot..jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/c0/Flickr_-_Official_U.S._Navy_Imagery_-_Rear_Adm._Klunder_introduces_CHARLI-2_robot..jpg?utm_source=
+  [wikimedia image] 600x800 0.1MB d=0.0s | File:Jules (3573219724).jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/cc/Jules_%283573219724%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=ori
+  [wikimedia image] 2100x1399 1.4MB d=0.0s | File:US Navy 100531-N-7676W-075 Visitors interact with the mobile, dexterous, social (MDS) robo
+      https://upload.wikimedia.org/wikipedia/commons/5/53/US_Navy_100531-N-7676W-075_Visitors_interact_with_the_mobile%2C_dexterous%2C_social_%28MDS%29_robo
+  [wikimedia image] 2100x1379 1.9MB d=0.0s | File:US Navy 100531-N-7676W-181 Lauren Gates, right, from the Office of Naval Research, and Gre
+      https://upload.wikimedia.org/wikipedia/commons/8/88/US_Navy_100531-N-7676W-181_Lauren_Gates%2C_right%2C_from_the_Office_of_Naval_Research%2C_and_Greg_
+
+=== data center server racks (7) ===
+  [wikimedia video] 3840x2160 1813.2MB d=737.3s | File:ASRock Rack 128-core Ampere Altra Max Arm mATX at Computex 2023- Servers, Workstations, an
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/1/1e/ASRock_Rack_128-core_Ampere_Altra_Max_Arm_mATX_at_Computex_2023-_Servers%2C_Workstation
+  [wikimedia video] 3840x2160 2431.3MB d=991.1s | File:Gigabyte AmpereOne Arm Server, Ampere Altra Max ATX Motherboards, Nvidia Grace Hopper, Liq
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/e/e7/Gigabyte_AmpereOne_Arm_Server%2C_Ampere_Altra_Max_ATX_Motherboards%2C_Nvidia_Grace_Hopp
+  [wikimedia image] 6000x4000 10.6MB d=0.0s | File:Datacenter Server Racks (22370909788).jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b3/Datacenter_Server_Racks_%2822370909788%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagei
+  [wikimedia image] 5346x3559 8.6MB d=0.0s | File:Duga-1 radar data center inside empty server racks 2018.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/94/Duga-1_radar_data_center_inside_empty_server_racks_2018.jpg?utm_source=commons.wikimedia.org&utm_c
+  [wikimedia image] 1152x768 0.2MB d=0.0s | File:EFTA00002518 - Server rack with multiple hard drives and network cables connected in a dat
+      https://upload.wikimedia.org/wikipedia/commons/a/a1/EFTA00002518_-_Server_rack_with_multiple_hard_drives_and_network_cables_connected_in_a_data_center
+  [wikimedia image] 6000x4004 14.1MB d=0.0s | File:Racks Amravati Data Center.jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/eb/Racks_Amravati_Data_Center.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content
+  [wikimedia image] 2860x4304 2.6MB d=0.0s | File:Rear of rack at NERSC data center - closeup.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/ff/Rear_of_rack_at_NERSC_data_center_-_closeup.jpg?utm_source=commons.wikimedia.org&utm_campaign=imag
+
+=== computer code screen programming (7) ===
+  [wikimedia video] 7680x4320 1590.0MB d=70.8s | File:Benchmark SuperTux Kart Base Profile 2025.07.04 - 10.19.10.02.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Benchmark_SuperTux_Kart_Base_Profile_2025.07.04_-_10.19.10.02.webm/Benchmark_SuperTux_K
+  [wikimedia image] 6153x3829 3.5MB d=0.0s | File:Atari 800 XL home computer with monitor and tape program recorder XC12.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/a8/Atari_800_XL_home_computer_with_monitor_and_tape_program_recorder_XC12.jpg?utm_source=commons.wiki
+  [wikimedia image] 5760x3840 17.2MB d=0.0s | File:Code on computer monitor (Unsplash).jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/7f/Code_on_computer_monitor_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinf
+  [wikimedia image] 2048x1536 0.7MB d=0.0s | File:Computer monitor screen image simulated.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/f3/Computer_monitor_screen_image_simulated.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinf
+  [wikimedia image] 3500x2625 2.0MB d=0.0s | File:Programming code.jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/ef/Programming_code.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 1920x1080 1.0MB d=0.0s | File:Tidal Code Screenshot.png
+      https://upload.wikimedia.org/wikipedia/commons/f/f5/Tidal_Code_Screenshot.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=orig
+  [wikimedia image] 1024x722 0.2MB d=0.0s | File:Vector06cc On-Screen Display Menu.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/55/Vector06cc_On-Screen_Display_Menu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_
+
+=== supercomputer (11) ===
+  [wikimedia video] 1920x1080 67.5MB d=513.6s | File:Creating Black Hole Jets With a NASA Supercomputer (SVS14217).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b6/Creating_Black_Hole_Jets_With_a_NASA_Supercomputer_%28SVS14217%29.webm/Creating_Black_H
+  [wikimedia video] 1920x1080 83.2MB d=120.4s | File:NASA Supercomputer Probes Tangled Magnetospheres of Merging Neutron Stars (SVS14884 Neutro
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/0/03/NASA_Supercomputer_Probes_Tangled_Magnetospheres_of_Merging_Neutron_Stars_%28SVS14884_N
+  [wikimedia video] 1920x1080 49.7MB d=110.9s | File:NASA supercomputer simulation on how the Moon formed.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/9/9f/NASA_supercomputer_simulation_on_how_the_Moon_formed.webm/NASA_supercomputer_simulation
+  [wikimedia video] 1920x1080 21.7MB d=133.4s | File:Supercomputer Simulation Reveals Supermassive Black Holes.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a9/Supercomputer_Simulation_Reveals_Supermassive_Black_Holes.webm/Supercomputer_Simulation
+  [wikimedia video] 1920x1080 23.3MB d=147.8s | File:The 100,000 Qubit Quantum-Centric Supercomputer of 2033.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/2/2b/The_100%2C000_Qubit_Quantum-Centric_Supercomputer_of_2033.webm/The_100%2C000_Qubit_Quan
+  [wikimedia image] 5152x3416 22.4MB d=0.0s | File:Dutch national supercomputer "Huygens".png
+      https://upload.wikimedia.org/wikipedia/commons/0/04/Dutch_national_supercomputer_%22Huygens%22.png?utm_source=commons.wikimedia.org&utm_campaign=image
+  [wikimedia image] 5190x3104 18.3MB d=0.0s | File:Dutch national supercomputer "Huygens" - 8183833489.png
+      https://upload.wikimedia.org/wikipedia/commons/5/53/Dutch_national_supercomputer_%22Huygens%22_-_8183833489.png?utm_source=commons.wikimedia.org&utm_c
+  [wikimedia image] 478x405 0.3MB d=0.0s | File:GM Revs up Diesel Combustion Modeling on Titan Supercomputer - 40244826141.png
+      https://upload.wikimedia.org/wikipedia/commons/8/88/GM_Revs_up_Diesel_Combustion_Modeling_on_Titan_Supercomputer_-_40244826141.png?utm_source=commons.
+  [wikimedia image] 2100x1334 2.1MB d=0.0s | File:Kraken Supercomputer (3592578852).jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/8e/Kraken_Supercomputer_%283592578852%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&
+  [wikimedia image] 3264x2448 2.0MB d=0.0s | File:Oak Ridge - Kraken (Cray XT5).JPG
+      https://upload.wikimedia.org/wikipedia/commons/1/16/Oak_Ridge_-_Kraken_%28Cray_XT5%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_
+  [wikimedia image] 809x506 0.1MB d=0.0s | File:Taiwania 3 Supercomputer.jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/04/Taiwania_3_Supercomputer.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=o
+
+=== artificial intelligence chip processor (6) ===
+  [wikimedia image] 4761x3103 9.7MB d=0.0s | File:Braunton (Devon, UK), Black Horse Inn -- 2013 -- 00169.jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/c9/Braunton_%28Devon%2C_UK%29%2C_Black_Horse_Inn_--_2013_--_00169.jpg?utm_source=commons.wikimedia.or
+  [wikimedia image] 6000x4000 14.9MB d=0.0s | File:Cochem, Unterbachstraße, Gebäude -- 2018 -- 0053.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/38/Cochem%2C_Unterbachstra%C3%9Fe%2C_Geb%C3%A4ude_--_2018_--_0053.jpg?utm_source=commons.wikimedia.or
+  [wikimedia image] 3839x3000 3.7MB d=0.0s | File:Hot off the press — the latest D-Wave wafer of quantum processors and TIME cover story.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d6/Hot_off_the_press_%E2%80%94_the_latest_D-Wave_wafer_of_quantum_processors_and_TIME_cover_story.jpg
+  [wikimedia image] 1376x768 0.2MB d=0.0s | File:PowerPC G3.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/fd/PowerPC_G3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 4000x2922 3.1MB d=0.0s | File:Quantum Computing for Google Goggles (4171280876).jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/ba/Quantum_Computing_for_Google_Goggles_%284171280876%29.jpg?utm_source=commons.wikimedia.org&utm_cam
+  [wikimedia image] 1584x672 0.7MB d=0.0s | File:Workflow of a machine-learning-based AI system.png
+      https://upload.wikimedia.org/wikipedia/commons/2/24/Workflow_of_a_machine-learning-based_AI_system.png?utm_source=commons.wikimedia.org&utm_campaign=i
+
+=== meeting room table office (5) ===
+  [wikimedia video] 1920x1080 2.8MB d=15.0s | File:Kin Wikipedia 25 Anthem 15" 16x9 Caption.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/4/40/Kin_Wikipedia_25_Anthem_15%22_16x9_Caption.webm/Kin_Wikipedia_25_Anthem_15%22_16x9_Capt
+  [wikimedia video] 1280x720 220.4MB d=1623.0s | File:The President's House. MP459. (1280x720).webm
+      https://upload.wikimedia.org/wikipedia/commons/3/36/The_President%27s_House._MP459._%281280x720%29.webm?utm_source=commons.wikimedia.org&utm_campaign=
+  [wikimedia video] 638x360 139.5MB d=2224.5s | File:The President- August 1968. MP899..webm
+      https://upload.wikimedia.org/wikipedia/commons/5/56/The_President-_August_1968._MP899..webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_cont
+  [wikimedia video] 638x360 121.6MB d=1929.5s | File:The President- November 1966. MP879..webm
+      https://upload.wikimedia.org/wikipedia/commons/8/8e/The_President-_November_1966._MP879..webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_co
+  [wikimedia video] 1080x1920 11.9MB d=41.9s | File:WP25Mireia.webm
+      https://upload.wikimedia.org/wikipedia/commons/c/c3/WP25Mireia.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+
+=== office desk computer monitor (0) ===
+
+=== usb flash drive (7) ===
+  [wikimedia image] 4535x3312 4.6MB d=0.0s | File:2023 Pendrive'y Verbatim Store ‘n’ Click 16 GB (1).jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/19/2023_Pendrive%27y_Verbatim_Store_%E2%80%98n%E2%80%99_Click_16_GB_%281%29.jpg?utm_source=commons.wi
+  [wikimedia image] 2900x1462 1.4MB d=0.0s | File:Kingston Technology DataTraveler G4 USB flash drive USB 3.0 32 Gb.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/6f/Kingston_Technology_DataTraveler_G4_USB_flash_drive_USB_3.0_32_Gb.jpg?utm_source=commons.wikimedia
+  [wikimedia image] 6630x3190 9.0MB d=0.0s | File:SanDisk Memory Stick PRO 256MB.jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/22/SanDisk_Memory_Stick_PRO_256MB.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_con
+  [wikimedia image] 2942x2336 0.8MB d=0.0s | File:Supertalent USB-Stick.jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/e7/Supertalent_USB-Stick.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=orig
+  [wikimedia image] 2441x1836 0.7MB d=0.0s | File:USB flash drive, 1TB.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/92/USB_flash_drive%2C_1TB.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=ori
+  [wikimedia image] 230x310 0.1MB d=0.0s | File:USB flash drive.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/67/USB_flash_drive.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [openverse image] 2592x1944 0MB d=0s | USB flash drive
+      https://upload.wikimedia.org/wikipedia/commons/2/2c/USB_flash_drive.JPG
+
+=== surveillance camera (11) ===
+  [wikimedia video] 1920x1080 64.6MB d=316.7s | File:BLK-HDPTZ12 Security Camera Parking Lot Surveillance Video.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/1/14/BLK-HDPTZ12_Security_Camera_Parking_Lot_Surveillance_Video.webm/BLK-HDPTZ12_Security_Ca
+  [wikimedia video] 1280x720 0.9MB d=35.5s | File:Chelyabinsk meteor security camera footage, Yekaterinburg.webm
+      https://upload.wikimedia.org/wikipedia/commons/3/3b/Chelyabinsk_meteor_security_camera_footage%2C_Yekaterinburg.webm?utm_source=commons.wikimedia.org&
+  [wikimedia video] 1270x720 15.3MB d=110.9s | File:HD CCTV Camera video 3MP 4MP iProx CCTV HDCCTVCameras.net retail store.webm
+      https://upload.wikimedia.org/wikipedia/commons/7/77/HD_CCTV_Camera_video_3MP_4MP_iProx_CCTV_HDCCTVCameras.net_retail_store.webm?utm_source=commons.wik
+  [wikimedia video] 1920x1080 11.8MB d=66.4s | File:Home surveillance camera captures Hilliard shooting.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f0/Home_surveillance_camera_captures_Hilliard_shooting.webm/Home_surveillance_camera_captu
+  [wikimedia video] 1920x1080 4.2MB d=33.9s | File:Surveillance camera captures bear in Franklin County for first time in nearly 20 years.web
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f4/Surveillance_camera_captures_bear_in_Franklin_County_for_first_time_in_nearly_20_years.
+  [wikimedia image] 607x497 0.3MB d=0.0s | File:CCTV Cameras.png
+      https://upload.wikimedia.org/wikipedia/commons/0/01/CCTV_Cameras.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 5472x3648 4.0MB d=0.0s | File:Gare - couloir nord (Strasbourg) (2).jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/f7/Gare_-_couloir_nord_%28Strasbourg%29_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=ima
+  [wikimedia image] 3024x4032 4.6MB d=0.0s | File:Pole with surveillance camera and kill switch.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/6f/Pole_with_surveillance_camera_and_kill_switch.jpg?utm_source=commons.wikimedia.org&utm_campaign=im
+  [wikimedia image] 3024x4032 1.7MB d=0.0s | File:Surveillance camera at AVEX Königsdorf.jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/08/Surveillance_camera_at_AVEX_K%C3%B6nigsdorf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imag
+  [wikimedia image] 3024x4032 2.7MB d=0.0s | File:Surveillance camera at REWE Königsdorf.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/69/Surveillance_camera_at_REWE_K%C3%B6nigsdorf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imag
+  [wikimedia image] 4032x3024 2.2MB d=0.0s | File:Surveillance camera in Königsdorf.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/ad/Surveillance_camera_in_K%C3%B6nigsdorf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo
+
+=== humanoid robot walking (7) ===
+  [wikimedia image] 206x206 0.0MB d=0.0s | File:Humanoid biped robot developed by me.jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/c9/Humanoid_biped_robot_developed_by_me.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&u
+  [wikimedia image] 240x351 0.2MB d=0.0s | File:Kirobo.PNG
+      https://upload.wikimedia.org/wikipedia/commons/0/06/Kirobo.PNG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 2457x3577 2.2MB d=0.0s | File:Latest Tesla Optimus Humanoid Robot.jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/c0/Latest_Tesla_Optimus_Humanoid_Robot.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&ut
+  [wikimedia image] 300x432 0.0MB d=0.0s | File:REEM-A humanoid robot.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/3d/REEM-A_humanoid_robot.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=orig
+  [wikimedia image] 300x448 0.0MB d=0.0s | File:REEM-B humanoid robot.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/6b/REEM-B_humanoid_robot.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=orig
+  [wikimedia image] 1920x2560 1.2MB d=0.0s | File:Robi by DeAGOSTINI.JPG
+      https://upload.wikimedia.org/wikipedia/commons/5/58/Robi_by_DeAGOSTINI.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=origina
+  [openverse image] 2000x3000 0MB d=0s | ASIMO 4.28.11
+      https://upload.wikimedia.org/wikipedia/commons/3/39/ASIMO_4.28.11.jpg
+
+=== circuit board macro (6) ===
+  [wikimedia image] 2048x1365 1.6MB d=0.0s | File:Circuit Board (260854457).jpeg
+      https://upload.wikimedia.org/wikipedia/commons/1/13/Circuit_Board_%28260854457%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_con
+  [wikimedia image] 2816x2112 2.5MB d=0.0s | File:Green circuit board II (2389301870).jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/43/Green_circuit_board_II_%282389301870%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinf
+  [wikimedia image] 1273x927 0.9MB d=0.0s | File:Labyrinthine circuit board lines - Flickr - quapan.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/66/Labyrinthine_circuit_board_lines_-_Flickr_-_quapan.jpg?utm_source=commons.wikimedia.org&utm_campai
+  [wikimedia image] 6903x5504 3.7MB d=0.0s | File:MDT AKD-0401.02 circuit board stackup.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/63/MDT_AKD-0401.02_circuit_board_stackup.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&
+  [wikimedia image] 8178x4791 5.7MB d=0.0s | File:MDT AKH-0600.03 circuit board back.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d3/MDT_AKH-0600.03_circuit_board_back.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm
+  [wikimedia image] 3888x2592 5.1MB d=0.0s | File:Macro circuit board.JPG
+      https://upload.wikimedia.org/wikipedia/commons/c/c4/Macro_circuit_board.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=origin
+
+=== typing keyboard coding (9) ===
+  [wikimedia video] 432x768 1.8MB d=51.8s | File:CangjieOnMiNote2AndroidScreencast.webm
+      https://upload.wikimedia.org/wikipedia/commons/9/98/CangjieOnMiNote2AndroidScreencast.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm
+  [wikimedia video] 1920x1080 475.2MB d=558.0s | File:How To Programming in Houdini.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d8/How_To_Programming_in_Houdini.webm/How_To_Programming_in_Houdini.webm.480p.vp9.webm
+  [wikimedia video] 1080x1920 30.2MB d=90.0s | File:Kin Wikipedia 25 Anthem 90" 9x16.webm
+      https://upload.wikimedia.org/wikipedia/commons/9/91/Kin_Wikipedia_25_Anthem_90%22_9x16.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_cont
+  [wikimedia video] 720x480 111.6MB d=453.0s | File:When black is read.webm
+      https://upload.wikimedia.org/wikipedia/commons/2/2b/When_black_is_read.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia image] 640x262 0.0MB d=0.0s | File:Acorn System keyboard (front).jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/fc/Acorn_System_keyboard_%28front%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_
+  [wikimedia image] 640x393 0.0MB d=0.0s | File:Acorn System keyboard (top).jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/5e/Acorn_System_keyboard_%28top%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_co
+  [wikimedia image] 1274x798 0.0MB d=0.0s | File:Italian keyboard touchtyping.png
+      https://upload.wikimedia.org/wikipedia/commons/3/33/Italian_keyboard_touchtyping.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_conte
+  [wikimedia image] 2901x1081 0.5MB d=0.0s | File:Keyboard layout empty fingers.png
+      https://upload.wikimedia.org/wikipedia/commons/3/3c/Keyboard_layout_empty_fingers.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_cont
+  [wikimedia image] 2901x1081 0.6MB d=0.0s | File:Keyboard layout english fingers.png
+      https://upload.wikimedia.org/wikipedia/commons/a/a0/Keyboard_layout_english_fingers.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_co
+
+=== network cable patch panel (0) ===
+
+=== office corridor (0) ===
+
+=== smartphone screen chat (2) ===
+  [wikimedia image] 4112x5472 3.3MB d=0.0s | File:Samsung Galaxy Ch@t (Black) - Front (splash screen).jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/92/Samsung_Galaxy_Ch%40t_%28Black%29_-_Front_%28splash_screen%29.jpg?utm_source=commons.wikimedia.org
+  [wikimedia image] 1024x1024 1.6MB d=0.0s | File:Schadenfreude.png
+      https://upload.wikimedia.org/wikipedia/commons/7/76/Schadenfreude.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+
+=== gpu graphics card (12) ===
+  [wikimedia video] 3840x2160 60.6MB d=100.6s | File:B-Rolls NVIDIA GeForce RTX 5090 FE (by ZMASLO) 5nj1qLazPlk.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/9/92/B-Rolls_NVIDIA_GeForce_RTX_5090_FE_%28by_ZMASLO%29_5nj1qLazPlk.webm/B-Rolls_NVIDIA_GeFo
+  [wikimedia video] 3840x2160 380.4MB d=228.8s | File:Gigabyte RTX 4090 Gaming OC UNBOXING MOUNT GPU HOLDER.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/76/Gigabyte_RTX_4090_Gaming_OC_UNBOXING_MOUNT_GPU_HOLDER.webm/Gigabyte_RTX_4090_Gaming_OC_
+  [wikimedia video] 3840x2160 1091.2MB d=648.0s | File:How to de-package and expose a GPU flip chip die.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/3d/How_to_de-package_and_expose_a_GPU_flip_chip_die.webm/How_to_de-package_and_expose_a_GP
+  [wikimedia video] 1920x1080 135.1MB d=521.3s | File:MSI Trident 3 9th Gen Teardown - GPU Swap - Storage.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a7/MSI_Trident_3_9th_Gen_Teardown_-_GPU_Swap_-_Storage.webm/MSI_Trident_3_9th_Gen_Teardown
+  [wikimedia video] 3840x2160 64.2MB d=109.8s | File:Nowe GPU Intela - jest lepiej, ale nie idealnie... (2160p 30fps VP9 LQ-128kbit AAC)-cut-me
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/2/26/Nowe_GPU_Intela_-_jest_lepiej%2C_ale_nie_idealnie..._%282160p_30fps_VP9_LQ-128kbit_AAC%
+  [wikimedia video] 7680x4320 519.1MB d=36.1s | File:Rundumsicht der Palit GeForce RTX 5090 GameRock C1385 OHNE TON.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/39/Rundumsicht_der_Palit_GeForce_RTX_5090_GameRock_C1385_OHNE_TON.webm/Rundumsicht_der_Pal
+  [wikimedia image] 3872x2592 0.9MB d=0.0s | File:AMD Fiji GPU package with GPU, HBM memory and interposer.jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/e7/AMD_Fiji_GPU_package_with_GPU%2C_HBM_memory_and_interposer.jpg?utm_source=commons.wikimedia.org&ut
+  [wikimedia image] 432x345 0.0MB d=0.0s | File:ATI Radeon HD 5970 Graphics Card-oblique view.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/4a/ATI_Radeon_HD_5970_Graphics_Card-oblique_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=im
+  [wikimedia image] 432x203 0.0MB d=0.0s | File:ATI Radeon HD 5970 Graphics Card-top view.jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/1e/ATI_Radeon_HD_5970_Graphics_Card-top_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagei
+  [wikimedia image] 432x298 0.0MB d=0.0s | File:ATI Radeon HD 5970 Graphics Card-vertical black background - oblique view.jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/cc/ATI_Radeon_HD_5970_Graphics_Card-vertical_black_background_-_oblique_view.jpg?utm_source=commons.w
+  [wikimedia image] 3893x2747 1.7MB d=0.0s | File:Graphics Card Diamond Viper 330 with Nvidia (RIVA 128) GPU.jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/2a/Graphics_Card_Diamond_Viper_330_with_Nvidia_%28RIVA_128%29_GPU.jpg?utm_source=commons.wikimedia.or
+  [wikimedia image] 535x294 0.0MB d=0.0s | File:NVIDIA GPU Accelerator Block Diagram.png
+      https://upload.wikimedia.org/wikipedia/commons/b/b5/NVIDIA_GPU_Accelerator_Block_Diagram.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&u
+
+=== electric motor actuator (11) ===
+  [wikimedia video] 640x480 7.1MB d=19.3s | File:Double servo codes.webm
+      https://upload.wikimedia.org/wikipedia/commons/e/e0/Double_servo_codes.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia video] 1916x1080 10.8MB d=13.9s | File:Dynamical stabilization of a plane using a Gough Stewart platform.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/3f/Dynamical_stabilization_of_a_plane_using_a_Gough_Stewart_platform.webm/Dynamical_stabil
+  [wikimedia video] 1920x1080 10.7MB d=26.8s | File:Gestione di un telepass con Arduino.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c6/Gestione_di_un_telepass_con_Arduino.webm/Gestione_di_un_telepass_con_Arduino.webm.480p.
+  [wikimedia video] 1920x1080 5.7MB d=22.4s | File:Hand-made robotic arm with Arduino.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/9/9c/Hand-made_robotic_arm_with_Arduino.webm/Hand-made_robotic_arm_with_Arduino.webm.480p.vp
+  [wikimedia video] 640x480 3.9MB d=10.8s | File:Single servo arm code.webm
+      https://upload.wikimedia.org/wikipedia/commons/d/d7/Single_servo_arm_code.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia video] 640x480 3.5MB d=9.8s | File:Single servo demo.webm
+      https://upload.wikimedia.org/wikipedia/commons/0/06/Single_servo_demo.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia image] 4000x3000 4.0MB d=0.0s | File:Braccio robotico con Arduino 01.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/ff/Braccio_robotico_con_Arduino_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_co
+  [wikimedia image] 415x640 0.1MB d=0.0s | File:Class2 modulating actuator cement factory.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/5f/Class2_modulating_actuator_cement_factory.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagei
+  [wikimedia image] 3579x2799 5.5MB d=0.0s | File:Servo motor drive.png
+      https://upload.wikimedia.org/wikipedia/commons/7/73/Servo_motor_drive.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 1600x1200 0.4MB d=0.0s | File:Servomotor 01.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d2/Servomotor_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 415x415 0.0MB d=0.0s | File:Yeskawa Servo Drive & Motor.jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b8/Yeskawa_Servo_Drive_%26_Motor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_cont
+
+=== empty conference room (7) ===
+  [wikimedia video] 1922x1080 111.3MB d=565.5s | File:President Obama on Death of Osama bin Laden no watermark.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/e/e3/President_Obama_on_Death_of_Osama_bin_Laden_no_watermark.webm/President_Obama_on_Death_
+  [wikimedia image] 4032x3024 3.9MB d=0.0s | File:Conference preparations.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/56/Conference_preparations.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=or
+  [wikimedia image] 5184x3456 2.5MB d=0.0s | File:Empty meeting room COP22 (30980793081).jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/04/Empty_meeting_room_COP22_%2830980793081%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=image
+  [wikimedia image] 3000x2000 0.6MB d=0.0s | File:Globes Israel business conference 2018 empty confrence room.jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/14/Globes_Israel_business_conference_2018_empty_confrence_room.jpg?utm_source=commons.wikimedia.org&u
+  [wikimedia image] 2500x1667 2.7MB d=0.0s | File:Residential common room - Garfield Building (28996679247).jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/87/Residential_common_room_-_Garfield_Building_%2828996679247%29.jpg?utm_source=commons.wikimedia.org
+  [wikimedia image] 4000x1819 6.1MB d=0.0s | File:Small conference room (Unsplash).jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/f2/Small_conference_room_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&u
+  [wikimedia image] 2837x4271 11.7MB d=0.0s | File:Wallenstein Palace conference room and ceiling mural.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/ad/Wallenstein_Palace_conference_room_and_ceiling_mural.jpg?utm_source=commons.wikimedia.org&utm_camp
+
+########## science ##########
+
+=== bumblebee flower slow motion (5) ===
+  [wikimedia video] 1280x720 12.2MB d=31.4s | File:Bumblebee in flight, 32 times slower.webm
+      https://upload.wikimedia.org/wikipedia/commons/3/35/Bumblebee_in_flight%2C_32_times_slower.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_
+  [wikimedia video] 1920x1080 27.2MB d=109.0s | File:Bumblebee looking for nectar, 5 times slower.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/4/4b/Bumblebee_looking_for_nectar%2C_5_times_slower.webm/Bumblebee_looking_for_nectar%2C_5_t
+  [wikimedia video] 3840x2160 162.2MB d=53.8s | File:Bumblebee looking for nectar in verbena, 4 times slower.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/3a/Bumblebee_looking_for_nectar_in_verbena%2C_4_times_slower.webm/Bumblebee_looking_for_ne
+  [wikimedia video] 3840x2160 84.4MB d=34.8s | File:Bumblebee looking for nectar in verbena up close, 4 times slower.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/e/e5/Bumblebee_looking_for_nectar_in_verbena_up_close%2C_4_times_slower.webm/Bumblebee_looki
+  [wikimedia image] 1733x1127 0.1MB d=0.0s | File:Cornus canadensis (3749608063).jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/7d/Cornus_canadensis_%283749608063%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm
+
+=== bees honeycomb hive (1) ===
+  [wikimedia video] 1920x1080 15.9MB d=63.1s | File:Queen honey bee laying eggs.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/1/10/Queen_honey_bee_laying_eggs.webm/Queen_honey_bee_laying_eggs.webm.480p.vp9.webm
+
+=== bee collecting nectar flower (0) ===
+
+=== beekeeper apiary frames (5) ===
+  [wikimedia image] 1348x264 0.1MB d=0.0s | File:American bee journal (1914) (17930206929).jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/6a/American_bee_journal_%281914%29_%2817930206929%29.jpg?utm_source=commons.wikimedia.org&utm_campaig
+  [wikimedia image] 3328x1110 0.8MB d=0.0s | File:American bee journal (1915) (17928957490).jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b3/American_bee_journal_%281915%29_%2817928957490%29.jpg?utm_source=commons.wikimedia.org&utm_campaig
+  [wikimedia image] 1274x1028 0.3MB d=0.0s | File:American bee journal (1918) (17928763999).jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/1d/American_bee_journal_%281918%29_%2817928763999%29.jpg?utm_source=commons.wikimedia.org&utm_campaig
+  [wikimedia image] 1279x932 0.3MB d=0.0s | File:Maltese honey (3044867663).jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/6b/Maltese_honey_%283044867663%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_con
+  [wikimedia image] 1962x1534 1.3MB d=0.0s | File:The ABC of bee culture- a cyclopaedia of every thing pertaining to the care of the honey-b
+      https://upload.wikimedia.org/wikipedia/commons/2/2a/The_ABC_of_bee_culture-_a_cyclopaedia_of_every_thing_pertaining_to_the_care_of_the_honey-bee%3B_be
+
+=== microscope laboratory research (11) ===
+  [wikimedia video] 1024x768 6.5MB d=41.6s | File:C. elegans with pencil for scale.webm
+      https://upload.wikimedia.org/wikipedia/commons/f/fd/C._elegans_with_pencil_for_scale.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_conten
+  [wikimedia video] 320x212 1.7MB d=61.1s | File:KSC-04-S-00099 (ksc 041504 supermag).webm
+      https://upload.wikimedia.org/wikipedia/commons/0/01/KSC-04-S-00099_%28ksc_041504_supermag%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imagei
+  [wikimedia video] 1920x1080 39.3MB d=257.1s | File:Life in the Lab- Working with malaria parasites.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a9/Life_in_the_Lab-_Working_with_malaria_parasites.webm/Life_in_the_Lab-_Working_with_mala
+  [wikimedia video] 1080x1920 107.4MB d=145.1s | File:Présentation du nématode Dracograllus Miguelitus (Ifremer 01022-113359).webm
+      https://upload.wikimedia.org/wikipedia/commons/f/fe/Pr%C3%A9sentation_du_n%C3%A9matode_Dracograllus_Miguelitus_%28Ifremer_01022-113359%29.webm?utm_sou
+  [wikimedia video] 1280x706 38.7MB d=592.7s | File:Utilisation du logiciel TNPC (Traitement Numérique des Pièces Calcifiées)- aide au paramét
+      https://upload.wikimedia.org/wikipedia/commons/e/e7/Utilisation_du_logiciel_TNPC_%28Traitement_Num%C3%A9rique_des_Pi%C3%A8ces_Calcifi%C3%A9es%29-_aide
+  [wikimedia image] 7360x4912 19.9MB d=0.0s | File:Close-up of a lab technitian adjusting a microscope glass slide.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/3a/Close-up_of_a_lab_technitian_adjusting_a_microscope_glass_slide.jpg?utm_source=commons.wikimedia.o
+  [wikimedia image] 4912x7360 17.4MB d=0.0s | File:Close-up of a test tube rack in front of a chemistry book with microscope in a blurry back
+      https://upload.wikimedia.org/wikipedia/commons/c/c3/Close-up_of_a_test_tube_rack_in_front_of_a_chemistry_book_with_microscope_in_a_blurry_background.j
+  [wikimedia image] 7360x4912 17.3MB d=0.0s | File:Close-up of the ocular lenses of a microscope with a blurry background.jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/ea/Close-up_of_the_ocular_lenses_of_a_microscope_with_a_blurry_background.jpg?utm_source=commons.wiki
+  [wikimedia image] 4912x7360 20.3MB d=0.0s | File:Close-up of the testing tubes with microscope in a blurry background.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/f2/Close-up_of_the_testing_tubes_with_microscope_in_a_blurry_background.jpg?utm_source=commons.wikime
+  [wikimedia image] 7360x4912 20.5MB d=0.0s | File:Lab technitian looking through the microscope while adjusting coarse knob.jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/ca/Lab_technitian_looking_through_the_microscope_while_adjusting_coarse_knob.jpg?utm_source=commons.w
+  [wikimedia image] 2059x1467 2.3MB d=0.0s | File:Marie Stopes in her laboratory, 1904 - Restoration.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/fa/Marie_Stopes_in_her_laboratory%2C_1904_-_Restoration.jpg?utm_source=commons.wikimedia.org&utm_camp
+
+=== macro insect close up (11) ===
+  [wikimedia video] 1920x1080 25.4MB d=253.4s | File:Oecanthus dulcisonans -- Großes Weinhähnchen -- Large Tree-cricket.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7a/Oecanthus_dulcisonans_--_Gro%C3%9Fes_Weinh%C3%A4hnchen_--_Large_Tree-cricket.webm/Oecan
+  [wikimedia video] 1920x1080 15.3MB d=73.3s | File:Pachytrachis frater -- Monk Bush-cricket.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a9/Pachytrachis_frater_--_Monk_Bush-cricket.webm/Pachytrachis_frater_--_Monk_Bush-cricket.
+  [wikimedia video] 1920x1080 2.2MB d=24.8s | File:Poecilimon (elegans) sp. 25.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/2/29/Poecilimon_%28elegans%29_sp._25.webm/Poecilimon_%28elegans%29_sp._25.webm.480p.vp9.webm
+  [wikimedia video] 1920x1080 8.3MB d=48.9s | File:Poecilimon affinis -- Balkan-Buntschrecke – Balkan Bright Bush-cricket.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f1/Poecilimon_affinis_--_Balkan-Buntschrecke_%E2%80%93_Balkan_Bright_Bush-cricket.webm/Poe
+  [wikimedia video] 1920x1080 24.1MB d=131.9s | File:Stenobothrus croaticus -- Kroatischer Heidegrashüpfer -- Croatian Toothed Grasshopper.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/9/91/Stenobothrus_croaticus_--_Kroatischer_Heidegrash%C3%BCpfer_--_Croatian_Toothed_Grasshop
+  [wikimedia image] 6000x4000 11.3MB d=0.0s | File:202603 Close-up of Ptecticus aurifer at the indoors.jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/8b/202603_Close-up_of_Ptecticus_aurifer_at_the_indoors.jpg?utm_source=commons.wikimedia.org&utm_campa
+  [wikimedia image] 3120x2080 1.5MB d=0.0s | File:Close-up view of a bioluminescent beetle Elateroidea.jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/2d/Close-up_view_of_a_bioluminescent_beetle_Elateroidea.jpg?utm_source=commons.wikimedia.org&utm_camp
+  [wikimedia image] 1280x1024 0.4MB d=0.0s | File:Episyrphus balteatus - head close-up (aka).jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/1b/Episyrphus_balteatus_-_head_close-up_%28aka%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=i
+  [wikimedia image] 2134x1560 2.2MB d=0.0s | File:Fly insect macro.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/93/Fly_insect_macro.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 4284x2856 6.4MB d=0.0s | File:Hairy dragonfly (Brachytron pratense) male close up.jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/28/Hairy_dragonfly_%28Brachytron_pratense%29_male_close_up.jpg?utm_source=commons.wikimedia.org&utm_c
+  [wikimedia image] 2688x1920 3.4MB d=0.0s | File:Insect macro (50091453773).jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/2b/Insect_macro_%2850091453773%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_con
+
+=== 3d printer printing (12) ===
+  [wikimedia video] 1920x1080 26.2MB d=53.8s | File:3D-printing moondust bricks with focused solar heat ESA374718.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d9/3D-printing_moondust_bricks_with_focused_solar_heat_ESA374718.webm/3D-printing_moondust
+  [wikimedia video] 1920x1080 3.9MB d=18.0s | File:3D Printing at FIMS Library.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/8/8d/3D_Printing_at_FIMS_Library.webm/3D_Printing_at_FIMS_Library.webm.480p.vp9.webm
+  [wikimedia video] 1920x1080 17.0MB d=24.8s | File:3D printing time-lapse 2026.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/9/91/3D_printing_time-lapse_2026.webm/3D_printing_time-lapse_2026.webm.480p.vp9.webm
+  [wikimedia video] 1920x1080 21.5MB d=31.8s | File:3d printing copenhagen.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/0/02/3d_printing_copenhagen.webm/3d_printing_copenhagen.webm.480p.vp9.webm
+  [wikimedia video] 1080x606 16.9MB d=70.9s | File:Printing in progress in a 3D printer.webm
+      https://upload.wikimedia.org/wikipedia/commons/a/ac/Printing_in_progress_in_a_3D_printer.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_co
+  [wikimedia image] 3072x4080 4.5MB d=0.0s | File:3D Printing.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/f4/3D_Printing.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 2400x1212 0.1MB d=0.0s | File:3D printing calibration axis alignment movement and lubrication.png
+      https://upload.wikimedia.org/wikipedia/commons/3/32/3D_printing_calibration_axis_alignment_movement_and_lubrication.png?utm_source=commons.wikimedia.o
+  [wikimedia image] 2400x1212 0.1MB d=0.0s | File:3D printing calibration elephant foot.png
+      https://upload.wikimedia.org/wikipedia/commons/f/f1/3D_printing_calibration_elephant_foot.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&
+  [wikimedia image] 2400x1212 0.1MB d=0.0s | File:3D printing calibration part-cooling fan airflow.png
+      https://upload.wikimedia.org/wikipedia/commons/2/21/3D_printing_calibration_part-cooling_fan_airflow.png?utm_source=commons.wikimedia.org&utm_campaign
+  [wikimedia image] 2400x2424 0.2MB d=0.0s | File:3D printing calibration – 3D printer belt tension and backlash.png
+      https://upload.wikimedia.org/wikipedia/commons/0/03/3D_printing_calibration_%E2%80%93_3D_printer_belt_tension_and_backlash.png?utm_source=commons.wiki
+  [wikimedia image] 501x498 0.1MB d=0.0s | File:Example of 3D printer support material.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/68/Example_of_3D_printer_support_material.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo
+  [openverse image] 2448x3264 0MB d=0s | Prusa i3 - RepRap 3D printer printing
+      https://upload.wikimedia.org/wikipedia/commons/6/6c/Prusa_i3_-_RepRap_3D_printer_printing.jpg
+
+=== laboratory pipette liquid (8) ===
+  [wikimedia video] 1024x576 83.2MB d=678.3s | File:Gezonde jeugd - een krachtig volk (acte 3).webm
+      https://upload.wikimedia.org/wikipedia/commons/b/b0/Gezonde_jeugd_-_een_krachtig_volk_%28acte_3%29.webm?utm_source=commons.wikimedia.org&utm_campaign=
+  [wikimedia image] 8192x5464 9.9MB d=0.0s | File:Disposable Pipette Tips in Laboratory Tip Boxes.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/32/Disposable_Pipette_Tips_in_Laboratory_Tip_Boxes.jpg?utm_source=commons.wikimedia.org&utm_campaign=
+  [wikimedia image] 8192x5464 10.0MB d=0.0s | File:Disposable Pipette Tips in Laboratory Tip Boxes 02.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/ac/Disposable_Pipette_Tips_in_Laboratory_Tip_Boxes_02.jpg?utm_source=commons.wikimedia.org&utm_campai
+  [wikimedia image] 3948x2832 0.4MB d=0.0s | File:Micro-pipette used by Lord Joseph Lister in his experiments on souring milk.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/9e/Micro-pipette_used_by_Lord_Joseph_Lister_in_his_experiments_on_souring_milk.jpg?utm_source=commons
+  [wikimedia image] 8192x5464 9.5MB d=0.0s | File:Micropipettes on a pipette stand 01.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/59/Micropipettes_on_a_pipette_stand_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&ut
+  [wikimedia image] 4640x2140 2.2MB d=0.0s | File:Pippette.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/36/Pippette.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 966x1600 0.1MB d=0.0s | File:Use of a Multichannel Pipette for High-Throughput Liquid Handling in a Biosafety Cabinet.j
+      https://upload.wikimedia.org/wikipedia/commons/b/bf/Use_of_a_Multichannel_Pipette_for_High-Throughput_Liquid_Handling_in_a_Biosafety_Cabinet.jpg?utm_s
+  [openverse image] 4081x3061 0MB d=0s | Andrew+ robot
+      https://upload.wikimedia.org/wikipedia/commons/5/5f/Andrew%2B_robot.jpg
+
+=== medical syringe injection close up (0) ===
+
+=== insect wing slow motion (0) ===
+
+=== scientist laboratory gloves (6) ===
+  [wikimedia image] 1600x1066 0.3MB d=0.0s | File:A group of scientists working in a laboratory Esculab.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/6f/A_group_of_scientists_working_in_a_laboratory_Esculab.jpg?utm_source=commons.wikimedia.org&utm_cam
+  [wikimedia image] 7216x5412 2.9MB d=0.0s | File:Food lab scientist packages food for spaceflight at Space Food Lab.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/49/Food_lab_scientist_packages_food_for_spaceflight_at_Space_Food_Lab.jpg?utm_source=commons.wikimedi
+  [wikimedia image] 4837x5982 1.9MB d=0.0s | File:Isotope laboratory at the National Institutes of Health.jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/ed/Isotope_laboratory_at_the_National_Institutes_of_Health.jpg?utm_source=commons.wikimedia.org&utm_c
+  [wikimedia image] 6016x4016 12.8MB d=0.0s | File:Scientist prepares samples in laboratory using various tools and equipment.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/9c/Scientist_prepares_samples_in_laboratory_using_various_tools_and_equipment.jpg?utm_source=commons.
+  [wikimedia image] 3238x4857 8.2MB d=0.0s | File:Scientist with a Petri dish (Unsplash).jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/bd/Scientist_with_a_Petri_dish_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=image
+  [wikimedia image] 2848x4288 5.8MB d=0.0s | File:Seafood- FDA Lab 2896 (4494149073).jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/78/Seafood-_FDA_Lab_2896_%284494149073%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo
+
+=== spring flowers meadow insects (6) ===
+  [wikimedia image] 1981x1483 0.6MB d=0.0s | File:Maniola jurtina (3746849076).jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/99/Maniola_jurtina_%283746849076%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_c
+  [wikimedia image] 1890x2840 1.4MB d=0.0s | File:The transformations (or metamorphoses) of insects (Insecta, Myriapoda, Arachnida, and Crus
+      https://upload.wikimedia.org/wikipedia/commons/9/95/The_transformations_%28or_metamorphoses%29_of_insects_%28Insecta%2C_Myriapoda%2C_Arachnida%2C_and_
+  [wikimedia image] 1896x2860 1.5MB d=0.0s | File:The transformations (or metamorphoses) of insects (Insecta, Myriapoda, Arachnida, and Crus
+      https://upload.wikimedia.org/wikipedia/commons/c/c5/The_transformations_%28or_metamorphoses%29_of_insects_%28Insecta%2C_Myriapoda%2C_Arachnida%2C_and_
+  [wikimedia image] 2048x1365 0.4MB d=0.0s | File:Tragopogon Pratensis Meadow Salsify (235873175).jpeg
+      https://upload.wikimedia.org/wikipedia/commons/d/d8/Tragopogon_Pratensis_Meadow_Salsify_%28235873175%29.jpeg?utm_source=commons.wikimedia.org&utm_camp
+  [wikimedia image] 2656x1776 1.1MB d=0.0s | File:Wild flowers and where they grow (1882) (14760072046).jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/74/Wild_flowers_and_where_they_grow_%281882%29_%2814760072046%29.jpg?utm_source=commons.wikimedia.org
+  [wikimedia image] 1972x2284 0.9MB d=0.0s | File:Wild flowers and where they grow (1882) (14782740322).jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/84/Wild_flowers_and_where_they_grow_%281882%29_%2814782740322%29.jpg?utm_source=commons.wikimedia.org
+
+=== bee swarm (10) ===
+  [wikimedia video] 1920x1080 2.3MB d=21.0s | File:Rhagovelia whirling in a swarm.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/4/48/Rhagovelia_whirling_in_a_swarm.webm/Rhagovelia_whirling_in_a_swarm.webm.480p.vp9.webm
+  [wikimedia video] 1280x720 27.6MB d=20.0s | File:Swarm of Bees.webm
+      https://upload.wikimedia.org/wikipedia/commons/6/6d/Swarm_of_Bees.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia video] 1280x720 26.5MB d=20.1s | File:Swarm of Bees (35280627481).webm
+      https://upload.wikimedia.org/wikipedia/commons/1/1a/Swarm_of_Bees_%2835280627481%29.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content
+  [wikimedia video] 1080x1920 262.2MB d=57.7s | File:Рій на землі 02.webm
+      https://upload.wikimedia.org/wikipedia/commons/7/76/%D0%A0%D1%96%D0%B9_%D0%BD%D0%B0_%D0%B7%D0%B5%D0%BC%D0%BB%D1%96_02.webm?utm_source=commons.wikimedi
+  [wikimedia image] 1638x1326 0.7MB d=0.0s | File:Black-banded honeybee (Apis nigrocincta), swarming behavior (Bukidnon, Mindanao, Philippin
+      https://upload.wikimedia.org/wikipedia/commons/1/14/Black-banded_honeybee_%28Apis_nigrocincta%29%2C_swarming_behavior_%28Bukidnon%2C_Mindanao%2C_Phili
+  [wikimedia image] 1251x943 0.4MB d=0.0s | File:Black-banded honeybee (Apis nigrocincta), swarming behavior (Bukidnon, Mindanao, Philippin
+      https://upload.wikimedia.org/wikipedia/commons/c/ca/Black-banded_honeybee_%28Apis_nigrocincta%29%2C_swarming_behavior_%28Bukidnon%2C_Mindanao%2C_Phili
+  [wikimedia image] 1663x1500 0.7MB d=0.0s | File:Black-banded honeybee (Apis nigrocincta), swarming behavior (Bukidnon, Mindanao, Philippin
+      https://upload.wikimedia.org/wikipedia/commons/b/bc/Black-banded_honeybee_%28Apis_nigrocincta%29%2C_swarming_behavior_%28Bukidnon%2C_Mindanao%2C_Phili
+  [wikimedia image] 2604x1932 1.4MB d=0.0s | File:Black-banded honeybee (Apis nigrocincta), swarming behavior (Bukidnon, Mindanao, Philippin
+      https://upload.wikimedia.org/wikipedia/commons/9/91/Black-banded_honeybee_%28Apis_nigrocincta%29%2C_swarming_behavior_%28Bukidnon%2C_Mindanao%2C_Phili
+  [wikimedia image] 2052x1792 1.0MB d=0.0s | File:Black-banded honeybee (Apis nigrocincta), swarming behavior (Bukidnon, Mindanao, Philippin
+      https://upload.wikimedia.org/wikipedia/commons/f/f4/Black-banded_honeybee_%28Apis_nigrocincta%29%2C_swarming_behavior_%28Bukidnon%2C_Mindanao%2C_Phili
+  [wikimedia image] 2060x1932 1.1MB d=0.0s | File:Black-banded honeybee (Apis nigrocincta), swarming behavior (Bukidnon, Mindanao, Philippin
+      https://upload.wikimedia.org/wikipedia/commons/5/5a/Black-banded_honeybee_%28Apis_nigrocincta%29%2C_swarming_behavior_%28Bukidnon%2C_Mindanao%2C_Phili
+
+=== engineering laboratory workshop (4) ===
+  [wikimedia image] 2298x2231 1.2MB d=0.0s | File:Materials & Industrial Engineering labs & workshops, late 1970's(1).jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/a5/Materials_%26_Industrial_Engineering_labs_%26_workshops%2C_late_1970%27s%281%29.jpg?utm_source=com
+  [wikimedia image] 3000x2232 5.4MB d=0.0s | File:Skylab Orbital Workshop mockup loading into Super Guppy (MSFC-6758108).jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/77/Skylab_Orbital_Workshop_mockup_loading_into_Super_Guppy_%28MSFC-6758108%29.jpg?utm_source=commons.
+  [wikimedia image] 1140x884 0.3MB d=0.0s | File:Skylab Orbital Workshop mockup removed from building 4755 (MSFC-6758107).jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/be/Skylab_Orbital_Workshop_mockup_removed_from_building_4755_%28MSFC-6758107%29.jpg?utm_source=common
+  [wikimedia image] 6240x4160 9.3MB d=0.0s | File:Workshop in the University of Michigan Department of Mechanical Engineering.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/da/Workshop_in_the_University_of_Michigan_Department_of_Mechanical_Engineering.jpg?utm_source=commons
+
+########## space ##########
+
+=== sun solar surface eruption (16) ===
+  [nasa      video] 0x0 0MB d=0s | Sun Shreds Its Own Eruption
+      http://images-assets.nasa.gov/video/GSFC_20170811_Solar_m11797_Eruption/GSFC_20170811_Solar_m11797_Eruption~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | How NASA Will Protect Astronauts From Space Radiation
+      http://images-assets.nasa.gov/video/GSFC_20190807_m13275_Astronaut_Radiation/GSFC_20190807_m13275_Astronaut_Radiation~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | SDO: Year 5
+      http://images-assets.nasa.gov/video/GSFC_20150211_SDO_m11742_Year5/GSFC_20150211_SDO_m11742_Year5~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | Scientists Uncover Origins of Dynamic Jets on Sun's Surface: Uncover Spicules
+      http://images-assets.nasa.gov/video/GSFC_20170622_m12604_UncoverSpicules/GSFC_20170622_m12604_UncoverSpicules~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | The Sun’s Mysteriously Hot Atmosphere
+      http://images-assets.nasa.gov/video/GSFC_20180725_Parker_m12903_CoronalHeating_Short/GSFC_20180725_Parker_m12903_CoronalHeating_Short~mobile.mp4
+  [wikimedia video] 3840x2160 249.2MB d=124.9s | File:Earth from Orbit- Solar Flare Erupts (NESDIS 2021-11-04 2021 11 04 SolarFlareErupts UHD).w
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/32/Earth_from_Orbit-_Solar_Flare_Erupts_%28NESDIS_2021-11-04_2021_11_04_SolarFlareErupts_U
+  [wikimedia video] 3840x2160 248.4MB d=124.9s | File:Earth from Orbit- Solar Flare Erupts (NESDIS 2021-11-04 2021 11 04 SolarFlareErupts UHD CL
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/78/Earth_from_Orbit-_Solar_Flare_Erupts_%28NESDIS_2021-11-04_2021_11_04_SolarFlareErupts_U
+  [wikimedia video] 1920x1080 7.8MB d=12.1s | File:Massive Solar Eruption Close-up - AIA 304.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a7/Massive_Solar_Eruption_Close-up_-_AIA_304.webm/Massive_Solar_Eruption_Close-up_-_AIA_30
+  [wikimedia video] 1280x720 52.9MB d=143.7s | File:Massive Solar Eruption Close-up - Multiple wavelengths.webm
+      https://upload.wikimedia.org/wikipedia/commons/8/83/Massive_Solar_Eruption_Close-up_-_Multiple_wavelengths.webm?utm_source=commons.wikimedia.org&utm_c
+  [wikimedia video] 640x480 6.9MB d=1.9s | File:TRACE observation of an X1.5 flare on 21 April 2002 in 195 Å.mpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d6/TRACE_observation_of_an_X1.5_flare_on_21_April_2002_in_195_%C3%85.mpg?utm_source=commons.wikimedia
+  [nasa      image] 0x0 0MB d=0s | Solar Activity Seen at Sunspot Site Tracked by Mars Rover
+      http://images-assets.nasa.gov/image/PIA19680/PIA19680~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Detailed Loops Above an Active Region
+      http://images-assets.nasa.gov/image/PIA22645/PIA22645~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Skylab
+      http://images-assets.nasa.gov/image/9606705/9606705~orig.jpg
+  [wikimedia image] 1280x1280 0.2MB d=0.0s | File:Largest Solar Flare Since 2017 Spotted on the Sun (49983663618).jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/67/Largest_Solar_Flare_Since_2017_Spotted_on_the_Sun_%2849983663618%29.jpg?utm_source=commons.wikimed
+  [wikimedia image] 1920x1080 2.6MB d=0.0s | File:Magnificent CME Erupts on the Sun - August 31.jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/e3/Magnificent_CME_Erupts_on_the_Sun_-_August_31.jpg?utm_source=commons.wikimedia.org&utm_campaign=im
+  [wikimedia image] 4095x3647 1.4MB d=0.0s | File:Sun - August 1, 2010.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/3c/Sun_-_August_1%2C_2010.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=ori
+
+=== sunrise earth from space (12) ===
+  [nasa      video] 0x0 0MB d=0s | NASA Launches Super-Pressure Balloon
+      http://images-assets.nasa.gov/video/GSFC_20160519_SPB_m12262_Balloons/GSFC_20160519_SPB_m12262_Balloons~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | jscm001441_Top_20_Earth_Images_of_2020-4kMP4
+      http://images-assets.nasa.gov/video/jscm001441_Top_20_Earth_Images_of_2020-4kMP4/jscm001441_Top_20_Earth_Images_of_2020-4kMP4~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | KSC-05-S-00124
+      http://images-assets.nasa.gov/video/van_052005_noaa_intro/van_052005_noaa_intro~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | KSC-05-S-00200
+      http://images-assets.nasa.gov/video/ksc_071005_114_hire-16/ksc_071005_114_hire-16~mobile.mp4
+  [wikimedia video] 1920x1080 28.5MB d=234.7s | File:NEOWISE from the International space station.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/8/8a/NEOWISE_from_the_International_space_station.webm/NEOWISE_from_the_International_space_
+  [wikimedia video] 1920x1080 3.0MB d=3.0s | File:Sunrise on Central US Weather Maker (CIRA 2025-02-12 - nolabels).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a2/Sunrise_on_Central_US_Weather_Maker_%28CIRA_2025-02-12_-_nolabels%29.webm/Sunrise_on_Ce
+  [wikimedia video] 1920x1080 4.7MB d=5.1s | File:Sunrise on Convection within Tropical Storm Idalia (CIRA 2023-08-28 - nolabels 1).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/33/Sunrise_on_Convection_within_Tropical_Storm_Idalia_%28CIRA_2023-08-28_-_nolabels_1%29.w
+  [wikimedia video] 1920x1080 3.1MB d=3.7s | File:Sunrise on Hurricane Idalia (202308290901-202308291246 g16 conus geocolorglm sunrise-CIRA 
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/e/ec/Sunrise_on_Hurricane_Idalia_%28202308290901-202308291246_g16_conus_geocolorglm_sunrise-
+  [wikimedia video] 1920x1080 3.0MB d=3.0s | File:Sunrise on a Historically Snow Covered Southeastern US (CIRA 2025-01-22 - nolabels).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/0/04/Sunrise_on_a_Historically_Snow_Covered_Southeastern_US_%28CIRA_2025-01-22_-_nolabels%29
+  [nasa      image] 0x0 0MB d=0s | Sunrise seen from STS-77
+      http://images-assets.nasa.gov/image/s77e5073/s77e5073~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Earth's limb at sunrise as seen from the Gemini 9-A spacecraft
+      http://images-assets.nasa.gov/image/s66-38275/s66-38275~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Sunrise, Earth Limb
+      http://images-assets.nasa.gov/image/STS052-23-022/STS052-23-022~orig.jpg
+
+=== milky way galaxy stars timelapse (1) ===
+  [nasa      video] 0x0 0MB d=0s | What's Up: July 2021 Skywatching Tips from NASA 
+      http://images-assets.nasa.gov/video/JPL-20210701-WHATSUf-0001-Whats-Up-July-2021/JPL-20210701-WHATSUf-0001-Whats-Up-July-2021~mobile.mp4
+
+=== spiral galaxy (16) ===
+  [nasa      video] 0x0 0MB d=0s | What's Up: February 2024 Skywatching Tips from NASA
+      http://images-assets.nasa.gov/video/JPL-20240201-WHATSUf-0001-Whats_Up_February_2024/JPL-20240201-WHATSUf-0001-Whats_Up_February_2024~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | Onward and Upward! New Crew Launches to the Space Station on This Week @NASA – October 7, 2022
+      http://images-assets.nasa.gov/video/Onward and Upward! New Crew Launches to the Space Station on This Week @NASA – October 7, 2022/Onward and Upward! 
+  [nasa      video] 0x0 0MB d=0s | New Simulation Sheds Light on Spiraling Supermassive Black Holes
+      http://images-assets.nasa.gov/video/GSFC_20181002_SMBH_m13043_Simulation/GSFC_20181002_SMBH_m13043_Simulation~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | Previewing Our Artemis I Mission to the Moon on This Week @NASA – August 5, 2022
+      http://images-assets.nasa.gov/video/Previewing Our Artemis I Mission to the Moon on This Week @NASA – August 5, 2022/Previewing Our Artemis I Mission 
+  [wikimedia video] 3840x2160 30.0MB d=30.0s | File:Explore spiral galaxy M83 through Webb’s infrared eyes ESA508223.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f1/Explore_spiral_galaxy_M83_through_Webb%E2%80%99s_infrared_eyes_ESA508223.webm/Explore_s
+  [wikimedia video] 3840x2160 21.8MB d=30.0s | File:One-sided spiral (potm2607a).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0d/One-sided_spiral_%28potm2607a%29.webm/One-sided_spiral_%28potm2607a%29.webm.480p.vp9.we
+  [wikimedia video] 1280x720 4.3MB d=38.3s | File:Zooming into the southern spiral NGC 300 (ESO 1037b).webm
+      https://upload.wikimedia.org/wikipedia/commons/c/c7/Zooming_into_the_southern_spiral_NGC_300_%28ESO_1037b%29.webm?utm_source=commons.wikimedia.org&utm
+  [nasa      image] 0x0 0MB d=0s | Gargantuan Super Spiral Galaxies Loom Large in the Cosmos
+      http://images-assets.nasa.gov/image/PIA20064/PIA20064~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | spiral galaxy M83
+      http://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001262/GSFC_20171208_Archive_e001262~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Hubble peeks at a spiral galaxy
+      http://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000687/GSFC_20171208_Archive_e000687~orig.jpg
+  [wikimedia image] 40000x12788 290.2MB d=0.0s | File:Andromeda Galaxy M31 - Heic1502a Full resolution.jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b3/Andromeda_Galaxy_M31_-_Heic1502a_Full_resolution.jpg?utm_source=commons.wikimedia.org&utm_campaign
+  [wikimedia image] 897x1065 0.8MB d=0.0s | File:Blackeyegalaxy.jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/c4/Blackeyegalaxy.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 6637x3787 14.4MB d=0.0s | File:Hubble2005-01-barred-spiral-galaxy-NGC1300.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/52/Hubble2005-01-barred-spiral-galaxy-NGC1300.jpg?utm_source=commons.wikimedia.org&utm_campaign=image
+  [wikimedia image] 11405x7419 124.0MB d=0.0s | File:Messier83 - Heic1403a.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/5e/Messier83_-_Heic1403a.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=orig
+  [wikimedia image] 3500x1813 2.6MB d=0.0s | File:NGC 2683 Spiral galaxy.jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/02/NGC_2683_Spiral_galaxy.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=ori
+  [wikimedia image] 1730x1428 1.7MB d=0.0s | File:NGC 4414 (NASA-med).jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/c3/NGC_4414_%28NASA-med%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=or
+
+=== solar system planets animation (17) ===
+  [nasa      video] 0x0 0MB d=0s | Bennu's Journey Teaser
+      http://images-assets.nasa.gov/video/GSFC_20140923_Bennu_m11661_Teaser/GSFC_20140923_Bennu_m11661_Teaser~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | Bennu's Journey - Letterbox
+      http://images-assets.nasa.gov/video/GSFC_20141118_M20220_BennuLetterbox_h264/GSFC_20141118_M20220_BennuLetterbox_h264~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | Bennu's Journey
+      http://images-assets.nasa.gov/video/GSFC_20141118_M20220_BennuHalfRes83/GSFC_20141118_M20220_BennuHalfRes83~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | NASA’s Psyche Mission Media Reel
+      http://images-assets.nasa.gov/video/JPL-20230809-PSYCHEf-0001-Psyche Media Reel Chronological/JPL-20230809-PSYCHEf-0001-Psyche Media Reel Chronologica
+  [nasa      video] 0x0 0MB d=0s | A Poem for Europa by U.S. Poet Laureate Ada Limón
+      http://images-assets.nasa.gov/video/JPL-20230601-CLIPPRf-0001-Ada Limon In Praise of Mystery/JPL-20230601-CLIPPRf-0001-Ada Limon In Praise of Mystery~
+  [wikimedia video] 1920x1080 12.5MB d=79.1s | File:Animation of ʻOumuamua passing through the Solar System.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/5/57/Animation_of_%CA%BBOumuamua_passing_through_the_Solar_System.webm/Animation_of_%CA%BBOu
+  [wikimedia video] 1920x1080 44.7MB d=283.4s | File:Improved Solar System Animation.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/37/Improved_Solar_System_Animation.webm/Improved_Solar_System_Animation.webm.480p.vp9.webm
+  [wikimedia video] 1920x1080 6.0MB d=31.4s | File:Sistema Solar.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/2/2c/Sistema_Solar.webm/Sistema_Solar.webm.480p.vp9.webm
+  [wikimedia video] 1920x1080 30.0MB d=14.0s | File:Solar System Resource Page (SVS20391).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/0/08/Solar_System_Resource_Page_%28SVS20391%29.webm/Solar_System_Resource_Page_%28SVS20391%2
+  [wikimedia video] 1920x1080 10.3MB d=39.4s | File:Solar plasma flying through the Solar System ESA498764.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b6/Solar_plasma_flying_through_the_Solar_System_ESA498764.webm/Solar_plasma_flying_through
+  [nasa      image] 0x0 0MB d=0s | Spinning Moons
+      http://images-assets.nasa.gov/image/PIA20152/PIA20152~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Young Star and Its Infant Planet (Artist animation)
+      http://images-assets.nasa.gov/image/PIA20692/PIA20692~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Brown Dwarf Weather (Artist's Concept)
+      http://images-assets.nasa.gov/image/PIA21752/PIA21752~orig.jpg
+  [wikimedia image] 12544x12544 62.1MB d=0.0s | File:Solar Orbiter’s widest high-res view of the Sun ESA508430.jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/73/Solar_Orbiter%E2%80%99s_widest_high-res_view_of_the_Sun_ESA508430.jpg?utm_source=commons.wikimedia
+  [wikimedia image] 3840x2160 1.0MB d=0.0s | File:Solar System true color.jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/19/Solar_System_true_color.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=or
+  [wikimedia image] 4044x3860 11.8MB d=0.0s | File:The Sun by the Atmospheric Imaging Assembly of NASA's Solar Dynamics Observatory - 2010081
+      https://upload.wikimedia.org/wikipedia/commons/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg?
+  [wikimedia image] 4000x1951 2.6MB d=0.0s | File:The violent youth of solar proxies.jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/c9/The_violent_youth_of_solar_proxies.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm
+
+=== telescope observatory night (13) ===
+  [nasa      video] 0x0 0MB d=0s | Mysterious ‘Cow’ Blast Studied with NASA Telescopes
+      http://images-assets.nasa.gov/video/GSFC_20190110_AT2018COW_m12855_4k/GSFC_20190110_AT2018COW_m12855_4k~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | Solar Highlights of 2016/2017: NASA STEREO Image
+      http://images-assets.nasa.gov/video/GSFC_20160624_STEREO_m12292_Image/GSFC_20160624_STEREO_m12292_Image~mobile.mp4
+  [wikimedia video] 3840x2160 95.3MB d=65.0s | File:A starry night, in another galaxy (potw2637a).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0f/A_starry_night%2C_in_another_galaxy_%28potw2637a%29.webm/A_starry_night%2C_in_another_g
+  [wikimedia video] 2560x1440 2672.5MB d=3451.8s | File:Car ride -02 Astro Observatory to Vilnius.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/2/2f/Car_ride_-02_Astro_Observatory_to_Vilnius.webm/Car_ride_-02_Astro_Observatory_to_Vilniu
+  [wikimedia video] 1920x1080 3.4MB d=30.0s | File:Night Lights 2012 - The Black Marble.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/9/90/Night_Lights_2012_-_The_Black_Marble.webm/Night_Lights_2012_-_The_Black_Marble.webm.480
+  [wikimedia video] 3840x2160 26.3MB d=13.9s | File:Night time lapse of the MeerKAT telescopes at the Meerkat National Park.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c1/Night_time_lapse_of_the_MeerKAT_telescopes_at_the_Meerkat_National_Park.webm/Night_time
+  [nasa      image] 0x0 0MB d=0s | Surface of TRAPPIST-1f
+      http://images-assets.nasa.gov/image/PIA21423/PIA21423~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | TRAPPIST-1 Planet Lineup
+      http://images-assets.nasa.gov/image/PIA21422/PIA21422~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | TRAPPIST-1 System - Artist Concept
+      http://images-assets.nasa.gov/image/PIA21751/PIA21751~orig.jpg
+  [wikimedia image] 28565x6098 50.5MB d=0.0s | File:Night Sky from Hawai‘i and Chile (iotw2225c).jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/3b/Night_Sky_from_Hawai%E2%80%98i_and_Chile_%28iotw2225c%29.jpg?utm_source=commons.wikimedia.org&utm_
+  [wikimedia image] 2592x3888 1.1MB d=0.0s | File:Night sky over the WIYN 0 9-meter Telescope on Kitt Peak National Observatory (noirlab-img
+      https://upload.wikimedia.org/wikipedia/commons/7/70/Night_sky_over_the_WIYN_0_9-meter_Telescope_on_Kitt_Peak_National_Observatory_%28noirlab-img-4497%
+  [wikimedia image] 3888x2592 1.6MB d=0.0s | File:Night sky over the WIYN 0 9-meter Telescope on Kitt Peak National Observatory (noirlab-img
+      https://upload.wikimedia.org/wikipedia/commons/d/de/Night_sky_over_the_WIYN_0_9-meter_Telescope_on_Kitt_Peak_National_Observatory_%28noirlab-img-4505%
+  [wikimedia image] 50000x9752 59.0MB d=0.0s | File:Very Large Telescope against a beautiful twilight on Cerro Paranal.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/9a/Very_Large_Telescope_against_a_beautiful_twilight_on_Cerro_Paranal.jpg?utm_source=commons.wikimedi
+
+=== nebula deep space (15) ===
+  [nasa      video] 0x0 0MB d=0s | First Images from the James Webb Space Telescope (Official NASA Highlights)
+      http://images-assets.nasa.gov/video/First Images from the James Webb Space Telescope (Official NASA Highlights)/First Images from the James Webb Space
+  [nasa      video] 0x0 0MB d=0s | The Webb Space Telescope’s New Look at the Cosmos on This Week @NASA – July 15, 2022
+      http://images-assets.nasa.gov/video/The Webb Space Telescope’s New Look at the Cosmos on This Week @NASA – July 15, 2022/The Webb Space Telescope’s Ne
+  [wikimedia video] 1920x1080 151.4MB d=303.7s | File:Hubblecast 54.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/9/92/Hubblecast_54.webm/Hubblecast_54.webm.480p.vp9.webm
+  [wikimedia video] 360x240 4.0MB d=1.6s | File:McNeil's Nebula- X-ray Outburst from a Young Star (2004-mcneil).mpeg
+      https://upload.wikimedia.org/wikipedia/commons/5/56/McNeil%27s_Nebula-_X-ray_Outburst_from_a_Young_Star_%282004-mcneil%29.mpeg?utm_source=commons.wiki
+  [wikimedia video] 720x480 2.7MB d=59.1s | File:Tarantula Nebula- 30 Doradus and The Growing Tarantula Within (2011-30dor - 30dor BU lg we
+      https://upload.wikimedia.org/wikipedia/commons/1/1f/Tarantula_Nebula-_30_Doradus_and_The_Growing_Tarantula_Within_%282011-30dor_-_30dor_BU_lg_web%29.w
+  [wikimedia video] 654x480 4.1MB d=115.6s | File:Tarantula Nebula- 30 Doradus and The Growing Tarantula Within (2011-30dor - spacescoop 30d
+      https://upload.wikimedia.org/wikipedia/commons/c/c3/Tarantula_Nebula-_30_Doradus_and_The_Growing_Tarantula_Within_%282011-30dor_-_spacescoop_30dor_lg_
+  [wikimedia video] 1920x1080 1.8MB d=18.5s | File:Webb's Science Mission Begins- First Light Images As Compared to Hubble (SVS31188 - deep-f
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a5/Webb%27s_Science_Mission_Begins-_First_Light_Images_As_Compared_to_Hubble_%28SVS31188_-
+  [wikimedia video] 7680x4320 26.1MB d=30.0s | File:Webb opens a Treasure Chest filled with stars (potm2607a).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/8/8c/Webb_opens_a_Treasure_Chest_filled_with_stars_%28potm2607a%29.webm/Webb_opens_a_Treasur
+  [nasa      image] 0x0 0MB d=0s | Crew Earth Observations (CEO) taken during Expedition Six
+      http://images-assets.nasa.gov/image/iss006e28028/iss006e28028~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Hubble reveals heart of Lagoon Nebula
+      http://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001955/GSFC_20171208_Archive_e001955~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | The "Jack-o'-Lantern Nebula"
+      http://images-assets.nasa.gov/image/PIA23403/PIA23403~orig.jpg
+  [wikimedia image] 20323x16259 99.4MB d=0.0s | File:30 Doradus, Tarantula Nebula.jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/78/30_Doradus%2C_Tarantula_Nebula.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_con
+  [wikimedia image] 13212x7250 41.3MB d=0.0s | File:Euclid and Hubble's view of Cat's Eye Nebula (potm2602c).jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/eb/Euclid_and_Hubble%27s_view_of_Cat%27s_Eye_Nebula_%28potm2602c%29.jpg?utm_source=commons.wikimedia.
+  [wikimedia image] 3200x3218 9.3MB d=0.0s | File:Euclid’s view of the Cat’s Eye Nebula ESA507303.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/36/Euclid%E2%80%99s_view_of_the_Cat%E2%80%99s_Eye_Nebula_ESA507303.jpg?utm_source=commons.wikimedia.o
+  [wikimedia image] 3840x2899 4.5MB d=0.0s | File:M8 Lagoon Nebula Blue 4K.jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/7e/M8_Lagoon_Nebula_Blue_4K.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=o
+
+=== earth from space (19) ===
+  [nasa      video] 0x0 0MB d=0s | Earth Views from the International Space Station
+      http://images-assets.nasa.gov/video/Earth Views from the International Space Station/Earth Views from the International Space Station~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | NISAR: Tracking Earth’s Changes From Space (Mission Overview)
+      http://images-assets.nasa.gov/video/JPL-20240109-NISARf-0001-Tracking Earth's Changes from Space/JPL-20240109-NISARf-0001-Tracking Earth's Changes fro
+  [nasa      video] 0x0 0MB d=0s | Safe Return to Earth from the Space Station on This Week @NASA – April 17, 2021
+      http://images-assets.nasa.gov/video/Safe Return to Earth from the Space Station on This Week @NASA – April 17, 2021/Safe Return to Earth from the Spac
+  [nasa      video] 0x0 0MB d=0s | NASA Science Live: Landsat - A Legacy of Seeing Earth from Space [Episode 28]
+      http://images-assets.nasa.gov/video/GSFC_20210930_NSL_Ep38_Landsat/GSFC_20210930_NSL_Ep38_Landsat~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | Earth Views from the ISS
+      http://images-assets.nasa.gov/video/NHQ_2019_0626_Earth Views from the ISS/NHQ_2019_0626_Earth Views from the ISS~mobile.mp4
+  [wikimedia video] 756x662 0.2MB d=11.4s | File:Earth View from Space.webm
+      https://upload.wikimedia.org/wikipedia/commons/7/73/Earth_View_from_Space.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia video] 1280x720 98.5MB d=200.8s | File:Earth Views from the International Space Station.webm
+      https://upload.wikimedia.org/wikipedia/commons/8/82/Earth_Views_from_the_International_Space_Station.webm?utm_source=commons.wikimedia.org&utm_campaig
+  [wikimedia video] 1920x1080 206.4MB d=185.6s | File:Earth from Space- Lake Trasimeno ESA471008.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/e/e3/Earth_from_Space-_Lake_Trasimeno_ESA471008.webm/Earth_from_Space-_Lake_Trasimeno_ESA471
+  [wikimedia video] 1920x1080 28.5MB d=234.7s | File:NEOWISE from the International space station.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/8/8a/NEOWISE_from_the_International_space_station.webm/NEOWISE_from_the_International_space_
+  [wikimedia video] 8192x4096 3619.8MB d=368.6s | File:View of the Earth from the ISS (8K).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c3/View_of_the_Earth_from_the_ISS_%288K%29.webm/View_of_the_Earth_from_the_ISS_%288K%29.we
+  [nasa      image] 0x0 0MB d=0s | View of Skylab space station cluster in Earth orbit from CSM
+      http://images-assets.nasa.gov/image/sl4-143-4707/sl4-143-4707~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | View of Skylab space station cluster in Earth orbit from CSM
+      http://images-assets.nasa.gov/image/sl4-143-4706/sl4-143-4706~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | NASA Google+ Hangout: 'Earthrise' A New Visualization - 45th Anniversary of Apollo 8 Viewing Ea
+      http://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001282/GSFC_20171208_Archive_e001282~orig.jpg
+  [wikimedia image] 4800x2400 4.0MB d=0.0s | File:Earth's City Lights by DMSP, 1994-1995 (large).jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/e1/Earth%27s_City_Lights_by_DMSP%2C_1994-1995_%28large%29.jpg?utm_source=commons.wikimedia.org&utm_ca
+  [wikimedia image] 2400x2400 0.3MB d=0.0s | File:NASA-Apollo8-Dec24-Earthrise.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/a8/NASA-Apollo8-Dec24-Earthrise.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_conte
+  [wikimedia image] 8000x8000 16.4MB d=0.0s | File:North America from low orbiting satellite Suomi NPP.jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/2c/North_America_from_low_orbiting_satellite_Suomi_NPP.jpg?utm_source=commons.wikimedia.org&utm_campa
+  [wikimedia image] 4256x2832 0.9MB d=0.0s | File:STS-135 final flyaround of ISS 1.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/37/STS-135_final_flyaround_of_ISS_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_c
+  [wikimedia image] 6084x6084 4.7MB d=0.0s | File:Space Shuttle Columbia launching.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/41/Space_Shuttle_Columbia_launching.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_c
+  [wikimedia image] 3000x3002 6.2MB d=0.0s | File:The Earth seen from Apollo 17.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_cont
+
+=== spacecraft satellite orbit (8) ===
+  [nasa      video] 0x0 0MB d=0s | Landsat sensors: push broom vs whisk broom: Landsat 7
+      http://images-assets.nasa.gov/video/GSFC_20171031_Landsat_m12754_whiskbroom/GSFC_20171031_Landsat_m12754_whiskbroom~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | Landsat sensors: pushbroom vs whiskbroom: Landsat 8
+      http://images-assets.nasa.gov/video/GSFC_20171031_Landsat_m12754_pushbroom/GSFC_20171031_Landsat_m12754_pushbroom~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | Landsat Orbit Swath
+      http://images-assets.nasa.gov/video/GSFC_20140211_LDCM_m11481_Orbit/GSFC_20140211_LDCM_m11481_Orbit~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | KSC-11-S-00053
+      http://images-assets.nasa.gov/video/ksc_061011_aquarius_sep1/ksc_061011_aquarius_sep1~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | Driving A Lunar Spacecraft
+      http://images-assets.nasa.gov/video/GSFC_20150727_LRO_m11949_Lunar/GSFC_20150727_LRO_m11949_Lunar~mobile.mp4
+  [nasa      image] 0x0 0MB d=0s | Spacecraft Observes Another Spacecraft at the Moon
+      http://images-assets.nasa.gov/image/PIA16602/PIA16602~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Neptune - Three New Satellites
+      http://images-assets.nasa.gov/image/PIA01991/PIA01991~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Diverse Orbits Around Mars Graphic
+      http://images-assets.nasa.gov/image/PIA19396/PIA19396~orig.jpg
+
+=== star field night sky (16) ===
+  [nasa      video] 0x0 0MB d=0s | KSC-04-S-00193
+      http://images-assets.nasa.gov/video/ksc_061404_t-nebula/ksc_061404_t-nebula~mobile.mp4
+  [wikimedia video] 1280x720 94.5MB d=530.5s | File:ESOcast 34.webm
+      https://upload.wikimedia.org/wikipedia/commons/8/86/ESOcast_34.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia video] 320x212 2.3MB d=68.1s | File:KSC-04-S-00193 (ksc 061404 t-nebula).webm
+      https://upload.wikimedia.org/wikipedia/commons/2/21/KSC-04-S-00193_%28ksc_061404_t-nebula%29.webm?utm_source=commons.wikimedia.org&utm_campaign=imagei
+  [wikimedia video] 324x240 0.4MB d=20.0s | File:Kepler's Supernova Remnant- A Star's Death Comes to Life (2007-kepler).webm
+      https://upload.wikimedia.org/wikipedia/commons/c/c3/Kepler%27s_Supernova_Remnant-_A_Star%27s_Death_Comes_to_Life_%282007-kepler%29.webm?utm_source=com
+  [wikimedia video] 3840x2160 14.5MB d=60.0s | File:Planetary Nebula NGC 1514- WISE vs Webb Images (SVS31346 - WISE-Webb-compare-slider-4K).we
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/1/10/Planetary_Nebula_NGC_1514-_WISE_vs_Webb_Images_%28SVS31346_-_WISE-Webb-compare-slider-4
+  [wikimedia video] 1920x1080 17.2MB d=137.8s | File:What's Up- April 2026 Skywatching Tips from NASA (JPL-20260326-WHATSUf-0001-Whats Up April
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/72/What%27s_Up-_April_2026_Skywatching_Tips_from_NASA_%28JPL-20260326-WHATSUf-0001-Whats_U
+  [wikimedia video] 1920x1080 31.3MB d=162.3s | File:What's Up- October 2026 Skywatching Tips from NASA (JPL-20260930-WHATSUf-0001-Whats Up Oct
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a9/What%27s_Up-_October_2026_Skywatching_Tips_from_NASA_%28JPL-20260930-WHATSUf-0001-Whats
+  [nasa      image] 0x0 0MB d=0s | Supergiant Star Near Giraffe Hind Foot
+      http://images-assets.nasa.gov/image/PIA13459/PIA13459~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | SPHEREx's Perspective From Orbit (Artist's Concept)
+      http://images-assets.nasa.gov/image/PIA26532/PIA26532~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Hubble Views a Dwarf Galaxy
+      http://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001569/GSFC_20171208_Archive_e001569~orig.jpg
+  [wikimedia image] 6960x4640 7.4MB d=0.0s | File:"Star Fun" Photobooth at 2024 Night Sky Festival (54072280606).jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/23/%22Star_Fun%22_Photobooth_at_2024_Night_Sky_Festival_%2854072280606%29.jpg?utm_source=commons.wiki
+  [wikimedia image] 6960x4640 7.5MB d=0.0s | File:"Star Fun" Tabling at 2024 Night Sky Festival (54072280021).jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/16/%22Star_Fun%22_Tabling_at_2024_Night_Sky_Festival_%2854072280021%29.jpg?utm_source=commons.wikimed
+  [wikimedia image] 2000x1333 2.1MB d=0.0s | File:2024 Night Sky Festival (54071398767).jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/1c/2024_Night_Sky_Festival_%2854071398767%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagei
+  [wikimedia image] 2048x1366 0.1MB d=0.0s | File:Night Sky - Star Party (28790084584).jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/36/Night_Sky_-_Star_Party_%2828790084584%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagein
+  [wikimedia image] 2048x1365 0.2MB d=0.0s | File:Night Sky - Star Party (29379750356).jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/94/Night_Sky_-_Star_Party_%2829379750356%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagein
+  [wikimedia image] 9808x8816 38.9MB d=0.0s | File:Widefield image of the sky around Barnard’s Star showing its motion.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/5d/Widefield_image_of_the_sky_around_Barnard%E2%80%99s_Star_showing_its_motion.jpg?utm_source=commons
+
+=== planets orbit animation (12) ===
+  [nasa      video] 0x0 0MB d=0s | KSC-07-S-00090
+      http://images-assets.nasa.gov/video/ksc_092707_dawn_lanim/ksc_092707_dawn_lanim~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | KSC-07-S-00089
+      http://images-assets.nasa.gov/video/ksc_092707_dawn_patel/ksc_092707_dawn_patel~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | NASA’s Tiny PREFIRE Satellites to Study Earth’s Polar Regions 
+      http://images-assets.nasa.gov/video/JPL-20240524-PRFIREf-0001-PREFIRE Media Reel/JPL-20240524-PRFIREf-0001-PREFIRE Media Reel~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | Media Reel: Mariner 4 Anniversary - 60 years at Mars
+      http://images-assets.nasa.gov/video/JPL-20250710-MARINRs-0001-Mariner_4_Media_Reel/JPL-20250710-MARINRs-0001-Mariner_4_Media_Reel~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | KSC-05-S-00249
+      http://images-assets.nasa.gov/video/ksc_080805_mro_zurek/ksc_080805_mro_zurek~mobile.mp4
+  [wikimedia video] 1920x1080 0.7MB d=15.9s | File:Aereostationary Orbit 4 satellite Animation.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/33/Aereostationary_Orbit_4_satellite_Animation.webm/Aereostationary_Orbit_4_satellite_Anim
+  [wikimedia video] 3840x2160 14.6MB d=26.2s | File:Animation of the planets in orbit around TRAPPIST-1.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b0/Animation_of_the_planets_in_orbit_around_TRAPPIST-1.webm/Animation_of_the_planets_in_or
+  [wikimedia video] 3840x2160 10.3MB d=26.2s | File:Animation of the planets orbiting TRAPPIST-1.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/3d/Animation_of_the_planets_orbiting_TRAPPIST-1.webm/Animation_of_the_planets_orbiting_TRA
+  [wikimedia video] 1920x1080 188.5MB d=306.6s | File:PIA23807-PlanetJupiter-FlyOver-Animation-20200602.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f2/PIA23807-PlanetJupiter-FlyOver-Animation-20200602.webm/PIA23807-PlanetJupiter-FlyOver-A
+  [nasa      image] 0x0 0MB d=0s | Mars Reconnaissance Orbiter Flying Over Mars
+      http://images-assets.nasa.gov/image/PIA15964/PIA15964~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Circus Family of Stars Artist Concept
+      http://images-assets.nasa.gov/image/PIA03521/PIA03521~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Land of Three Suns Artist Concept Animation
+      http://images-assets.nasa.gov/image/PIA03520/PIA03520~orig.jpg
+
+=== rocket launch (19) ===
+  [nasa      video] 0x0 0MB d=0s | TROPICS Rocket Launch
+      http://images-assets.nasa.gov/video/KSC-20230507-MH-RLS01-TROPICS_Rocket_Launch-Rocket_Lab-WON_3330130/KSC-20230507-MH-RLS01-TROPICS_Rocket_Launch-Roc
+  [nasa      video] 0x0 0MB d=0s | Rocket Lab PREFIRE-1 Launch
+      http://images-assets.nasa.gov/video/KSC-20240525-MH-RKL01-0001-Rocket_Lab_PREFIRE_1_Launch_1080p-M6988/KSC-20240525-MH-RKL01-0001-Rocket_Lab_PREFIRE_1
+  [nasa      video] 0x0 0MB d=0s | Rocket Lab PREFIRE and Ice Launch
+      http://images-assets.nasa.gov/video/KSC-20240605-MH-RKL01-0001-Rocket_Lab_PREFIRE_and_Ice_Launch_1080p-M6988/KSC-20240605-MH-RKL01-0001-Rocket_Lab_PRE
+  [nasa      video] 0x0 0MB d=0s | Rocket-Lovers Watch OSIRIS-REx Launch
+      http://images-assets.nasa.gov/video/GSFC_20160909_M12368_OSIRIS_launch/GSFC_20160909_M12368_OSIRIS_launch~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | Rocket Lab Capstone Live Launch Coverage - ROCKET VIEWS
+      http://images-assets.nasa.gov/video/KSC-20220628-VP-MMS01-0001-RocketLab_Capstone_Live_Launch_Coverage_ROCKET_VIEWS_ONLY-3306978/KSC-20220628-VP-MMS01
+  [wikimedia video] 3413x1920 33.5MB d=128.8s | File:Backpulver-Rakete (Betankung mit Flug).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c4/Backpulver-Rakete_%28Betankung_mit_Flug%29.webm/Backpulver-Rakete_%28Betankung_mit_Flug
+  [wikimedia video] 3840x2160 3030.7MB d=475.6s | File:NASA’s SpaceX Crew-4 Isolated Launch Views.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/37/NASA%E2%80%99s_SpaceX_Crew-4_Isolated_Launch_Views.webm/NASA%E2%80%99s_SpaceX_Crew-4_Is
+  [wikimedia video] 1280x720 72.1MB d=269.9s | File:Riding on a Sounding Rocket.webm
+      https://upload.wikimedia.org/wikipedia/commons/0/01/Riding_on_a_Sounding_Rocket.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=ori
+  [wikimedia video] 1920x1080 41.8MB d=119.5s | File:Streichholzrakete (Geschwindigkeit).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f6/Streichholzrakete_%28Geschwindigkeit%29.webm/Streichholzrakete_%28Geschwindigkeit%29.we
+  [wikimedia video] 1920x1080 20.5MB d=97.2s | File:Streichholzrakete (SSR-2, Steigflug).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/f/fa/Streichholzrakete_%28SSR-2%2C_Steigflug%29.webm/Streichholzrakete_%28SSR-2%2C_Steigflug
+  [nasa      image] 0x0 0MB d=0s | Rocket Lab PREFIRE-1 Launch
+      http://images-assets.nasa.gov/image/KSC-20240525-PH-RKL01_0005/KSC-20240525-PH-RKL01_0005~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Rocket Lab PREFIRE-1 Launch
+      http://images-assets.nasa.gov/image/KSC-20240525-PH-RKL01_0001/KSC-20240525-PH-RKL01_0001~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | Rocket Lab PREFIRE-1 Launch
+      http://images-assets.nasa.gov/image/KSC-20240525-PH-RKL01_0006/KSC-20240525-PH-RKL01_0006~orig.jpg
+  [wikimedia image] 1996x3000 2.0MB d=0.0s | File:Ares I-X launch 08.jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/bb/Ares_I-X_launch_08.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=origina
+  [wikimedia image] 3000x2000 1.2MB d=0.0s | File:CRS-9 mission (28348649546).jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/0e/CRS-9_mission_%2828348649546%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_co
+  [wikimedia image] 1600x2400 0.3MB d=0.0s | File:First NASA ISINGLASS rocket launch.jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/2d/First_NASA_ISINGLASS_rocket_launch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm
+  [wikimedia image] 1819x2831 0.5MB d=0.0s | File:Soyuz TMA-5 launch.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/f4/Soyuz_TMA-5_launch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=origina
+  [wikimedia image] 2136x3216 0.9MB d=0.0s | File:Soyuz TMA-9 launch.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/9a/Soyuz_TMA-9_launch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=origina
+  [wikimedia image] 6084x6084 4.7MB d=0.0s | File:Space Shuttle Columbia launching.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/41/Space_Shuttle_Columbia_launching.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_c
+
+=== sunset clouds timelapse (7) ===
+  [wikimedia video] 1920x1080 5.8MB d=10.8s | File:Cloudy sunset on the edge of small town. HD 1080p Timelapse (video).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/8/86/Cloudy_sunset_on_the_edge_of_small_town._HD_1080p_Timelapse_%28video%29.webm/Cloudy_sun
+  [wikimedia video] 1920x1080 18.3MB d=15.1s | File:Timelapse Joshua Tree Clouds and Sunset Near West Entrance.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c7/Timelapse_Joshua_Tree_Clouds_and_Sunset_Near_West_Entrance.webm/Timelapse_Joshua_Tree_C
+  [wikimedia video] 1280x720 84.3MB d=60.0s | File:Timelapse of Winter's End at Bertram Creek Park overlooking Okanagan Lake, includes Snowme
+      https://upload.wikimedia.org/wikipedia/commons/f/f4/Timelapse_of_Winter%27s_End_at_Bertram_Creek_Park_overlooking_Okanagan_Lake%2C_includes_Snowmelt%2
+  [wikimedia image] 1280x720 0.1MB d=0.0s | File:Grand Canyon Nat Park- Time-lapse Video from Yaki Point (8931531533).jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/71/Grand_Canyon_Nat_Park-_Time-lapse_Video_from_Yaki_Point_%288931531533%29.jpg?utm_source=commons.wi
+  [wikimedia image] 2000x1334 1.1MB d=0.0s | File:Martin's Beach (44942914911).jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/22/Martin%27s_Beach_%2844942914911%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm
+  [wikimedia image] 4025x2264 2.7MB d=0.0s | File:Rubin Observatory at sunset in May 2024 (noirlab2417b).jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/88/Rubin_Observatory_at_sunset_in_May_2024_%28noirlab2417b%29.jpg?utm_source=commons.wikimedia.org&ut
+  [wikimedia image] 1920x1080 0.3MB d=0.0s | File:Timelapse Joshua Tree Clouds and Sunset Near West Entrance (51162225252).jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/5f/Timelapse_Joshua_Tree_Clouds_and_Sunset_Near_West_Entrance_%2851162225252%29.jpg?utm_source=common
+
+=== astronaut spacewalk (18) ===
+  [nasa      video] 0x0 0MB d=0s | Spacewalking Astronauts Work Outside the Space Station on This Week @NASA - June 25, 2021
+      http://images-assets.nasa.gov/video/Spacewalking astronauts work outside the space station …/Spacewalking astronauts work outside the space station …~
+  [nasa      video] 0x0 0MB d=0s | Spacewalk 101
+      http://images-assets.nasa.gov/video/jsc2026m000932_Spacewalk_101_AVAIL1080p/jsc2026m000932_Spacewalk_101_AVAIL1080p~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | KSC-06-S-00183
+      http://images-assets.nasa.gov/video/ksc_072606_itow_robinson/ksc_072606_itow_robinson~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | Suiting Up for a Spacewalk
+      http://images-assets.nasa.gov/video/jsc2019m000990_Suiting_Up_for_a_Spacewalk_MP4/jsc2019m000990_Suiting_Up_for_a_Spacewalk_MP4~mobile.mp4
+  [nasa      video] 0x0 0MB d=0s | NASA ScienceCasts: Unlocking the Origins of the Universe
+      http://images-assets.nasa.gov/video/304_ISS-AMS/304_ISS-AMS~mobile.mp4
+  [wikimedia video] 1920x1080 115.9MB d=222.4s | File:Spacewalk 101 (jsc2026m000932).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/1/1c/Spacewalk_101_%28jsc2026m000932%29.webm/Spacewalk_101_%28jsc2026m000932%29.webm.480p.vp
+  [wikimedia video] 1920x1080 116.2MB d=174.5s | File:U S Spacewalk 94 Animation – January 6, 2026 (jsc2026m000001).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/9/97/U_S_Spacewalk_94_Animation_%E2%80%93_January_6%2C_2026_%28jsc2026m000001%29.webm/U_S_Sp
+  [wikimedia video] 1920x1080 152.3MB d=226.7s | File:U S Spacewalk 94 Animation – March 17, 2026 (jsc2026m000049).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/a/ac/U_S_Spacewalk_94_Animation_%E2%80%93_March_17%2C_2026_%28jsc2026m000049%29.webm/U_S_Spa
+  [wikimedia video] 1920x1080 280.1MB d=430.2s | File:U S Spacewalk 95 Animation – January 6, 2026 (jsc2026m000002).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a8/U_S_Spacewalk_95_Animation_%E2%80%93_January_6%2C_2026_%28jsc2026m000002%29.webm/U_S_Sp
+  [nasa      image] 0x0 0MB d=0s | CCP Astronauts Practice Spacewalking
+      http://images-assets.nasa.gov/image/jsc2018e087573/jsc2018e087573~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | CCP Astronauts Practice Spacewalking
+      http://images-assets.nasa.gov/image/jsc2018e078340/jsc2018e078340~orig.jpg
+  [nasa      image] 0x0 0MB d=0s | CCP Astronauts Practice Spacewalking
+      http://images-assets.nasa.gov/image/jsc2018e087572/jsc2018e087572~orig.jpg
+  [wikimedia image] 3072x3072 7.4MB d=0.0s | File:Bruce McCandless II during EVA in 1984.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/91/Bruce_McCandless_II_during_EVA_in_1984.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo
+  [wikimedia image] 4288x2848 1.2MB d=0.0s | File:ISS-32 American EVA b3 Aki Hoshide.jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/26/ISS-32_American_EVA_b3_Aki_Hoshide.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm
+  [wikimedia image] 3000x3000 2.1MB d=0.0s | File:NASA Apollo 17 Lunar Roving Vehicle.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/4d/NASA_Apollo_17_Lunar_Roving_Vehicle.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&ut
+  [wikimedia image] 3032x2007 2.4MB d=0.0s | File:Piers Sellers spacewalk.jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/08/Piers_Sellers_spacewalk.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=or
+  [wikimedia image] 3032x2000 2.0MB d=0.0s | File:STS-116 spacewalk 1.jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/89/STS-116_spacewalk_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=origin
+  [wikimedia image] 1734x1287 0.3MB d=0.0s | File:Shenzhou-15 spacewalk.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/31/Shenzhou-15_spacewalk.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=orig
+
+########## economy ##########
+
+=== red caviar salmon roe (1) ===
+  [openverse image] 4272x2848 0MB d=0s | Lachskaviar, Salmon roe, Red caviar, Красная икра 003
+      https://upload.wikimedia.org/wikipedia/commons/0/03/Lachskaviar%2C_Salmon_roe%2C_Red_caviar%2C_%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%B0%D1%8F_%D0%B8%D0%BA
+
+=== salmon (6) ===
+  [wikimedia image] 4096x3072 8.6MB d=0.0s | File:Male Kokanee Salmon Strawberry Reservoir 2020.jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/8b/Male_Kokanee_Salmon_Strawberry_Reservoir_2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=im
+  [wikimedia image] 2250x1006 1.2MB d=0.0s | File:Oncorhynchus nerka.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/63/Oncorhynchus_nerka.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=origina
+  [wikimedia image] 2346x1063 0.5MB d=0.0s | File:Pink salmon FWS.jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/1e/Pink_salmon_FWS.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 1636x1250 0.9MB d=0.0s | File:Salmon caught at Llangynog (1490812).jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/1e/Salmon_caught_at_Llangynog_%281490812%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagein
+  [wikimedia image] 1250x1636 0.8MB d=0.0s | File:Salmon caught at Llangynog (1490813).jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/02/Salmon_caught_at_Llangynog_%281490813%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagein
+  [wikimedia image] 3846x2564 7.5MB d=0.0s | File:Sammamish kokanee (51666400632).jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b9/Sammamish_kokanee_%2851666400632%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&ut
+
+=== fish market (9) ===
+  [wikimedia video] 1080x1920 7.2MB d=4.9s | File:Descaling of Ijaah fish.webm
+      https://upload.wikimedia.org/wikipedia/commons/0/0c/Descaling_of_Ijaah_fish.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=origina
+  [wikimedia video] 1080x1920 19.5MB d=20.4s | File:Special descaling techniques for a uniquely scaled fish.webm
+      https://upload.wikimedia.org/wikipedia/commons/e/ed/Special_descaling_techniques_for_a_uniquely_scaled_fish.webm?utm_source=commons.wikimedia.org&utm_
+  [wikimedia video] 1920x1080 23.1MB d=9.5s | File:Stalls inside the Tsukiji fish market, Tokyo, Japan.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/b/bf/Stalls_inside_the_Tsukiji_fish_market%2C_Tokyo%2C_Japan.webm/Stalls_inside_the_Tsukiji_
+  [wikimedia image] 4243x2912 3.7MB d=0.0s | File:Ensenada fish market 2.jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/0e/Ensenada_fish_market_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=ori
+  [wikimedia image] 3888x2592 3.6MB d=0.0s | File:Fish market in Nouakchott - Mauritania.jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/70/Fish_market_in_Nouakchott_-_Mauritania.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo
+  [wikimedia image] 8312x5846 41.1MB d=0.0s | File:Great Fish market - Jan Brueghel (I).jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/68/Great_Fish_market_-_Jan_Brueghel_%28I%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagein
+  [wikimedia image] 4691x2339 21.3MB d=0.0s | File:Nihonbashi-Fish-Market-Prosperity-Ukiyoe-Utagawa-Kuniyasu.png
+      https://upload.wikimedia.org/wikipedia/commons/4/42/Nihonbashi-Fish-Market-Prosperity-Ukiyoe-Utagawa-Kuniyasu.png?utm_source=commons.wikimedia.org&utm
+  [wikimedia image] 2017x3025 4.8MB d=0.0s | File:Oweston sting fish for sale at Tsukiji Fishmarket, Tokyo-30.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/6e/Oweston_sting_fish_for_sale_at_Tsukiji_Fishmarket%2C_Tokyo-30.jpg?utm_source=commons.wikimedia.org
+  [wikimedia image] 2048x1534 1.3MB d=0.0s | File:The fish market of Lauricisque.jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/22/The_fish_market_of_Lauricisque.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_con
+
+=== supermarket shelves (7) ===
+  [wikimedia image] 4032x3024 4.7MB d=0.0s | File:2020-03-15 Empty supermarket shelves in Australian supermarket 01.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/5d/2020-03-15_Empty_supermarket_shelves_in_Australian_supermarket_01.jpg?utm_source=commons.wikimedia
+  [wikimedia image] 3024x4032 4.4MB d=0.0s | File:2020-03-15 Empty supermarket shelves in Australian supermarket 02.jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/81/2020-03-15_Empty_supermarket_shelves_in_Australian_supermarket_02.jpg?utm_source=commons.wikimedia
+  [wikimedia image] 3024x4032 2.8MB d=0.0s | File:2020-03-15 Empty supermarket shelves in Australian supermarket 03.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/45/2020-03-15_Empty_supermarket_shelves_in_Australian_supermarket_03.jpg?utm_source=commons.wikimedia
+  [wikimedia image] 4032x3024 3.3MB d=0.0s | File:2020-03-15 Empty supermarket shelves in Australian supermarket 04.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/4f/2020-03-15_Empty_supermarket_shelves_in_Australian_supermarket_04.jpg?utm_source=commons.wikimedia
+  [wikimedia image] 4032x3024 4.1MB d=0.0s | File:2020-03-15 Empty supermarket shelves in Australian supermarket 05.jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/0c/2020-03-15_Empty_supermarket_shelves_in_Australian_supermarket_05.jpg?utm_source=commons.wikimedia
+  [wikimedia image] 3921x2368 11.1MB d=0.0s | File:Supermarket in recife, pernambuco, Brazil.jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/0b/Supermarket_in_recife%2C_pernambuco%2C_Brazil.jpg?utm_source=commons.wikimedia.org&utm_campaign=im
+  [openverse image] 4076x3152 0MB d=0s | Empty supermarket shelves before Hurricane Sandy, Montgomery, NY
+      https://upload.wikimedia.org/wikipedia/commons/5/5b/Empty_supermarket_shelves_before_Hurricane_Sandy%2C_Montgomery%2C_NY.jpg
+
+=== shopping basket (10) ===
+  [wikimedia video] 1080x1920 6.5MB d=6.6s | File:Disinfecting shopping cart.webm
+      https://upload.wikimedia.org/wikipedia/commons/b/b0/Disinfecting_shopping_cart.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=orig
+  [wikimedia video] 1920x1080 245.3MB d=67.6s | File:EB Englewood Trolley departing Englewood Station.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/8/8d/EB_Englewood_Trolley_departing_Englewood_Station.webm/EB_Englewood_Trolley_departing_En
+  [wikimedia video] 1920x1080 33.3MB d=20.4s | File:Old Town Trolley Tours, St. Augustine.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7b/Old_Town_Trolley_Tours%2C_St._Augustine.webm/Old_Town_Trolley_Tours%2C_St._Augustine.we
+  [wikimedia video] 1920x1080 3.7MB d=14.6s | File:Pianludado en librovendejo en Erevano.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/8/87/Pianludado_en_librovendejo_en_Erevano.webm/Pianludado_en_librovendejo_en_Erevano.webm.4
+  [wikimedia image] 4864x2736 4.2MB d=0.0s | File:Dirx Drogist shopping basket, Blijdorp, Rotterdam (2020) 01.jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/26/Dirx_Drogist_shopping_basket%2C_Blijdorp%2C_Rotterdam_%282020%29_01.jpg?utm_source=commons.wikimed
+  [wikimedia image] 4864x2736 3.8MB d=0.0s | File:Dirx Drogist shopping basket, Blijdorp, Rotterdam (2020) 02.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/ac/Dirx_Drogist_shopping_basket%2C_Blijdorp%2C_Rotterdam_%282020%29_02.jpg?utm_source=commons.wikimed
+  [wikimedia image] 5344x3008 4.2MB d=0.0s | File:Edah shopping basket, Hillegersberg, Rotterdam (2021) 01.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/aa/Edah_shopping_basket%2C_Hillegersberg%2C_Rotterdam_%282021%29_01.jpg?utm_source=commons.wikimedia.
+  [wikimedia image] 5344x3008 4.2MB d=0.0s | File:Edah shopping basket, Hillegersberg, Rotterdam (2021) 02.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/51/Edah_shopping_basket%2C_Hillegersberg%2C_Rotterdam_%282021%29_02.jpg?utm_source=commons.wikimedia.
+  [wikimedia image] 3072x2304 1.1MB d=0.0s | File:Nakupni kosik.JPG
+      https://upload.wikimedia.org/wikipedia/commons/0/0d/Nakupni_kosik.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 2448x3264 2.8MB d=0.0s | File:SZ 深圳 Shenzhen 蛇口 Shekou 沃爾瑪 Wal-Mart store WMT interior customers queue pay gate shopping
+      https://upload.wikimedia.org/wikipedia/commons/b/b1/SZ_%E6%B7%B1%E5%9C%B3_Shenzhen_%E8%9B%87%E5%8F%A3_Shekou_%E6%B2%83%E7%88%BE%E7%91%AA_Wal-Mart_stor
+
+=== sandwich (12) ===
+  [wikimedia video] 1280x720 3.8MB d=40.1s | File:Amul Sandwich - Stop Motion Animation.webm
+      https://upload.wikimedia.org/wikipedia/commons/0/01/Amul_Sandwich_-_Stop_Motion_Animation.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_c
+  [wikimedia video] 1920x1080 37.6MB d=113.7s | File:Grin til Gavn 2019 - Jacob Taarnhøj - Job som Sandwich Artist.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/76/Grin_til_Gavn_2019_-_Jacob_Taarnh%C3%B8j_-_Job_som_Sandwich_Artist.webm/Grin_til_Gavn_2
+  [wikimedia video] 900x674 0.8MB d=4.4s | File:Kelvin wakes on the South Sandwich Islands (CIRA 2021-01-12).webm
+      https://upload.wikimedia.org/wikipedia/commons/f/f4/Kelvin_wakes_on_the_South_Sandwich_Islands_%28CIRA_2021-01-12%29.webm?utm_source=commons.wikimedia
+  [wikimedia video] 384x216 47.6MB d=1154.2s | File:Mukbang Sandwich.webm
+      https://upload.wikimedia.org/wikipedia/commons/9/94/Mukbang_Sandwich.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia video] 1280x720 59.9MB d=565.8s | File:Sandwich Theorem - Beweis Anwendung Beispielaufgabe.webm
+      https://upload.wikimedia.org/wikipedia/commons/9/99/Sandwich_Theorem_-_Beweis_Anwendung_Beispielaufgabe.webm?utm_source=commons.wikimedia.org&utm_camp
+  [wikimedia video] 1440x1080 9.8MB d=10.0s | File:VIS-IR Sandwich loop of an impressive supercell near Lubbock, Texas (CIRA 2019-05-05).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f6/VIS-IR_Sandwich_loop_of_an_impressive_supercell_near_Lubbock%2C_Texas_%28CIRA_2019-05-0
+  [wikimedia image] 352x232 0.0MB d=0.0s | File:Bologna sandwich.jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/24/Bologna_sandwich.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 3450x1950 4.4MB d=0.0s | File:Peanut-Butter-Jelly-Sandwich.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/a8/Peanut-Butter-Jelly-Sandwich.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_conte
+  [wikimedia image] 3024x4032 4.3MB d=0.0s | File:Sandwich 1.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/43/Sandwich_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 1200x1600 0.2MB d=0.0s | File:Sandwich 4.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/ab/Sandwich_4.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 1536x2048 0.2MB d=0.0s | File:Sandwich Water tower.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/5b/Sandwich_Water_tower.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=origi
+  [wikimedia image] 2000x1244 0.5MB d=0.0s | File:Sandwich on a cutting board.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/f8/Sandwich_on_a_cutting_board.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_conten
+
+=== onigiri (2) ===
+  [wikimedia video] 1920x1080 27.5MB d=97.1s | File:Cebollitas en salsa de soya - Parecidas a las de la comida china.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/0/02/Cebollitas_en_salsa_de_soya_-_Parecidas_a_las_de_la_comida_china.webm/Cebollitas_en_sal
+  [wikimedia video] 1920x1080 7.7MB d=33.1s | File:Just Inc. Recipe Video Sample - Onigiri Rice Balls (2016).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/e/ef/Just_Inc._Recipe_Video_Sample_-_Onigiri_Rice_Balls_%282016%29.webm/Just_Inc._Recipe_Vid
+
+=== hot dog (0) ===
+
+=== plastic food container (9) ===
+  [wikimedia image] 4608x3072 5.4MB d=0.0s | File:Dead plant grown in plastic bottle, April 2013.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/fd/Dead_plant_grown_in_plastic_bottle%2C_April_2013.jpg?utm_source=commons.wikimedia.org&utm_campaign
+  [wikimedia image] 2048x1536 1.8MB d=0.0s | File:HK Plastic Recycling mark black food container Resin identification code 1 PET in Feb-2014
+      https://upload.wikimedia.org/wikipedia/commons/3/3c/HK_Plastic_Recycling_mark_black_food_container_Resin_identification_code_1_PET_in_Feb-2014.JPG?utm
+  [wikimedia image] 2560x1920 1.4MB d=0.0s | File:Höşmerim in a plastic container.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/da/H%C3%B6%C5%9Fmerim_in_a_plastic_container.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagei
+  [wikimedia image] 2272x1704 0.6MB d=0.0s | File:Plastic Pactiv food container.JPG
+      https://upload.wikimedia.org/wikipedia/commons/7/79/Plastic_Pactiv_food_container.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_cont
+  [wikimedia image] 4032x3024 2.5MB d=0.0s | File:Plastic food containers in South Korea.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/a7/Plastic_food_containers_in_South_Korea.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo
+  [wikimedia image] 2048x1473 0.5MB d=0.0s | File:Rectangular plastic food containers.JPG
+      https://upload.wikimedia.org/wikipedia/commons/4/45/Rectangular_plastic_food_containers.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&ut
+  [openverse image] 2048x1473 0MB d=0s | Rectangular plastic food containers
+      https://upload.wikimedia.org/wikipedia/commons/4/45/Rectangular_plastic_food_containers.JPG
+  [openverse image] 4128x3096 0MB d=0s | HK plastic food containers bag cup n box 外賣食品 膠塑料包裝物料 January 2021 SS2
+      https://upload.wikimedia.org/wikipedia/commons/0/07/HK_plastic_food_containers_bag_cup_n_box_%E5%A4%96%E8%B3%A3%E9%A3%9F%E5%93%81_%E8%86%A0%E5%A1%91%E
+  [openverse image] 4032x3024 0MB d=0s | Plastic food containers in South Korea
+      https://upload.wikimedia.org/wikipedia/commons/a/a7/Plastic_food_containers_in_South_Korea.jpg
+
+=== supermarket checkout (7) ===
+  [wikimedia video] 1080x1920 6.5MB d=6.6s | File:Disinfecting shopping cart.webm
+      https://upload.wikimedia.org/wikipedia/commons/b/b0/Disinfecting_shopping_cart.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=orig
+  [wikimedia image] 3000x4000 4.8MB d=0.0s | File:Supermarket checkout Tegut Tauberbischofsheim.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/40/Supermarket_checkout_Tegut_Tauberbischofsheim.jpg?utm_source=commons.wikimedia.org&utm_campaign=im
+  [wikimedia image] 3000x4000 6.1MB d=0.0s | File:Supermarket checkout Tegut Tauberbischofsheim 10.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/43/Supermarket_checkout_Tegut_Tauberbischofsheim_10.jpg?utm_source=commons.wikimedia.org&utm_campaign
+  [wikimedia image] 3000x4000 4.3MB d=0.0s | File:Supermarket checkout Tegut Tauberbischofsheim 2.jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/19/Supermarket_checkout_Tegut_Tauberbischofsheim_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=
+  [wikimedia image] 3000x4000 9.8MB d=0.0s | File:Supermarket checkout Tegut Tauberbischofsheim 4.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d3/Supermarket_checkout_Tegut_Tauberbischofsheim_4.jpg?utm_source=commons.wikimedia.org&utm_campaign=
+  [wikimedia image] 3000x4000 4.7MB d=0.0s | File:Supermarket checkout Tegut Tauberbischofsheim 5.jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/88/Supermarket_checkout_Tegut_Tauberbischofsheim_5.jpg?utm_source=commons.wikimedia.org&utm_campaign=
+  [wikimedia image] 3000x4000 4.6MB d=0.0s | File:Supermarket checkout Tegut Tauberbischofsheim 7.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/fe/Supermarket_checkout_Tegut_Tauberbischofsheim_7.jpg?utm_source=commons.wikimedia.org&utm_campaign=
+
+=== ruble banknotes (10) ===
+  [wikimedia video] 1920x1080 243.7MB d=334.1s | File:Новая купюра 200 рублей с Крымом в трамвае, в магазине, в ларьке и платежном терминале Ека
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/4/47/%D0%9D%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BA%D1%83%D0%BF%D1%8E%D1%80%D0%B0_200_%D1%80%D1%83%D0
+  [wikimedia image] 2539x2001 1.7MB d=0.0s | File:20 евро и 2000 рублей (сравнение).jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/78/20_%D0%B5%D0%B2%D1%80%D0%BE_%D0%B8_2000_%D1%80%D1%83%D0%B1%D0%BB%D0%B5%D0%B9_%28%D1%81%D1%80%D0%B0
+  [wikimedia image] 1125x1125 2.5MB d=0.0s | File:Current Russian ruble (banknotes).png
+      https://upload.wikimedia.org/wikipedia/commons/0/0c/Current_Russian_ruble_%28banknotes%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&
+  [wikimedia image] 900x428 0.1MB d=0.0s | File:Old Paper Money Banknotes Russian Empire 100 rubles (Original 1910) retro 1973 01.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/38/Old_Paper_Money_Banknotes_Russian_Empire_100_rubles_%28Original_1910%29_retro_1973_01.jpg?utm_sour
+  [wikimedia image] 900x426 0.1MB d=0.0s | File:Old Paper Money Banknotes Russian Empire 100 rubles (Original 1910) retro 1973 02.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/66/Old_Paper_Money_Banknotes_Russian_Empire_100_rubles_%28Original_1910%29_retro_1973_02.jpg?utm_sour
+  [wikimedia image] 2344x3363 10.2MB d=0.0s | File:Russian-American Co - 1 Ruble (7559).jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/73/Russian-American_Co_-_1_Ruble_%287559%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagein
+  [wikimedia image] 511x479 0.1MB d=0.0s | File:Transnistrian ruble notes.jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/bd/Transnistrian_ruble_notes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=
+  [openverse image] 5008x3339 0MB d=0s | Belarusian 10 ruble banknote (52190334468)
+      https://upload.wikimedia.org/wikipedia/commons/c/cb/Belarusian_10_ruble_banknote_%2852190334468%29.jpg
+  [openverse image] 3363x2170 0MB d=0s | 250 ruble banknote of the Azerbaijan Democratic Republic
+      https://upload.wikimedia.org/wikipedia/commons/8/84/250_ruble_banknote_of_the_Azerbaijan_Democratic_Republic.jpg
+  [openverse image] 3449x2044 0MB d=0s | 500 ruble banknote of the Azerbaijan Democratic Republic
+      https://upload.wikimedia.org/wikipedia/commons/d/df/500_ruble_banknote_of_the_Azerbaijan_Democratic_Republic.jpg
+
+=== price tag shelf (6) ===
+  [wikimedia image] 4032x3024 2.3MB d=0.0s | File:2021-06-28 E-ink price tag in Sydney supermarket.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/54/2021-06-28_E-ink_price_tag_in_Sydney_supermarket.jpg?utm_source=commons.wikimedia.org&utm_campaign
+  [wikimedia image] 2376x1020 0.3MB d=0.0s | File:Back of a Hanshow Nebular Pro 437Q-N electronic shelf label.jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/e0/Back_of_a_Hanshow_Nebular_Pro_437Q-N_electronic_shelf_label.jpg?utm_source=commons.wikimedia.org&u
+  [wikimedia image] 5232x3324 10.7MB d=0.0s | File:Bayer and store-brand aspirin containers on US drugstore shelf.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/4b/Bayer_and_store-brand_aspirin_containers_on_US_drugstore_shelf.jpg?utm_source=commons.wikimedia.or
+  [wikimedia image] 800x600 0.2MB d=0.0s | File:Digital price tags (5004089790).jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/06/Digital_price_tags_%285004089790%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&ut
+  [wikimedia image] 1944x2592 0.8MB d=0.0s | File:Fizz Blueberry 0,5l.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/f0/Fizz_Blueberry_0%2C5l.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=orig
+  [wikimedia image] 4592x3064 2.8MB d=0.0s | File:Jars of Chili, with electronic shelf tags.jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/bd/Jars_of_Chili%2C_with_electronic_shelf_tags.jpg?utm_source=commons.wikimedia.org&utm_campaign=imag
+
+=== bento box (11) ===
+  [wikimedia video] 1920x1080 360.8MB d=1623.2s | File:BRASIL EM PAUTA - Bento Albuquerque, ministro de Minas e Energia.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7b/BRASIL_EM_PAUTA_-_Bento_Albuquerque%2C_ministro_de_Minas_e_Energia.webm/BRASIL_EM_PAUTA
+  [wikimedia video] 640x480 2.2MB d=6.0s | File:Bento Gonçalves 2015-05-01 .webm
+      https://upload.wikimedia.org/wikipedia/commons/1/1d/Bento_Gon%C3%A7alves_2015-05-01_.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_conten
+  [wikimedia video] 640x480 2.5MB d=32.0s | File:Cabeça d'água na Cachoeira São Bento - Alto Paraíso (GO) - 2.webm
+      https://upload.wikimedia.org/wikipedia/commons/1/19/Cabe%C3%A7a_d%27%C3%A1gua_na_Cachoeira_S%C3%A3o_Bento_-_Alto_Para%C3%ADso_%28GO%29_-_2.webm?utm_so
+  [wikimedia video] 1920x1080 22.8MB d=48.6s | File:Papa Bento XVI em câmara ardente.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/0/06/Papa_Bento_XVI_em_c%C3%A2mara_ardente.webm/Papa_Bento_XVI_em_c%C3%A2mara_ardente.webm.4
+  [wikimedia video] 1280x720 96.8MB d=657.8s | File:Triunfo, a terra de Bento Gonçalves - Rio Grande Rural.webm
+      https://upload.wikimedia.org/wikipedia/commons/8/8e/Triunfo%2C_a_terra_de_Bento_Gon%C3%A7alves_-_Rio_Grande_Rural.webm?utm_source=commons.wikimedia.or
+  [wikimedia image] 3131x2619 1.0MB d=0.0s | File:Anpanman bento (4285982179).jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/9d/Anpanman_bento_%284285982179%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_co
+  [wikimedia image] 4608x2592 1.9MB d=0.0s | File:Bento 20210305 114446.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/50/Bento_20210305_114446.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=orig
+  [wikimedia image] 1999x1499 0.9MB d=0.0s | File:Bento at Hanabishi, Koyasan.jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/ea/Bento_at_Hanabishi%2C_Koyasan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_cont
+  [wikimedia image] 2077x2770 3.0MB d=0.0s | File:Cookie Monster Preschool Lunch in a Sassy Bento Box (8480757646).jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/e6/Cookie_Monster_Preschool_Lunch_in_a_Sassy_Bento_Box_%288480757646%29.jpg?utm_source=commons.wikime
+  [wikimedia image] 9248x6936 13.1MB d=0.0s | File:Handmade bento 03.jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/bc/Handmade_bento_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 3500x4296 10.9MB d=0.0s | File:São Bento Monastery, São Paulo downtown, Brazil.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/67/S%C3%A3o_Bento_Monastery%2C_S%C3%A3o_Paulo_downtown%2C_Brazil.jpg?utm_source=commons.wikimedia.org
+
+=== fishing boat fisherman (1) ===
+  [wikimedia video] 1920x1080 209.8MB d=99.4s | File:Canical MADEIRA - unloading of TUNA at the port.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c8/Canical_MADEIRA_-_unloading_of_TUNA_at_the_port.webm/Canical_MADEIRA_-_unloading_of_TUN
+
+########## society ##########
+
+=== electric scooter (0) ===
+
+=== kick scooter rider (6) ===
+  [wikimedia image] 4704x3631 2.1MB d=0.0s | File:Female rider on Egret One eScooter.jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b9/Female_rider_on_Egret_One_eScooter.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm
+  [wikimedia image] 4128x2322 3.2MB d=0.0s | File:Grin e-scooter rider in Mexico City.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/57/Grin_e-scooter_rider_in_Mexico_City.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&ut
+  [wikimedia image] 5184x3888 12.9MB d=0.0s | File:Knight Rider scooter, St. Charles Avenue, Uptown New Orleans - 1.jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/8a/Knight_Rider_scooter%2C_St._Charles_Avenue%2C_Uptown_New_Orleans_-_1.jpg?utm_source=commons.wikime
+  [wikimedia image] 3888x5184 16.6MB d=0.0s | File:Knight Rider scooter, St. Charles Avenue, Uptown New Orleans - 2.jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/cf/Knight_Rider_scooter%2C_St._Charles_Avenue%2C_Uptown_New_Orleans_-_2.jpg?utm_source=commons.wikime
+  [wikimedia image] 6000x4000 13.9MB d=0.0s | File:Rider with scooter boarding route 111 bus at Haymarket September 2024.jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/86/Rider_with_scooter_boarding_route_111_bus_at_Haymarket_September_2024.jpg?utm_source=commons.wikim
+  [wikimedia image] 2417x3020 2.7MB d=0.0s | File:Voi e-scooter used as part of the Portsmouth official 2021 Voi rental trial.jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/1c/Voi_e-scooter_used_as_part_of_the_Portsmouth_official_2021_Voi_rental_trial.jpg?utm_source=commons
+
+=== pedestrian crossing (9) ===
+  [wikimedia video] 1080x1920 3.0MB d=4.0s | File:Red green flashing pedestrian crossing.webm
+      https://upload.wikimedia.org/wikipedia/commons/6/67/Red_green_flashing_pedestrian_crossing.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_
+  [wikimedia video] 1008x1118 2.0MB d=3.2s | File:Red red flashing pedestrian crossing.webm
+      https://upload.wikimedia.org/wikipedia/commons/e/e1/Red_red_flashing_pedestrian_crossing.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_co
+  [wikimedia video] 1920x1080 55.1MB d=58.6s | File:Shibuya Crossing, Tokyo, Japan (video).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/5/53/Shibuya_Crossing%2C_Tokyo%2C_Japan_%28video%29.webm/Shibuya_Crossing%2C_Tokyo%2C_Japan_
+  [wikimedia image] 1600x1069 0.3MB d=0.0s | File:A rainbow pedestrian crossing - geograph.org.uk - 8145500.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/34/A_rainbow_pedestrian_crossing_-_geograph.org.uk_-_8145500.jpg?utm_source=commons.wikimedia.org&utm
+  [wikimedia image] 7241x4538 15.7MB d=0.0s | File:Crosswalk of Market at Third, San Francisco.jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b3/Crosswalk_of_Market_at_Third%2C_San_Francisco.jpg?utm_source=commons.wikimedia.org&utm_campaign=im
+  [wikimedia image] 860x477 0.5MB d=0.0s | File:Delineated pedestrian crossing seen from above.png
+      https://upload.wikimedia.org/wikipedia/commons/5/5e/Delineated_pedestrian_crossing_seen_from_above.png?utm_source=commons.wikimedia.org&utm_campaign=i
+  [wikimedia image] 3646x4557 6.2MB d=0.0s | File:Pedestrian Crossing Push Buttons Wiesbaden Germany.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/6e/Pedestrian_Crossing_Push_Buttons_Wiesbaden_Germany.jpg?utm_source=commons.wikimedia.org&utm_campai
+  [wikimedia image] 4184x2789 3.1MB d=0.0s | File:Pedestrian Crossing on the Cambrian Line - geograph.org.uk - 5087402.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/ac/Pedestrian_Crossing_on_the_Cambrian_Line_-_geograph.org.uk_-_5087402.jpg?utm_source=commons.wikime
+  [wikimedia image] 1024x768 0.1MB d=0.0s | File:Pedestrian crossing on Marsh Way - geograph.org.uk - 5626247.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/5d/Pedestrian_crossing_on_Marsh_Way_-_geograph.org.uk_-_5626247.jpg?utm_source=commons.wikimedia.org&
+
+=== ambulance (11) ===
+  [wikimedia video] 3840x2160 18.4MB d=20.8s | File:2022-08-26 Zwei Krankenwagen Rettungssanitäter und Polizeiauto in Tauberbischofsheim.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0b/2022-08-26_Zwei_Krankenwagen_Rettungssanit%C3%A4ter_und_Polizeiauto_in_Tauberbischofshe
+  [wikimedia video] 3840x2160 39.0MB d=17.1s | File:2022-09-07 Video Krankenwagen, L 506 zwischen Tauberbischofsheim und Impfingen.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/70/2022-09-07_Video_Krankenwagen%2C_L_506_zwischen_Tauberbischofsheim_und_Impfingen.webm/2
+  [wikimedia video] 1920x1080 1.6MB d=30.9s | File:Hughes Park Dr Rear-Ending.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/37/Hughes_Park_Dr_Rear-Ending.webm/Hughes_Park_Dr_Rear-Ending.webm.480p.vp9.webm
+  [wikimedia video] 1280x720 3.1MB d=5.0s | File:Karetka na sygnale w Gdańsku.webm
+      https://upload.wikimedia.org/wikipedia/commons/6/6b/Karetka_na_sygnale_w_Gda%C5%84sku.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_conte
+  [wikimedia video] 1920x1080 59.1MB d=64.3s | File:Rush to save a life.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/0/05/Rush_to_save_a_life.webm/Rush_to_save_a_life.webm.480p.vp9.webm
+  [wikimedia image] 4388x3129 6.9MB d=0.0s | File:Austin 18 Six Cylinder Ambulance 1938.jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/0e/Austin_18_Six_Cylinder_Ambulance_1938.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&
+  [wikimedia image] 3065x2145 1.1MB d=0.0s | File:Bedford J1 Ambulance 1966.jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/86/Bedford_J1_Ambulance_1966.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=
+  [wikimedia image] 3008x2000 3.0MB d=0.0s | File:Force Traveller Kuoni ambulance, 2008.JPG
+      https://upload.wikimedia.org/wikipedia/commons/9/96/Force_Traveller_Kuoni_ambulance%2C_2008.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinf
+  [wikimedia image] 2500x1800 0.9MB d=0.0s | File:Krankentransportwagen in Passau.JPG
+      https://upload.wikimedia.org/wikipedia/commons/e/e1/Krankentransportwagen_in_Passau.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_co
+  [wikimedia image] 5150x3438 14.5MB d=0.0s | File:New York Fire Department Ambulance at Pulaski Day Parade, 20231001 1350 1160.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/a0/New_York_Fire_Department_Ambulance_at_Pulaski_Day_Parade%2C_20231001_1350_1160.jpg?utm_source=comm
+  [wikimedia image] 5616x3744 7.5MB d=0.0s | File:Väljakutsel kiirabibrigaad Tartus, Supilinnas, Herne tänaval. 2016. aasta november..jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/3c/V%C3%A4ljakutsel_kiirabibrigaad_Tartus%2C_Supilinnas%2C_Herne_t%C3%A4naval._2016._aasta_november..
+
+=== road traffic (10) ===
+  [wikimedia video] 1920x1080 29.1MB d=46.6s | File:Road traffic in Ljubljana.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/cb/Road_traffic_in_Ljubljana.webm/Road_traffic_in_Ljubljana.webm.480p.vp9.webm
+  [wikimedia video] 1920x1080 54.8MB d=80.0s | File:Road traffic on Stritarjeva street.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/2/20/Road_traffic_on_Stritarjeva_street.webm/Road_traffic_on_Stritarjeva_street.webm.480p.vp
+  [wikimedia video] 1080x1920 86.7MB d=45.2s | File:Traffic Congestion, 6th Mile, Gangtok.webm
+      https://upload.wikimedia.org/wikipedia/commons/8/85/Traffic_Congestion%2C_6th_Mile%2C_Gangtok.webm?utm_source=commons.wikimedia.org&utm_campaign=api&u
+  [wikimedia image] 4224x2376 4.8MB d=0.0s | File:Japanese car accident.jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/1a/Japanese_car_accident.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=orig
+  [wikimedia image] 5725x3817 20.3MB d=0.0s | File:NH301 Traffic Sani Padum Zanskar Oct22 A7C 04264.jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/82/NH301_Traffic_Sani_Padum_Zanskar_Oct22_A7C_04264.jpg?utm_source=commons.wikimedia.org&utm_campaign
+  [wikimedia image] 4000x3000 5.0MB d=0.0s | File:Road junction, traffic, traffic lights - geograph.org.uk - 3333308.jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b1/Road_junction%2C_traffic%2C_traffic_lights_-_geograph.org.uk_-_3333308.jpg?utm_source=commons.wiki
+  [wikimedia image] 480x640 0.3MB d=0.0s | File:Traffic counter on Oxford Road - geograph.org.uk - 5876620.jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/c6/Traffic_counter_on_Oxford_Road_-_geograph.org.uk_-_5876620.jpg?utm_source=commons.wikimedia.org&ut
+  [wikimedia image] 480x640 0.3MB d=0.0s | File:Traffic in London Road - geograph.org.uk - 5879329.jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b0/Traffic_in_London_Road_-_geograph.org.uk_-_5879329.jpg?utm_source=commons.wikimedia.org&utm_campai
+  [wikimedia image] 640x480 0.1MB d=0.0s | File:Traffic in Solent Road - geograph.org.uk - 1474258.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/fa/Traffic_in_Solent_Road_-_geograph.org.uk_-_1474258.jpg?utm_source=commons.wikimedia.org&utm_campai
+  [openverse image] 2755x1400 0MB d=0s | Vienna Convention on Road Traffic
+      https://upload.wikimedia.org/wikipedia/commons/c/c3/Vienna_Convention_on_Road_Traffic.svg
+
+=== bicycle lane (11) ===
+  [wikimedia video] 1920x1440 458.5MB d=625.9s | File:Bicycle lane on a snowy street in Quebec City 01.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7a/Bicycle_lane_on_a_snowy_street_in_Quebec_City_01.webm/Bicycle_lane_on_a_snowy_street_in
+  [wikimedia video] 1920x1080 12.8MB d=24.0s | File:Cycling-1000482, Dingle Peninsula, Co. Kerry, Ireland.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7a/Cycling-1000482%2C_Dingle_Peninsula%2C_Co._Kerry%2C_Ireland.webm/Cycling-1000482%2C_Din
+  [wikimedia video] 1440x1080 875.6MB d=1439.0s | File:Magic of the Bicycle (1965).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/8/86/Magic_of_the_Bicycle_%281965%29.webm/Magic_of_the_Bicycle_%281965%29.webm.480p.vp9.webm
+  [wikimedia video] 1280x720 42.2MB d=358.4s | File:Protected intersections for bicyclists.webm
+      https://upload.wikimedia.org/wikipedia/commons/9/90/Protected_intersections_for_bicyclists.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_
+  [wikimedia video] 1920x1080 56.7MB d=371.0s | File:Suspect on Bicycle Leads Police on Freeway Chase After Shooting Family Member.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/8/8f/Suspect_on_Bicycle_Leads_Police_on_Freeway_Chase_After_Shooting_Family_Member.webm/Susp
+  [wikimedia image] 3000x4000 3.2MB d=0.0s | File:Autorickshaw parked on bicycle lane, on Hitex Road.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/9a/Autorickshaw_parked_on_bicycle_lane%2C_on_Hitex_Road.jpg?utm_source=commons.wikimedia.org&utm_camp
+  [wikimedia image] 4000x3000 5.6MB d=0.0s | File:Bicycle lane in Hyderabad Hitec City.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/4c/Bicycle_lane_in_Hyderabad_Hitec_City.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&u
+  [wikimedia image] 3072x2456 1.8MB d=0.0s | File:Buffered bicycle lane in Burlington VT.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d2/Buffered_bicycle_lane_in_Burlington_VT.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo
+  [wikimedia image] 4080x3072 3.8MB d=0.0s | File:Dozens of cars parked on bicycle lane in Ebisu.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/4e/Dozens_of_cars_parked_on_bicycle_lane_in_Ebisu.jpg?utm_source=commons.wikimedia.org&utm_campaign=i
+  [wikimedia image] 3840x2160 2.0MB d=0.0s | File:Herbert Street bicycle lane outside the former Tesla dealership.jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/15/Herbert_Street_bicycle_lane_outside_the_former_Tesla_dealership.jpg?utm_source=commons.wikimedia.o
+  [wikimedia image] 3072x4080 4.4MB d=0.0s | File:Jeep parked on bicycle lane in Ebisu.jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/24/Jeep_parked_on_bicycle_lane_in_Ebisu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&u
+
+=== traffic police (5) ===
+  [wikimedia video] 1920x1080 282.6MB d=991.1s | File:Bodycam Shows Police Shootout During Traffic Stop In Florida.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/1/1b/Bodycam_Shows_Police_Shootout_During_Traffic_Stop_In_Florida.webm/Bodycam_Shows_Police_
+  [wikimedia video] 1920x1080 108.1MB d=857.5s | File:Empower 305 Podcast - Lt. Indiana Miranda – Florida Highway Patrol.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/5/5b/Empower_305_Podcast_-_Lt._Indiana_Miranda_%E2%80%93_Florida_Highway_Patrol.webm/Empower
+  [wikimedia video] 1920x1080 104.0MB d=45.4s | File:Kolkata Police North traffic guard distributing food 01.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0d/Kolkata_Police_North_traffic_guard_distributing_food_01.webm/Kolkata_Police_North_traff
+  [wikimedia video] 1920x1080 110.6MB d=45.2s | File:Kolkata Police North traffic guard distributing food 02.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7a/Kolkata_Police_North_traffic_guard_distributing_food_02.webm/Kolkata_Police_North_traff
+  [wikimedia video] 1920x1080 18.0MB d=99.9s | File:Police Chase Ensues After Florida Fugitive Flees Traffic Stop.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/35/Police_Chase_Ensues_After_Florida_Fugitive_Flees_Traffic_Stop.webm/Police_Chase_Ensues_
+
+=== bicycle wheel (0) ===
+
+=== traffic camera (6) ===
+  [wikimedia image] 1080x1920 0.6MB d=0.0s | File:Almuñecar traffic camera.jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/e6/Almu%C3%B1ecar_traffic_camera.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_cont
+  [wikimedia image] 5472x3648 7.1MB d=0.0s | File:Congestion pricing cameras W34 & Dyre.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/a9/Congestion_pricing_cameras_W34_%26_Dyre.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinf
+  [wikimedia image] 3200x4000 12.0MB d=0.0s | File:Massachusetts Turnpike Traffic Camera by Route 49, Sturbridge.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/a4/Massachusetts_Turnpike_Traffic_Camera_by_Route_49%2C_Sturbridge.jpg?utm_source=commons.wikimedia.o
+  [wikimedia image] 2784x4176 3.4MB d=0.0s | File:New Traffic Cameras at Mount Pleasant Junction, Kingston upon Hull Jun24.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/4d/New_Traffic_Cameras_at_Mount_Pleasant_Junction%2C_Kingston_upon_Hull_Jun24.jpg?utm_source=commons.
+  [wikimedia image] 2784x4176 3.4MB d=0.0s | File:New Traffic Cameras at Mount Pleasant Junction Close-Up, Kingston upon Hull Jun24.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d6/New_Traffic_Cameras_at_Mount_Pleasant_Junction_Close-Up%2C_Kingston_upon_Hull_Jun24.jpg?utm_source
+  [wikimedia image] 4176x2784 3.4MB d=0.0s | File:New Traffic Cameras at Mount Pleasant Junction Control Box, Kingston upon Hull Jun24.jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/87/New_Traffic_Cameras_at_Mount_Pleasant_Junction_Control_Box%2C_Kingston_upon_Hull_Jun24.jpg?utm_sou
+
+=== bicycle helmet (11) ===
+  [wikimedia video] 640x360 78.0MB d=571.8s | File:22 mi. Sellwood - Oregon City bicycle route preview.webm
+      https://upload.wikimedia.org/wikipedia/commons/5/54/22_mi._Sellwood_-_Oregon_City_bicycle_route_preview.webm?utm_source=commons.wikimedia.org&utm_camp
+  [wikimedia video] 854x470 13.0MB d=87.4s | File:Bike Patrol Officers Safety Check List.webm
+      https://upload.wikimedia.org/wikipedia/commons/a/a7/Bike_Patrol_Officers_Safety_Check_List.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_
+  [wikimedia video] 1920x1080 12.8MB d=24.0s | File:Cycling-1000482, Dingle Peninsula, Co. Kerry, Ireland.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7a/Cycling-1000482%2C_Dingle_Peninsula%2C_Co._Kerry%2C_Ireland.webm/Cycling-1000482%2C_Din
+  [wikimedia video] 1920x1080 50.6MB d=52.4s | File:Explore Washington Recreation- Juniper Dunes Off-Highway Vehicle Area (27203691361).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/3b/Explore_Washington_Recreation-_Juniper_Dunes_Off-Highway_Vehicle_Area_%2827203691361%29
+  [wikimedia video] 720x720 7.4MB d=47.1s | File:WiMiUS Action Camera 4K Video 16MP 40M Underwater Cameras Sports.webm
+      https://upload.wikimedia.org/wikipedia/commons/0/07/WiMiUS_Action_Camera_4K_Video_16MP_40M_Underwater_Cameras_Sports.webm?utm_source=commons.wikimedia
+  [wikimedia image] 3060x2292 2.0MB d=0.0s | File:ABUS, Eurobike 2024, Frankfurt am Main (LRM 20240707 144137-RR).jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/8d/ABUS%2C_Eurobike_2024%2C_Frankfurt_am_Main_%28LRM_20240707_144137-RR%29.jpg?utm_source=commons.wik
+  [wikimedia image] 2500x1721 1.6MB d=0.0s | File:Bicycle Helmet 0085 Transparent.png
+      https://upload.wikimedia.org/wikipedia/commons/8/81/Bicycle_Helmet_0085_Transparent.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_co
+  [wikimedia image] 3000x4000 3.7MB d=0.0s | File:Bicycle white helmet from ABUS.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/50/Bicycle_white_helmet_from_ABUS.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_con
+  [wikimedia image] 3000x4000 2.6MB d=0.0s | File:Bicycle white helmet from bikemate.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/fa/Bicycle_white_helmet_from_bikemate.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm
+  [wikimedia image] 3000x4000 2.4MB d=0.0s | File:Bicycle white helmet from bikemate 2.jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/7f/Bicycle_white_helmet_from_bikemate_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&u
+  [wikimedia image] 3000x4000 3.3MB d=0.0s | File:Bicycle white helmet from bikemate 3.jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b8/Bicycle_white_helmet_from_bikemate_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&u
+
+=== street traffic evening (11) ===
+  [wikimedia video] 640x480 132.2MB d=1572.0s | File:Berlin Documentary.webm
+      https://upload.wikimedia.org/wikipedia/commons/2/27/Berlin_Documentary.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia video] 1920x1080 104.1MB d=579.4s | File:Bodycam Footage Of Police Shooting Kidnapping Suspect in Richmond, California.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c2/Bodycam_Footage_Of_Police_Shooting_Kidnapping_Suspect_in_Richmond%2C_California.webm/Bo
+  [wikimedia video] 1024x576 16.4MB d=29.3s | File:Hammering saron.webm
+      https://upload.wikimedia.org/wikipedia/commons/b/bb/Hammering_saron.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia video] 1024x576 17.0MB d=29.8s | File:Hitting bonang.webm
+      https://upload.wikimedia.org/wikipedia/commons/6/62/Hitting_bonang.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia video] 1728x1080 2.9MB d=23.1s | File:Tesla Front Camera footage on Redstone Hill Road, Bristol, CT (12 October 2022).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b9/Tesla_Front_Camera_footage_on_Redstone_Hill_Road%2C_Bristol%2C_CT_%2812_October_2022%29
+  [wikimedia image] 4291x2654 1.5MB d=0.0s | File:Early evening traffic at the Hannan Street lights.jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/c7/Early_evening_traffic_at_the_Hannan_Street_lights.jpg?utm_source=commons.wikimedia.org&utm_campaig
+  [wikimedia image] 640x392 0.1MB d=0.0s | File:Evening peak traffic, Belfast (2) - geograph.org.uk - 997623.jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/ea/Evening_peak_traffic%2C_Belfast_%282%29_-_geograph.org.uk_-_997623.jpg?utm_source=commons.wikimedi
+  [wikimedia image] 640x419 0.1MB d=0.0s | File:Evening peak traffic, Middlepath Street, Belfast (May 2015) - geograph.org.uk - 4495239.jp
+      https://upload.wikimedia.org/wikipedia/commons/a/a0/Evening_peak_traffic%2C_Middlepath_Street%2C_Belfast_%28May_2015%29_-_geograph.org.uk_-_4495239.jp
+  [wikimedia image] 2268x4032 2.1MB d=0.0s | File:Evening street traffic Aleja Jana Pawła II Warsaw.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/dc/Evening_street_traffic_Aleja_Jana_Paw%C5%82a_II_Warsaw.jpg?utm_source=commons.wikimedia.org&utm_ca
+  [wikimedia image] 3968x2229 2.8MB d=0.0s | File:Evening traffic, Belfast - geograph.org.uk - 5612427.jpg
+      https://upload.wikimedia.org/wikipedia/commons/2/2e/Evening_traffic%2C_Belfast_-_geograph.org.uk_-_5612427.jpg?utm_source=commons.wikimedia.org&utm_ca
+  [wikimedia image] 2048x1152 0.7MB d=0.0s | File:Moscow, Bolshaya Polyanka Street, evening northbound traffic (199741007).jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/5a/Moscow%2C_Bolshaya_Polyanka_Street%2C_evening_northbound_traffic_%28199741007%29.jpg?utm_source=co
+
+=== scooter (10) ===
+  [wikimedia video] 1920x1080 260.1MB d=83.6s | File:09 Scooter Matvey Demchuk Karelian Jam 2021.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/3/3b/09_Scooter_Matvey_Demchuk_Karelian_Jam_2021.webm/09_Scooter_Matvey_Demchuk_Karelian_Jam
+  [wikimedia video] 1920x1080 1791.6MB d=1257.2s | File:Riding a scooter down Bermuda's streets.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/ce/Riding_a_scooter_down_Bermuda%27s_streets.webm/Riding_a_scooter_down_Bermuda%27s_street
+  [wikimedia video] 1920x1080 54.8MB d=200.0s | File:SCOOTER CONTEST VIENNA 2014.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f8/SCOOTER_CONTEST_VIENNA_2014.webm/SCOOTER_CONTEST_VIENNA_2014.webm.480p.vp9.webm
+  [wikimedia video] 1920x1080 222.3MB d=77.8s | File:Scooter boy Yellow T-shirt and blue jeans.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/5/52/Scooter_boy_Yellow_T-shirt_and_blue_jeans.webm/Scooter_boy_Yellow_T-shirt_and_blue_jean
+  [wikimedia image] 4608x3456 7.0MB d=0.0s | File:Jinan scooter-20150519-RM-184932.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/6a/Jinan_scooter-20150519-RM-184932.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_c
+  [wikimedia image] 4288x2848 5.0MB d=0.0s | File:Moscow motor scooter 2013-05 254.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/af/Moscow_motor_scooter_2013-05_254.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_c
+  [wikimedia image] 2592x1944 2.2MB d=0.0s | File:Old Bajaj Chetak Scooter 01.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/af/Old_Bajaj_Chetak_Scooter_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_conten
+  [wikimedia image] 5456x3632 12.4MB d=0.0s | File:Red Vespa scooter in front of Rocca Maggiore, Assisi.jpg
+      https://upload.wikimedia.org/wikipedia/commons/7/70/Red_Vespa_scooter_in_front_of_Rocca_Maggiore%2C_Assisi.jpg?utm_source=commons.wikimedia.org&utm_ca
+  [wikimedia image] 1260x2284 0.5MB d=0.0s | File:Scooter Messina Tirone 27-9-21.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/50/Scooter_Messina_Tirone_27-9-21.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_con
+  [wikimedia image] 3456x2304 2.3MB d=0.0s | File:Zündapp Bella R 154 (2008-05-21) Seitenansicht ret.jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b5/Z%C3%BCndapp_Bella_R_154_%282008-05-21%29_Seitenansicht_ret.jpg?utm_source=commons.wikimedia.org&u
+
+########## final ##########
+
+=== siberian husky (12) ===
+  [wikimedia video] 1280x720 1.8MB d=47.0s | File:Howling Husky Dog.webm
+      https://upload.wikimedia.org/wikipedia/commons/4/4f/Howling_Husky_Dog.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia video] 1280x720 12.2MB d=94.2s | File:Husky kills poodle at South Korean "dog hotel" (August 2017).webm
+      https://upload.wikimedia.org/wikipedia/commons/8/8b/Husky_kills_poodle_at_South_Korean_%22dog_hotel%22_%28August_2017%29.webm?utm_source=commons.wikim
+  [wikimedia video] 1920x1080 34.0MB d=60.1s | File:InFocus- Operation Husky (970284).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/6/66/InFocus-_Operation_Husky_%28970284%29.webm/InFocus-_Operation_Husky_%28970284%29.webm.4
+  [wikimedia video] 1920x1080 19.6MB d=56.3s | File:Operation Husky (1021702).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d7/Operation_Husky_%281021702%29.webm/Operation_Husky_%281021702%29.webm.480p.vp9.webm
+  [wikimedia video] 1920x1080 31.6MB d=59.7s | File:Operation Husky (1023771).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/Operation_Husky_%281023771%29.webm/Operation_Husky_%281023771%29.webm.480p.vp9.webm
+  [wikimedia video] 1920x1080 389.5MB d=1186.6s | File:Transient Hazards- Explosion at the Husky Superior Refinery.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/4/49/Transient_Hazards-_Explosion_at_the_Husky_Superior_Refinery.webm/Transient_Hazards-_Exp
+  [wikimedia image] 4410x2940 5.9MB d=0.0s | File:Inzell 2017 Kat A1 ZBYSZEK Kunert -9513.jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/0e/Inzell_2017_Kat_A1_ZBYSZEK_Kunert_-9513.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinf
+  [wikimedia image] 5281x3521 7.6MB d=0.0s | File:Inzell 2017 Kat unlimited Krzystof JANECKI-9523.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/97/Inzell_2017_Kat_unlimited_Krzystof_JANECKI-9523.jpg?utm_source=commons.wikimedia.org&utm_campaign=
+  [wikimedia image] 2950x2500 4.7MB d=0.0s | File:Juvenile Siberian Husky.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/65/Juvenile_Siberian_Husky.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=or
+  [wikimedia image] 2000x1500 1.1MB d=0.0s | File:Keeshond Siberian Husky crossbreed puppy.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/96/Keeshond_Siberian_Husky_crossbreed_puppy.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagein
+  [wikimedia image] 1600x732 0.9MB d=0.0s | File:Siberian Husky heterchromia edit.jpg
+      https://upload.wikimedia.org/wikipedia/commons/8/8d/Siberian_Husky_heterchromia_edit.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_c
+  [wikimedia image] 5568x3712 9.0MB d=0.0s | File:Werfenweng 2018 Kat B1 Philip BOTT-8667.jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/c4/Werfenweng_2018_Kat_B1_Philip_BOTT-8667.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinf
+
+=== dog snow running (0) ===
+
+=== brown bear (0) ===
+
+=== veterinarian clinic (8) ===
+  [wikimedia video] 1280x720 16.5MB d=85.3s | File:2012 Smithsonian Folklife Festival (20120628-OC-LSC-9001).webm
+      https://upload.wikimedia.org/wikipedia/commons/4/4f/2012_Smithsonian_Folklife_Festival_%2820120628-OC-LSC-9001%29.webm?utm_source=commons.wikimedia.or
+  [wikimedia image] 5708x3805 2.7MB d=0.0s | File:Kosovo Force 28 Soldiers assist veterinarian clinic (6436450).jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/e9/Kosovo_Force_28_Soldiers_assist_veterinarian_clinic_%286436450%29.jpg?utm_source=commons.wikimedia
+  [wikimedia image] 6000x4000 3.4MB d=0.0s | File:Veterinarian Clinic Panama Continuing Promise 2025 (9139813).jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d1/Veterinarian_Clinic_Panama_Continuing_Promise_2025_%289139813%29.jpg?utm_source=commons.wikimedia.
+  [wikimedia image] 4000x6000 3.6MB d=0.0s | File:Veterinarian Clinic Panama Continuing Promise 2025 (9139815).jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/00/Veterinarian_Clinic_Panama_Continuing_Promise_2025_%289139815%29.jpg?utm_source=commons.wikimedia.
+  [wikimedia image] 4000x6000 4.9MB d=0.0s | File:Veterinarian Clinic Panama Continuing Promise 2025 (9139816).jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/1a/Veterinarian_Clinic_Panama_Continuing_Promise_2025_%289139816%29.jpg?utm_source=commons.wikimedia.
+  [wikimedia image] 5848x3899 5.1MB d=0.0s | File:Veterinarian Clinic Panama Continuing Promise 2025 (9139821).jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/e5/Veterinarian_Clinic_Panama_Continuing_Promise_2025_%289139821%29.jpg?utm_source=commons.wikimedia.
+  [wikimedia image] 4032x3024 2.6MB d=0.0s | File:Veterinarian clinic - Shinagawa May 26 2022 03-27-59 PM.jpeg
+      https://upload.wikimedia.org/wikipedia/commons/e/e9/Veterinarian_clinic_-_Shinagawa_May_26_2022_03-27-59_PM.jpeg?utm_source=commons.wikimedia.org&utm_
+  [openverse image] 4032x3024 0MB d=0s | Veterinarian clinic - Shinagawa May 26 2022 03-27-59 PM
+      https://upload.wikimedia.org/wikipedia/commons/e/e9/Veterinarian_clinic_-_Shinagawa_May_26_2022_03-27-59_PM.jpeg
+
+=== elephant herd (12) ===
+  [wikimedia video] 1920x1080 36.1MB d=46.0s | File:A herd of elephant of Hoollongapar Gibbon Sanctuary, Jorhat - Assam.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f1/A_herd_of_elephant_of_Hoollongapar_Gibbon_Sanctuary%2C_Jorhat_-_Assam.webm/A_herd_of_el
+  [wikimedia video] 720x480 1.1MB d=16.8s | File:Baby Elephant at Pinnawala Elephant Orphanage Sri Lanka.webm
+      https://upload.wikimedia.org/wikipedia/commons/4/46/Baby_Elephant_at_Pinnawala_Elephant_Orphanage_Sri_Lanka.webm?utm_source=commons.wikimedia.org&utm_
+  [wikimedia video] 1920x1080 49.4MB d=16.7s | File:Elephants Grazing in Ngorongoro.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/5/5a/Elephants_Grazing_in_Ngorongoro.webm/Elephants_Grazing_in_Ngorongoro.webm.480p.vp9.webm
+  [wikimedia video] 3840x2160 292.2MB d=53.4s | File:Elephants in Malawi - 2018 Aug.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/d/dc/Elephants_in_Malawi_-_2018_Aug.webm/Elephants_in_Malawi_-_2018_Aug.webm.480p.vp9.webm
+  [wikimedia video] 3840x2160 2068.4MB d=761.0s | File:I Went to a Chiang Mai Elephant Sanctuary — Here's What It Actually Looks Like.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/77/I_Went_to_a_Chiang_Mai_Elephant_Sanctuary_%E2%80%94_Here%27s_What_It_Actually_Looks_Lik
+  [wikimedia image] 8640x5760 26.3MB d=0.0s | File:079 Herd of African bush elephants drinking in Etosha National Park Photo by Giles Laurent
+      https://upload.wikimedia.org/wikipedia/commons/a/a1/079_Herd_of_African_bush_elephants_drinking_in_Etosha_National_Park_Photo_by_Giles_Laurent.jpg?utm
+  [wikimedia image] 4401x2476 13.1MB d=0.0s | File:Elephant Herd Descent Ganges Mahabalipuram Sep22 A7C 02502.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/ac/Elephant_Herd_Descent_Ganges_Mahabalipuram_Sep22_A7C_02502.jpg?utm_source=commons.wikimedia.org&ut
+  [wikimedia image] 3776x3776 13.0MB d=0.0s | File:Elephant Herd Panel Descent Ganges Mahabalipuram Sep22 D72 24955.jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/0c/Elephant_Herd_Panel_Descent_Ganges_Mahabalipuram_Sep22_D72_24955.jpg?utm_source=commons.wikimedia.
+  [wikimedia image] 4500x3000 5.4MB d=0.0s | File:Felsgruppe Elefantenherde in Schlag (Litschau) 2014-05 03 NÖ-Naturdenkmal GD-072.jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/05/Felsgruppe_Elefantenherde_in_Schlag_%28Litschau%29_2014-05_03_N%C3%96-Naturdenkmal_GD-072.jpg?utm_
+  [wikimedia image] 3648x2736 5.7MB d=0.0s | File:Herd of elephants in Dhikala chaur AJTJ DSCN8222.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/fd/Herd_of_elephants_in_Dhikala_chaur_AJTJ_DSCN8222.jpg?utm_source=commons.wikimedia.org&utm_campaign
+  [wikimedia image] 722x450 0.1MB d=0.0s | File:The elephant herd of Elephant Nature Park.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/ab/The_elephant_herd_of_Elephant_Nature_Park.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagei
+  [openverse image] 3872x2592 0MB d=0s | An elephant herd at Jim Corbett National Park
+      https://upload.wikimedia.org/wikipedia/commons/2/28/An_elephant_herd_at_Jim_Corbett_National_Park.jpg
+
+=== safari wildlife africa (6) ===
+  [wikimedia image] 5576x3718 10.7MB d=0.0s | File:African bush elephants (Loxodonta africana) female with six-week-old baby.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d5/African_bush_elephants_%28Loxodonta_africana%29_female_with_six-week-old_baby.jpg?utm_source=commo
+  [wikimedia image] 1365x2048 0.7MB d=0.0s | File:Animal Lion Africa Nature Wildlife Savanna Safari Predator Cat Landscape (257023085).jpeg
+      https://upload.wikimedia.org/wikipedia/commons/4/4e/Animal_Lion_Africa_Nature_Wildlife_Savanna_Safari_Predator_Cat_Landscape_%28257023085%29.jpeg?utm_
+  [wikimedia image] 4928x3280 10.9MB d=0.0s | File:De Wildt Cheetah and Wildlife Centre, Hartbeespoort, North West, South Africa (20345561489
+      https://upload.wikimedia.org/wikipedia/commons/4/45/De_Wildt_Cheetah_and_Wildlife_Centre%2C_Hartbeespoort%2C_North_West%2C_South_Africa_%2820345561489
+  [wikimedia image] 6016x4016 10.3MB d=0.0s | File:De Wildt Cheetah and Wildlife Centre, Hartbeespoort, North West, South Africa (20505239906
+      https://upload.wikimedia.org/wikipedia/commons/6/63/De_Wildt_Cheetah_and_Wildlife_Centre%2C_Hartbeespoort%2C_North_West%2C_South_Africa_%2820505239906
+  [wikimedia image] 17250x4784 18.8MB d=0.0s | File:Elefantes africanos de sabana (Loxodonta africana), Elephant Sands, Botsuana, 2018-07-28, 
+      https://upload.wikimedia.org/wikipedia/commons/d/d7/Elefantes_africanos_de_sabana_%28Loxodonta_africana%29%2C_Elephant_Sands%2C_Botsuana%2C_2018-07-28
+  [wikimedia image] 5760x3840 7.5MB d=0.0s | File:Wildlife, Madikwe Game Reserve, South Africa (46895101231).jpg
+      https://upload.wikimedia.org/wikipedia/commons/0/05/Wildlife%2C_Madikwe_Game_Reserve%2C_South_Africa_%2846895101231%29.jpg?utm_source=commons.wikimedi
+
+=== octopus (9) ===
+  [wikimedia video] 1280x720 8.5MB d=49.5s | File:An octopus is visiting the EMSO-Molène observatory (Ifremer 00384-49520).webm
+      https://upload.wikimedia.org/wikipedia/commons/c/c9/An_octopus_is_visiting_the_EMSO-Mol%C3%A8ne_observatory_%28Ifremer_00384-49520%29.webm?utm_source=
+  [wikimedia video] 1280x720 8.1MB d=18.9s | File:Hairy octopus.webm
+      https://upload.wikimedia.org/wikipedia/commons/9/9b/Hairy_octopus.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=original
+  [wikimedia video] 1920x1080 17.7MB d=46.3s | File:OctopusFeedingCSS.mpg
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/c/cc/OctopusFeedingCSS.mpg/OctopusFeedingCSS.mpg.480p.vp9.webm
+  [wikimedia image] 2746x2985 1.3MB d=0.0s | File:CU octopus suckers 0459.jpg
+      https://upload.wikimedia.org/wikipedia/commons/1/1d/CU_octopus_suckers_0459.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=or
+  [wikimedia image] 5444x3707 12.6MB d=0.0s | File:Octopus as food at Noryangjin Fisheries Wholesale Market in Seoul South Korea.jpg
+      https://upload.wikimedia.org/wikipedia/commons/e/ea/Octopus_as_food_at_Noryangjin_Fisheries_Wholesale_Market_in_Seoul_South_Korea.jpg?utm_source=commo
+  [wikimedia image] 1680x1260 1.5MB d=0.0s | File:Octopus marginatus.jpg
+      https://upload.wikimedia.org/wikipedia/commons/6/63/Octopus_marginatus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=origina
+  [wikimedia image] 4752x3168 9.4MB d=0.0s | File:Octopus vulgaris 03.jpg
+      https://upload.wikimedia.org/wikipedia/commons/5/5c/Octopus_vulgaris_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=origin
+  [wikimedia image] 1800x2000 1.9MB d=0.0s | File:Octopus vulgaris Merculiano.jpg
+      https://upload.wikimedia.org/wikipedia/commons/3/32/Octopus_vulgaris_Merculiano.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_conten
+  [wikimedia image] 1627x1085 1.8MB d=0.0s | File:Pulpo común (Octopus vulgaris), Parque natural de la Arrábida, Portugal, 2020-07-31, DD 11
+      https://upload.wikimedia.org/wikipedia/commons/8/80/Pulpo_com%C3%BAn_%28Octopus_vulgaris%29%2C_Parque_natural_de_la_Arr%C3%A1bida%2C_Portugal%2C_2020-
+
+=== whale shark (11) ===
+  [wikimedia video] 1920x1080 85.1MB d=236.8s | File:Swimming with a whale shark (Rhincodon typus) (no audio).webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/7/7e/Swimming_with_a_whale_shark_%28Rhincodon_typus%29_%28no_audio%29.webm/Swimming_with_a_w
+  [wikimedia video] 640x480 4.3MB d=22.5s | File:Whale Sharks - Osaka Aquarium.webm
+      https://upload.wikimedia.org/wikipedia/commons/d/df/Whale_Sharks_-_Osaka_Aquarium.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=o
+  [wikimedia video] 1920x1080 328.0MB d=96.4s | File:Whale shark (Rhincodon typus) near a boat.webm
+      https://upload.wikimedia.org/wikipedia/commons/transcoded/b/bd/Whale_shark_%28Rhincodon_typus%29_near_a_boat.webm/Whale_shark_%28Rhincodon_typus%29_ne
+  [wikimedia video] 640x480 1.9MB d=36.6s | File:Whale shark in the Maldives-lLbhHx5bZf0.webm
+      https://upload.wikimedia.org/wikipedia/commons/3/3b/Whale_shark_in_the_Maldives-lLbhHx5bZf0.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm
+  [wikimedia video] 1080x606 21.1MB d=84.5s | File:Whale shark tank.webmhd.webm
+      https://upload.wikimedia.org/wikipedia/commons/b/b6/Whale_shark_tank.webmhd.webm?utm_source=commons.wikimedia.org&utm_campaign=api&utm_content=origina
+  [wikimedia image] 8111x2048 9.1MB d=0.0s | File:A beachcomber is touching a dead whale washed ashore at Ocean beach edit 1.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/95/A_beachcomber_is_touching_a_dead_whale_washed_ashore_at_Ocean_beach_edit_1.jpg?utm_source=commons.
+  [wikimedia image] 3456x2304 3.3MB d=0.0s | File:Male whale shark at Georgia Aquarium.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/a1/Male_whale_shark_at_Georgia_Aquarium.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&u
+  [wikimedia image] 5862x3912 7.8MB d=0.0s | File:Okinawa Aquarium.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/47/Okinawa_Aquarium.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 4608x3456 1.6MB d=0.0s | File:Whale Shark (Rhincodon typus).jpg
+      https://upload.wikimedia.org/wikipedia/commons/b/b0/Whale_Shark_%28Rhincodon_typus%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_
+  [wikimedia image] 3000x2000 2.7MB d=0.0s | File:Whale Shark AdF.jpg
+      https://upload.wikimedia.org/wikipedia/commons/c/c7/Whale_Shark_AdF.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+  [wikimedia image] 2331x1074 2.0MB d=0.0s | File:Whale shark Georgia aquarium.jpg
+      https://upload.wikimedia.org/wikipedia/commons/f/f1/Whale_shark_Georgia_aquarium.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_conte
+
+=== wildlife photographer (0) ===
+
+=== dog portrait (6) ===
+  [wikimedia image] 2617x2786 2.4MB d=0.0s | File:"Man with Dog", 1923 self-portrait by Otis Oldfield.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d1/%22Man_with_Dog%22%2C_1923_self-portrait_by_Otis_Oldfield.jpg?utm_source=commons.wikimedia.org&utm
+  [wikimedia image] 1100x1350 0.1MB d=0.0s | File:Bartolomeo Passerotti - Portrait of a Man with a Dog - WGA17075.jpg
+      https://upload.wikimedia.org/wikipedia/commons/4/4b/Bartolomeo_Passerotti_-_Portrait_of_a_Man_with_a_Dog_-_WGA17075.jpg?utm_source=commons.wikimedia.o
+  [wikimedia image] 3195x4260 7.1MB d=0.0s | File:DSC09611a Search and Rescue Dog, Austrian Red Cross Perchtoldsdorf, 2024-10.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/94/DSC09611a_Search_and_Rescue_Dog%2C_Austrian_Red_Cross_Perchtoldsdorf%2C_2024-10.jpg?utm_source=com
+  [wikimedia image] 3831x5746 9.4MB d=0.0s | File:Human–canine friendship - girl hugging her dog tightly at golden hour in Laos.jpg
+      https://upload.wikimedia.org/wikipedia/commons/9/99/Human%E2%80%93canine_friendship_-_girl_hugging_her_dog_tightly_at_golden_hour_in_Laos.jpg?utm_sour
+  [wikimedia image] 50417x39213 351.8MB d=0.0s | File:Portrait of an Extraordinary Musical Dog.jpg
+      https://upload.wikimedia.org/wikipedia/commons/a/ab/Portrait_of_an_Extraordinary_Musical_Dog.jpg?utm_source=commons.wikimedia.org&utm_campaign=imagein
+  [wikimedia image] 499x388 0.0MB d=0.0s | File:Portrait of an extraordinary musical dog by Philip Reinagle 1805.jpg
+      https://upload.wikimedia.org/wikipedia/commons/d/d8/Portrait_of_an_extraordinary_musical_dog_by_Philip_Reinagle_1805.jpg?utm_source=commons.wikimedia.

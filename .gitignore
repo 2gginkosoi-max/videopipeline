@@ -1,0 +1,73 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+*.manifest
+*.spec.bak
+
+# ===== Logs =====
+*.log
+
+# ===== IDE / OS =====
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Secrets =====
+.env
+.env.local
+vk_token.txt
+vk_config.json
+*.key
+*.pem
+secrets.json
+
+# ===== Databases =====
+*.db
+*.sqlite
+*.sqlite3
+
+# ===== Output: готовые ролики и архив =====
+output/*
+!output/.gitkeep
+output/archive/*
+!output/archive/.gitkeep
+
+# ===== Web uploads =====
+web/uploads/*
+!web/uploads/.gitkeep
+
+# ===== Скачанный b-roll (не наш исходник) =====
+temp_news/
+assets_news/
+news_assets/
+longform/media/
+
+# ===== Сгенерированные аудио-подложки (создаются локально через FFmpeg) =====
+assets/audio/bed_*.wav
+
+# ===== Кэш =====
+.cache/
+__pycache__/
+node_modules/

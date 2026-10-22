@@ -1,0 +1,84 @@
+{
+  "id": "YtShortsAutopst1",
+  "name": "YouTube Shorts Autopost",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "publish-short",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "aa110000-0000-4000-8000-000000000001",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [-260, 0],
+      "webhookId": "aa110000-1111-4000-8000-0000000000aa"
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "fileSelector": "={{ $('Webhook').item.json.body.videoPath }}",
+        "options": {
+          "dataPropertyName": "data"
+        }
+      },
+      "id": "aa110000-0000-4000-8000-000000000002",
+      "name": "Read Video",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [-20, 0]
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "upload",
+        "title": "={{ $('Webhook').item.json.body.title }}",
+        "categoryId": "={{ $('Webhook').item.json.body.categoryId || '24' }}",
+        "binaryProperty": "data",
+        "options": {
+          "description": "={{ $('Webhook').item.json.body.description }}",
+          "privacyStatus": "={{ $('Webhook').item.json.body.privacyStatus || 'unlisted' }}",
+          "tags": "={{ $('Webhook').item.json.body.tags }}",
+          "notifySubscribers": false,
+          "selfDeclaredMadeForKids": false
+        }
+      },
+      "id": "aa110000-0000-4000-8000-000000000003",
+      "name": "YouTube Upload",
+      "type": "n8n-nodes-base.youTube",
+      "typeVersion": 1,
+      "position": [220, 0]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Read Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Video": {
+      "main": [
+        [
+          {
+            "node": "YouTube Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": []
+}

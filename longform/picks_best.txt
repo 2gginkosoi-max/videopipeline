@@ -1,0 +1,175 @@
+﻿
+### intro
+  artificial intelligence robot              wiki/i 7754x5169 d=  0.0    7.6MB sc=84.0
+      File:Artificial Intelligence (AI) and Robotics exhibition at the Heinz Nixdorf MuseumsFo
+  server room data center                    wiki/i 5456x3632 d=  0.0    8.2MB sc=98.0
+      File:Duga-1 radar data center interior server room 2018.jpg
+  bee macro flower                           wiki/i 4264x2466 d=  0.0    5.9MB sc=70.0
+      File:Bee on orange flower in macro (Unsplash).jpg
+  milky way night sky timelapse              wiki/v 3840x2160 d= 10.0  138.1MB sc=82.0
+      File:Air traffic in the Swiss night sky as seen from Oeschinensee Video by Giles Laurent
+  city traffic timelapse night               wiki/v 2304x1980 d= 30.0   16.7MB sc=62.0
+      File:WP25 Times Square billboard.webm
+
+### tech
+  robot humanoid laboratory                  wiki/i 3648x2592 d=  0.0    3.0MB sc=54.2
+      File:Flickr - Official U.S. Navy Imagery - Rear Adm. Klunder introduces CHARLI-2 robot..
+  data center server racks                   wiki/i 6000x4000 d=  0.0   10.6MB sc=98.0
+      File:Datacenter Server Racks (22370909788).jpg
+  computer code screen programming           wiki/i 5760x3840 d=  0.0   17.2MB sc=70.0
+      File:Code on computer monitor (Unsplash).jpg
+  supercomputer                              wiki/v 1920x1080 d=110.9   49.7MB sc=70.0
+      File:NASA supercomputer simulation on how the Moon formed.webm
+  artificial intelligence chip processor     wiki/i 3839x3000 d=  0.0    3.7MB sc=55.2
+      File:Hot off the press — the latest D-Wave wafer of quantum processors and TIME cover st
+  meeting room table office                  wiki/v 1080x1920 d= 41.9   11.9MB sc=55.0
+      File:WP25Mireia.webm
+  office desk computer monitor               -- ПУСТО
+  usb flash drive                            wiki/i 2900x1462 d=  0.0    1.4MB sc=64.5
+      File:Kingston Technology DataTraveler G4 USB flash drive USB 3.0 32 Gb.jpg
+  surveillance camera                        wiki/v 1920x1080 d= 33.9    4.2MB sc=90.0
+      File:Surveillance camera captures bear in Franklin County for first time in nearly 20 ye
+  humanoid robot walking                     wiki/i 2457x3577 d=  0.0    2.2MB sc=56.3
+      File:Latest Tesla Optimus Humanoid Robot.jpg
+  circuit board macro                        wiki/i 3888x2592 d=  0.0    5.1MB sc=83.4
+      File:Macro circuit board.JPG
+  typing keyboard coding                     wiki/i 2901x1081 d=  0.0    0.5MB sc=50.5
+      File:Keyboard layout empty fingers.png
+  network cable patch panel                  -- ПУСТО
+  office corridor                            -- ПУСТО
+  smartphone screen chat                     wiki/i 4112x5472 d=  0.0    3.3MB sc=50.0
+      File:Samsung Galaxy Ch@t (Black) - Front (splash screen).jpg
+  gpu graphics card                          wiki/i 3893x2747 d=  0.0    1.7MB sc=69.5
+      File:Graphics Card Diamond Viper 330 with Nvidia (RIVA 128) GPU.jpg
+  electric motor actuator                    wiki/v 1920x1080 d= 26.8   10.7MB sc=62.0
+      File:Gestione di un telepass con Arduino.webm
+  empty conference room                      wiki/i 3000x2000 d=  0.0    0.6MB sc=79.0
+      File:Globes Israel business conference 2018 empty confrence room.jpg
+
+### science
+  bumblebee flower slow motion               wiki/v 3840x2160 d= 34.8   84.4MB sc=90.0
+      File:Bumblebee looking for nectar in verbena up close, 4 times slower.webm
+  bees honeycomb hive                        wiki/v 1920x1080 d= 63.1   15.9MB sc=50.0
+      File:Queen honey bee laying eggs.webm
+  bee collecting nectar flower               -- ПУСТО
+  beekeeper apiary frames                    wiki/i 3328x1110 d=  0.0    0.8MB sc=38.6
+      File:American bee journal (1915) (17928957490).jpg
+  microscope laboratory research             wiki/i 7360x4912 d=  0.0   19.9MB sc=56.0
+      File:Close-up of a lab technitian adjusting a microscope glass slide.jpg
+  macro insect close up                      wiki/i 2688x1920 d=  0.0    3.4MB sc=63.4
+      File:Insect macro (50091453773).jpg
+  3d printer printing                        wiki/v 1920x1080 d= 18.0    3.9MB sc=76.0
+      File:3D Printing at FIMS Library.webm
+  laboratory pipette liquid                  wiki/i 8192x5464 d=  0.0    9.9MB sc=70.0
+      File:Disposable Pipette Tips in Laboratory Tip Boxes.jpg
+  medical syringe injection close up         -- ПУСТО
+  insect wing slow motion                    -- ПУСТО
+  scientist laboratory gloves                wiki/i 6016x4016 d=  0.0   12.8MB sc=70.0
+      File:Scientist prepares samples in laboratory using various tools and equipment.jpg
+  spring flowers meadow insects              wiki/i 2656x1776 d=  0.0    1.1MB sc=49.3
+      File:Wild flowers and where they grow (1882) (14760072046).jpg
+  bee swarm                                  wiki/v 1080x1920 d= 57.7  262.2MB sc=43.0
+      File:Рій на землі 02.webm
+  engineering laboratory workshop            wiki/i 6240x4160 d=  0.0    9.3MB sc=70.0
+      File:Workshop in the University of Michigan Department of Mechanical Engineering.jpg
+
+### space
+  sun solar surface eruption                 wiki/v 1920x1080 d= 12.1    7.8MB sc=90.0
+      File:Massive Solar Eruption Close-up - AIA 304.webm
+  sunrise earth from space                   wiki/v 1920x1080 d=  5.1    4.7MB sc=76.0
+      File:Sunrise on Convection within Tropical Storm Idalia (CIRA 2023-08-28 - nolabels 1).w
+  milky way galaxy stars timelapse           nasa/v 0x0 d=    0      0MB sc=4.0
+      What's Up: July 2021 Skywatching Tips from NASA 
+  spiral galaxy                              wiki/v 3840x2160 d= 30.0   30.0MB sc=96.0
+      File:Explore spiral galaxy M83 through Webb’s infrared eyes ESA508223.webm
+  solar system planets animation             wiki/v 1920x1080 d= 14.0   30.0MB sc=96.0
+      File:Solar System Resource Page (SVS20391).webm
+  telescope observatory night                wiki/v 3840x2160 d= 13.9   26.3MB sc=90.0
+      File:Night time lapse of the MeerKAT telescopes at the Meerkat National Park.webm
+  nebula deep space                          wiki/v 1920x1080 d= 18.5    1.8MB sc=82.0
+      File:Webb's Science Mission Begins- First Light Images As Compared to Hubble (SVS31188 -
+  earth from space                           wiki/v 1920x1080 d=185.6  206.4MB sc=90.0
+      File:Earth from Space- Lake Trasimeno ESA471008.webm
+  spacecraft satellite orbit                 nasa/v 0x0 d=    0      0MB sc=18.0
+      Landsat Orbit Swath
+  star field night sky                       wiki/i 6960x4640 d=  0.0    7.4MB sc=70.0
+      File:"Star Fun" Photobooth at 2024 Night Sky Festival (54072280606).jpg
+  planets orbit animation                    wiki/v 3840x2160 d= 26.2   14.6MB sc=104.0
+      File:Animation of the planets in orbit around TRAPPIST-1.webm
+  rocket launch                              wiki/i 1600x2400 d=  0.0    0.3MB sc=58.0
+      File:First NASA ISINGLASS rocket launch.jpg
+  sunset clouds timelapse                    wiki/v 1920x1080 d= 15.1   18.3MB sc=104.0
+      File:Timelapse Joshua Tree Clouds and Sunset Near West Entrance.webm
+  astronaut spacewalk                        wiki/v 1920x1080 d=222.4  115.9MB sc=56.0
+      File:Spacewalk 101 (jsc2026m000932).webm
+
+### economy
+  red caviar salmon roe                      open/i 4272x2848 d=    0      0MB sc=66.0
+      Lachskaviar, Salmon roe, Red caviar, Красная икра 003
+  salmon                                     wiki/i 4096x3072 d=  0.0    8.6MB sc=56.0
+      File:Male Kokanee Salmon Strawberry Reservoir 2020.jpg
+  fish market                                wiki/v 1920x1080 d=  9.5   23.1MB sc=90.0
+      File:Stalls inside the Tsukiji fish market, Tokyo, Japan.webm
+  supermarket shelves                        wiki/i 4032x3024 d=  0.0    4.7MB sc=70.0
+      File:2020-03-15 Empty supermarket shelves in Australian supermarket 01.jpg
+  shopping basket                            wiki/i 4864x2736 d=  0.0    4.2MB sc=70.0
+      File:Dirx Drogist shopping basket, Blijdorp, Rotterdam (2020) 01.jpg
+  sandwich                                   wiki/v 1440x1080 d= 10.0    9.8MB sc=72.0
+      File:VIS-IR Sandwich loop of an impressive supercell near Lubbock, Texas (CIRA 2019-05-0
+  onigiri                                    wiki/v 1920x1080 d= 33.1    7.7MB sc=76.0
+      File:Just Inc. Recipe Video Sample - Onigiri Rice Balls (2016).webm
+  hot dog                                    -- ПУСТО
+  plastic food container                     wiki/i 4032x3024 d=  0.0    2.5MB sc=84.0
+      File:Plastic food containers in South Korea.jpg
+  supermarket checkout                       wiki/i 3000x4000 d=  0.0    4.8MB sc=59.0
+      File:Supermarket checkout Tegut Tauberbischofsheim.jpg
+  ruble banknotes                            open/i 5008x3339 d=    0      0MB sc=52.0
+      Belarusian 10 ruble banknote (52190334468)
+  price tag shelf                            wiki/i 4032x3024 d=  0.0    2.3MB sc=56.0
+      File:2021-06-28 E-ink price tag in Sydney supermarket.jpg
+  bento box                                  wiki/v 1920x1080 d= 48.6   22.8MB sc=64.0
+      File:Papa Bento XVI em câmara ardente.webm
+  fishing boat fisherman                     wiki/v 1920x1080 d= 99.4  209.8MB sc=50.0
+      File:Canical MADEIRA - unloading of TUNA at the port.webm
+
+### society
+  electric scooter                           -- ПУСТО
+  kick scooter rider                         wiki/i 4704x3631 d=  0.0    2.1MB sc=70.0
+      File:Female rider on Egret One eScooter.jpg
+  pedestrian crossing                        wiki/v 1080x1920 d=  4.0    3.0MB sc=71.0
+      File:Red green flashing pedestrian crossing.webm
+  ambulance                                  wiki/v 3840x2160 d= 20.8   18.4MB sc=62.0
+      File:2022-08-26 Zwei Krankenwagen Rettungssanitäter und Polizeiauto in Tauberbischofshei
+  road traffic                               wiki/v 1920x1080 d= 46.6   29.1MB sc=78.0
+      File:Road traffic in Ljubljana.webm
+  bicycle lane                               wiki/i 4000x3000 d=  0.0    5.6MB sc=70.0
+      File:Bicycle lane in Hyderabad Hitec City.jpg
+  traffic police                             -- ПУСТО
+  bicycle wheel                              -- ПУСТО
+  traffic camera                             wiki/i 4176x2784 d=  0.0    3.4MB sc=70.0
+      File:New Traffic Cameras at Mount Pleasant Junction Control Box, Kingston upon Hull Jun2
+  bicycle helmet                             wiki/i 2500x1721 d=  0.0    1.6MB sc=62.5
+      File:Bicycle Helmet 0085 Transparent.png
+  street traffic evening                     wiki/i 4291x2654 d=  0.0    1.5MB sc=84.0
+      File:Early evening traffic at the Hannan Street lights.jpg
+  scooter                                    wiki/v 1920x1080 d= 83.6  260.1MB sc=64.0
+      File:09 Scooter Matvey Demchuk Karelian Jam 2021.webm
+
+### final
+  siberian husky                             wiki/v 1920x1080 d= 60.1   34.0MB sc=64.0
+      File:InFocus- Operation Husky (970284).webm
+  dog snow running                           -- ПУСТО
+  brown bear                                 -- ПУСТО
+  veterinarian clinic                        wiki/i 5708x3805 d=  0.0    2.7MB sc=70.0
+      File:Kosovo Force 28 Soldiers assist veterinarian clinic (6436450).jpg
+  elephant herd                              wiki/v 1920x1080 d= 46.0   36.1MB sc=78.0
+      File:A herd of elephant of Hoollongapar Gibbon Sanctuary, Jorhat - Assam.webm
+  safari wildlife africa                     wiki/i 4928x3280 d=  0.0   10.9MB sc=70.0
+      File:De Wildt Cheetah and Wildlife Centre, Hartbeespoort, North West, South Africa (2034
+  octopus                                    wiki/v 1280x720 d= 18.9    8.1MB sc=70.7
+      File:Hairy octopus.webm
+  whale shark                                wiki/v 1920x1080 d= 96.4  328.0MB sc=78.0
+      File:Whale shark (Rhincodon typus) near a boat.webm
+  wildlife photographer                      -- ПУСТО
+  dog portrait                               wiki/i 50417x39213 d=  0.0  351.8MB sc=56.0
+      File:Portrait of an Extraordinary Musical Dog.jpg

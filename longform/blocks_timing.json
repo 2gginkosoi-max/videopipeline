@@ -1,0 +1,58 @@
+[
+ {
+  "id": "intro",
+  "label": "ГЛАВНОЕ ЗА 5 МИНУТ",
+  "color": "FFD700",
+  "words": 32,
+  "dur": 12.8,
+  "shots": 5
+ },
+ {
+  "id": "tech",
+  "label": "ТЕХНОЛОГИИ",
+  "color": "FF0033",
+  "words": 187,
+  "dur": 74.8,
+  "shots": 18
+ },
+ {
+  "id": "science",
+  "label": "НАУКА",
+  "color": "00FF88",
+  "words": 129,
+  "dur": 51.6,
+  "shots": 14
+ },
+ {
+  "id": "space",
+  "label": "КОСМОС",
+  "color": "FF6B00",
+  "words": 123,
+  "dur": 49.2,
+  "shots": 14
+ },
+ {
+  "id": "economy",
+  "label": "ЭКОНОМИКА",
+  "color": "FFD700",
+  "words": 142,
+  "dur": 56.8,
+  "shots": 14
+ },
+ {
+  "id": "society",
+  "label": "ОБЩЕСТВО",
+  "color": "FF0033",
+  "words": 120,
+  "dur": 48.0,
+  "shots": 12
+ },
+ {
+  "id": "final",
+  "label": "ХОРОШАЯ НОВОСТЬ",
+  "color": "00FF88",
+  "words": 88,
+  "dur": 35.2,
+  "shots": 10
+ }
+]

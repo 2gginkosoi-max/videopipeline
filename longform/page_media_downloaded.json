@@ -1,0 +1,129 @@
+{
+ "tech_muse": [],
+ "tech_gemini": [
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\tech_gemini\\p03.png",
+   "url": "https://habrastorage.org/r/w1560/extt/2c/75/b3/2c75b35a1792a2979d018546ad0736a3.png",
+   "bytes": 359476
+  },
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\tech_gemini\\p04.png",
+   "url": "https://habrastorage.org/r/w1560/extt/ca/fc/ff/cafcff7274fa20f8679cad5a48783e8b.png",
+   "bytes": 337379
+  },
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\tech_gemini\\p05.png",
+   "url": "https://habrastorage.org/r/w1560/extt/55/ff/c1/55ffc1826e714b4bbbc707c46fd98977.png",
+   "bytes": 1116655
+  },
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\tech_gemini\\p07.png",
+   "url": "https://habrastorage.org/webt/97/0d/9d/970d9d74094c58a7ed44dda9c1d40875.png",
+   "bytes": 143346
+  },
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\tech_gemini\\p08.jpg",
+   "url": "https://habrastorage.org/extt/16/dd/d0/16ddd037a910281b6beb92a27e09fb63.jpg",
+   "bytes": 680924
+  }
+ ],
+ "tech_openai": [
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\tech_openai\\p01.webp",
+   "url": "https://habrastorage.org/r/w1560/extt/c1/81/1c/c1811c9c1f036697fe269b5cae336a85.webp",
+   "bytes": 68296
+  },
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\tech_openai\\p02.webp",
+   "url": "https://habrastorage.org/r/w1560/extt/8a/e1/b6/8ae1b64aa58d1c1105e3f61bc6217183.webp",
+   "bytes": 38252
+  },
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\tech_openai\\p04.png",
+   "url": "https://habrastorage.org/webt/97/0d/9d/970d9d74094c58a7ed44dda9c1d40875.png",
+   "bytes": 143346
+  },
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\tech_openai\\p05.jpg",
+   "url": "https://habrastorage.org/extt/16/dd/d0/16ddd037a910281b6beb92a27e09fb63.jpg",
+   "bytes": 680924
+  }
+ ],
+ "bee_sting": [
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\bee_sting\\p00.jpg",
+   "url": "https://naked-science.ru/wp-content/uploads/2026/10/pchel-1--1440x810.jpg",
+   "bytes": 55914
+  },
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\bee_sting\\p01.jpg",
+   "url": "https://naked-science.ru/wp-content/uploads/2026/10/pchel-1--1200x801.jpg",
+   "bytes": 53085
+  }
+ ],
+ "space_sun": [
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\space_sun\\p00.jpg",
+   "url": "https://naked-science.ru/wp-content/uploads/2026/10/red_giant_earth-1-_11zon-1440x810.jpg",
+   "bytes": 48069
+  },
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\space_sun\\p01.jpg",
+   "url": "https://naked-science.ru/wp-content/uploads/2026/10/red_giant_earth-1-_11zon-1200x811.jpg",
+   "bytes": 43867
+  }
+ ],
+ "space_dark": [
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\space_dark\\p00.jpg",
+   "url": "https://naked-science.ru/wp-content/uploads/2026/10/SRG-eROSITA_all-sky_image_11zon.jpg",
+   "bytes": 105405
+  },
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\space_dark\\p01.jpg",
+   "url": "https://naked-science.ru/wp-content/uploads/2026/10/SRG-eROSITA_all-sky_image_11zon-1200x609.jpg",
+   "bytes": 137614
+  },
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\space_dark\\p02.jpg",
+   "url": "https://naked-science.ru/wp-content/uploads/2026/10/photo_2026-10-12_13-25-26.jpg",
+   "bytes": 56972
+  },
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\space_dark\\p09.jpg",
+   "url": "https://habrastorage.org/getpro/habr/upload_files/f7c/3c2/a67/f7c3c2a67313389c88a83a7572936ce4.jpg",
+   "bytes": 816125
+  }
+ ],
+ "caviar": [],
+ "caviar_lenta": [
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\caviar_lenta\\p00.jpg",
+   "url": "https://icdn.lenta.ru/images/2026/10/14/09/20261014092843782/share_033aa0ef10631b66c1965e241936e954.jpg",
+   "bytes": 57675
+  }
+ ],
+ "portion": [],
+ "escooter": [],
+ "wildlife": [
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\wildlife\\p00.png",
+   "url": "https://minio.nplus1.ru/app-images/1147172/conversions/2ba02078d389faf2d4acf3eadb813ec0-share.png",
+   "bytes": 142513
+  }
+ ],
+ "puppy": [
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\puppy\\p00.jpg",
+   "url": "https://icdn.lenta.ru/images/2026/10/14/09/20261014095248417/share_339839db71879af4dd8654d1baca9ab0.jpg",
+   "bytes": 53996
+  }
+ ],
+ "sleep": [
+  {
+   "file": "D:\\AI\\VIDEO_PIPELINE\\longform\\media\\page\\sleep\\p00.jpg",
+   "url": "https://minio.nplus1.ru/app-images/1147238/6acea35957e8f_cover_share.jpg",
+   "bytes": 116065
+  }
+ ]
+}
