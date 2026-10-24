@@ -66,6 +66,7 @@
       </div>
     </header>
     <div class="step-card__body">
+      <div class="hint" id="slicingStatus">Клипы появятся здесь после нарезки.</div>
       <ul id="slicingClipsList" class="clip-list"></ul>
     </div>
   </article>
@@ -111,104 +112,113 @@
   }
 
   const form = document.getElementById('slicingForm');
-  const progressBar = document.getElementById('slicingProgressBar');
-  const progressText = document.getElementById('slicingProgressText');
   const clipsList = document.getElementById('slicingClipsList');
   const subtitleGrid = document.getElementById('slicingSubtitleGrid');
+  const subStyleInput = form ? form.querySelector('input[name="sub_style"]') : null;
+  const statusEl = document.getElementById('slicingStatus');
+  const startBtn = document.getElementById('slicingStartBtn');
+
+  function setStatus(text) {
+    if (statusEl) statusEl.textContent = text;
+  }
 
   // Инициализация превью при загрузке страницы
   updatePreview('classic');
 
-  // Визуальный отклик на выбор стиля субтитров + обновление превью
+  // Выбор стиля субтитров: подсветка, превью и hidden-поле для отправки
   subtitleGrid.addEventListener('click', e => {
-    if (e.target.classList.contains('subtitle-pill')) {
-      // --- техничка принудительного перезапуска анимации ---
-      const pill = e.target;
-      pill.classList.remove('is-active');
-      void pill.offsetWidth; // reflow, чтобы браузер перерисовал элемент
-      pill.classList.add('is-active');
-      // ----------------------------------------------------
+    const pill = e.target.closest('.subtitle-pill');
+    if (!pill) return;
+    subtitleGrid.querySelectorAll('.subtitle-pill').forEach(p => p.classList.remove('is-active'));
+    pill.classList.add('is-active');
 
-      // Обновляем превью при смене стиля
-      const style = e.target.getAttribute('data-sub');
-      updatePreview(style);
-    }
+    const style = pill.getAttribute('data-sub');
+    if (subStyleInput) subStyleInput.value = style;
+    updatePreview(style);
   });
 
-  // Отправка формы через fetch (без перезагрузки страницы)
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const fd = new FormData(form);
-    const resp = await fetch('/api/slicing/start', {
-      method: 'POST',
-      body: fd,
-    });
-    const data = await resp.json();
-    if (!data.ok) {
-      alert(data.detail || 'Ошибка');
-      return;
-    }
-    const jobId = data.job_id;
-    const poll = setInterval(async () => {
-      const sr = await fetch(`/api/jobs/${jobId}`);
-      const st = await sr.json();
-      if (st.status === 'processing') {
-        if (st.progress !== undefined) {
-          const pct = Math.round(st.progress * 100);
-          progressBar.style.width = pct + '%';
-          progressText.textContent = `${pct}%`;
-        }
-      } else if (st.status === 'completed') {
-        clearInterval(poll);
-        clipsList.innerHTML = '';
-        (st.clips || []).forEach(c => {
-          const li = document.createElement('li');
-          li.className = 'clip-item';
-          li.innerHTML = `<a href="/static/tmp/${c.filename}" target="_blank">${c.filename}</a> (${c.duration}s)`;
-          clipsList.appendChild(li);
-        });
-      } else if (st.status === 'failed') {
-        clearInterval(poll);
-        alert('Ошибка при обработке видео');
-      }
-    }, 2000);
-  });
-
-  // Обработка клика по кнопки "Нарезать клипы" — блокируем перезагрузку и отправляем запрос
-  const startBtn = document.getElementById('slicingStartBtn');
-  if (startBtn) {
-    startBtn.addEventListener('click', async e => {
-      e.preventDefault(); // гарантированно убираем любое отправление формы
-      const fd = new FormData(form);
-      const resp = await fetch('/api/slicing/start', {
-        method: 'POST',
-        body: fd,
-      });
-      const data = await resp.json();
-      if (!data.ok) {
-        alert(data.detail || 'Ошибка');
-        return;
-      }
-      const jobId = data.job_id;
-      const poll = setInterval(async () => {
-        const sr = await fetch(`/api/jobs/${jobId}`);
-        const st = await sr.json();
-        if (st.status === 'completed') {
-          clearInterval(poll);
-          clipsList.innerHTML = '';
-          (st.clips || []).forEach(c => {
-            const li = document.createElement('li');
-            li.className = 'clip-item';
-            li.innerHTML = `<a href="/static/tmp/${c.filename}" target="_blank">${c.filename}</a> (${c.duration}s)`;
-            clipsList.appendChild(li);
-          });
-        } else if (st.status === 'failed') {
-          clearInterval(poll);
-          alert('Ошибка при обработке видео');
-        }
-      }, 2000);
+  function renderClips(clips, jobId) {
+    if (!clipsList) return;
+    clipsList.innerHTML = '';
+    clips.forEach(c => {
+      const li = document.createElement('li');
+      li.className = 'clip-item';
+      const a = document.createElement('a');
+      a.href = c.url || `/api/slicing/clip/${jobId}/${c.filename}`;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = c.filename;
+      li.appendChild(a);
+      li.appendChild(document.createTextNode(` (${c.duration} с)`));
+      clipsList.appendChild(li);
     });
   }
+
+  let slicing = false;
+
+  async function startSlicing() {
+    if (slicing) return;
+    const fd = new FormData(form);
+    const file = fd.get('videoFile');
+    const url = (fd.get('youtubeUrl') || '').toString().trim();
+    const hasFile = file && typeof file === 'object' && file.size > 0;
+    if (!hasFile && !url) {
+      alert('Выберите видеофайл или вставьте ссылку YouTube');
+      return;
+    }
+
+    slicing = true;
+    if (startBtn) startBtn.disabled = true;
+    setStatus('Загрузка видео…');
+    if (clipsList) clipsList.innerHTML = '';
+
+    try {
+      const resp = await fetch('/api/slicing/start', { method: 'POST', body: fd });
+      let data = null;
+      try { data = await resp.json(); } catch (err) { data = null; }
+      if (!resp.ok || !data || !data.ok) {
+        throw new Error((data && data.detail) || ('Ошибка ' + resp.status));
+      }
+
+      const jobId = data.job_id;
+      setStatus('Нарезка…');
+
+      await new Promise((resolve, reject) => {
+        const poll = setInterval(async () => {
+          try {
+            const sr = await fetch(`/api/jobs/${jobId}`);
+            const st = await sr.json();
+            if (!sr.ok) throw new Error(st.detail || ('Ошибка ' + sr.status));
+
+            if (st.status === 'completed') {
+              clearInterval(poll);
+              renderClips(st.clips || [], jobId);
+              setStatus(`Готово: ${(st.clips || []).length} клипов`);
+              resolve();
+            } else if (st.status === 'failed') {
+              clearInterval(poll);
+              reject(new Error(st.error || 'не удалось нарезать видео'));
+            } else {
+              const pct = Math.round((st.progress || 0) * 100);
+              setStatus(`Нарезка… ${pct}%`);
+            }
+          } catch (err) {
+            clearInterval(poll);
+            reject(err);
+          }
+        }, 1500);
+      });
+    } catch (err) {
+      setStatus('Ошибка: ' + err.message);
+      alert('Ошибка нарезки: ' + err.message);
+    } finally {
+      slicing = false;
+      if (startBtn) startBtn.disabled = false;
+    }
+  }
+
+  form.addEventListener('submit', e => { e.preventDefault(); startSlicing(); });
+  if (startBtn) startBtn.addEventListener('click', e => { e.preventDefault(); startSlicing(); });
 
 })();
 </script>

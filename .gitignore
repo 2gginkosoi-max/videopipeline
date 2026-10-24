@@ -83,5 +83,8 @@ assets/audio/bed_*.wav
 __pycache__/
 node_modules/
 
-# ===== Web: скачанные b-roll превью (шаг 2) =====
+# ===== Python venv (Р»РѕРєР°Р»СЊРЅР°СЏ РїСЂРѕРІРµСЂРєР°) =====
+.venv/
+
+# ===== Web: РІСЂРµРјРµРЅРЅС‹Рµ b-roll РєР»РёРїС‹ (С€Р°Рі 2) =====
 web/static/tmp/

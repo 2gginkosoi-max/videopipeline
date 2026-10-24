@@ -44,7 +44,7 @@ from fastapi import (
     WebSocket,
     WebSocketDisconnect,
 )
-from fastapi.responses import HTMLResponse, StreamingResponse, RedirectResponse
+from fastapi.responses import FileResponse, HTMLResponse, StreamingResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.requests import Request as StarletteRequest
@@ -61,10 +61,12 @@ import vision        # noqa: E402
 
 # ---------------------------------------------------------------- paths
 
-VP = Path(r"D:\AI\VIDEO_PIPELINE")
-F5 = Path(r"D:\AI\F5-TTS")
+# Пути берём из config.py: по умолчанию — исторические D:\AI\..., но их можно
+# переопределить переменными окружения (VIDEO_PIPELINE_DIR, F5TTS_DIR,
+# PIPELINE_PYTHON) и тогда сервер запускается из любого каталога/контейнера.
+from config import FFMPEG, FFPROBE, F5, PY, VP  # noqa: E402
+
 WEB = Path(__file__).resolve().parent
-PY = r"D:\AI\python310\python.exe"
 UPLOADS = WEB / "uploads"
 OUTPUT = VP / "output"
 ARCHIVE = OUTPUT / "archive"
@@ -1166,92 +1168,232 @@ async def health():
     return {"ok": True, "jobs": len(JOBS), "videos": len(list_videos())}
 
 
+# ---------------------------------------------------------------- нарезка
+
+SLICE_LEN = 45.0        # длина клипа, сек
+MIN_CLIP = 1.0          # клипы короче не отдаём
+# reencode — точные границы (по умолчанию); copy — быстро, но режет по ключевым
+# кадрам, поэтому клипы получаются длиннее заданных и перекрываются.
+SLICE_MODE = (os.environ.get("SLICE_MODE", "reencode") or "reencode").strip().lower()
+
+
+def _safe_name(name: str, fallback: str = "video.mp4") -> str:
+    base = Path(name or "").name
+    base = re.sub(r"[^\w.\-]+", "_", base).strip("._") or fallback
+    return base[-80:]
+
+
+def _download_video(url: str, tmp_dir: Path) -> Path:
+    """Скачать видео по ссылке через yt-dlp -> путь к файлу."""
+    try:
+        import yt_dlp  # type: ignore
+    except ModuleNotFoundError as exc:
+        raise RuntimeError("yt-dlp не установлен: pip install yt-dlp") from exc
+
+    base = tmp_dir / f"dl_{uuid.uuid4().hex[:12]}"
+    opts = {
+        "outtmpl": f"{base}.%(ext)s",
+        "format": "bv*[height<=1080]+ba/b[height<=1080]/b",
+        "merge_output_format": "mp4",
+        "noplaylist": True,
+        "quiet": True,
+        "no_warnings": True,
+        "noprogress": True,
+    }
+    with yt_dlp.YoutubeDL(opts) as ydl:
+        ydl.download([url])
+
+    files = sorted(tmp_dir.glob(base.name + ".*"),
+                   key=lambda p: p.stat().st_size, reverse=True)
+    if not files:
+        raise RuntimeError("файл не скачался")
+    return files[0]
+
+
+def _probe_duration(path: Path) -> float:
+    p = subprocess.run(
+        [FFPROBE, "-v", "error", "-show_entries", "format=duration",
+         "-of", "default=noprint_wrappers=1:nokey=1", str(path)],
+        capture_output=True, text=True, encoding="utf-8", errors="replace",
+    )
+    try:
+        return float((p.stdout or "").strip().splitlines()[0])
+    except (IndexError, ValueError):
+        return 0.0
+
+
+def _cut_clip(src: Path, start: float, length: float, out: Path) -> None:
+    """Вырезать ровно ``length`` секунд с позиции ``start``.
+
+    По умолчанию перекодируем: только так границы совпадают с кадрами
+    (потоковое копирование режет по ключевым кадрам и клипы «плывут»).
+    Режим copy — быстрый, для случаев, когда точность не важна.
+    """
+    common = ["-y", "-hide_banner", "-loglevel", "error",
+              "-ss", f"{start:.3f}", "-i", str(src), "-t", f"{length:.3f}",
+              "-map", "0:v:0", "-map", "0:a?"]
+
+    if SLICE_MODE == "copy":
+        copy_cmd = [FFMPEG, *common, "-c", "copy",
+                    "-avoid_negative_ts", "make_zero", str(out)]
+        p = subprocess.run(copy_cmd, capture_output=True, text=True, errors="replace")
+        if p.returncode == 0 and out.exists() and out.stat().st_size > 1024:
+            return
+
+    reenc_cmd = [FFMPEG, *common, "-c:v", "libx264", "-preset", "veryfast",
+                 "-crf", "23", "-pix_fmt", "yuv420p",
+                 "-c:a", "aac", "-b:a", "128k",
+                 "-movflags", "+faststart", str(out)]
+    p2 = subprocess.run(reenc_cmd, capture_output=True, text=True, errors="replace")
+    if p2.returncode != 0 or not out.exists() or out.stat().st_size == 0:
+        tail = (p2.stderr or "").strip().splitlines()[-3:]
+        raise RuntimeError("ffmpeg не смог нарезать: " + " | ".join(tail))
+
+
 @app.post("/api/slicing/start")
 async def api_slicing_start(
-    request: Request,
-    video_file: UploadFile = Form(None),
+    video_file: UploadFile | None = File(None),
+    videoFile: UploadFile | None = File(None),
     youtubeUrl: str = Form(""),
-    user: dict = Depends(auth.current_user),
+    sub_style: str = Form("classic"),
+    user: dict | None = Depends(auth.current_user),
 ):
-    """Start video slicing job. Either upload a video file or provide a YouTube URL."""
+    """Запуск нарезки видео на клипы: загруженный файл или ссылка (yt-dlp).
+
+    Поле файла принимаем под двумя именами: ``video_file`` (API) и
+    ``videoFile`` (форма во вкладке «Нарезка»).
+    """
     auth.require_user(user)
 
-    # ---------- handle uploaded file ----------
     tmp_dir = WEB / "tmp"
     tmp_dir.mkdir(parents=True, exist_ok=True)
-    input_path = None
 
-    if video_file:
-        fname = f"{uuid4()}_{video_file.filename}"
-        input_path = tmp_dir / fname
-        async with input_path.open("wb") as out:
-            while chunk := await video_file.read(1024 * 1024):
+    upload = video_file or videoFile
+    input_path: Path | None = None
+
+    if upload is not None and upload.filename:
+        safe = _safe_name(upload.filename)
+        input_path = tmp_dir / f"src_{uuid.uuid4().hex[:12]}_{safe}"
+        with input_path.open("wb") as out:
+            while chunk := await upload.read(1024 * 1024):
                 out.write(chunk)
     elif youtubeUrl.strip():
-        # Download video via yt-dlp (already in requirements)
-        import yt_dlp  # type: ignore
-
-        outtmpl = str(tmp_dir / f"{uuid4()}.mp4")
-        ydl_opts = {"outtmpl": outtmpl, "format": "bestvideo[ext=mp4]+bestaudio[ext=mp4]/best[ext=mp4]"}
         try:
-            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([youtubeUrl.strip()])
-        except Exception as e:
-            raise HTTPException(400, f"Failed to download video: {str(e)}")
-        input_path = Path(outtmpl)
-    else:
+            input_path = await asyncio.to_thread(_download_video, youtubeUrl.strip(), tmp_dir)
+        except Exception as exc:  # noqa: BLE001
+            raise HTTPException(400, f"Не удалось скачать видео: {exc}") from exc
+
+    if input_path is None or not input_path.exists() or input_path.stat().st_size == 0:
         raise HTTPException(400, "Укажите видеофайл или ссылку YouTube")
 
-    # ---------- start background slicing ----------
-    job_id = str(uuid4())
+    job_id = uuid.uuid4().hex[:12]
+    out_dir = voices.user_video_dir(user["id"])
     JOBS[job_id] = {
+        "id": job_id,
         "status": "processing",
+        "progress": 0.0,
         "user_id": user["id"],
         "input_path": str(input_path),
+        "out_dir": str(out_dir),
         "clips": [],
+        "error": None,
+        "started": datetime.now().isoformat(timespec="seconds"),
+        "finished": None,
+        "log": [],
+        # meta нужен общим эндпоинтам /api/jobs: они фильтруют по user_id
+        "meta": {"user_id": user["id"], "kind": "slicing",
+                 "sub_style": sub_style or "classic"},
     }
-    asyncio.create_task(_run_slicing(job_id, input_path, user["id"]))
+    src = "файл" if upload is not None and upload.filename else "ссылка"
+    _slice_event(job_id, f"● Нарезка: старт ({src})", status="start")
+    asyncio.create_task(_run_slicing(job_id, input_path))
 
     return {"ok": True, "job_id": job_id}
 
 
-async def _run_slicing(job_id: str, input_path: str, user_id: str) -> None:
-    """Split video into 30‑60 s clips using ffmpeg and save to user's videos folder."""
-    import json as _json
-    from pathlib import Path
+def _slice_event(job_id: str, line: str, **extra) -> None:
+    """Строка в лог задачи + в правую панель (WebSocket)."""
+    job = JOBS.get(job_id)
+    if job is not None:
+        job.setdefault("log", []).append(line)
+    broadcast("log", {"job_id": job_id, "line": line})
+    if extra:
+        broadcast("slicing", {"job_id": job_id, **extra})
 
-    up = voices.user_video_dir(user_id)
-    up.mkdir(parents=True, exist_ok=True)
 
-    # probe duration
-    probe = subprocess.run(
-        ["ffprobe", "-v", "quiet", "-show_entries", "format=duration",
-         "-of", "json", input_path],
-        capture_output=True, text=True, check=True,
-    )
-    dur = _json.loads(probe.stdout)["format"]["duration"]
-    duration = float(dur)
+async def _run_slicing(job_id: str, input_path: Path) -> None:
+    """Нарезать видео на клипы по SLICE_LEN секунд."""
+    job = JOBS.get(job_id)
+    if not job:
+        return
 
-    clip_len = 45
-    clips = []
-    for i in range(int(duration // clip_len) + 1):
-        start = i * clip_len
-        end = min(start + clip_len, duration)
-        out_name = f"sliced_{job_id}_{i:03d}.mp4"
-        out_path = up / out_name
-        cmd = [
-            "ffmpeg", "-y",
-            "-i", input_path,
-            "-ss", str(start),
-            "-t", str(end - start),
-            "-c", "copy",
-            str(out_path),
-        ]
-        subprocess.run(cmd, capture_output=True, check=True)
-        clips.append({"filename": out_name, "duration": round(end - start, 1)})
+    out_dir = Path(job["out_dir"])
+    out_dir.mkdir(parents=True, exist_ok=True)
 
-    JOBS[job_id]["status"] = "completed"
-    JOBS[job_id]["clips"] = clips
+    try:
+        duration = await asyncio.to_thread(_probe_duration, input_path)
+        if duration <= 0:
+            raise RuntimeError("не удалось определить длительность видео")
+
+        ranges: list[tuple[float, float]] = []
+        start = 0.0
+        while start < duration - 0.05:
+            end = min(start + SLICE_LEN, duration)
+            if end - start >= MIN_CLIP:
+                ranges.append((start, end))
+            start = end
+        if not ranges:
+            raise RuntimeError("видео короче одного клипа")
+        _slice_event(job_id, f"• Нарезка: {duration:.1f} с → {len(ranges)} клипов",
+                     status="progress", progress=0.0)
+
+        clips = []
+        for i, (start, end) in enumerate(ranges):
+            out_name = f"sliced_{job_id}_{i:03d}.mp4"
+            out_path = out_dir / out_name
+            await asyncio.to_thread(_cut_clip, input_path, start, end - start, out_path)
+            actual = await asyncio.to_thread(_probe_duration, out_path)
+            clips.append({
+                "filename": out_name,
+                "duration": round(actual or (end - start), 1),
+                "url": f"/api/slicing/clip/{job_id}/{out_name}",
+            })
+            job["clips"] = list(clips)
+            job["progress"] = round((i + 1) / len(ranges), 3)
+            _slice_event(job_id,
+                         f"• клип {i + 1}/{len(ranges)} — {clips[-1]['duration']:.1f} с",
+                         status="progress", progress=job["progress"])
+
+        job["status"] = "completed"
+        job["finished"] = datetime.now().isoformat(timespec="seconds")
+        _slice_event(job_id, f"✓ Нарезка готова: {len(clips)} клипов",
+                     status="done", clips=len(clips), progress=1.0)
+    except Exception as exc:  # noqa: BLE001
+        job["status"] = "failed"
+        job["error"] = str(exc)
+        job["finished"] = datetime.now().isoformat(timespec="seconds")
+        _slice_event(job_id, f"✗ Нарезка: {exc}", status="error", error=str(exc))
+    finally:
+        try:
+            input_path.unlink(missing_ok=True)
+        except OSError:
+            pass
+
+
+@app.get("/api/slicing/clip/{job_id}/{name}")
+async def api_slicing_clip(job_id: str, name: str,
+                           user: dict | None = Depends(auth.current_user)):
+    """Отдать нарезанный клип (только владельцу задачи)."""
+    auth.require_user(user)
+    job = JOBS.get(job_id)
+    if not job or job.get("user_id") != user["id"]:
+        raise HTTPException(404, "клип не найден")
+    if "/" in name or "\\" in name or ".." in name:
+        raise HTTPException(400, "недопустимое имя")
+    path = Path(job["out_dir"]) / name
+    if not path.is_file():
+        raise HTTPException(404, "файл не найден")
+    return FileResponse(path, media_type="video/mp4")
 
 
 @app.on_event("startup")
@@ -1274,10 +1416,14 @@ async def on_startup():
 if __name__ == "__main__":
     import uvicorn
 
+    host = os.environ.get("HOST", "127.0.0.1").strip() or "127.0.0.1"
+    port = int(os.environ.get("PORT", "8000") or 8000)
+
     db.init_db()
     print("=" * 62)
     print("  ГУСЬ ПЕРЕВОДИЛА — веб-конвейер")
-    print("  http://127.0.0.1:8000")
+    print(f"  http://{host}:{port}")
+    print(f"  пайплайн: {VP}")
     print("=" * 62)
     sys.stdout.flush()
-    uvicorn.run(app, host="127.0.0.1", port=8000, log_level="info")
+    uvicorn.run(app, host=host, port=port, log_level="info")

@@ -896,3 +896,33 @@
     margin: 0 auto;
   }
 }
+
+/* ---------- клипы нарезки ---------- */
+.clip-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.clip-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.clip-item a {
+  color: var(--neon-accent);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.clip-item a:hover { text-decoration: underline; }

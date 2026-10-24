@@ -21,6 +21,8 @@
 
 ## Запуск
 
+### Windows (как обычно)
+
 ```cmd
 start_web.bat
 ```
@@ -33,10 +35,49 @@ D:\AI\python310\python.exe D:\AI\VIDEO_PIPELINE\web\app.py
 
 Открыть: <http://127.0.0.1:8000>
 
+### Из свежего клона GitHub в любом каталоге
+
+Пути к пайплайну и F5-TTS задаются в `web/config.py`. По умолчанию берутся
+исторические `D:\AI\VIDEO_PIPELINE` и `D:\AI\F5-TTS`; если таких каталогов нет
+(клон в другом месте, Linux, Docker), используются пути относительно репозитория.
+Переопределить можно переменными окружения:
+
+| Переменная | Что задаёт | По умолчанию |
+|---|---|---|
+| `VIDEO_PIPELINE_DIR` | корень пайплайна (`auto_news.py`, `output/`) | `D:\AI\VIDEO_PIPELINE` → корень репозитория |
+| `F5TTS_DIR` (или `F5_TTS_DIR`) | каталог F5-TTS (`say_f5.py`, `stt.py`, `models/`) | `D:\AI\F5-TTS` → `<репозиторий>/F5-TTS` |
+| `PIPELINE_PYTHON` | python для сабпроцессов конвейера | `D:\AI\python310\python.exe` → текущий python |
+| `FFMPEG_PATH` | путь к ffmpeg | локальный путь → `ffmpeg` из `PATH` |
+| `HOST` / `PORT` | адрес и порт `python web/app.py` | `127.0.0.1` / `8000` |
+
+```bash
+git clone https://github.com/2gginkosoi-max/videopipeline.git
+cd videopipeline
+python -m pip install -r requirements.txt
+python web/app.py
+```
+
+Либо через uvicorn (так же, как в Dockerfile):
+
+```bash
+python -m uvicorn web.app:app --host 127.0.0.1 --port 8000
+```
+
+### Docker / HuggingFace Spaces
+
+```bash
+docker build -t goose-pipeline .
+docker run --rm -p 8000:7860 goose-pipeline
+```
+
+Образ уже содержит ffmpeg; модели F5-TTS в него не входят — их нужно
+примонтировать в `/app/F5-TTS` и указать `F5TTS_DIR=/app/F5-TTS`.
+Для Spaces используется `README_HF.md` (SDK: docker, порт 7860).
+
 ## Зависимости
 
 ```cmd
-D:\AI\python310\python.exe -m pip install fastapi uvicorn jinja2 python-multipart websockets
+D:\AI\python310\python.exe -m pip install -r requirements.txt
 ```
 
 Плюс локально: FFmpeg, F5-TTS (модели), faster-whisper, yt-dlp.
@@ -110,6 +151,18 @@ web/
 | GET | `/api/download/{id}` | скачать ролик |
 | POST | `/api/open-folder` | открыть папку в проводнике (только локально) |
 | WS | `/ws` | поток логов в реальном времени |
+
+### Нарезка
+| Метод | Путь | Назначение |
+|-------|------|------------|
+| POST | `/api/slicing/start` | нарезать видео: файл (`video_file` или `videoFile`) либо `youtubeUrl`; возвращает `job_id` |
+| GET | `/api/jobs/{id}` | статус (`processing`/`completed`/`failed`), `progress`, `clips[]`, `error` |
+| GET | `/api/slicing/clip/{job_id}/{name}` | отдать нарезанный клип (только владельцу) |
+
+Клипы режутся по 45 с и сохраняются в `web/users/<id>/videos/`. По умолчанию
+кадры перекодируются (`libx264`, `veryfast`, `crf 23`), чтобы границы были
+точными и клипы не перекрывались; `SLICE_MODE=copy` — быстрое копирование
+потока без перекодирования (режет по ключевым кадрам, длины «плывут»).
 
 ## Настройки формы → флаги `auto_news.py`
 

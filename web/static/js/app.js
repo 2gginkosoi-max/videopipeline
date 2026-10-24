@@ -862,6 +862,19 @@
         appendLog(msg.line);
         break;
 
+      case "slicing": {
+        if (msg.status === "start") {
+          setLive(true, "нарезка…");
+        } else if (msg.status === "progress") {
+          setLive(true, "нарезка " + Math.round((msg.progress || 0) * 100) + "%");
+        } else if (msg.status === "done") {
+          setLive(false, "нарезка готова: " + (msg.clips || 0) + " клипов");
+        } else {
+          setLive(false, "нарезка: ошибка");
+        }
+        break;
+      }
+
       case "video_ready":
         appendVideoReady(msg);
         loadMyStats();
@@ -1313,13 +1326,29 @@
     }, 720);
   }
 
+  /* ------------------------------------------------ чистота адресной строки */
+
+  /* Enter в поле отправляет форму нативно (метод GET по умолчанию) и дописывает
+     в адрес все её поля: ?videoFile=&youtubeUrl=…#assembly. Гасим нативную
+     отправку: обработчики submit (initForm, нарезка) продолжают работать, но
+     страница не перезагружается с грязным URL. Формы с явным POST/action
+     не трогаем. */
+  function initAddressBarGuard() {
+    document.addEventListener("submit", (e) => {
+      const form = e.target;
+      if (!(form instanceof HTMLFormElement)) return;
+      const method = (form.getAttribute("method") || "get").toLowerCase();
+      if (method !== "post" && !form.hasAttribute("action")) e.preventDefault();
+    }, true);
+  }
+
   /* ------------------------------------------------ init */
 
   document.addEventListener("DOMContentLoaded", () => {
     // Один сломанный инициализатор не должен убивать весь интерфейс.
-    const steps = [initCounter, initUpload, initForm, initLogButtons, initVoiceTabs,
-      initVoiceSelect, initClone, initNews, initScenarioTools, initUserMenu,
-      initResults, restoreScript, initSubtitlePreview];
+    const steps = [initAddressBarGuard, initCounter, initUpload, initForm, initLogButtons,
+      initVoiceTabs, initVoiceSelect, initClone, initNews, initScenarioTools,
+      initUserMenu, initResults, restoreScript, initSubtitlePreview];
     for (const step of steps) {
       try { step(); } catch (e) { console.error("[init]", step.name, e); }
     }

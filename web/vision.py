@@ -14,13 +14,20 @@ import json
 import os
 import re
 import subprocess
+import sys
 import threading
 import time
 import urllib.request
 from pathlib import Path
 
-# Модель качается один раз в кэш на диске D (на C мало места).
-os.environ.setdefault("HF_HOME", r"D:\AI\hf_cache")
+WEB = Path(__file__).resolve().parent
+if str(WEB) not in sys.path:
+    sys.path.insert(0, str(WEB))
+
+from config import HF_CACHE  # noqa: E402
+
+# Модель качается один раз в кэш (на Windows исторически — на диске D).
+os.environ.setdefault("HF_HOME", str(HF_CACHE))
 
 MODEL = "HuggingFaceTB/SmolVLM-256M-Instruct"
 ASK = "What is happening in this picture? Answer in one short sentence."

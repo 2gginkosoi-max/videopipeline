@@ -47,7 +47,10 @@
     }
 
     try {
-      history.replaceState(null, '', '#' + tabName);
+      // Только путь + якорь вкладки: так ссылка остаётся короткой, а мусорные
+      // query-параметры (например, ?videoFile=&youtubeUrl=… после нативной
+      // GET-отправки формы) не переезжают из вкладки во вкладку.
+      history.replaceState(null, '', location.pathname + '#' + tabName);
     } catch (e) {}
   }
 
