@@ -862,6 +862,19 @@
         appendLog(msg.line);
         break;
 
+      case "slicing": {
+        if (msg.status === "start") {
+          setLive(true, "нарезка…");
+        } else if (msg.status === "progress") {
+          setLive(true, "нарезка " + Math.round((msg.progress || 0) * 100) + "%");
+        } else if (msg.status === "done") {
+          setLive(false, "нарезка готова: " + (msg.clips || 0) + " клипов");
+        } else {
+          setLive(false, "нарезка: ошибка");
+        }
+        break;
+      }
+
       case "video_ready":
         appendVideoReady(msg);
         loadMyStats();

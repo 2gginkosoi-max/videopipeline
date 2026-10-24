@@ -1304,9 +1304,21 @@ async def api_slicing_start(
         "meta": {"user_id": user["id"], "kind": "slicing",
                  "sub_style": sub_style or "classic"},
     }
+    src = "файл" if upload is not None and upload.filename else "ссылка"
+    _slice_event(job_id, f"● Нарезка: старт ({src})", status="start")
     asyncio.create_task(_run_slicing(job_id, input_path))
 
     return {"ok": True, "job_id": job_id}
+
+
+def _slice_event(job_id: str, line: str, **extra) -> None:
+    """Строка в лог задачи + в правую панель (WebSocket)."""
+    job = JOBS.get(job_id)
+    if job is not None:
+        job.setdefault("log", []).append(line)
+    broadcast("log", {"job_id": job_id, "line": line})
+    if extra:
+        broadcast("slicing", {"job_id": job_id, **extra})
 
 
 async def _run_slicing(job_id: str, input_path: Path) -> None:
@@ -1322,7 +1334,6 @@ async def _run_slicing(job_id: str, input_path: Path) -> None:
         duration = await asyncio.to_thread(_probe_duration, input_path)
         if duration <= 0:
             raise RuntimeError("не удалось определить длительность видео")
-        job["log"].append(f"длительность: {duration:.1f} с")
 
         ranges: list[tuple[float, float]] = []
         start = 0.0
@@ -1333,6 +1344,8 @@ async def _run_slicing(job_id: str, input_path: Path) -> None:
             start = end
         if not ranges:
             raise RuntimeError("видео короче одного клипа")
+        _slice_event(job_id, f"• Нарезка: {duration:.1f} с → {len(ranges)} клипов",
+                     status="progress", progress=0.0)
 
         clips = []
         for i, (start, end) in enumerate(ranges):
@@ -1347,15 +1360,19 @@ async def _run_slicing(job_id: str, input_path: Path) -> None:
             })
             job["clips"] = list(clips)
             job["progress"] = round((i + 1) / len(ranges), 3)
+            _slice_event(job_id,
+                         f"• клип {i + 1}/{len(ranges)} — {clips[-1]['duration']:.1f} с",
+                         status="progress", progress=job["progress"])
 
         job["status"] = "completed"
         job["finished"] = datetime.now().isoformat(timespec="seconds")
-        job["log"].append(f"готово клипов: {len(clips)}")
+        _slice_event(job_id, f"✓ Нарезка готова: {len(clips)} клипов",
+                     status="done", clips=len(clips), progress=1.0)
     except Exception as exc:  # noqa: BLE001
         job["status"] = "failed"
         job["error"] = str(exc)
         job["finished"] = datetime.now().isoformat(timespec="seconds")
-        job["log"].append(f"[ERROR] {exc}")
+        _slice_event(job_id, f"✗ Нарезка: {exc}", status="error", error=str(exc))
     finally:
         try:
             input_path.unlink(missing_ok=True)
