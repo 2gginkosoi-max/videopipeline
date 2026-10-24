@@ -15,12 +15,15 @@ from pathlib import Path
 import numpy as np
 
 WEB = Path(__file__).resolve().parent
+if str(WEB) not in sys.path:
+    sys.path.insert(0, str(WEB))
+
+from config import FFMPEG, F5, PY  # noqa: E402
+
 BUILTIN_DIR = WEB / "voices" / "builtin"
 USERS_DIR = WEB / "users"
 
-FFMPEG = r"C:\Users\nasle\tools\ffmpeg\ffmpeg.exe"
-PY = r"D:\AI\python310\python.exe"
-STT = r"D:\AI\F5-TTS\stt.py"
+STT = F5 / "stt.py"
 
 # Референс должен быть 5–10 c: длинный референс «протекает» в озвучку на стыке батчей.
 REF_SECONDS = 8.0
@@ -28,17 +31,17 @@ REF_SECONDS = 8.0
 BUILTIN = [
     # --- дикторы, найденные в репозитории (реальная речь, разные тембры) ---
     {"key": "sauron",   "name": "Саурон",         "gender": "male",
-     "src": r"D:\AI\F5-TTS\out\sauron_short.wav"},
+     "src": F5 / "out" / "sauron_short.wav"},
     {"key": "voice12",  "name": "Диктор 12с",     "gender": "male",
-     "src": r"D:\AI\F5-TTS\ref\voice_ref_12s.wav"},
+     "src": F5 / "ref" / "voice_ref_12s.wav"},
     {"key": "robot",    "name": "Робот",          "gender": "male",
-     "src": r"D:\AI\F5-TTS\assets\robot_prank.mp4"},
+     "src": F5 / "assets" / "robot_prank.mp4"},
     {"key": "katyusha", "name": "Катюша",         "gender": "female",
-     "src": r"D:\AI\F5-TTS\out\katyusha_voice_clone.wav"},
+     "src": F5 / "out" / "katyusha_voice_clone.wav"},
     {"key": "asu",      "name": "Асу",            "gender": "female",
-     "src": r"D:\AI\F5-TTS\out\asu_vo.wav"},
+     "src": F5 / "out" / "asu_vo.wav"},
     {"key": "pig",      "name": "Хрюн",           "gender": "male",
-     "src": r"D:\AI\F5-TTS\out\news_short_07_pig.wav"},
+     "src": F5 / "out" / "news_short_07_pig.wav"},
 ]
 
 BUILTIN_BY_KEY = {v["key"]: v for v in BUILTIN}

@@ -16,8 +16,12 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-VP = Path(r"D:\AI\VIDEO_PIPELINE")
-PY = r"D:\AI\python310\python.exe"
+WEB = Path(__file__).resolve().parent
+if str(WEB) not in sys.path:
+    sys.path.insert(0, str(WEB))
+
+from config import PY, VP  # noqa: E402
+
 REDDIT_DL = VP / "reddit_dl.py"
 
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "

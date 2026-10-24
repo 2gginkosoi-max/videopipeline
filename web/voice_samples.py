@@ -28,8 +28,8 @@ if str(WEB) not in sys.path:
     sys.path.insert(0, str(WEB))
 
 import voices  # noqa: E402
+from config import F5  # noqa: E402
 
-F5 = Path(r"D:\AI\F5-TTS")
 CKPT = F5 / "models" / "ru" / "F5TTS_v1_Base" / "model_240000_inference.safetensors"
 VOCAB = F5 / "models" / "ru" / "F5TTS_v1_Base" / "vocab.txt"
 FFMPEG = voices.FFMPEG

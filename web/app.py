@@ -61,10 +61,12 @@ import vision        # noqa: E402
 
 # ---------------------------------------------------------------- paths
 
-VP = Path(r"D:\AI\VIDEO_PIPELINE")
-F5 = Path(r"D:\AI\F5-TTS")
+# Пути берём из config.py: по умолчанию — исторические D:\AI\..., но их можно
+# переопределить переменными окружения (VIDEO_PIPELINE_DIR, F5TTS_DIR,
+# PIPELINE_PYTHON) и тогда сервер запускается из любого каталога/контейнера.
+from config import F5, PY, VP  # noqa: E402
+
 WEB = Path(__file__).resolve().parent
-PY = r"D:\AI\python310\python.exe"
 UPLOADS = WEB / "uploads"
 OUTPUT = VP / "output"
 ARCHIVE = OUTPUT / "archive"
@@ -1274,10 +1276,14 @@ async def on_startup():
 if __name__ == "__main__":
     import uvicorn
 
+    host = os.environ.get("HOST", "127.0.0.1").strip() or "127.0.0.1"
+    port = int(os.environ.get("PORT", "8000") or 8000)
+
     db.init_db()
     print("=" * 62)
     print("  ГУСЬ ПЕРЕВОДИЛА — веб-конвейер")
-    print("  http://127.0.0.1:8000")
+    print(f"  http://{host}:{port}")
+    print(f"  пайплайн: {VP}")
     print("=" * 62)
     sys.stdout.flush()
-    uvicorn.run(app, host="127.0.0.1", port=8000, log_level="info")
+    uvicorn.run(app, host=host, port=port, log_level="info")
