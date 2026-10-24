@@ -104,9 +104,9 @@ def main():
                   if l.startswith("Dialogue:") and ("WordRed" in l or "WordWhite" in l)]
     has_title = "HookTitle" in subs_txt
     has_broll = bool(a.asset) and Path(a.asset).exists()
-    # Инфо-карточки по центру и прогресс-бар ЗАПРЕЩЕНЫ пользователем (13.10.2026).
-    # Из уникальных визуальных элементов остаются: b-roll, типографика, частота
-    # склеек (динамика монтажа), звуковые акценты и гусь-ведущий. Ниже — честный подсчёт.
+    # Инфо-карточки по центру и прогресс-бар ЗАПРЕЩЕНЫ пользователем (13.10.2026),
+    # гусь-соведущий удалён из конвейера (23.10.2026). Уникальные визуальные
+    # элементы: b-roll, заголовок-хук, субтитры по словам и звуковые акценты.
     ar_visual = {}
     apv = Path(a.audio_report)
     if apv.exists():
@@ -115,19 +115,11 @@ def main():
         except ValueError:
             ar_visual = {}
     has_accents = int(ar_visual.get("whoosh", 0)) >= 1 or bool(ar_visual.get("click"))
-    # Частота склеек: сегменты заданы в сценарии монтажа (>=6 = динамичный монтаж).
-    seg_count = 0
-    seg_file = Path(str(a.video)).parent / "segments.txt"
-    # Гусь-ведущий (goose_overlay.py) — фирменный оверлей канала. Маркер существует,
-    # только если оверлей реально вписан: goose_overlay пишет его на успехе,
-    # а конвейер стирает в начале каждого прогона (см. auto_news.py, шаг 10).
-    has_goose = (Path(str(a.video)).parent / "goose_overlay.json").exists()
     visual = {
         "B-roll (уникальные кадры)": has_broll,
-        "Динамичная типографика (заголовок+субтитры)": has_title and len(word_lines) > 5,
-        "Динамичный монтаж (частые склейки b-roll)": has_broll and len(word_lines) > 5,
+        "Верхний заголовок-хук": has_title,
+        "Субтитры с анимацией по словам": len(word_lines) > 5,
         "Звуковые акценты (whoosh/click)": has_accents,
-        "Гусь-ведущий (круглый оверлей, зациклен)": has_goose,
     }
     n_visual = sum(1 for v in visual.values() if v)
     min_visual = 3 if a.visual_state == "on" else 2

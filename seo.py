@@ -2,11 +2,15 @@
 """
 seo.py — автоматический SEO-пакет для Shorts (русский), работает надёжно.
 
-Как выбирается «самый крутой» заголовок:
-  • берём пул кандидатов: файл title_pool.txt (если есть) + кандидаты от LLM
-    (Pollinations, best-effort, со СТРОГИМ фильтром мусора) + варианты из брифа;
-  • каждый кандидат оценивается эвристикой «кликабельности»;
-  • побеждает кандидат с максимальным баллом — это и есть авто-выбор.
+Как выбирается «самый крутой» заголовок (пересмотрено 23.10.2026):
+  • заголовок делается ПОД ТЕКУЩЕЕ видео: кандидаты от LLM по фактам брифа
+    (тема + контекст, без «сценарного» текста) + формульные хуки от темы ролика;
+  • каждый кандидат оценивается эвристикой «кликабельности» ПЛЮС релевантностью
+    фактам текущего видео — чужой/старый заголовок просто не наберёт баллов;
+  • title_pool.txt больше не имеет приоритета: его строки попадают в кандидаты
+    только если релевантны теме этого ролика и ещё не использовались;
+  • использованные заголовки пишутся в output/used_titles.txt и больше не
+    выбираются — у каждого нового видео свой новый заголовок.
 
 Дополнительно генерируются: ОПИСАНИЕ, ХЭШТЕГИ, КЛЮЧЕВЫЕ слова, ЭКРАННЫЙ заголовок.
 
@@ -37,10 +41,18 @@ POLL_LEGACY = "https://text.pollinations.ai/"
 POLL_OPENAI = POLL_LEGACY + "openai"
 POLL_MODEL = "openai-fast"
 
+# Локальная модель через Ollama: бесплатный Pollinations на длинных промптах
+# выдаёт словесный салат, локальная 4B держит русский заметно лучше.
+OLLAMA_URL = "http://127.0.0.1:11434/api/chat"
+OLLAMA_TAGS = "http://127.0.0.1:11434/api/tags"
+LOCAL_PREFER = ("qwen3.5:4b", "qwen2.5:latest", "gemma3:4b")
+_LOCAL = {"checked": False, "model": ""}
+
 ROOT = Path(r"D:\AI\VIDEO_PIPELINE")
 DEFAULT_BRIEF = ROOT / "brief.txt"
 POOL_FILE = ROOT / "title_pool.txt"
 SEO_JSON = ROOT / "output" / "seo.json"
+USED_TITLES = ROOT / "output" / "used_titles.txt"
 
 TITLE_TXT = Path(r"D:\AI\F5-TTS\title.txt")
 DESC_TXT = Path(r"D:\AI\F5-TTS\description.txt")
@@ -109,8 +121,8 @@ TOPIC_TAGS = {
     "горилл": ["#обезьяны", "#monkeys", "#приматы", "#primates", "#животные"],
     "макак": ["#обезьяны", "#monkeys", "#приматы", "#primates", "#животные"],
     "кот": ["#коты", "#cats", "#животные", "#pets"],
-    "волк": ["#волк", "#wolf", "#медведь", "#bear", "#животные", "#wildlife", "#природа", "#nature"],
-    "медвед": ["#медведь", "#bear", "#волк", "#wolf", "#животные", "#wildlife", "#природа", "#nature"],
+    "волк": ["#волк", "#wolf", "#животные", "#wildlife", "#природа", "#nature"],
+    "медвед": ["#медведь", "#bear", "#животные", "#wildlife", "#природа", "#nature"],
     "собак": ["#собаки", "#dogs", "#животные", "#pets"],
     # Тема-жирафы: специфичный ключ до общих (неб/машин не перехватят).
     "жираф": ["#жирафы", "#giraffe", "#животные", "#wildlife", "#природа", "#nature"],
@@ -138,6 +150,7 @@ TOPIC_TAGS = {
 # Ложные срабатывания ключей: ключ совпал, но слово о другом.
 TOPIC_EXCLUDE = {
     "машин": ("машинист",),   # «машинист» — человек, а не транспорт
+    "кот": ("котор", "котёл", "котел", "котлет"),  # «который» — не кот
 }
 
 BASE_TAGS = ["#shorts", "#новости", "#интересное", "#факты", "#разбор"]
@@ -227,6 +240,99 @@ def norm_title(t: str) -> str:
     return t
 
 
+# --- свежесть и релевантность заголовков (23.10.2026) ------------------------
+STOP_WORDS = {
+    "это", "этот", "этом", "этого", "эти", "была", "были", "было", "есть", "как",
+    "что", "чем", "его", "её", "для", "или", "под", "над", "при", "все", "весь",
+    "они", "она", "оно", "ещё", "еще", "уже", "тоже", "себя", "свой", "свои",
+    "когда", "чтобы", "может", "можно", "только", "даже", "очень", "такой",
+    "такие", "после", "перед", "между", "среди", "более", "менее", "будет",
+    "стало", "стали", "него", "неё", "них", "без", "про", "там", "тут", "здесь",
+    "который", "которая", "которое", "которые", "почему", "зачем", "видео",
+    "кадры", "кадрах",
+}
+
+
+def load_used() -> set:
+    """Заголовки, которые уже выходили: повторно выбирать их нельзя."""
+    if not USED_TITLES.exists():
+        return set()
+    out = set()
+    for line in USED_TITLES.read_text(encoding="utf-8-sig").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#"):
+            out.add(norm_title(line).lower())
+    return out
+
+
+def mark_used(title: str) -> None:
+    USED_TITLES.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with USED_TITLES.open("a", encoding="utf-8") as f:
+            f.write(title.strip() + "\n")
+    except OSError as e:  # noqa: BLE001
+        print(f"[WARN] не записал использованный заголовок ({e})")
+
+
+def title_facts(brief: str) -> str:
+    """Факты ТОЛЬКО о текущем ролике: строка «Тема» и «Контекст».
+
+    Текст после «Сценарий:» намеренно не берём: он длинный и, при слабой
+    модели, шумный — из-за него LLM писал заголовки с выдуманными словами
+    вместо заголовка по теме видео.
+    """
+    topic, ctx = "", ""
+    for line in brief.splitlines():
+        low = line.strip().lower()
+        if low.startswith("тема:"):
+            topic = line.split(":", 1)[1].strip()
+        elif low.startswith("контекст:"):
+            ctx = line.split(":", 1)[1].strip()
+        elif low.startswith("сценарий:"):
+            break
+    if not topic:
+        topic = next((l.strip() for l in brief.splitlines() if l.strip()), "")
+    parts = [p for p in (topic, ctx) if p]
+    return ". ".join(parts)[:400]
+
+
+def content_words(text: str) -> list:
+    return [w for w in re.findall(r"[а-яёa-z]{4,}", text.lower()) if w not in STOP_WORDS]
+
+
+def relevance(title: str, facts: str) -> int:
+    """Сколько слов заголовка реально взяты из фактов ЭТОГО видео."""
+    facts_words = content_words(facts)
+    if not facts_words:
+        return 0
+    prefixes = {w[:4] for w in facts_words}
+    return sum(1 for w in set(content_words(title)) if w[:4] in prefixes)
+
+
+def formula_titles(brief: str) -> list:
+    """Грамотные хуки прямо из темы ролика — страховка, если LLM даст мусор."""
+    topic = ""
+    for line in brief.splitlines():
+        if line.strip().lower().startswith("тема:"):
+            topic = line.split(":", 1)[1].strip()
+            break
+    if not topic:
+        topic = next((l.strip() for l in brief.splitlines() if l.strip()), "")
+    topic = re.sub(r"[^\w\sА-Яа-яЁё\-:,.!?]+", " ", topic).strip(" .,:—-")
+    topic = re.sub(r"\s+", " ", topic)
+    if len(topic) < 12:
+        return []
+    if len(topic) > 70:
+        topic = topic[:70].rsplit(" ", 1)[0]
+    base = topic[0].upper() + topic[1:]
+    low = base[0].lower() + base[1:]
+    return [
+        f"{base}: что происходит на кадрах? #shorts",
+        f"{base} — вот что попало на видео #shorts",
+        f"Почему {low}? #shorts",
+    ]
+
+
 # ---------------------------------------------------------------------------
 def _poll_openai(prompt: str, timeout: int) -> str:
     """Основной путь: OpenAI-совместимый POST — он стабильнее GET."""
@@ -266,7 +372,55 @@ def _poll_legacy(prompt: str, timeout: int) -> str:
         return r.read().decode("utf-8", "replace")
 
 
+def _local_model() -> str:
+    if _LOCAL["checked"]:
+        return _LOCAL["model"]
+    _LOCAL["checked"] = True
+    try:
+        with urllib.request.urlopen(OLLAMA_TAGS, timeout=2) as r:
+            names = [m.get("name", "") for m in json.loads(
+                r.read().decode("utf-8", "replace")).get("models", [])]
+    except Exception:  # noqa: BLE001
+        names = []
+    for pref in LOCAL_PREFER:
+        if pref in names:
+            _LOCAL["model"] = pref
+            break
+    else:
+        _LOCAL["model"] = names[0] if names else ""
+    if _LOCAL["model"]:
+        print(f"   [LLM] локальная модель: {_LOCAL['model']}")
+    return _LOCAL["model"]
+
+
+def _ollama(prompt: str, timeout: int = 300) -> str:
+    model = _local_model()
+    if not model:
+        return ""
+    body = json.dumps({
+        "model": model,
+        "stream": False,
+        "think": False,
+        "messages": [{"role": "user", "content": prompt}],
+        "options": {"temperature": 0.8, "num_predict": 500, "num_ctx": 4096},
+        # не держим VRAM: следом на этой же карте запускается F5-TTS
+        "keep_alive": "20s",
+    }).encode("utf-8")
+    req = urllib.request.Request(OLLAMA_URL, data=body,
+                                 headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        d = json.loads(r.read().decode("utf-8", "replace"))
+    return (d.get("message", {}).get("content") or "").strip()
+
+
 def call_llm(prompt: str, retries: int = 4, timeout: int = 120) -> str:
+    try:
+        text = _ollama(prompt)
+        if text:
+            return text
+    except Exception as e:  # noqa: BLE001
+        print(f"   [LLM] ollama: {type(e).__name__}: {e}")
+
     last = ""
     for attempt in range(1, retries + 1):
         for fn in (_poll_openai, _poll_legacy):
@@ -282,26 +436,34 @@ def call_llm(prompt: str, retries: int = 4, timeout: int = 120) -> str:
     raise RuntimeError(last)
 
 
-def llm_titles(facts: str, n: int) -> list:
-    prompt = (f"Новость: {facts}. "
-              f"Придумай {n} разных коротких цепляющих заголовков для YouTube Shorts на русском. "
-              "Каждый до 90 символов, в конце #shorts. Каждый с новой строки, без нумерации и пояснений.")
+def llm_pack(facts: str, n: int) -> dict:
+    """Один запрос к LLM вместо двух.
+
+    Бесплатный тариф Pollinations отдаёт ~1 ответ в 30 секунд, поэтому два
+    отдельных вызова (заголовки + мета) в одном запуске не проходят: второй
+    получал 429. Здесь всё в одном ответе.
+    """
+    prompt = (
+        f"Факты о новом видео: {facts}\n\n"
+        f"Придумай {n} разных заголовков для YouTube Shorts на РУССКОМ языке строго "
+        "по этим фактам: 40-85 символов, только реальные слова из фактов и обычные "
+        "русские слова (без выдуманных названий и имён), интрига, в конце #shorts.\n\n"
+        "Ответь строго в формате:\n"
+        "TITLES:\n<заголовок>\n<заголовок>\n...\n"
+        "DESCRIPTION: <описание видео из двух предложений на русском>\n"
+        "HASHTAGS: <12 хэштегов под ЭТО видео через пробел: существительные и короткие "
+        "фразы только из фактов выше, без общих слов вроде #видео #интересно>\n"
+        "KEYWORDS: <10 русских слов через запятую>")
     text = call_llm(prompt)
-    out = []
-    for line in text.splitlines():
-        line = line.strip()
+
+    titles = []
+    m = re.search(r"TITLES?:\s*(.+?)(?=\n\s*DESCRIPTION:|$)", text, re.DOTALL | re.IGNORECASE)
+    block = m.group(1) if m else text
+    for line in block.splitlines():
+        line = re.sub(r"^\s*\d+[\.\)]\s*", "", line.strip())
         if valid_title(line):
-            out.append(norm_title(line))
-    return out
+            titles.append(norm_title(line))
 
-
-def llm_meta(facts: str) -> tuple:
-    prompt = (f"Новость: {facts}. "
-              "Ответь строго в формате:\n"
-              "DESCRIPTION: <описание видео из двух предложений на русском>\n"
-              "HASHTAGS: <12 хэштегов через пробел>\n"
-              "KEYWORDS: <10 русских слов через запятую>")
-    text = call_llm(prompt)
     desc = ""
     m = re.search(r"DESCRIPTION:\s*(.+?)(?=HASHTAGS:|$)", text, re.DOTALL | re.IGNORECASE)
     if m:
@@ -316,35 +478,72 @@ def llm_meta(facts: str) -> tuple:
     m = re.search(r"KEYWORDS:\s*(.+)", text, re.IGNORECASE)
     if m:
         kw = [w.strip().lower().strip(".,!?;:") for w in re.split(r"[,\n;]", m.group(1)) if w.strip()]
-    return desc, tags, kw
+    return {"titles": titles, "desc": desc, "hashtags": tags, "keywords": kw}
 
 
 # ---------------------------------------------------------------------------
-def build_tags(brief: str, llm_tags: list) -> list:
-    """Теги для поля «теги» YouTube: только релевантное, без спама.
+# Слова, которые не годятся в теги: слишком общие, ничего не дают поиску.
+STOP_TAG_WORDS = {
+    "видео", "кадры", "кадре", "ролик", "сцена", "сцене", "люди", "человек",
+    "история", "новость", "новости", "сегодня", "который", "которая", "которое",
+    "которые", "почему", "зачем", "такое", "очень", "просто",
+}
 
-    Набор берём у ОДНОЙ темы (первое совпадение, как в build_hashtags), а не у всех
-    сразу: иначе в брифe про робота слово «машины» добавляло в теги #авто, #cars.
+
+# Категории, которые уместны у любого ролика этой темы, даже если слова нет
+# дословно в брифе (модель часто предлагает их как осмысленную категорию).
+GENERAL_TAG_STEMS = (
+    "животн", "природ", "наук", "техно", "космо", "спорт", "здоров", "путеше",
+    "культур", "интерес", "wildlife", "nature", "animal", "shorts", "short",
+)
+
+
+def build_tags(brief: str, llm_tags: list, keywords: list | None = None,
+               best: str = "") -> list:
+    """Теги ПОД КОНКРЕТНЫЙ ролик, а не из общего запаса.
+
+    Основа — что предложила модель по фактам этого видео, потом ключевые слова
+    ролика. Словарь тем остаётся только добавкой (и только если ключ реально
+    встретился отдельным словом). Общих тегов-заглушек больше нет.
     """
-    low = brief.lower()
-    tags = list(BASE_TAGS)
+    tags = ["#shorts"]
+    src_text = re.sub(r"[^а-яёa-z0-9]", "", (brief + " " + (best or "")).lower())
+
+    def ok(hashtag: str) -> bool:
+        word = re.sub(r"[^а-яёa-z0-9]", "", str(hashtag).lower())
+        if len(word) < 4 or word in STOP_TAG_WORDS:
+            return False
+        if any(word.startswith(stem) for stem in GENERAL_TAG_STEMS):
+            return True
+        # тег должен быть про этот ролик: его слово есть в теме/заголовке
+        return word[:5] in src_text
+
+    tags += [t for t in (llm_tags or []) if ok(t)]
+
+    for word in (keywords or [])[:10]:
+        if ok(word):
+            tags.append("#" + re.sub(r"[^А-Яа-яЁёA-Za-z0-9\-]", "", str(word)))
+
+    low = (brief + " " + (best or "")).lower()
     for key, extra in TOPIC_TAGS.items():
         if topic_match(low, key):
-            tags += extra
+            tags += extra[:4]
             break
-    tags += llm_tags
-    # уникализируем, не даём свалку
+
     seen, out = set(), []
+    roots = set()
     for t in tags:
-        t = t.strip()
+        t = str(t).strip()
         if not t:
             continue
         if not t.startswith("#"):
             t = "#" + t
-        key = t.lower()
-        if key in seen:
+        low = t.lower()
+        root = re.sub(r"[^а-яёa-z0-9]", "", low)[:5]
+        if len(t) < 3 or low in seen or root in roots:
             continue
-        seen.add(key)
+        seen.add(low)
+        roots.add(root)
         out.append(t)
     return out[:15]
 
@@ -363,14 +562,19 @@ def topic_match(low: str, key: str) -> bool:
     return False
 
 
-def build_hashtags(brief: str, best: str) -> list:
-    """2–3 РЕЛЕВАНТНЫХ хэштега (ORIGINALITY_GUIDE: без спама)."""
-    low = (brief + " " + best).lower()
-    picked = []
-    for key, extra in TOPIC_TAGS.items():
-        if topic_match(low, key):
-            picked = extra
-            break
+def build_hashtags(brief: str, best: str, llm_tags: list | None = None) -> list:
+    """2–3 РЕЛЕВАНТНЫХ хэштега (ORIGINALITY_GUIDE: без спама).
+
+    Сначала берём то, что модель предложила под этот ролик, и только если она
+    ничего не дала — словарь темы.
+    """
+    picked = [t for t in (llm_tags or []) if str(t).startswith("#")]
+    if not picked:
+        low = (brief + " " + best).lower()
+        for key, extra in TOPIC_TAGS.items():
+            if topic_match(low, key):
+                picked = extra
+                break
     if not picked:
         picked = ["#новости", "#интересное"]
     out, seen = [], set()
@@ -398,7 +602,12 @@ def build_description(brief: str, best: str, llm_desc: str, hashtags: list,
         if not body.endswith((".", "!", "?")):
             body += "."
     else:
-        chunks = [s.strip() for s in re.split(r"(?<=[.!?])\s+", brief) if s.strip()]
+        # Описание без служебных ярлыков брифа («Тема:», «Контекст:», «Сценарий:»):
+        # раньше они попадали в текст описания YouTube как есть.
+        clean = re.sub(r"^\s*(тема|контекст|сценарий|ссылка)\s*:\s*", "",
+                       brief, flags=re.IGNORECASE | re.MULTILINE)
+        clean = re.sub(r"\s+", " ", clean).strip()
+        chunks = [s.strip() for s in re.split(r"(?<=[.!?])\s+", clean) if s.strip()]
         body = " ".join(chunks[:2]).strip()
         if body and not body.endswith((".", "!", "?")):
             body += "."
@@ -425,21 +634,38 @@ def build_screen_title(brief: str, best: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-def collect_candidates(brief: str, n: int, use_llm: bool = True) -> list:
-    """Возвращает список (title, source). Пул имеет приоритет."""
+def collect_candidates(brief: str, n: int, titles: list | None = None) -> list:
+    """Кандидаты ПОД ТЕКУЩЕЕ видео: формулы от темы + заголовки от LLM.
+
+    Пул title_pool.txt больше НЕ приоритет: его строки попадают в кандидаты,
+    только если они про этот же ролик (совпало хотя бы одно слово темы) и ещё
+    не использовались. Иначе каждый новый выпуск получал старый заголовок.
+    """
+    facts = title_facts(brief)
+    used = load_used()
     cands = []
+
+    for t in formula_titles(brief):
+        cands.append((t, "formula"))
+
+    for t in (titles or []):
+        cands.append((t, "llm"))
+
     if POOL_FILE.exists():
         for line in POOL_FILE.read_text(encoding="utf-8-sig").splitlines():
             line = line.strip()
             if line and not line.startswith("#") and valid_title(line):
-                cands.append((norm_title(line), "pool"))
-    if use_llm:
-        facts = brief.replace("\n", " ")[:500]
-        try:
-            for t in llm_titles(facts, n):
-                cands.append((t, "llm"))
-        except Exception as e:  # noqa: BLE001
-            print(f"[WARN] LLM-заголовки недоступны ({e})")
+                t = norm_title(line)
+                if relevance(t, facts) >= 1:
+                    cands.append((t, "pool"))
+
+    # Никаких повторов: у каждого нового видео свой новый заголовок.
+    fresh = [(t, s) for t, s in cands if t.lower() not in used]
+    if fresh:
+        cands = fresh
+    elif cands:
+        print(f"[WARN] все {len(cands)} кандидатов уже использовались — беру лучший из них")
+
     seen, uniq = set(), []
     for c, src in cands:
         if c.lower() not in seen:
@@ -449,29 +675,37 @@ def collect_candidates(brief: str, n: int, use_llm: bool = True) -> list:
 
 
 def generate(brief: str, n: int = 7, use_llm: bool = True) -> dict:
-    cands = collect_candidates(brief, n, use_llm=use_llm)
+    facts = title_facts(brief)
+    pack = {"titles": [], "desc": "", "hashtags": [], "keywords": []}
+    if use_llm:
+        try:
+            pack = llm_pack(facts, max(n, 7))
+        except Exception as e:  # noqa: BLE001
+            print(f"[WARN] LLM недоступен ({e})")
+
+    cands = collect_candidates(brief, n, titles=pack["titles"])
     if not cands:
         raise ValueError("нет ни одного валидного кандидата заголовка")
     scored = []
     for title, src in cands:
-        bonus = 1.0 if src == "pool" else 0.0   # редакционный пул довереннее
-        scored.append({"title": title, "source": src,
-                       "total": round(heuristic_score(title) + bonus, 2)})
+        rel = relevance(title, facts)
+        # Релевантность фактам важнее «красивости»: раньше пул получал +1.0 и
+        # старый заголовок про Lamborghini побеждал свежий про птицу.
+        # Формульные хуки (собраны дословно из темы ролика) чуть впереди: у
+        # бесплатной модели русский с опечатками, а тут слова гарантированно её.
+        bonus = 0.8 if src == "formula" else 0.0
+        total = round(heuristic_score(title) + bonus + 0.6 * min(rel, 3), 2)
+        scored.append({"title": title, "source": src, "relevance": rel, "total": total})
     scored.sort(key=lambda x: x["total"], reverse=True)
     best = scored[0]["title"]
+    mark_used(best)
 
-    facts = brief.replace("\n", " ")[:500]
-    llm_desc, llm_tags, llm_kw = "", [], []
-    if use_llm:
-        try:
-            llm_desc, llm_tags, llm_kw = llm_meta(facts)
-        except Exception as e:  # noqa: BLE001
-            print(f"[WARN] LLM-meta недоступна ({e})")
-
-    hashtags = build_hashtags(brief, best)
-    tags = build_tags(brief, llm_tags)
-    note = sensitivity_note(brief + " " + best)
+    llm_desc, llm_tags, llm_kw = pack["desc"], pack["hashtags"], pack["keywords"]
     keywords = [k for k in llm_kw if re.fullmatch(r"[а-яё\-]+", k)][:20]
+
+    hashtags = build_hashtags(brief, best, llm_tags)
+    tags = build_tags(brief, llm_tags, keywords, best)
+    note = sensitivity_note(brief + " " + best)
 
     return {
         "title": best,
@@ -547,12 +781,14 @@ def main():
     print(f"[OK] Выбран заголовок: {seo['title']}")
     print(f"[OK] Экранный заголовок: {seo['screen_title']}")
     print(f"[OK] Хэштеги ({len(seo['hashtags'])}): {' '.join(seo['hashtags'])}")
+    print(f"[OK] Теги под ролик ({len(seo['tags'])}): {' '.join(seo['tags'])}")
     if seo.get("disclaimer"):
         print(f"[OK] Дисклеймер (чувствительная тема): {seo['disclaimer']}")
     print(f"[OK] Описание:\n{seo['description']}")
-    print("\n--- Все кандидаты (балл) ---")
+    print("\n--- Все кандидаты (балл | релевантность | источник) ---")
     for t in seo["candidates"]:
-        print(f"  [{t['total']:>5}] {t['title']}")
+        print(f"  [{t['total']:>5}] rel={t.get('relevance', 0):<2} "
+              f"({t.get('source', '?')}) {t['title']}")
     print(f"\n[OK] {TITLE_TXT} | {DESC_TXT} | {TAGS_TXT}")
 
 

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нарезка видео</title>
+    <link rel="stylesheet" href="/static/css/style.css?asset_v">
+</head>
+<body>
+    <div class="container">
+        <h2>Автоматическая нарезка видео</h2>
+
+        <div class="card">
+            <h3>Загрузить видео</h3>
+            <form id="slicingForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="videoFile">Файл видео</label>
+                    <input type="file" name="videoFile" id="videoFile" accept="video/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="youtubeUrl">или ссылка YouTube</label>
+                    <input type="text" name="youtubeUrl" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=...">
+                </div>
+                <button type="submit" class="btn btn--primary">Нарезать сцены</button>
+            </form>
+        </div>
+
+        <div class="card" style="margin-top:20px;">
+            <h3>Прогресс</h3>
+            <div id="progressBar">
+                <div class="progress" style="width:0%"></div>
+            </div>
+            <div id="progressText">Ожидание...</div>
+        </div>
+
+        <div class="card" style="margin-top:20px;">
+            <h3>Получившиеся клипы</h3>
+            <ul id="clipsList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('slicingForm');
+        const progressBar = document.querySelector('#progressBar .progress');
+        const progressText = document.getElementById('progressText');
+        const clipsList = document.getElementById('clipsList');
+
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const resp = await fetch('/api/slicing/start', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await resp.json();
+            if (!data.ok) {
+                alert(data.detail || 'Ошибка');
+                return;
+            }
+            // Poll job status
+            const jobId = data.job_id;
+            const interval = setInterval(async () => {
+                const statusResp = await fetch(`/api/jobs/${jobId}`);
+                const status = await statusResp.json();
+                if (status.status === 'completed') {
+                    clearInterval(interval);
+                    showClips(status.clips);
+                } else if (status.status === 'failed') {
+                    clearInterval(interval);
+                    alert('Ошибка при обработке');
+                } else {
+                    progressText.textContent = status.status;
+                }
+            }, 2000);
+        });
+
+        function showClips(clips) {
+            clipsList.innerHTML = '';
+            clips.forEach(c => {
+                const li = document.createElement('li');
+                li.className = 'clip-item';
+                li.innerHTML = `<a href="/static/tmp/${c.filename}" target="_blank">${c.filename}</a> (${c.duration}s)`;
+                clipsList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>

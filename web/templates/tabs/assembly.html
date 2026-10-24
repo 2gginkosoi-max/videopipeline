@@ -1,0 +1,143 @@
+<form id="runForm" class="assembly-form" autocomplete="off">
+  <div class="steps-grid" id="stepsGrid">
+    <article class="step-card glass-panel">
+      <header class="step-card__head">
+        <div class="step-card__index">1</div>
+        <div class="step-card__titles">
+          <h3>Новость</h3>
+          <p>Reddit → свежие посты с видео</p>
+        </div>
+      </header>
+      <div class="step-card__body">
+        <button type="button" class="search-news-btn" id="searchNews">🔍 Найти новости</button>
+
+        <div class="hint" id="newsHint"></div>
+
+        <div id="newsResults" style="display: none;">
+          <span class="field__label">Найденные новости:</span>
+          <div id="newsList"></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="step-card glass-panel">
+      <header class="step-card__head">
+        <div class="step-card__index">2</div>
+        <div class="step-card__titles">
+          <h3>Источник видео</h3>
+          <p>Загрузка b-roll</p>
+        </div>
+      </header>
+      <div class="step-card__body">
+        <div class="video-preview-container" id="videoPreview">
+          <div class="video-preview-container__inner">
+            <span class="video-preview-container__icon">▷</span>
+            <span>Ожидание выбора новости...</span>
+          </div>
+        </div>
+
+        <input type="hidden" name="video_url" id="videoUrlInput" value="">
+        <input type="hidden" name="asset" id="assetInput" value="">
+      </div>
+    </article>
+
+    <article class="step-card glass-panel is-locked">
+      <header class="step-card__head">
+        <div class="step-card__index">3</div>
+        <div class="step-card__titles">
+          <h3>Сценарий</h3>
+          <p>Текст закадрового голоса</p>
+        </div>
+      </header>
+      <div class="step-card__body">
+        <label class="field">
+          <span class="field__label">Тема ролика</span>
+          <input class="field__input" name="topic" placeholder="например: розовый морской слизень">
+        </label>
+        <label class="field">
+          <span class="field__label">Сценарий</span>
+          <textarea class="field__textarea" name="script" placeholder="Сгенерируйте или вставьте готовый сценарий..."></textarea>
+        </label>
+        <div class="field__row">
+          <button type="button" class="btn btn--mini btn--accent" id="genScenario">✨ Варианты по теме</button>
+        </div>
+        <div class="hint">
+          <span id="scriptLen">0</span> символов · <span id="scriptWords">0</span> слов · ориентир 60–140 слов
+        </div>
+        <div class="variants" id="variants" hidden></div>
+      </div>
+    </article>
+
+    <article class="step-card glass-panel">
+      <header class="step-card__head">
+        <div class="step-card__index">4</div>
+        <div class="step-card__titles">
+          <h3>Голос</h3>
+          <p>Генерация TTS</p>
+        </div>
+      </header>
+      <div class="step-card__body">
+        <label class="field">
+          <span class="field__label">Выбор голоса</span>
+          <div class="field__row">
+            <select class="field__select" name="voice_id" id="voiceId">
+              <option value="">Загрузка...</option>
+            </select>
+            <button type="button" class="btn-preview" id="voicePreviewBtn">▶ Прослушать</button>
+          </div>
+        </label>
+        <div class="field__row">
+          <button type="button" class="btn btn--mini btn--ghost" id="cloneBtn">+ Клонировать голос</button>
+          <span class="hint">свой голос по записи</span>
+        </div>
+        <label class="field">
+          <span class="field__label">Скорость речи</span>
+          <input class="field__range" type="range" name="factor" min="0.8" max="1.6" step="0.05" value="1.15">
+        </label>
+        <div class="voicepreview" id="voicePreview" hidden>
+          <audio id="voiceAudio" controls></audio>
+          <span class="hint" id="voicePreviewName"></span>
+        </div>
+      </div>
+    </article>
+
+    <article class="step-card glass-panel is-locked">
+      <header class="step-card__head">
+        <div class="step-card__index">5</div>
+        <div class="step-card__titles">
+          <h3>Субтитры</h3>
+          <p>Стилизация субтитров</p>
+        </div>
+      </header>
+      <div class="step-card__body">
+        <span class="field__label">Стиль субтитров</span>
+        <div class="subtitle-grid" id="subtitleGrid">
+          <button type="button" class="subtitle-pill is-active" data-sub="classic">Классика</button>
+          <button type="button" class="subtitle-pill" data-sub="clean">Чистый</button>
+          <button type="button" class="subtitle-pill" data-sub="neon">Неон</button>
+          <button type="button" class="subtitle-pill" data-sub="min">Минимум</button>
+          <button type="button" class="subtitle-pill" data-sub="cinema">Кино</button>
+        </div>
+        <input type="hidden" name="sub_style" value="classic">
+
+        <div class="sub-preview" id="subPreview" data-style="classic">
+          <div class="sub-preview__frame">
+            <span class="sub-preview__word" id="subPreviewWord">Медведь</span>
+          </div>
+          <div class="sub-preview__side">
+            <div class="sub-preview__label" id="subPreviewLabel">Классика</div>
+            <div class="sub-preview__hint" id="subPreviewHint">
+              Слово выскакивает с лёгким увеличением, ключевые — красным.
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="steps-connector" id="stepsConnector"></div>
+
+  <button type="submit" class="btn-run" id="runBtn">
+    <span class="btn__label">Собрать ролик</span>
+  </button>
+</form>

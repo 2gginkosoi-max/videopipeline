@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ГУСЬ — видеоконвейер{% endblock %}</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪿</text></svg>">
+  <link rel="stylesheet" href="/static/css/layout.css?v={{ asset_v('css/layout.css') }}">
+  <link rel="stylesheet" href="/static/css/components.css?v={{ asset_v('css/components.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="bg-video-container">
+    <video class="bg-video active" autoplay muted playsinline loop>
+      <source src="/static/video/clouds2.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="bg-overlay"></div>
+
+  <div class="app-layout">
+    {% include 'partials/sidebar.html' %}
+    <main class="main">
+      <header class="main__header">
+        <div class="main__title-group">
+          <span class="main__title-icon">⚙️</span>
+          <div>
+            <h1 class="main__title">СБОРКА</h1>
+            <p class="main__subtitle">Конвейер генерации ролика</p>
+          </div>
+        </div>
+      </header>
+
+      <section id="tab-assembly" class="tab-view">
+        {% include 'tabs/assembly.html' %}
+      </section>
+      <section id="tab-archive" class="tab-view" hidden>
+        {% include 'tabs/archive.html' %}
+      </section>
+      <section id="tab-profile" class="tab-view" hidden>
+        {% include 'tabs/profile.html' %}
+      </section>
+      <section id="tab-slicing" class="tab-view" hidden>
+        {% include 'partials/slicing_tab.html' %}
+      </section>
+      <section id="tab-cut" class="tab-view" hidden>
+        {% include 'tabs/cut.html' %}
+      </section>
+    </main>
+    {% include 'partials/right_panel.html' %}
+  </div>
+
+  <nav class="bottom-nav glass-panel">
+    <button class="bottom-nav__btn is-active" data-tab="assembly">
+      <span>Сборка</span>
+    </button>
+    <button class="bottom-nav__btn" data-tab="archive">
+      <span>Архив</span>
+    </button>
+    <button class="bottom-nav__btn" data-tab="profile">
+      <span>Профиль</span>
+    </button>
+    <button class="bottom-nav__btn" data-tab="cut">
+      <span>Нарезка</span>
+    </button>
+  </nav>
+
+  {% include 'partials/modals.html' %}
+
+  <script src="/static/js/layout-router.js?v={{ asset_v('js/layout-router.js') }}" defer></script>
+  <script src="/static/js/app.js?v={{ asset_v('js/app.js') }}" defer></script>
+  <script src="/static/js/news-flow.js?v={{ asset_v('js/news-flow.js') }}" defer></script>
+  <script src="/static/js/assembly-line.js?v={{ asset_v('js/assembly-line.js') }}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

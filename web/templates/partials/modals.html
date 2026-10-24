@@ -1,0 +1,45 @@
+{# Модалка клонирования голоса + toast.
+   Разметка повторяет ту, что ждёт app.js (initClone/toast). #}
+<div class="modal" id="cloneModal" hidden>
+  <div class="modal__box">
+    <div class="modal__head">
+      <h3>Клонировать голос</h3>
+      <button type="button" class="modal__x" id="cloneClose" aria-label="Закрыть">✕</button>
+    </div>
+    <div class="modal__body">
+      <p class="hint">Загрузите запись голоса (аудио или видео). Конвейер сам вырежет чистый
+      фрагмент, определит тембр и запишет текст референса. Клонировать можно только свой голос
+      или запись, на которую у вас есть разрешение.</p>
+
+      <label class="field">
+        <span class="field__label">Файл</span>
+        <input class="field__input" type="file" id="cloneFile"
+               accept="audio/*,video/*,.wav,.mp3,.m4a,.ogg,.mp4,.webm,.mov">
+      </label>
+
+      <div class="field__row">
+        <label class="field">
+          <span class="field__label">Название голоса</span>
+          <input class="field__input" type="text" id="cloneName" placeholder="Мой голос" maxlength="40">
+        </label>
+        <label class="field">
+          <span class="field__label">Пол</span>
+          <select class="field__select" id="cloneGender">
+            <option value="auto">Определить автоматически</option>
+            <option value="male">Мужской</option>
+            <option value="female">Женский</option>
+            <option value="neutral">Нейтральный</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="modal__log" id="cloneLog" hidden></div>
+    </div>
+    <div class="modal__foot">
+      <button type="button" class="btn btn--ghost" id="cloneCancel">Отмена</button>
+      <button type="button" class="btn btn--accent" id="cloneGo">Клонировать</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>

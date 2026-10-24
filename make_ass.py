@@ -29,6 +29,40 @@ WHITE = r"{\c&HFFFFFF&}"
 YELLOW = r"{\c&H00D7FF&}"  # #FFD700
 TITLE_PALETTE = [RED, WHITE, YELLOW, WHITE]
 
+# --- Стили субтитров (слово в кадре) -------------------------------------
+# classic — как было: белые слова, ключевые красным, «выскакивание»;
+# clean   — только белые, появляются по одному, без вспышек;
+# neon    — белое слово с холодным свечением;
+# min     — мелкий текст без обводки;
+# cinema  — шрифт с засечками, разрядка, спокойное появление.
+STYLES = {
+    "classic": dict(
+        font="Montserrat Black", size=90, white="&H00FFFFFF", key="&H003300FF",
+        outline_color="&H00000000", outline=6, shadow=3, spacing=0, bold=-1,
+        tags=r"{\fscx80\fscy80\t(0,150,\fscx100\fscy100)}",
+    ),
+    "clean": dict(
+        font="Montserrat Black", size=90, white="&H00FFFFFF", key=None,
+        outline_color="&H00000000", outline=5, shadow=2, spacing=0, bold=-1,
+        tags="",
+    ),
+    "neon": dict(
+        font="Montserrat Black", size=90, white="&H00FFFFFF", key=None,
+        outline_color="&H00FFE500", outline=2, shadow=0, spacing=0, bold=-1,
+        tags=r"{\fad(100,0)\blur4\fscx80\fscy80\t(0,150,\fscx100\fscy100)}",
+    ),
+    "min": dict(
+        font="Montserrat", size=64, white="&H00FFFFFF", key=None,
+        outline_color="&H00000000", outline=2, shadow=0, spacing=1, bold=0,
+        tags="",
+    ),
+    "cinema": dict(
+        font="Georgia", size=76, white="&H00E6F0F5", key=None,
+        outline_color="&H00000000", outline=3, shadow=2, spacing=2, bold=0,
+        tags=r"{\fad(80,0)}",
+    ),
+}
+
 # --- Ключевые слова для красного выделения (база) ---
 KEY_WORDS = {
     # Угрозы/негатив/слежка/экстрим
@@ -89,6 +123,8 @@ def parse_args():
     ap.add_argument("--title-file", default=DEFAULT_TITLE_FILE)
     ap.add_argument("--keywords-file", default=DEFAULT_KEYWORDS)
     ap.add_argument("--extra-keys", default="", help="Доп. ключевые слова через запятую")
+    ap.add_argument("--style", default="classic", choices=sorted(STYLES),
+                    help="стиль субтитров: classic|clean|neon|min|cinema")
     return ap.parse_args()
 
 
@@ -175,6 +211,8 @@ def main():
 
     matches = parse_srt(str(srt))
 
+    st = STYLES[a.style]
+
     ass = """[Script Info]
 Title: Title + One Word with Key Words Highlight
 ScriptType: v4.00+
@@ -186,9 +224,15 @@ PlayResY: 1920
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: HookTitle,Montserrat Black,80,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,-1,0,0,0,100,100,2,0,1,6,3,8,30,30,200,1
-Style: WordWhite,Montserrat Black,90,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,6,3,2,0,0,400,1
-Style: WordRed,Montserrat Black,90,&H003300FF,&H003300FF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,6,3,2,0,0,400,1
+"""
+    # WordWhite/WordRed собираются из выбранного стиля; classic даёт те же
+    # строки, что и раньше (дизайн по умолчанию не меняется).
+    for sname, color in (("WordWhite", st["white"]), ("WordRed", st["key"] or st["white"])):
+        ass += (f"Style: {sname},{st['font']},{st['size']},{color},{color},"
+                f"{st['outline_color']},&H80000000,{st['bold']},0,0,0,100,100,"
+                f"{st['spacing']},0,1,{st['outline']},{st['shadow']},2,0,0,400,1\n")
 
+    ass += """
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
@@ -199,12 +243,12 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         s = srt_time_to_seconds(start)
         e = srt_time_to_seconds(end)
         for word, ws, we in split_words_with_timing(text, s, e):
-            style = "WordRed" if is_key_word(word) else "WordWhite"
+            style = "WordRed" if (st["key"] and is_key_word(word)) else "WordWhite"
             if style == "WordRed":
                 red += 1
             else:
                 white += 1
-            wt = r"{\fscx80\fscy80\t(0,150,\fscx100\fscy100)}" + word
+            wt = st["tags"] + word
             ass += f"Dialogue: 0,{seconds_to_ass_time(ws)},{seconds_to_ass_time(we)},{style},,0,0,0,,{wt}\n"
 
     out = Path(a.out)
@@ -212,6 +256,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     out.write_text(ass, encoding="utf-8")
     print(f"[OK] ASS сохранён: {out}")
     print(f"    Заголовок: {title}")
+    print(f"    Стиль субтитров: {a.style}")
     print(f"    Красных слов: {red} | белых: {white} | всего: {red + white}")
 
 

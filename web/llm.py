@@ -15,6 +15,7 @@
 """
 
 import json
+import os
 import random
 import re
 import time
@@ -29,6 +30,17 @@ OPENAI_URL = BASE + "openai"
 MODEL = "openai-fast"
 TIMEOUT = 100
 RETRIES = 3
+
+# Локальная модель через Ollama лучше держит русский, чем бесплатный
+# openai-fast (тот на длинных промптах выдаёт словесный салат).
+OLLAMA_URL = "http://127.0.0.1:11434/api/chat"
+OLLAMA_TAGS = "http://127.0.0.1:11434/api/tags"
+OLLAMA_TIMEOUT = 300
+# Порядок важен: gemma3:4b на этом промпте уходит в фантазии (пингвин с книгой),
+# qwen3.5:4b держится фактов — с него и начинаем.
+LOCAL_PREFER = ("qwen3.5:4b", "qwen2.5:latest", "gemma3:4b")
+_local_model = None
+_local_checked = False
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0 Safari/537.36",
@@ -98,15 +110,96 @@ def _ask_legacy(prompt: str, model: str, timeout: int) -> str:
     return _unwrap(raw)
 
 
+def _local_model_name() -> str:
+    """Какая локальная модель доступна в Ollama ('' если сервера нет)."""
+    global _local_model, _local_checked
+    if _local_checked:
+        return _local_model or ""
+    _local_checked = True
+    try:
+        with urllib.request.urlopen(OLLAMA_TAGS, timeout=2) as r:
+            names = [m.get("name", "") for m in json.loads(
+                r.read().decode("utf-8", errors="replace")).get("models", [])]
+    except Exception:  # noqa: BLE001
+        names = []
+    for pref in LOCAL_PREFER:
+        if pref in names:
+            _local_model = pref
+            break
+    else:
+        _local_model = names[0] if names else ""
+    if _local_model:
+        print(f"[LLM] локальная модель: {_local_model}", flush=True)
+    return _local_model
+
+
+def _ask_ollama(prompt: str, timeout: int = OLLAMA_TIMEOUT,
+                temperature: float = 0.75, num_predict: int = 420,
+                keep_alive: str = "5m") -> str:
+    model = _local_model_name()
+    if not model:
+        return ""
+    body = {
+        "model": model,
+        "stream": False,
+        "think": False,
+        "messages": [{"role": "user", "content": prompt}],
+        "options": {"temperature": temperature, "num_predict": num_predict,
+                    "num_ctx": 4096},
+        "keep_alive": keep_alive,
+    }
+    req = urllib.request.Request(OLLAMA_URL, data=json.dumps(body).encode(),
+                                 headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        d = json.loads(r.read().decode("utf-8", errors="replace"))
+    return (d.get("message", {}).get("content") or "").strip()
+
+
+# Черновик 4B-модели почти всегда с парой ошибок в падежах. Отдельный
+# проход «только грамматика» их вычищает и не трогает смысл (проверено).
+_POLISH_PROMPT = """Исправь в тексте только грамматику: падежи, согласование, запятые. Смысл, порядок фраз и длину не меняй, ничего не добавляй и не сокращай.
+Верни только исправленный текст, без пояснений.
+
+{text}"""
+
+
+def _polish(text: str) -> str:
+    if not text:
+        return text
+    try:
+        out = _ask_ollama(_POLISH_PROMPT.format(text=text), temperature=0.2,
+                          num_predict=400, keep_alive="20s")
+    except Exception as exc:  # noqa: BLE001
+        print(f"[LLM] вычитка не удалась: {type(exc).__name__}: {exc}", flush=True)
+        return text
+    out = _clean(out).replace("**", "").strip()
+    if not out:
+        return text
+    src, got = len(text.split()), len(out.split())
+    # вычитка не должна переписывать текст заново
+    if got < src * 0.7 or got > src * 1.35:
+        print(f"[LLM] вычитка изменила длину ({src} -> {got}), оставляю черновик",
+              flush=True)
+        return text
+    return _CLEAN_WS.sub(" ", out).strip()
+
+
 def ask(prompt: str, model: str = MODEL, timeout: int = TIMEOUT,
         json_mode: bool = False, retries: int = RETRIES) -> str:
     """Один запрос к LLM. Возвращает текст ответа (пустая строка при ошибке).
 
-    Бесплатный тариф Pollinations периодически отвечает 402/429/404 —
-    поэтому пробуем несколько раз и два разных транспорта.
+    Сначала пробуем локальную модель (без лимитов и по-русски лучше), потом
+    бесплатный Pollinations. JSON-режим — только Pollinations.
     """
     if json_mode:
         prompt = prompt + JSON_HINT
+    else:
+        try:
+            text = _ask_ollama(prompt)
+            if text:
+                return text
+        except Exception as exc:  # noqa: BLE001
+            print(f"[LLM] ollama: {type(exc).__name__}: {exc}", flush=True)
 
     last = ""
     for attempt in range(1, retries + 1):
@@ -156,45 +249,53 @@ def ask_json(prompt: str, model: str = MODEL, timeout: int = TIMEOUT,
 
 # ------------------------------------------------------------------ промпты
 #
-# Модель бесплатного тарифа плохо держит длинный JSON с кириллицей: кавычки
-# в тексте ломают экранирование и ответ приходит невалидным. Поэтому просим
-# простой текстовый формат с маркерами, а разбираем его регуляркой.
+# Бесплатная модель (GPT-OSS 20B) не держит длинный список правил: начинается
+# «словесный салат» (проверено 24.10.2026 на живом ролике). Работает обратное:
+# короткий промпт и один готовый пример, один сценарий на запрос.
 
-GRAMMAR = """Требования к тексту озвучки:
-- 60–140 слов (это 25–50 секунд речи).
-- Первые 3 секунды — ХУК: вопрос или интригующая фраза, которая цепляет.
-- Дальше — АНАЛИТИКА: свой вывод, почему это важно. Не пересказ новости.
-- В конце — ПРОГНОЗ: к чему это приведёт.
-- Один абзац, живой разговорный язык, без канцелярита.
-- Без тире, двоеточий, многоточий, скобок, эмодзи, хештегов и обращений к зрителю.
-- Числа — словами.
-- Не рассуждай и не объясняй, сразу пиши готовый текст."""
+EXAMPLE = """ЗАГОЛОВОК: Бобёр валит дерево за секунду
+ТЕКСТ: В кадре бобёр перегрызает ствол и дерево падает за пару секунд. Зачем ему столько силы? Так он строит плотину и поднимает уровень воды, чтобы нора оставалась недоступной. Чем больше таких плотин, тем сильнее меняется русло реки. Если бобры продолжат заселять новые места, через десять лет карта местных рек будет другой."""
 
-SCENARIO_PROMPT = """Ты редактор новостного YouTube-Shorts на русском. Канал «ГУСЬ ПЕРЕВОДИЛА».
+_LINE_FORMAT = """Напиши так же 70-90 слов, это обязательный объём. Первая фраза про то, что видно в кадре. Вторая фраза — вопрос, который цепляет, и в конце обязательно знак вопроса. Больше вопросов в тексте не задавай.
+Потом объясни смысл. В конце — утверждение о том, к чему это приведёт, а не вопрос.
+Вопрос задавай прямо от себя, а не пересказывай его словами вроде человек спрашивает.
+Не придумывай того, чего нет в кадре и заголовке. Если не знаешь, кто этот человек, называй его просто человек.
+Не обращайся к зрителю, никаких вы, давайте и представьте.
+Без тире, двоеточий и скобок. Формат ответа ровно две строки:
+ЗАГОЛОВОК: до 50 символов, без выдуманных профессий
+ТЕКСТ: сценарий одним абзацем"""
 
-Напиши сценарий озвучки к короткому новостному ролику.
+SCENARIO_PROMPT = """Ты пишешь текст озвучки для YouTube Shorts на русском. Пиши так, как в примере.
 
-Тема: {title}
+Пример:
+{example}
+
+Тема ролика: {title}
 Контекст: {context}
 
-{grammar}
+{lines}"""
 
-Формат ответа, ровно две строки:
-ЗАГОЛОВОК: короткая цепляющая фраза до 60 символов
-ТЕКСТ: сценарий одним абзацем"""
+# Сценарий пишется по видеоряду, а не по одному заголовку: иначе модель
+# придумывает сюжет, которого в ролике нет.
 
-VARIANTS_PROMPT = """Ты редактор новостного YouTube-Shorts на русском. Канал «ГУСЬ ПЕРЕВОДИЛА».
+GROUNDED_PROMPT = """Ты пишешь текст озвучки для YouTube Shorts на русском. Пиши так, как в примере.
 
-Тема ролика: {topic}
+Пример:
+{example}
 
-Придумай 3 РАЗНЫХ сценария на эту тему. Разный угол, разный хук, разный вывод.
+Ролик:
+В кадре: {video}
+Заголовок поста: {title}
+Сабреддит: {sub}
+Текст поста: {context}
 
-{grammar}
+{lines}
+Если описание кадров противоречит заголовку поста, верь заголовку."""
 
-Формат ответа: три блока, между блоками строка из трёх знаков равенства.
-В каждом блоке ровно две строки:
-ЗАГОЛОВОК: короткая фраза до 60 символов
-ТЕКСТ: сценарий одним абзацем"""
+_VARIANT_ANGLES = (
+    "",
+    "Начни со сравнения, которое цепляет.",
+)
 
 _CLEAN_WS = re.compile(r"[ \t]+")
 _FIELD = re.compile(r"^\s*(?:[#*\-\s]*)"
@@ -261,46 +362,108 @@ def _parse_blocks(raw: str) -> list:
     return out
 
 
-def generate_scenario(title: str, context: str = "", model: str = MODEL) -> dict | None:
-    """Сгенерировать сценарий под тему. -> {"title":..., "script":...} или None"""
-    prompt = SCENARIO_PROMPT.format(title=title, context=context or "нет",
-                                    grammar=GRAMMAR)
-    for attempt in range(3):
+_STOP = {
+    "этот", "этого", "этому", "этим", "который", "которая", "которое",
+    "которые", "потому", "поэтому", "когда", "только", "чтобы", "если",
+    "очень", "просто", "даже", "всегда", "никогда", "можно", "нельзя",
+    "каждый", "своих", "своими", "такой", "такая", "такое", "такие",
+    "будет", "будут", "бывает", "становится", "оказывается",
+}
+
+
+def _content_words(text: str) -> list:
+    """Значимые слова для проверки «текст про то же самое»."""
+    words = re.findall(r"[а-яё]{5,}", (text or "").lower())
+    return [w for w in words if w not in _STOP]
+
+
+def _same_topic(script: str, title: str, video: str, context: str) -> bool:
+    """Пересечение по корням с фактами поста. Грубо, зато без словаря."""
+    facts = {w[:5] for w in _content_words(f"{title} {video} {context}")}
+    if not facts:
+        return True
+    got = {w[:5] for w in _content_words(script)}
+    return bool(facts & got)
+
+
+def _validate(script: str, title: str, video: str, context: str) -> str:
+    """"" если сценарий годный, иначе причина отказа."""
+    n = len(script.split())
+    if n < 40:
+        return "слишком короткий"
+    if n > 170:
+        return "слишком длинный"
+    low = script.lower()
+    for bad in ("как языковая модель", "не могу", "вот сценарий", "вот текст"):
+        if bad in low:
+            return "служебный ответ"
+    if "?" not in script:
+        return "в хуке нет вопроса"
+    if not _same_topic(script, title, video, context):
+        return "не про этот ролик"
+    return ""
+
+
+def _build_prompt(title: str, context: str, video: str, sub: str,
+                  extra: str = "") -> str:
+    if video or context:
+        prompt = GROUNDED_PROMPT.format(
+            example=EXAMPLE, title=title or "нет", sub=sub or "нет",
+            context=(context or "нет")[:900],
+            video=video or "нет описания", lines=_LINE_FORMAT)
+    else:
+        prompt = SCENARIO_PROMPT.format(
+            example=EXAMPLE, title=title or "нет",
+            context=context or "нет", lines=_LINE_FORMAT)
+    return prompt + ("\n" + extra if extra else "")
+
+
+def _one(title: str, context: str, video: str, sub: str, model: str,
+         extra: str = "") -> dict | None:
+    prompt = _build_prompt(title, context, video, sub, extra)
+    last = None
+    for attempt in range(2):
         raw = ask(prompt, model=model)
         if not raw:
             continue
         blocks = _parse_blocks(raw)
         if blocks:
             b = blocks[0]
-            return {"title": (b["title"] or title).strip(),
-                    "script": b["script"]}
-        # модель могла ответить просто абзацем без маркеров
-        text = _clean(raw)
-        text = re.sub(r"^\s*(ЗАГОЛОВОК|ТЕКСТ|СЦЕНАРИЙ)\s*:.*$", "",
-                      text, flags=re.M)
-        text = _CLEAN_WS.sub(" ", text).strip()
-        if _usable(text) and 40 <= len(text.split()) <= 220:
-            return {"title": title, "script": text}
-        print(f"[LLM] сценарий не разобрался (попытка {attempt + 1}/3)",
-              flush=True)
+            script, ttl = b["script"], (b["title"] or title).strip()
+        else:
+            # ответ без маркеров: считаем всё текстом сценария
+            text = _clean(raw)
+            text = re.sub(r"^\s*(ЗАГОЛОВОК|ТЕКСТ|СЦЕНАРИЙ)\s*:.*$", "",
+                          text, flags=re.M)
+            script = _CLEAN_WS.sub(" ", text).strip()
+            ttl = title
+        if not script:
+            continue
+        last = {"title": ttl, "script": script}
+        why = _validate(script, title, video, context)
+        if not why:
+            return {"title": ttl, "script": _polish(script)}
+        print(f"[LLM] {why} (попытка {attempt + 1}/2)", flush=True)
+    # Не отдаём мусор: лучше пусто, чем текст не про тот ролик
+    if last:
+        print(f"[LLM] отбраковал сценарий: {last['script'][:80]}...", flush=True)
     return None
 
 
-def generate_variants(topic: str, model: str = MODEL) -> list:
-    prompt = VARIANTS_PROMPT.format(topic=topic, grammar=GRAMMAR)
-    for attempt in range(3):
-        raw = ask(prompt, model=model)
-        if not raw:
-            continue
-        blocks = _parse_blocks(raw)
-        if len(blocks) >= 2:
-            return blocks[:3]
-        print(f"[LLM] варианты не разобрались (попытка {attempt + 1}/3): "
-              f"блоков {len(blocks)}", flush=True)
-    # запасной путь: собрать варианты отдельными запросами
+def generate_scenario(title: str, context: str = "", video: str = "",
+                      sub: str = "", model: str = MODEL) -> dict | None:
+    """Сгенерировать сценарий под тему. -> {"title":..., "script":...} или None"""
+    return _one(title, context, video, sub, model)
+
+
+def generate_variants(topic: str, context: str = "", video: str = "",
+                      sub: str = "", model: str = MODEL) -> list:
+    """Три варианта — тремя отдельными запросами (три за раз модель валит)."""
     out = []
-    for i in range(3):
-        one = generate_scenario(f"{topic} (вариант {i + 1})", model=model)
+    for angle in _VARIANT_ANGLES:
+        if out:
+            time.sleep(4)      # бесплатный тариф душит частые запросы
+        one = _one(topic, context, video, sub, model, extra=angle)
         if one and _usable(one["script"]):
             out.append(one)
     return out

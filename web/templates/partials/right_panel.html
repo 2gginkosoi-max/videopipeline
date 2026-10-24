@@ -1,0 +1,24 @@
+<aside class="right-panel">
+  <div class="terminal-window glass-panel" id="log">
+    <div class="terminal-header">
+      <div class="terminal-dot dot-red"></div>
+      <div class="terminal-dot dot-yellow"></div>
+      <div class="terminal-dot dot-green"></div>
+      <span style="margin-left: 10px; font-size: 12px; color: #888; font-family: monospace;">auto_news.py — live</span>
+      <span class="step step--live" id="liveDot" style="margin-left:auto; color:#ffa500;">●</span>
+    </div>
+    <div class="terminal-body" id="logBody">
+      <div class="term-line term-line--dim">// Ожидание запуска конвейера...</div>
+    </div>
+    <div class="terminal-footer" style="display:flex; gap:6px; padding:8px; border-top:1px solid rgba(255,255,255,0.08);">
+      <button type="button" class="btn btn--mini btn--ghost" id="copyLog">Копировать</button>
+      <button type="button" class="btn btn--mini btn--ghost" id="clearLog">Очистить</button>
+      <span class="hint" id="logMeta" style="margin-left:auto;">ожидание запуска</span>
+    </div>
+  </div>
+
+  <div class="panel-stats">
+    <div class="stat"><span class="stat__num" id="statVideos">—</span><span class="stat__label">моих роликов</span></div>
+    <div class="stat"><span class="stat__num" id="statVoices">0</span><span class="stat__label">моих голосов</span></div>
+  </div>
+</aside>

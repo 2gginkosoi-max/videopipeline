@@ -1,0 +1,497 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+/* ==========================================
+   1. БАЗОВЫЕ ПЕРЕМЕННЫЕ И СБРОС
+   ========================================== */
+:root {
+  --bg-glass: rgba(15, 15, 20, 0.65);
+  --blur-glass: blur(12px);
+  --border-glass: 1px solid rgba(255, 255, 255, 0.1);
+  --neon-accent: #FFA500;
+  --text-main: #FFFFFF;
+  --text-muted: #A0A0A0;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #0a0a0f;
+  color: var(--text-main);
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* ==========================================
+   2. ФОН И СЕТКА ПРИЛОЖЕНИЯ
+   ========================================== */
+.bg-video-container {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: -2; pointer-events: none;
+}
+.bg-video { width: 100%; height: 100%; object-fit: cover; }
+.bg-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.3); z-index: -1; pointer-events: none;
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr 340px;
+  height: 100vh;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* ==========================================
+   3. СТЕКЛО И ЛЕВОЕ МЕНЮ
+   ========================================== */
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border: var(--border-glass);
+  border-radius: 16px;
+}
+
+.sidebar {
+  display: flex; flex-direction: column; gap: 10px; padding: 20px;
+}
+.sidebar-logo { text-align: center; padding: 10px 0; font-weight: bold; }
+.nav-btn {
+  background: transparent; border: 1px solid transparent; color: var(--text-muted);
+  padding: 12px 15px; border-radius: 8px; cursor: pointer; text-align: left;
+  font-size: 14px; transition: 0.3s; width: 100%;
+}
+.nav-btn:hover { color: var(--text-main); background: rgba(255,255,255,0.05); }
+.nav-btn.is-active {
+  color: var(--text-main);
+  border-color: var(--neon-accent);
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.3), inset 0 0 5px rgba(255, 165, 0, 0.1);
+}
+
+/* ==========================================
+   4. ЦЕНТРАЛЬНАЯ ЧАСТЬ (КАРТОЧКИ)
+   ========================================== */
+.main { display: flex; flex-direction: column; overflow-y: auto; padding-right: 5px;
+padding-bottom: 40px; }
+.assembly-form { display: flex; flex-direction: column; gap: 20px; }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.step-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 240px;
+  overflow: hidden;
+  grid-column: span 2;
+  padding: 0; /* Убираем паддинг, он внутри */
+}
+.step-card:nth-child(4),
+.step-card:nth-child(5) {
+  grid-column: span 3;
+}
+
+.step-card__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 22px 0;
+}
+.step-card__index {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 165, 0, 0.6);
+  font-family: 'JetBrains Mono', monospace;
+  box-shadow: 0 0 16px rgba(255, 165, 0, 0.25);
+}
+.step-card__titles h3 { font-size: 16px; margin: 0; }
+.step-card__titles p { margin-top: 4px; font-size: 13px; color: var(--text-muted); }
+
+.step-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 20px 15px;
+  flex: 1;
+}
+
+/* ==========================================
+   5. ИНПУТЫ И КНОПКИ
+   ========================================== */
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field__label { font-size: 13px; color: var(--text-muted); }
+.field__row { display: flex; align-items: center; gap: 10px; }
+
+.field__input,
+.field__textarea,
+.field__select {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0,0,0,0.3);
+  color: var(--text-main);
+  font: 14px/1.7 'Inter', sans-serif;
+  padding: 10px 14px;
+  outline: none;
+  transition: border 160ms ease, box-shadow 160ms ease;
+}
+.field__input:focus,
+.field__textarea:focus,
+.field__select:focus {
+  border-color: rgba(255, 165, 0, 0.6);
+  box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.08);
+}
+.field__textarea { min-height: 100px; resize: vertical; }
+.field__range { width: 100%; accent-color: var(--neon-accent); }
+
+.btn-preview {
+  border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.16);
+  background: transparent; color: var(--text-main); padding: 9px 14px; cursor: pointer;
+}
+.btn-preview:hover { border-color: rgba(255, 165, 0, 0.6); box-shadow: 0 0 10px rgba(255, 165, 0, 0.25); }
+
+.btn-run {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 165, 0, 0.7);
+  background: radial-gradient(circle at top, rgba(255, 165, 0, 0.9), rgba(255, 120, 0, 0.7));
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  padding: 12px 20px;
+  cursor: pointer;
+  box-shadow: 0 0 40px rgba(255, 165, 0, 0.25);
+  margin-top: 0;
+}
+.btn-run:hover { box-shadow: 0 0 60px rgba(255, 165, 0, 0.4); }
+
+.subtitle-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; }
+.subtitle-pill {
+  border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent; color: var(--text-muted); font-size: 13px;
+  padding: 8px 12px; text-align: center; cursor: pointer;
+}
+.subtitle-pill.is-active { color: var(--text-main); border-color: rgba(255, 165, 0, 0.7); box-shadow: 0 0 10px rgba(255, 165, 0, 0.25); }
+
+/* Терминал */
+.right-panel { display: flex; flex-direction: column; gap: 20px; }
+.terminal-window { background: #0d0d0d; border: var(--border-glass); border-radius: 12px; display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+.terminal-header { padding: 10px; background: #1a1a1a; display: flex; gap: 6px; }
+.terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-red { background: #ff5f56; } .dot-yellow { background: #ffbd2e; } .dot-green { background: #27c93f; }
+.terminal-body { padding: 15px; font-family: monospace; font-size: 13px; color: #27c93f; overflow-y: auto; }
+.bottom-nav {
+  display: none !important;
+}
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden; /* Чтобы ничего не вылезало */
+}
+
+.terminal-window {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Растягиваем на всю высоту */
+}
+
+.terminal-body {
+  flex: 1; /* Терминал занимает всё свободное место */
+  overflow-y: auto; /* Добавляет скролл внутри терминала, если логов будет много */
+}
+
+/* ==========================================
+   6. ПИКСЕЛЬНЫЕ ШРИФТЫ
+   ========================================== */
+.step-card__index,
+.step-card__titles h3,
+.nav-btn,
+.btn-run {
+  font-family: 'Press Start 2P', monospace;
+}
+
+.field__input,
+.field__textarea,
+.field__select,
+.hint,
+.step-card__titles p,
+.news-card,
+.video-preview-container {
+  font-family: 'VT323', monospace;
+}
+
+/* ==========================================
+   7. ШАГ 1: КНОПКА ПОИСКА НОВОСТЕЙ
+   ========================================== */
+.search-news-btn {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 165, 0, 0.7);
+  background: radial-gradient(circle at top, rgba(255, 165, 0, 0.85), rgba(255, 120, 0, 0.55));
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 0 26px rgba(255, 165, 0, 0.25);
+  transition: box-shadow 160ms ease, transform 120ms ease;
+}
+.search-news-btn:hover {
+  box-shadow: 0 0 44px rgba(255, 165, 0, 0.45);
+  transform: translateY(-1px);
+}
+.search-news-btn:active { transform: translateY(0); }
+
+/* ==========================================
+   8. ШАГ 1: КАРТОЧКИ НОВОСТЕЙ
+   ========================================== */
+#newsResults { margin-top: 12px; }
+
+#newsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.news-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.38);
+  color: var(--text-main);
+  font-size: 15px;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 120ms ease;
+}
+.news-card:hover,
+.news-card:focus-visible {
+  border-color: var(--neon-accent);
+  box-shadow: 0 0 18px rgba(255, 165, 0, 0.35), inset 0 0 8px rgba(255, 165, 0, 0.08);
+  transform: translateY(-1px);
+  outline: none;
+}
+.news-card.is-selected {
+  border-color: var(--neon-accent);
+  box-shadow: 0 0 24px rgba(255, 165, 0, 0.45);
+}
+
+.news-card__num {
+  flex: 0 0 auto;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--neon-accent);
+  padding-top: 2px;
+}
+.news-card__title { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.news-card__meta { font-size: 13px; color: var(--text-muted); }
+
+/* ==========================================
+   9. ШАГ 2: ЗАГЛУШКА ВИДЕО
+   ========================================== */
+.video-preview-container {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  border: 2px dashed rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.45);
+  color: var(--text-muted);
+  font-size: 15px;
+  text-align: center;
+  overflow: hidden;
+  transition: border-color 200ms ease, box-shadow 200ms ease, color 200ms ease;
+}
+.video-preview-container.is-loaded {
+  border-style: solid;
+  border-color: rgba(255, 165, 0, 0.6);
+  color: var(--text-main);
+  box-shadow: 0 0 24px rgba(255, 165, 0, 0.2);
+}
+.video-preview-container__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.video-preview-container__icon {
+  font-size: 30px;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+/* ==========================================
+   10. БЛОКИРОВКА ШАГОВ 3–5
+   ========================================== */
+.step-card.is-locked {
+  opacity: 0.45;
+  pointer-events: none;
+  filter: grayscale(0.5);
+}
+.step-card.is-locked .step-card__index {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+.step-card.is-done .step-card__index {
+  border-color: var(--neon-accent);
+  box-shadow: 0 0 18px rgba(255, 165, 0, 0.45);
+}
+
+/* ==========================================
+   11. КАРТОЧКИ: НЕ РАСТЯГИВАТЬСЯ ПО ВЫСОТЕ
+   ========================================== */
+.steps-grid {
+  align-items: start;
+}
+
+/* ==========================================
+   12. ВАРИАНТЫ СЦЕНАРИЯ: ВНУТРЕННЯЯ ПРОКРУТКА
+   ========================================== */
+#variants {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* тонкий скроллбар под тёмную тему */
+#variants::-webkit-scrollbar { width: 6px; }
+#variants::-webkit-scrollbar-track { background: transparent; }
+#variants::-webkit-scrollbar-thumb {
+  background: rgba(255, 165, 0, 0.45);
+  border-radius: 3px;
+}
+#variants::-webkit-scrollbar-thumb:hover { background: rgba(255, 165, 0, 0.7); }
+
+/* ==========================================
+   13. СПИСОК НОВОСТЕЙ: СВОЯ ПРОКРУТКА
+   ========================================== */
+#newsList {
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+#newsList::-webkit-scrollbar { width: 6px; }
+#newsList::-webkit-scrollbar-track { background: transparent; }
+#newsList::-webkit-scrollbar-thumb {
+  background: rgba(255, 165, 0, 0.45);
+  border-radius: 3px;
+}
+
+/* ==========================================
+   14. ПРЕВЬЮ B-ROLL
+   ========================================== */
+.broll-status {
+  font-size: 12px;
+  color: var(--text-muted);
+  word-break: break-all;
+  max-width: 92%;
+}
+
+.video-preview-container.has-video {
+  display: block;
+  aspect-ratio: auto;
+  padding: 0;
+  border-style: solid;
+  border-color: rgba(255, 165, 0, 0.55);
+  background: #000;
+}
+
+.video-preview-container__video {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 360px;
+  margin: 0 auto;
+  background: #000;
+}
+
+.video-preview-container__caption {
+  padding: 8px 10px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+/* ==========================================
+   15. ВЫБРАННЫЙ ВАРИАНТ СЦЕНАРИЯ
+   ========================================== */
+#variants .variant.is-selected {
+  border-color: rgba(255, 165, 0, 0.5);
+  box-shadow: 0 0 18px rgba(255, 165, 0, 0.18);
+}
+
+/* ==========================================
+   16. ШАГ 1: ССЫЛКА НА ПОСТ И КНОПКА «ВЫБРАТЬ»
+   ========================================== */
+.news-card__side {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.news-card__open {
+  font-size: 16px;
+  line-height: 1;
+  color: var(--text-muted);
+  transition: color 160ms ease, transform 160ms ease;
+}
+.news-card:hover .news-card__open,
+.news-card:focus-visible .news-card__open {
+  color: var(--neon-accent);
+  transform: translate(1px, -1px);
+}
+
+.news-card__pick {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 7px 9px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 165, 0, 0.45);
+  background: rgba(255, 165, 0, 0.12);
+  color: #ffd08a;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+.news-card__pick:hover,
+.news-card__pick:focus-visible {
+  background: rgba(255, 165, 0, 0.26);
+  border-color: var(--neon-accent);
+  outline: none;
+}
+
+.news-card__text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

@@ -1,0 +1,24 @@
+<aside class="sidebar glass-panel">
+  <div class="sidebar-logo">
+    <img class="sidebar-logo__img" src="/static/img/goose.png" alt="Гусь">
+    <div class="sidebar-logo__title">Гусь видеоконвейер</div>
+  </div>
+
+  <nav style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+    <button class="nav-btn is-active" data-tab="assembly">Сборка</button>
+    <button class="nav-btn" data-tab="slicing">Нарезка</button>
+    <button class="nav-btn" data-tab="archive">Архив</button>
+    <button class="nav-btn" data-tab="profile">Профиль</button>
+  </nav>
+
+  <div class="sidebar__user">
+    <div id="userMenu" hidden class="user-inline">
+      <span class="user-chip__avatar" id="userAvatar">?</span>
+      <span class="user-chip__name" id="userName">—</span>
+      <button type="button" class="user-logout" id="logoutBtn"
+              title="Выйти из аккаунта" aria-label="Выйти">⏻</button>
+    </div>
+    <a class="btn btn--mini btn--accent" href="/login" id="loginBtn" hidden
+       style="width:100%; justify-content:center;">Войти</a>
+  </div>
+</aside>

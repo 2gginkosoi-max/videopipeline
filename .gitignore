@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.so
+
+# ===== Р’РёСЂС‚СѓР°Р»СЊРЅС‹Рµ РѕРєСЂСѓР¶РµРЅРёСЏ =====
+venv/
+.venv/
+env/
+ENV/
 .Python
 build/
 develop-eggs/
@@ -76,3 +82,6 @@ assets/audio/bed_*.wav
 .cache/
 __pycache__/
 node_modules/
+
+# ===== Web: скачанные b-roll превью (шаг 2) =====
+web/static/tmp/
