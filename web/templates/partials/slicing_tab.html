@@ -16,6 +16,7 @@
       <div class="field">
         <label class="field__label">Ссылка YouTube</label>
         <input type="text" name="youtubeUrl" class="field__input" placeholder="https://www.youtube.com/watch?v=...">
+        <div class="hint">Если YouTube просит подтвердить вход — обновите yt-dlp или скачайте видео и загрузите файлом.</div>
       </div>
     </div>
   </article>
@@ -209,8 +210,10 @@
         }, 1500);
       });
     } catch (err) {
-      setStatus('Ошибка: ' + err.message);
-      alert('Ошибка нарезки: ' + err.message);
+      const text = (err && err.message) ? err.message : 'неизвестная ошибка';
+      const short = text.length > 700 ? text.slice(0, 700) + '…' : text;
+      setStatus('Ошибка: ' + short);
+      alert('Ошибка нарезки: ' + short);
     } finally {
       slicing = false;
       if (startBtn) startBtn.disabled = false;

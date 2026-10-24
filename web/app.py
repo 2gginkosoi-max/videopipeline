@@ -1183,31 +1183,113 @@ def _safe_name(name: str, fallback: str = "video.mp4") -> str:
     return base[-80:]
 
 
-def _download_video(url: str, tmp_dir: Path) -> Path:
-    """Скачать видео по ссылке через yt-dlp -> путь к файлу."""
+# Скачивание по ссылке: yt-dlp + обход bot-check YouTube.
+YTDLP_COOKIES = os.environ.get("YTDLP_COOKIES", "").strip()
+YTDLP_BROWSER = os.environ.get("YTDLP_COOKIES_FROM_BROWSER", "").strip()
+YTDLP_NO_BROWSER = os.environ.get("YTDLP_NO_BROWSER_COOKIES", "").strip().lower() in (
+    "1", "true", "yes", "on")
+YTDLP_CLIENTS = ("android_vr", "web_safari", "tv")
+
+_ANSI_RE = re.compile(r"\x1b\[[0-9;]*m")
+_CTRL_RE = re.compile(r"[\x00-\x08\x0b-\x1f\x7f]")
+
+
+def _clean_error(text) -> str:
+    """Убрать ANSI-цвета и управляющие символы из вывода yt-dlp."""
+    text = _ANSI_RE.sub("", str(text))
+    text = _CTRL_RE.sub("", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _bot_check(text: str) -> bool:
+    low = text.lower()
+    return any(k in low for k in (
+        "sign in to confirm", "not a bot", "confirm you're not a bot",
+        "login required", "cookies",
+    ))
+
+
+def _download_hint(exc: Exception) -> str:
+    msg = _clean_error(exc)[:600]
+    if _bot_check(msg):
+        return (
+            "YouTube требует подтвердить вход (bot-check). Что делать: "
+            "1) обновите yt-dlp: python -m pip install -U yt-dlp; "
+            "2) передайте cookies браузера: YTDLP_COOKIES_FROM_BROWSER=chrome "
+            "(или edge/firefox), либо файл cookies: YTDLP_COOKIES=C:\\path\\cookies.txt; "
+            "3) проще всего — скачать видео вручную и загрузить его файлом. "
+            "Ответ yt-dlp: " + msg
+        )
+    return msg or "не удалось скачать видео"
+
+
+def _download_video(url: str, tmp_dir: Path, note=None) -> Path:
+    """Скачать видео по ссылке через yt-dlp -> путь к файлу.
+
+    Сначала обычная загрузка. Если YouTube просит вход (bot-check) — пробуем
+    cookies из браузера (настроенные или chrome/edge/firefox) и альтернативные
+    клиенты YouTube. Каждая попытка пишется в журнал через ``note``.
+    """
     try:
         import yt_dlp  # type: ignore
     except ModuleNotFoundError as exc:
-        raise RuntimeError("yt-dlp не установлен: pip install yt-dlp") from exc
+        raise RuntimeError("yt-dlp не установлен: python -m pip install yt-dlp") from exc
 
-    base = tmp_dir / f"dl_{uuid.uuid4().hex[:12]}"
-    opts = {
-        "outtmpl": f"{base}.%(ext)s",
+    base = {
         "format": "bv*[height<=1080]+ba/b[height<=1080]/b",
         "merge_output_format": "mp4",
         "noplaylist": True,
         "quiet": True,
         "no_warnings": True,
         "noprogress": True,
+        "color": "never",
     }
-    with yt_dlp.YoutubeDL(opts) as ydl:
-        ydl.download([url])
 
-    files = sorted(tmp_dir.glob(base.name + ".*"),
-                   key=lambda p: p.stat().st_size, reverse=True)
-    if not files:
-        raise RuntimeError("файл не скачался")
-    return files[0]
+    def attempt(label: str, extra: dict) -> Path:
+        stem = tmp_dir / f"dl_{uuid.uuid4().hex[:12]}"
+        opts = {**base, **extra, "outtmpl": f"{stem}.%(ext)s"}
+        if note:
+            note(f"… {label}")
+        with yt_dlp.YoutubeDL(opts) as ydl:
+            ydl.download([url])
+        files = sorted(tmp_dir.glob(stem.name + ".*"),
+                       key=lambda p: p.stat().st_size, reverse=True)
+        if not files:
+            raise RuntimeError("файл не скачался")
+        return files[0]
+
+    try:
+        return attempt("загрузка по ссылке", {})
+    except Exception as exc:  # noqa: BLE001
+        first = exc
+
+    first_text = _clean_error(first)
+    if not _bot_check(first_text):
+        try:
+            return attempt("другой клиент YouTube", {
+                "extractor_args": {"youtube": {"player_client": list(YTDLP_CLIENTS)}}})
+        except Exception as exc:  # noqa: BLE001
+            raise RuntimeError(_download_hint(exc)) from exc
+
+    plans: list = []
+    if YTDLP_COOKIES:
+        plans.append((f"cookies из файла {YTDLP_COOKIES}", {"cookiefile": YTDLP_COOKIES}))
+    if YTDLP_BROWSER:
+        plans.append((f"cookies из {YTDLP_BROWSER}", {"cookiesfrombrowser": (YTDLP_BROWSER,)}))
+    if not YTDLP_NO_BROWSER:
+        for browser in ("chrome", "edge", "firefox"):
+            plans.append((f"cookies из {browser}", {"cookiesfrombrowser": (browser,)}))
+    plans.append(("другой клиент YouTube", {
+        "extractor_args": {"youtube": {"player_client": list(YTDLP_CLIENTS)}}}) )
+
+    last = first
+    for label, extra in plans:
+        try:
+            return attempt(label, extra)
+        except Exception as exc:  # noqa: BLE001
+            last = exc
+
+    raise RuntimeError(_download_hint(last)) from last
 
 
 def _probe_duration(path: Path) -> float:
@@ -1270,6 +1352,7 @@ async def api_slicing_start(
 
     upload = video_file or videoFile
     input_path: Path | None = None
+    dl_lines: list[str] = []   # строки скачивания — попадём ими в лог задачи
 
     if upload is not None and upload.filename:
         safe = _safe_name(upload.filename)
@@ -1278,10 +1361,22 @@ async def api_slicing_start(
             while chunk := await upload.read(1024 * 1024):
                 out.write(chunk)
     elif youtubeUrl.strip():
+        loop = asyncio.get_running_loop()
+
+        def note(line: str) -> None:
+            dl_lines.append(line)
+            loop.call_soon_threadsafe(broadcast, "log", {"line": line})
+
+        note("● Нарезка: старт (ссылка) — скачиваю видео…")
         try:
-            input_path = await asyncio.to_thread(_download_video, youtubeUrl.strip(), tmp_dir)
+            input_path = await asyncio.to_thread(
+                _download_video, youtubeUrl.strip(), tmp_dir, note)
         except Exception as exc:  # noqa: BLE001
-            raise HTTPException(400, f"Не удалось скачать видео: {exc}") from exc
+            msg = _clean_error(exc)
+            note(f"✗ Нарезка: {msg}")
+            raise HTTPException(400, msg) from exc
+        note(f"● Нарезка: видео скачано "
+             f"({input_path.stat().st_size / 1024 / 1024:.1f} МБ)")
 
     if input_path is None or not input_path.exists() or input_path.stat().st_size == 0:
         raise HTTPException(400, "Укажите видеофайл или ссылку YouTube")
@@ -1299,13 +1394,16 @@ async def api_slicing_start(
         "error": None,
         "started": datetime.now().isoformat(timespec="seconds"),
         "finished": None,
-        "log": [],
+        "log": list(dl_lines),
         # meta нужен общим эндпоинтам /api/jobs: они фильтруют по user_id
         "meta": {"user_id": user["id"], "kind": "slicing",
                  "sub_style": sub_style or "classic"},
     }
-    src = "файл" if upload is not None and upload.filename else "ссылка"
-    _slice_event(job_id, f"● Нарезка: старт ({src})", status="start")
+    if dl_lines:
+        # для ссылки строка старта уже ушла в лог до скачивания
+        broadcast("slicing", {"job_id": job_id, "status": "start"})
+    else:
+        _slice_event(job_id, "● Нарезка: старт (файл)", status="start")
     asyncio.create_task(_run_slicing(job_id, input_path))
 
     return {"ok": True, "job_id": job_id}
