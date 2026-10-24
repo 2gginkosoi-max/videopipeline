@@ -69,6 +69,23 @@ def _ffmpeg() -> str:
 
 FFMPEG = _ffmpeg()
 
+
+def _ffprobe() -> str:
+    env = os.environ.get("FFPROBE_PATH", "").strip()
+    if env:
+        return env
+    legacy = Path(r"C:\Users\nasle\tools\ffmpeg\ffprobe.exe")
+    if legacy.is_file():
+        return str(legacy)
+    if FFMPEG and os.path.sep in FFMPEG:
+        sibling = Path(FFMPEG).with_name("ffprobe" + (".exe" if os.name == "nt" else ""))
+        if sibling.is_file():
+            return str(sibling)
+    return shutil.which("ffprobe") or "ffprobe"
+
+
+FFPROBE = _ffprobe()
+
 # Кэш моделей HuggingFace (SmolVLM и пр.)
 HF_CACHE = _env_path("HF_HOME") or _existing_dir(
     Path(r"D:\AI\hf_cache"), REPO_ROOT / ".cache" / "hf")
