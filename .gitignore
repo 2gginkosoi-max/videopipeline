@@ -76,3 +76,6 @@ assets/audio/bed_*.wav
 .cache/
 __pycache__/
 node_modules/
+
+# ===== Python venv (локальная проверка) =====
+.venv/
