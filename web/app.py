@@ -58,6 +58,8 @@ import news as news_mod  # noqa: E402
 import voices        # noqa: E402
 import voice_samples # noqa: E402
 import vision        # noqa: E402
+import subs as subs_mod        # noqa: E402
+import vertical as vertical_mod  # noqa: E402
 
 # ---------------------------------------------------------------- paths
 
@@ -1172,6 +1174,7 @@ async def health():
 
 SLICE_LEN = 45.0        # длина клипа, сек
 MIN_CLIP = 1.0          # клипы короче не отдаём
+MIN_TAIL = 15.0         # хвостик короче — приклеиваем к предыдущему клипу
 # reencode — точные границы (по умолчанию); copy — быстро, но режет по ключевым
 # кадрам, поэтому клипы получаются длиннее заданных и перекрываются.
 SLICE_MODE = (os.environ.get("SLICE_MODE", "reencode") or "reencode").strip().lower()
@@ -1304,32 +1307,50 @@ def _probe_duration(path: Path) -> float:
         return 0.0
 
 
-def _cut_clip(src: Path, start: float, length: float, out: Path) -> None:
+def _cut_clip(src: Path, start: float, length: float, out: Path, *,
+              vertical: bool = True, cam: dict | None = None,
+              cam_pos: str = "bottom", src_size: tuple = (0, 0),
+              subs_name: str | None = None, fonts_dir: str | None = None):
     """Вырезать ровно ``length`` секунд с позиции ``start``.
 
-    По умолчанию перекодируем: только так границы совпадают с кадрами
-    (потоковое копирование режет по ключевым кадрам и клипы «плывут»).
-    Режим copy — быстрый, для случаев, когда точность не важна.
+    vertical=True — собрать 1080×1920: размытый фон, основное видео по центру,
+    вебка (если есть) сверху/снизу, при ``subs_name`` — прожигаем субтитры.
+    Перекодирование обязательно: только так границы совпадают с кадрами.
     """
-    common = ["-y", "-hide_banner", "-loglevel", "error",
-              "-ss", f"{start:.3f}", "-i", str(src), "-t", f"{length:.3f}",
-              "-map", "0:v:0", "-map", "0:a?"]
+    common = [FFMPEG, "-y", "-hide_banner", "-loglevel", "error",
+              "-ss", f"{start:.3f}", "-i", str(src), "-t", f"{length:.3f}"]
 
-    if SLICE_MODE == "copy":
-        copy_cmd = [FFMPEG, *common, "-c", "copy",
-                    "-avoid_negative_ts", "make_zero", str(out)]
+    if vertical:
+        graph, label = vertical_mod.build_filter(
+            src_size[0], src_size[1], cam, cam_pos, subs_name, fonts_dir)
+        cmd = [*common, "-filter_complex", graph,
+               "-map", f"[{label}]", "-map", "0:a?"]
+    else:
+        cmd = [*common, "-map", "0:v:0", "-map", "0:a?"]
+        if subs_name:
+            fonts = f":fontsdir='{fonts_dir}'" if fonts_dir else ""
+            cmd += ["-vf", f"ass={subs_name}{fonts}"]
+
+    if SLICE_MODE == "copy" and not vertical and not subs_name:
+        copy_cmd = [*cmd, "-c", "copy", "-avoid_negative_ts", "make_zero", str(out)]
         p = subprocess.run(copy_cmd, capture_output=True, text=True, errors="replace")
         if p.returncode == 0 and out.exists() and out.stat().st_size > 1024:
             return
 
-    reenc_cmd = [FFMPEG, *common, "-c:v", "libx264", "-preset", "veryfast",
-                 "-crf", "23", "-pix_fmt", "yuv420p",
-                 "-c:a", "aac", "-b:a", "128k",
-                 "-movflags", "+faststart", str(out)]
-    p2 = subprocess.run(reenc_cmd, capture_output=True, text=True, errors="replace")
+    cmd += ["-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
+            "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k",
+            "-movflags", "+faststart", str(out)]
+    # cwd=папка клипа: имя ASS относительное, без проблем с ':' в путях Windows
+    p2 = subprocess.run(cmd, cwd=str(out.parent), capture_output=True,
+                        text=True, errors="replace")
     if p2.returncode != 0 or not out.exists() or out.stat().st_size == 0:
-        tail = (p2.stderr or "").strip().splitlines()[-3:]
+        tail = (p2.stderr or "").strip().splitlines()[-4:]
         raise RuntimeError("ffmpeg не смог нарезать: " + " | ".join(tail))
+
+    # libass без шрифтов молча не рисует текст — сообщим об этом один раз
+    if subs_name and "fontconfig" in (p2.stderr or "").lower():
+        return "шрифты для субтитров не найдены (Montserrat) — текст не отрисован"
+    return None
 
 
 @app.post("/api/slicing/start")
@@ -1338,6 +1359,9 @@ async def api_slicing_start(
     videoFile: UploadFile | None = File(None),
     youtubeUrl: str = Form(""),
     sub_style: str = Form("classic"),
+    vertical: str = Form("1"),
+    subs: str = Form("1"),
+    webcam: str = Form("auto"),
     user: dict | None = Depends(auth.current_user),
 ):
     """Запуск нарезки видео на клипы: загруженный файл или ссылка (yt-dlp).
@@ -1381,6 +1405,12 @@ async def api_slicing_start(
     if input_path is None or not input_path.exists() or input_path.stat().st_size == 0:
         raise HTTPException(400, "Укажите видеофайл или ссылку YouTube")
 
+    vertical_on = _truthy(vertical, True)
+    subs_on = _truthy(subs, True)
+    webcam_mode = (webcam or "auto").strip().lower()
+    if webcam_mode not in ("auto", "off", "top", "bottom"):
+        webcam_mode = "auto"
+
     job_id = uuid.uuid4().hex[:12]
     out_dir = voices.user_video_dir(user["id"])
     JOBS[job_id] = {
@@ -1397,16 +1427,28 @@ async def api_slicing_start(
         "log": list(dl_lines),
         # meta нужен общим эндпоинтам /api/jobs: они фильтруют по user_id
         "meta": {"user_id": user["id"], "kind": "slicing",
-                 "sub_style": sub_style or "classic"},
+                 "sub_style": sub_style or "classic",
+                 "vertical": vertical_on, "subs": subs_on,
+                 "webcam": webcam_mode},
     }
     if dl_lines:
         # для ссылки строка старта уже ушла в лог до скачивания
         broadcast("slicing", {"job_id": job_id, "status": "start"})
     else:
         _slice_event(job_id, "● Нарезка: старт (файл)", status="start")
-    asyncio.create_task(_run_slicing(job_id, input_path))
+    asyncio.create_task(_run_slicing(
+        job_id, input_path, vertical=vertical_on, subs_on=subs_on,
+        style=sub_style or "classic", webcam_mode=webcam_mode))
 
     return {"ok": True, "job_id": job_id}
+
+
+def _truthy(value, default: bool = True) -> bool:
+    """Флаг из формы: "0"/"false"/"off"/"no"/пусто -> False."""
+    text = str(value if value is not None else "").strip().lower()
+    if not text:
+        return default
+    return text not in ("0", "false", "off", "no", "нет")
 
 
 def _slice_event(job_id: str, line: str, **extra) -> None:
@@ -1419,8 +1461,10 @@ def _slice_event(job_id: str, line: str, **extra) -> None:
         broadcast("slicing", {"job_id": job_id, **extra})
 
 
-async def _run_slicing(job_id: str, input_path: Path) -> None:
-    """Нарезать видео на клипы по SLICE_LEN секунд."""
+async def _run_slicing(job_id: str, input_path: Path, *, vertical: bool = True,
+                       subs_on: bool = True, style: str = "classic",
+                       webcam_mode: str = "auto") -> None:
+    """Нарезать видео на клипы 9:16 с субтитрами."""
     job = JOBS.get(job_id)
     if not job:
         return
@@ -1442,24 +1486,89 @@ async def _run_slicing(job_id: str, input_path: Path) -> None:
             start = end
         if not ranges:
             raise RuntimeError("видео короче одного клипа")
+        # короткий хвост (5–15 с) лучше приклеить к предыдущему клипу,
+        # чем отдавать обрубок, который никуда не годится
+        if len(ranges) >= 2 and ranges[-1][1] - ranges[-1][0] < MIN_TAIL:
+            ranges[-2] = (ranges[-2][0], ranges[-1][1])
+            ranges.pop()
+
+        src_w, src_h = (0, 0)
+        cam = None
+        if vertical:
+            src_w, src_h = await asyncio.to_thread(
+                vertical_mod.probe_size, FFPROBE, input_path)
+            if webcam_mode != "off":
+                _slice_event(job_id, "• ищу вебку в кадре…", status="progress", progress=0.0)
+                cam = await asyncio.to_thread(
+                    vertical_mod.detect_webcam, input_path, duration, FFMPEG, FFPROBE)
+                if cam:
+                    _slice_event(job_id,
+                                 f"• вебка: {cam['corner']} {cam['w']}×{cam['h']} "
+                                 f"(в {cam['score']} кадрах)",
+                                 status="progress", progress=0.0)
+                else:
+                    _slice_event(job_id, "• вебка не найдена — только вертикаль и фон",
+                                 status="progress", progress=0.0)
+            _slice_event(job_id, "• формат: 1080×1920, размытый фон",
+                         status="progress", progress=0.0)
+
+        words: list = []
+        if subs_on:
+            _slice_event(job_id, "• распознаю речь (faster-whisper)…",
+                         status="progress", progress=0.0)
+            try:
+                words = await asyncio.to_thread(subs_mod.transcribe_words, input_path)
+                _slice_event(job_id, f"• слов распознано: {len(words)}",
+                             status="progress", progress=0.0)
+            except Exception as exc:  # noqa: BLE001
+                _slice_event(job_id, "! субтитры пропущены: " + _clean_error(exc)[:300])
+                words = []
+
         _slice_event(job_id, f"• Нарезка: {duration:.1f} с → {len(ranges)} клипов",
                      status="progress", progress=0.0)
+
+        cam_pos = vertical_mod.cam_position(cam, webcam_mode)
+        margin_v = 620 if (cam and cam_pos == "bottom") else 400
+        fonts_dir = os.environ.get("SUB_FONTS_DIR", "").strip() or None
 
         clips = []
         for i, (start, end) in enumerate(ranges):
             out_name = f"sliced_{job_id}_{i:03d}.mp4"
             out_path = out_dir / out_name
-            await asyncio.to_thread(_cut_clip, input_path, start, end - start, out_path)
+            ass_path = out_dir / f"sliced_{job_id}_{i:03d}.ass"
+            subs_name = None
+            n_words = 0
+            if words:
+                n_words = subs_mod.build_clip_ass(
+                    words, start, end, style, ass_path, margin_v=margin_v)
+                if n_words:
+                    subs_name = ass_path.name
+            try:
+                warn = await asyncio.to_thread(
+                    _cut_clip, input_path, start, end - start, out_path,
+                    vertical=vertical, cam=cam, cam_pos=cam_pos,
+                    src_size=(src_w, src_h), subs_name=subs_name,
+                    fonts_dir=fonts_dir)
+                if warn and not job.get("fonts_warned"):
+                    job["fonts_warned"] = True
+                    _slice_event(job_id, "! " + warn)
+            finally:
+                if ass_path.exists():
+                    ass_path.unlink(missing_ok=True)
+
             actual = await asyncio.to_thread(_probe_duration, out_path)
             clips.append({
                 "filename": out_name,
                 "duration": round(actual or (end - start), 1),
                 "url": f"/api/slicing/clip/{job_id}/{out_name}",
+                "subs": bool(n_words),
+                "words": n_words,
             })
             job["clips"] = list(clips)
             job["progress"] = round((i + 1) / len(ranges), 3)
             _slice_event(job_id,
-                         f"• клип {i + 1}/{len(ranges)} — {clips[-1]['duration']:.1f} с",
+                         f"• клип {i + 1}/{len(ranges)} — {clips[-1]['duration']:.1f} с"
+                         + (f", слов {n_words}" if n_words else ""),
                          status="progress", progress=job["progress"])
 
         job["status"] = "completed"
