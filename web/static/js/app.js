@@ -811,9 +811,39 @@
     }
   }
 
+  /* ------------------------------------------------ чистота адресной строки */
+
+  /* Ни одна страница конвейера не читает query-параметры: состояние живёт
+     в памяти/sessionStorage. Поэтому всё, что браузер дописал в URL сам
+     (например, при нативной GET-отправке формы), — мусор, который портит
+     ссылку на сайт. Чистим его, оставляя только путь и якорь раздела. */
+  function cleanAddressBar() {
+    if (!location.search) return;
+    const cleaned = location.pathname + location.hash;
+    if (location.href === location.origin + cleaned) return;
+    history.replaceState(null, "", cleaned);
+  }
+
+  /* Enter в текстовом поле отправляет форму нативно (метод GET по умолчанию)
+     и дописывает в адресную строку все её поля: ?videoFile=&youtubeUrl=…#assembly.
+     Гасим нативную отправку: обработчики submit (initForm, логин) продолжают
+     работать, но страница больше не перезагружается с грязным URL. */
+  function initAddressBarGuard() {
+    cleanAddressBar();
+
+    document.addEventListener("submit", (e) => {
+      const form = e.target;
+      if (!(form instanceof HTMLFormElement)) return;
+      const method = (form.getAttribute("method") || "get").toLowerCase();
+      // Формы с явным POST/action — это не наша история, их не трогаем.
+      if (method !== "post" && !form.hasAttribute("action")) e.preventDefault();
+    }, true);
+  }
+
   /* ------------------------------------------------ init */
 
   document.addEventListener("DOMContentLoaded", () => {
+    initAddressBarGuard();
     initCounter();
     initUpload();
     initForm();
