@@ -62,9 +62,15 @@
     if (state.user) {
       if (menu) menu.hidden = false;
       if (loginBtn) loginBtn.hidden = true;
-      $("#userName").textContent = state.user.username;
-      $("#userAvatar").textContent = state.user.username.slice(0, 1).toUpperCase();
+      const name = state.user.username;
+      const n = $("#userName"); if (n) n.textContent = name;
+      const a = $("#userAvatar"); if (a) a.textContent = name.slice(0, 1).toUpperCase();
+      const pn = $("#profileName"); if (pn) pn.textContent = name;
+      const pa = $("#profileAvatar"); if (pa) pa.textContent = name.slice(0, 1).toUpperCase();
+      const pe = $("#profileEmail");
+      if (pe) pe.textContent = state.user.email || "аккаунт активен";
       loadMyStats();
+      renderProfileTab();
     } else {
       if (menu) menu.hidden = true;
       if (loginBtn) loginBtn.hidden = false;
@@ -75,32 +81,36 @@
     if (!state.user) return;
     try {
       const v = await api("/api/videos");
-      const el = $("#statVideos");
-      if (el) el.textContent = v.videos.length;
+      const n = v.videos.length;
+      ["statVideos", "profVideos"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = n;
+      });
     } catch (e) {}
     try {
       const v = await api("/api/voices");
-      const mine = v.voices.filter(x => !x.builtin);
-      const el = $("#statVoices");
-      if (el) el.textContent = mine.length;
+      const mine = v.voices.filter(x => !x.builtin).length;
+      ["statVoices", "profVoices"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = mine;
+      });
     } catch (e) {}
   }
 
   function initUserMenu() {
-    const btn = $("#userBtn");
-    const pop = $("#userPop");
-    if (btn && pop) {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        pop.hidden = !pop.hidden;
-      });
-      document.addEventListener("click", () => { pop.hidden = true; });
-    }
+    // всплывающее меню со ссылками на старые страницы убрано:
+    // архив и профиль — это вкладки в левом меню, здесь остаётся только выход
     const out = $("#logoutBtn");
-    if (out) out.addEventListener("click", async () => {
+    if (out) out.addEventListener("click", () => doLogout());
+    const pout = $("#profileLogout");
+    if (pout) pout.addEventListener("click", () => doLogout());
+  }
+
+  async function doLogout() {
+    try {
       await api("/api/auth/logout", { method: "POST" });
-      location.reload();
-    });
+    } catch (e) {}
+    location.reload();
   }
 
   /* ------------------------------------------------ голоса */
@@ -117,6 +127,56 @@
       state.voices = [];
     }
     renderVoices();
+    renderVoiceOptions();
+  }
+
+  /* Селект «Выбор голоса» в новом layout. Группируем: встроенные / мои клоны. */
+  function renderVoiceOptions() {
+    const sel = $("#voiceId");
+    if (!sel) return;
+    const prev = state.selectedVoice || sel.value;
+    sel.innerHTML = "";
+
+    if (!state.voices.length) {
+      const o = document.createElement("option");
+      o.value = "";
+      o.textContent = "Голоса не загрузились";
+      sel.appendChild(o);
+      return;
+    }
+
+    const groups = [
+      ["Встроенные", state.voices.filter(v => v.builtin)],
+      ["Мои клоны", state.voices.filter(v => !v.builtin)]
+    ];
+    groups.forEach(([label, items]) => {
+      if (!items.length) return;
+      const g = document.createElement("optgroup");
+      g.label = label;
+      items.forEach((v) => {
+        const o = document.createElement("option");
+        o.value = v.id;
+        o.textContent = v.name + (v.gender === "female" ? " · ж" : v.gender === "male" ? " · м" : "");
+        g.appendChild(o);
+      });
+      sel.appendChild(g);
+    });
+
+    const pick = state.voices.some(v => v.id === prev) ? prev : state.voices[0].id;
+    sel.value = pick;
+    state.selectedVoice = pick;
+  }
+
+  function initVoiceSelect() {
+    const sel = $("#voiceId");
+    if (sel) sel.addEventListener("change", () => { state.selectedVoice = sel.value; });
+
+    const btn = $("#voicePreviewBtn");
+    if (btn) btn.addEventListener("click", () => {
+      const id = state.selectedVoice || (sel && sel.value);
+      if (!id) { toast("Выберите голос", "err"); return; }
+      previewVoice(id);
+    });
   }
 
   function renderVoices() {
@@ -208,8 +268,39 @@
     renderVoices();
   }
 
+  /* Прослушивание: сначала готовый пример файлом (играет сразу),
+     синтез «на месте» — только если примера нет. */
   async function previewVoice(id) {
+    // профиль грузится асинхронно — дождёмся его, иначе сразу после
+    // открытия страницы кнопка «Прослушать» ругалась «Войдите»
+    if (!state.user && state.mePromise) {
+      try { await state.mePromise; } catch (e) { /* ignore */ }
+    }
     if (!state.user) { toast("Войдите, чтобы слушать голоса", "err"); return; }
+    const v = state.voices.find(x => x.id === id) || {
+      id: id, name: id, sample_ts: 0,
+      sample_url: "/api/voices/" + encodeURIComponent(id) + "/sample"
+    };
+    const box = $("#voicePreview");
+    const audio = $("#voiceAudio");
+
+    if (box && audio && v && v.sample_url) {
+      box.hidden = false;
+      $("#voicePreviewName").textContent = "Пример: " + v.name;
+      audio.onerror = () => {
+        audio.onerror = null;
+        synthesizePreview(v);        // примера нет — синтезируем как раньше
+      };
+      audio.src = v.sample_url + "?v=" + (v.sample_ts || 0);
+      const pr = audio.play();
+      if (pr && pr.catch) pr.catch(() => {});
+      return;
+    }
+    synthesizePreview(v || { id: id, name: id });
+  }
+
+  async function synthesizePreview(v) {
+    const id = v && v.id;
     toast("Готовим пробное аудио…");
     try {
       const d = await api("/api/voices/preview", {
@@ -279,6 +370,7 @@
         $("#cloneName").value = "";
         await loadVoices();
         selectVoice(d.voice.id);
+        previewVoice(d.voice.id);     // сразу слышно, что получилось
         loadMyStats();
       } catch (e) {
         log.textContent = "Ошибка: " + e.message;
@@ -512,9 +604,183 @@
     if (!btn) return;
     btn.disabled = on;
     btn.classList.toggle("is-busy", on);
-    $(".btn__label", btn).textContent = on ? "Собираем…" : "Собрать ролик";
-    $(".btn__sub", btn).textContent = on
+    const label = $(".btn__label", btn);
+    if (label) label.textContent = on ? "Собираем…" : "Собрать ролик";
+    const sub = $(".btn__sub", btn);
+    if (sub) sub.textContent = on
       ? "не закрывайте вкладку" : "~5–8 минут · F5-TTS + FFmpeg";
+  }
+
+  /* ------------------------------------------------ этапы конвейера */
+
+  let stageTimer = null;
+  let stageStart = 0;
+
+  function fmtDur(sec) {
+    const s = Math.max(0, Math.floor(sec));
+    return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+  }
+
+  function resetStages() {
+    const body = $("#logBody");
+    if (body) body.innerHTML = "";
+    clearInterval(stageTimer);
+    stageTimer = null;
+    stageStart = 0;
+  }
+
+  function addStage(label, step) {
+    const body = $("#logBody");
+    if (!body) return;
+    const prev = body.querySelector(".job-step.is-active");
+    if (prev) {
+      prev.classList.remove("is-active");
+      prev.classList.add("is-done");
+      const t = prev.querySelector(".job-step__time");
+      if (t && stageStart) t.textContent = fmtDur((Date.now() - stageStart) / 1000);
+    }
+    const row = document.createElement("div");
+    row.className = "job-step is-active";
+    if (step) row.dataset.step = step;
+    row.innerHTML = '<span class="job-step__dot"></span>' +
+                    '<span class="job-step__label"></span>' +
+                    '<span class="job-step__time">0:00</span>';
+    row.querySelector(".job-step__label").textContent = label;
+    body.appendChild(row);
+    const term = $("#log");
+    if (term) term.scrollTop = term.scrollHeight;
+    stageStart = Date.now();
+    setLive(true, label);
+    clearInterval(stageTimer);
+    stageTimer = setInterval(() => {
+      const cur = body.querySelector(".job-step.is-active .job-step__time");
+      if (cur) cur.textContent = fmtDur((Date.now() - stageStart) / 1000);
+    }, 1000);
+  }
+
+  function finishStages(text) {
+    clearInterval(stageTimer);
+    stageTimer = null;
+    const body = $("#logBody");
+    const cur = body && body.querySelector(".job-step.is-active");
+    if (cur) {
+      cur.classList.remove("is-active");
+      cur.classList.add("is-done");
+      const t = cur.querySelector(".job-step__time");
+      if (t && stageStart) t.textContent = fmtDur((Date.now() - stageStart) / 1000);
+    }
+    stageStart = 0;
+    setLive(false, text || "готово");
+  }
+
+  function appendFinal(text, ok) {
+    const body = $("#logBody");
+    if (!body) return;
+    const div = document.createElement("div");
+    div.className = "job-final " + (ok ? "is-ok" : "is-err");
+    div.textContent = text;
+    body.appendChild(div);
+    const term = $("#log");
+    if (term) term.scrollTop = term.scrollHeight;
+  }
+
+  /* Готовый ролик: путь на диске + кнопки «Скачать» и «Открыть». */
+  function appendVideoReady(msg) {
+    const body = $("#logBody");
+    if (!body) return;
+    const box = document.createElement("div");
+    box.className = "video-ready";
+
+    const head = document.createElement("div");
+    head.className = "video-ready__head";
+    const check = document.createElement("span");
+    check.className = "video-ready__check";
+    check.textContent = "✓";
+    const headText = document.createElement("span");
+    headText.textContent = "Ролик готов";
+    head.appendChild(check);
+    head.appendChild(headText);
+
+    const name = document.createElement("div");
+    name.className = "video-ready__name";
+    name.textContent = msg.name || msg.title || "видео";
+
+    const path = document.createElement("div");
+    path.className = "video-ready__path";
+    path.textContent = msg.path || "";
+    path.title = msg.path || "";
+
+    const meta = document.createElement("div");
+    meta.className = "video-ready__meta";
+    meta.textContent = (msg.size_h || "") +
+      (msg.title ? " · " + msg.title : "") + " · сохранён в профиль";
+
+    const actions = document.createElement("div");
+    actions.className = "video-ready__actions";
+    if (msg.download) {
+      const dl = document.createElement("a");
+      dl.className = "video-ready__btn is-primary";
+      dl.href = msg.download;
+      dl.setAttribute("download", "");
+      dl.textContent = "Скачать";
+      actions.appendChild(dl);
+    }
+    if (msg.url) {
+      const open = document.createElement("a");
+      open.className = "video-ready__btn";
+      open.href = msg.url;
+      open.target = "_blank";
+      open.rel = "noopener";
+      open.textContent = "Открыть";
+      actions.appendChild(open);
+    }
+
+    box.appendChild(head);
+    box.appendChild(name);
+    if (msg.path) box.appendChild(path);
+    box.appendChild(meta);
+    if (actions.children.length) box.appendChild(actions);
+    body.appendChild(box);
+    const term = $("#log");
+    if (term) term.scrollTop = term.scrollHeight;
+  }
+
+  /* Теги, которые SEO подобрал именно под этот ролик. */
+  function appendSeo(msg) {
+    const body = $("#logBody");
+    if (!body) return;
+    const box = document.createElement("div");
+    box.className = "seo-card";
+
+    const head = document.createElement("div");
+    head.className = "seo-card__head";
+    head.textContent = "Теги под этот ролик";
+
+    const title = document.createElement("div");
+    title.className = "seo-card__title";
+    title.textContent = msg.title || "";
+
+    const list = document.createElement("div");
+    list.className = "seo-card__tags";
+    (msg.tags || []).forEach((t) => {
+      const chip = document.createElement("span");
+      chip.className = "seo-tag";
+      chip.textContent = t;
+      list.appendChild(chip);
+    });
+
+    box.appendChild(head);
+    if (msg.title) box.appendChild(title);
+    if ((msg.tags || []).length) box.appendChild(list);
+    if ((msg.hashtags || []).length) {
+      const note = document.createElement("div");
+      note.className = "seo-card__note";
+      note.textContent = "Хэштеги в описании: " + msg.hashtags.join(" ");
+      box.appendChild(note);
+    }
+    body.appendChild(box);
+    const term = $("#log");
+    if (term) term.scrollTop = term.scrollHeight;
   }
 
   /* ------------------------------------------------ websocket */
@@ -579,10 +845,17 @@
       }
 
       case "job_start":
-        setLive(true, "выполняется…");
+        resetStages();
+        setLive(true, "запуск…");
         setBusy(true);
-        appendLog("");
-        appendLog(msg.cmd);
+        break;
+
+      case "stage":
+        addStage(msg.label, msg.step);
+        break;
+
+      case "seo":
+        appendSeo(msg);
         break;
 
       case "log":
@@ -590,21 +863,23 @@
         break;
 
       case "video_ready":
-        appendLog("");
-        appendLog("✓ Ролик сохранён в профиль: " + msg.title);
+        appendVideoReady(msg);
         loadMyStats();
+        renderArchive();
         break;
 
       case "job_end": {
-        setLive(false, msg.status === "done" ? "готово" : "ошибка");
+        finishStages(msg.status === "done" ? "готово" : "остановлено");
         setBusy(false);
-        appendLog("");
-        appendLog(msg.status === "done"
-          ? "✓ Конвейер завершён успешно"
-          : "✗ Конвейер завершился с ошибкой (код " + msg.returncode + ")");
+        // если ролик уже показан карточкой — не дублируем финальной строкой
+        const body = $("#logBody");
+        if (!(msg.status === "done" && body && body.querySelector(".video-ready"))) {
+          appendFinal(msg.status === "done" ? "✓ Готово" : "Остановлено",
+                      msg.status === "done");
+        }
         toast(msg.status === "done"
           ? "Ролик готов — он в вашем профиле"
-          : "Ошибка в конвейере — смотрите лог", msg.status === "done" ? "ok" : "err");
+          : "Сборка остановлена", msg.status === "done" ? "ok" : "err");
         loadMyStats();
         break;
       }
@@ -618,8 +893,10 @@
     if (!ta) return;
     const upd = () => {
       const v = ta.value.trim();
-      $("#scriptLen").textContent = v.length;
-      $("#scriptWords").textContent = v ? v.split(/\s+/).length : 0;
+      const lenEl = $("#scriptLen");
+      const wordsEl = $("#scriptWords");
+      if (lenEl) lenEl.textContent = v.length;
+      if (wordsEl) wordsEl.textContent = v ? v.split(/\s+/).length : 0;
     };
     ta.addEventListener("input", upd);
     upd();
@@ -705,10 +982,11 @@
 
       try {
         const d = await api("/api/process", { method: "POST", body: payload });
-        $("textarea[name=script]").value = payload.script;
+        const ta = $("textarea[name=script]");
+        if (ta) ta.value = payload.script || "";
         await api("/api/scenarios", {
           method: "POST",
-          body: { text: payload.script, title: payload.topic || "", source: "used" }
+          body: { text: payload.script || "", title: payload.topic || "", source: "used" }
         });
       } catch (err) {
         setBusy(false);
@@ -733,9 +1011,8 @@
     if (copy) copy.addEventListener("click", async () => {
       const body = $("#logBody");
       if (!body) return;
-      const text = Array.from(body.querySelectorAll(".term-line"))
-        .map(n => n.textContent).join("\n");
-      try { await navigator.clipboard.writeText(text); toast("Лог скопирован", "ok"); }
+      const text = (body.innerText || "").trim();
+      try { await navigator.clipboard.writeText(text); toast("Список этапов скопирован", "ok"); }
       catch (e) { toast("Не удалось скопировать", "err"); }
     });
 
@@ -750,12 +1027,23 @@
 
   function initResults() {
     const reload = $("#reload");
-    if (reload) reload.addEventListener("click", () => location.reload());
+    if (reload) reload.addEventListener("click", () => renderArchive());
 
     const openFolder = $("#openFolder");
     if (openFolder) openFolder.addEventListener("click", () => openFolderPath(
       "D:\\AI\\VIDEO_PIPELINE\\output"));
 
+    // карточки архива рендерятся из API — слушатели вешаем в renderArchive()
+    document.querySelectorAll('[data-tab="archive"]').forEach(btn =>
+      btn.addEventListener("click", () => renderArchive()));
+    renderArchive();
+
+    // вкладка «Профиль» — голоса и сценарии прямо на странице
+    document.querySelectorAll('[data-tab="profile"]').forEach(btn =>
+      btn.addEventListener("click", () => renderProfileTab()));
+    renderProfileTab();
+
+    // страница /results отдаётся сервером с готовой разметкой — оживляем её как раньше
     $$("[data-open]").forEach(btn =>
       btn.addEventListener("click", () => openFolderPath(btn.dataset.open))
     );
@@ -802,6 +1090,170 @@
     );
   }
 
+  async function renderArchive() {
+    const grid = $("#archiveGrid");
+    if (!grid) return;
+    const empty = $("#archiveEmpty");
+
+    if (!state.user) {
+      grid.innerHTML = "";
+      if (empty) {
+        empty.hidden = false;
+        empty.textContent = "Войдите, чтобы увидеть свои ролики.";
+      }
+      return;
+    }
+
+    let videos = [];
+    try {
+      const d = await api("/api/videos");
+      videos = d.videos || [];
+    } catch (e) {
+      grid.innerHTML = "";
+      if (empty) {
+        empty.hidden = false;
+        empty.textContent = "Не удалось загрузить список: " + e.message;
+      }
+      return;
+    }
+
+    grid.innerHTML = "";
+    if (empty) {
+      empty.hidden = videos.length > 0;
+      if (!videos.length) empty.textContent = "Роликов пока нет — соберите первый на вкладке «Сборка».";
+    }
+
+    videos.forEach((v) => {
+      const card = document.createElement("article");
+      card.className = "vcard";
+      card.innerHTML =
+        '<div class="vcard__thumb">' +
+          '<video preload="none" muted playsinline' +
+            (v.url ? ' data-src="' + esc(v.url) + '"' : '') + '></video>' +
+          (v.url ? '<button type="button" class="vcard__play">▶</button>' : '') +
+        '</div>' +
+        '<div class="vcard__body">' +
+          '<div class="vcard__title">' + esc(v.title || v.filename) + '</div>' +
+          '<div class="vcard__meta">' + esc(v.size_h || "") +
+            (v.created_at ? ' · ' + esc(String(v.created_at).slice(0, 16)) : "") +
+            (v.exists ? "" : " · файл удалён") + '</div>' +
+          '<div class="vcard__actions">' +
+            (v.exists
+              ? '<a class="btn btn--mini btn--accent" href="/api/download/' + esc(v.id) + '">Скачать</a>'
+              : "") +
+            '<button type="button" class="btn btn--mini btn--ghost vcard__del">Удалить</button>' +
+          '</div>' +
+        '</div>';
+
+      const play = $(".vcard__play", card);
+      const vid = $("video", card);
+      if (play && vid) {
+        play.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (!vid.src) { vid.src = vid.dataset.src; vid.load(); }
+          if (vid.paused) { vid.play().catch(() => {}); play.textContent = "❚❚"; }
+          else { vid.pause(); play.textContent = "▶"; }
+        });
+        vid.addEventListener("ended", () => { play.textContent = "▶"; });
+        vid.addEventListener("mouseenter", () => {
+          if (!vid.src) { vid.src = vid.dataset.src; vid.load(); }
+        });
+      }
+
+      const del = $(".vcard__del", card);
+      if (del) del.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        if (!confirm("Удалить ролик «" + (v.title || v.filename) + "»? Файл тоже будет удалён.")) return;
+        try {
+          await api("/api/videos/" + encodeURIComponent(v.id), { method: "DELETE" });
+          toast("Ролик удалён", "ok");
+          renderArchive();
+          loadMyStats();
+        } catch (err) { toast(err.message, "err"); }
+      });
+
+      grid.appendChild(card);
+    });
+  }
+
+  /* ------------------------------------------------ вкладка «Профиль» */
+
+  async function renderProfileTab() {
+    const voicesBox = $("#profileVoiceList");
+    const scenBox = $("#profileScenarioList");
+
+    if (!state.user) {
+      if (voicesBox) voicesBox.innerHTML = '<div class="hint">Войдите, чтобы увидеть свои голоса.</div>';
+      if (scenBox) scenBox.innerHTML = '<div class="hint">Войдите, чтобы увидеть свои сценарии.</div>';
+      return;
+    }
+
+    // свои клоны голоса
+    if (voicesBox) {
+      try {
+        const d = await api("/api/voices");
+        const mine = (d.voices || []).filter((v) => !v.builtin);
+        voicesBox.innerHTML = "";
+        if (!mine.length) {
+          voicesBox.innerHTML = '<div class="hint">Клонов пока нет — запишите голос на вкладке «Сборка».</div>';
+        }
+        mine.forEach((v) => {
+          const row = document.createElement("div");
+          row.className = "profile-item";
+          row.innerHTML =
+            '<span class="profile-item__name">' + esc(v.name) + '</span>' +
+            '<span class="profile-item__meta">' + (v.ready ? "готов" : "нет файла") + '</span>' +
+            '<button type="button" class="btn btn--mini btn--ghost">Удалить</button>';
+          row.querySelector("button").addEventListener("click", async () => {
+            if (!confirm("Удалить голос «" + v.name + "»?")) return;
+            try {
+              await api("/api/voices/" + encodeURIComponent(v.id), { method: "DELETE" });
+              toast("Голос удалён", "ok");
+              renderProfileTab();
+              loadVoices();
+              loadMyStats();
+            } catch (e) { toast(e.message, "err"); }
+          });
+          voicesBox.appendChild(row);
+        });
+      } catch (e) {
+        voicesBox.innerHTML = '<div class="hint">Не удалось загрузить голоса: ' + esc(e.message) + '</div>';
+      }
+    }
+
+    // сохранённые сценарии
+    if (scenBox) {
+      try {
+        const d = await api("/api/scenarios");
+        const list = d.scenarios || [];
+        scenBox.innerHTML = "";
+        if (!list.length) {
+          scenBox.innerHTML = '<div class="hint">Сценариев пока нет — сгенерируйте на вкладке «Сборка».</div>';
+        }
+        list.slice(0, 20).forEach((s) => {
+          const row = document.createElement("div");
+          row.className = "profile-item";
+          const title = (s.title || s.text || "без названия").slice(0, 80);
+          row.innerHTML =
+            '<span class="profile-item__name">' + esc(title) + '</span>' +
+            '<span class="profile-item__meta">' + esc(String(s.created_at || "").slice(0, 16)) + '</span>' +
+            '<button type="button" class="btn btn--mini btn--ghost">Удалить</button>';
+          row.querySelector("button").addEventListener("click", async () => {
+            if (!confirm("Удалить сценарий?")) return;
+            try {
+              await api("/api/scenarios/" + encodeURIComponent(s.id), { method: "DELETE" });
+              toast("Сценарий удалён", "ok");
+              renderProfileTab();
+            } catch (e) { toast(e.message, "err"); }
+          });
+          scenBox.appendChild(row);
+        });
+      } catch (e) {
+        scenBox.innerHTML = '<div class="hint">Не удалось загрузить сценарии: ' + esc(e.message) + '</div>';
+      }
+    }
+  }
+
   async function openFolderPath(path) {
     try {
       const d = await api("/api/open-folder", { method: "POST", body: { path } });
@@ -811,31 +1263,68 @@
     }
   }
 
-  /* ------------------------------------------------ чистота адресной строки */
+  /* ------------------------------------------------ превью субтитров */
 
-  /* Ни одна страница конвейера не читает query-параметры: состояние живёт
-     в памяти/sessionStorage. Поэтому всё, что браузер дописал в URL сам
-     (например, при нативной GET-отправке формы), — мусор, который портит
-     ссылку на сайт. Чистим его, оставляя только путь и якорь раздела. */
-  function cleanAddressBar() {
-    if (!location.search) return;
-    const cleaned = location.pathname + location.hash;
-    if (location.href === location.origin + cleaned) return;
-    history.replaceState(null, "", cleaned);
+  const SUB_PREVIEW = {
+    classic: { label: "Классика", hint: "Слово выскакивает с лёгким увеличением, ключевые — красным." },
+    clean: { label: "Чистый", hint: "Все слова белые, появляются по одному, в такт голосу — без вспышек." },
+    neon: { label: "Неон", hint: "Белое слово с холодным неоновым свечением." },
+    min: { label: "Минимум", hint: "Мелкий текст без обводки — ничего не отвлекает от кадра." },
+    cinema: { label: "Кино", hint: "Шрифт с засечками и разрядкой, как в титрах." },
+  };
+
+  function initSubtitlePreview() {
+    const box = $("#subPreview");
+    if (!box) return;
+    const word = $("#subPreviewWord");
+    const label = $("#subPreviewLabel");
+    const hint = $("#subPreviewHint");
+    const hidden = $('input[name="sub_style"]');
+    const pills = $$(".subtitle-pill[data-sub]");
+    if (!word || !pills.length) return;
+
+    const phrase = ["Медведь", "вышел", "к", "воде"];
+    let step = 0;
+
+    function show(style) {
+      const meta = SUB_PREVIEW[style] || SUB_PREVIEW.classic;
+      box.dataset.style = style;
+      word.textContent = phrase[step % phrase.length];
+      // без reflow браузер не проиграет анимацию заново
+      word.classList.remove("is-in", "is-key");
+      void word.offsetWidth;
+      if (style === "classic" && step % phrase.length === 0) word.classList.add("is-key");
+      word.classList.add("is-in");
+      if (label) label.textContent = meta.label;
+      if (hint) hint.textContent = meta.hint;
+      if (hidden) hidden.value = style;
+    }
+
+    pills.forEach((p) => p.addEventListener("click", () => {
+      pills.forEach((x) => x.classList.toggle("is-active", x === p));
+      step = 0;
+      show(p.dataset.sub);
+    }));
+
+    show(box.dataset.style || "classic");
+    setInterval(() => {
+      step += 1;
+      show(box.dataset.style || "classic");
+    }, 720);
   }
 
-  /* Enter в текстовом поле отправляет форму нативно (метод GET по умолчанию)
-     и дописывает в адресную строку все её поля: ?videoFile=&youtubeUrl=…#assembly.
-     Гасим нативную отправку: обработчики submit (initForm, логин) продолжают
-     работать, но страница больше не перезагружается с грязным URL. */
-  function initAddressBarGuard() {
-    cleanAddressBar();
+  /* ------------------------------------------------ чистота адресной строки */
 
+  /* Enter в поле отправляет форму нативно (метод GET по умолчанию) и дописывает
+     в адрес все её поля: ?videoFile=&youtubeUrl=…#assembly. Гасим нативную
+     отправку: обработчики submit (initForm, нарезка) продолжают работать, но
+     страница не перезагружается с грязным URL. Формы с явным POST/action
+     не трогаем. */
+  function initAddressBarGuard() {
     document.addEventListener("submit", (e) => {
       const form = e.target;
       if (!(form instanceof HTMLFormElement)) return;
       const method = (form.getAttribute("method") || "get").toLowerCase();
-      // Формы с явным POST/action — это не наша история, их не трогаем.
       if (method !== "post" && !form.hasAttribute("action")) e.preventDefault();
     }, true);
   }
@@ -843,19 +1332,15 @@
   /* ------------------------------------------------ init */
 
   document.addEventListener("DOMContentLoaded", () => {
-    initAddressBarGuard();
-    initCounter();
-    initUpload();
-    initForm();
-    initLogButtons();
-    initVoiceTabs();
-    initClone();
-    initNews();
-    initScenarioTools();
-    initUserMenu();
-    initResults();
-    restoreScript();
-    loadMe().then(() => { loadVoices(); loadMyStats(); });
+    // Один сломанный инициализатор не должен убивать весь интерфейс.
+    const steps = [initAddressBarGuard, initCounter, initUpload, initForm, initLogButtons,
+      initVoiceTabs, initVoiceSelect, initClone, initNews, initScenarioTools,
+      initUserMenu, initResults, restoreScript, initSubtitlePreview];
+    for (const step of steps) {
+      try { step(); } catch (e) { console.error("[init]", step.name, e); }
+    }
+    state.mePromise = loadMe();
+    state.mePromise.then(() => { loadVoices(); loadMyStats(); });
     connectWS();
   });
 

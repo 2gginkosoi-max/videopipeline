@@ -19,6 +19,7 @@ auto_news.py как subprocess и транслирует stdout в браузе�
 """
 
 import asyncio
+import hashlib
 import json
 import os
 import re
@@ -43,7 +44,7 @@ from fastapi import (
     WebSocket,
     WebSocketDisconnect,
 )
-from fastapi.responses import HTMLResponse, StreamingResponse
+from fastapi.responses import HTMLResponse, StreamingResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.requests import Request as StarletteRequest
@@ -55,6 +56,8 @@ import db            # noqa: E402
 import llm           # noqa: E402
 import news as news_mod  # noqa: E402
 import voices        # noqa: E402
+import voice_samples # noqa: E402
+import vision        # noqa: E402
 
 # ---------------------------------------------------------------- paths
 
@@ -73,6 +76,17 @@ for p in (UPLOADS, OUTPUT, ARCHIVE, WEB / "data", WEB / "voices" / "builtin"):
 app = FastAPI(title="ГУСЬ ПЕРЕВОДИЛА", docs_url="/api/docs", redoc_url=None)
 app.mount("/static", StaticFiles(directory=str(WEB / "static")), name="static")
 templates = Jinja2Templates(directory=str(WEB / "templates"))
+
+
+def _asset_v(rel: str) -> int:
+    """Версия статики по mtime — браузер не держит старый JS/CSS после правок."""
+    try:
+        return int((WEB / "static" / rel).stat().st_mtime)
+    except OSError:
+        return 0
+
+
+templates.env.globals["asset_v"] = _asset_v
 
 # ---------------------------------------------------------------- state
 
@@ -94,6 +108,40 @@ def broadcast(kind: str, payload: dict) -> None:
             pass
 
 
+# Этапы конвейера: auto_news.py печатает их как «===== Название =====».
+# В панель справа уходит только название этапа (и таймер), без техвывода.
+STAGE_RE = re.compile(r"^={3,}\s*([^=\s][^=]*?)\s*={3,}\s*$")
+STAGE_NAMES = {
+    "Проверка сценария (оригинальность/структура)": "Проверка сценария",
+    "Скачивание b-roll (Reddit)": "Скачивание видео",
+    "Скачивание b-roll": "Скачивание видео",
+    "Подготовка текста (ударения RUAccent)": "Подготовка текста",
+    "Озвучка F5-TTS": "Озвучка голосом",
+    "Ускорение темпа (atempo)": "Выравнивание темпа речи",
+    "Аудио-ассеты (музыка/акценты)": "Музыка и звуковые акценты",
+    "Аудиомикс (музыка + whoosh/click)": "Сведение звука",
+    "Whisper (субтитры)": "Распознавание речи для субтитров",
+    "Правка субтитров (fix_srt)": "Вычитка субтитров",
+    "SEO": "Заголовок и описание",
+    "Сборка ASS": "Субтитры и заголовок в кадре",
+    "Монтаж видео": "Монтаж видео",
+    "Автопроверка оригинальности": "Проверка оригинальности",
+}
+
+
+def _seo_snapshot(since_ts: float) -> dict:
+    """Заголовок/теги, которые seo.py только что выбрал для ЭТОГО ролика."""
+    f = OUTPUT / "seo.json"
+    try:
+        if not f.exists() or f.stat().st_mtime < since_ts:
+            return {}
+        d = json.loads(f.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    return {"title": d.get("title", ""), "tags": d.get("tags") or [],
+            "hashtags": d.get("hashtags") or []}
+
+
 def make_job(cmd: list, meta: dict) -> dict:
     job = {
         "id": uuid.uuid4().hex[:12],
@@ -105,6 +153,8 @@ def make_job(cmd: list, meta: dict) -> dict:
         "cmd": cmd,
         "meta": meta,
         "log": [],
+        "stage": "",
+        "stage_index": 0,
         "video_id": None,
     }
     JOBS[job["id"]] = job
@@ -217,20 +267,21 @@ def build_cmd(data: dict, user_id: str) -> tuple:
     if bed:
         cmd += ["--bed", bed]
 
-    goose_pos = data.get("goose_pos") or "top-right"
-    if goose_pos in ("top-right", "mid-right", "low-right", "top-left", "mid-left"):
-        cmd += ["--goose-pos", goose_pos]
+    # стиль субтитров из шага 5 (make_ass.py --style)
+    sub_style = (data.get("sub_style") or "classic").strip()
+    if sub_style not in ("classic", "clean", "neon", "min", "cinema"):
+        sub_style = "classic"
+    cmd += ["--style", sub_style]
 
-    if data.get("no_goose"):
-        cmd.append("--no-goose")
     if data.get("sharpen"):
         cmd += ["--sharpen", str(data["sharpen"]).strip()]
     if data.get("skip_voice"):
         cmd.append("--skip-voice")
     if data.get("skip_download"):
         cmd.append("--skip-download")
-    if data.get("skip_publish"):
-        cmd.append("--skip-publish")
+    # Публикации в конвейере больше нет: ролик сохраняется в профиль,
+    # скачивает и выкладывает пользователь сам.
+    cmd.append("--skip-publish")
 
     # голос
     voice_name = ""
@@ -279,6 +330,7 @@ async def run_job(job: dict) -> None:
         job["status"] = "running"
         broadcast("job_start", {"job_id": job["id"], "cmd": " ".join(cmd[1:])})
         job["log"].append(f"$ {' '.join(cmd[1:])}")
+        job_started = time.time()
 
         try:
             proc = await asyncio.create_subprocess_exec(
@@ -291,9 +343,7 @@ async def run_job(job: dict) -> None:
         except Exception as exc:  # noqa: BLE001
             job["status"] = "error"
             job["finished"] = datetime.now().isoformat(timespec="seconds")
-            msg = f"[ERROR] не удалось запустить процесс: {exc}"
-            job["log"].append(msg)
-            broadcast("log", {"job_id": job["id"], "line": msg})
+            job["log"].append(f"[ERROR] не удалось запустить процесс: {exc}")
             broadcast("job_end", {"job_id": job["id"], "status": "error", "returncode": -1})
             return
 
@@ -303,8 +353,26 @@ async def run_job(job: dict) -> None:
             if not raw:
                 break
             line = raw.decode("utf-8", errors="replace").rstrip()
+            # Полный вывод auto_news оставляем в job["log"] (для отладки), а в
+            # панель справа отдаём ТОЛЬКО этапы: «что сейчас происходит».
             job["log"].append(line)
-            broadcast("log", {"job_id": job["id"], "line": line})
+            m = STAGE_RE.match(line)
+            if m:
+                label = m.group(1).strip()
+                # публикации в вебе больше нет — этап не показываем
+                if label.lower().startswith("публикац"):
+                    continue
+                prev_label = job["stage"]
+                job["stage"] = label
+                job["stage_index"] += 1
+                broadcast("stage", {"job_id": job["id"],
+                                    "label": STAGE_NAMES.get(label, label),
+                                    "step": job["stage_index"]})
+                # SEO только что закончился — показываем, какие теги он выбрал
+                if prev_label == "SEO":
+                    snap = _seo_snapshot(job_started)
+                    if snap:
+                        broadcast("seo", {"job_id": job["id"], **snap})
 
         rc = await proc.wait()
 
@@ -313,19 +381,29 @@ async def run_job(job: dict) -> None:
     job["status"] = "done" if rc == 0 else "error"
 
     # регистрируем готовый ролик в профиле
-    if rc == 0 and user_id:
+    # (даже если конвейер упал на последнем шаге — файл уже на диске)
+    if user_id:
         final = Path(meta.get("final", ""))
-        if final.exists():
+        if final.exists() and final.stat().st_size > 0:
             try:
                 rec = db.add_video(
                     user_id=user_id, job_id=job["id"], title=meta.get("title", ""),
                     path=str(final), size=final.stat().st_size)
                 job["video_id"] = rec["id"]
-                broadcast("video_ready", {"job_id": job["id"], "video_id": rec["id"],
-                                          "title": rec["title"]})
+                size_mb = final.stat().st_size / 1024 / 1024
+                broadcast("video_ready", {
+                    "job_id": job["id"],
+                    "video_id": rec["id"],
+                    "title": rec["title"],
+                    "name": final.name,
+                    "path": str(final),
+                    "size_h": f"{size_mb:.1f} MB",
+                    "url": f"/api/video/{rec['id']}",
+                    "download": f"/api/download/{rec['id']}",
+                })
+                job["log"].append(f"[OK] ролик сохранён: {final}")
             except Exception as exc:  # noqa: BLE001
-                broadcast("log", {"job_id": job["id"],
-                                  "line": f"[WARN] не удалось сохранить ролик в профиль: {exc}"})
+                job["log"].append(f"[WARN] не удалось сохранить ролик в профиль: {exc}")
 
     broadcast("job_end", {"job_id": job["id"], "status": job["status"],
                           "returncode": rc, "video_id": job["video_id"]})
@@ -379,18 +457,24 @@ async def api_me(user: dict | None = Depends(auth.current_user)):
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: StarletteRequest):
-    return templates.TemplateResponse(request, "index.html", {"active": "run"})
+    return templates.TemplateResponse(request, "base_layout.html", {})
 
 
 @app.get("/results", response_class=HTMLResponse)
 async def results_page(request: StarletteRequest):
-    return templates.TemplateResponse(request, "results.html", {
-        "active": "results", "videos": list_videos()})
+    # старый дизайн убран: архив теперь вкладка на главной
+    return RedirectResponse("/#archive", status_code=307)
 
 
 @app.get("/profile", response_class=HTMLResponse)
 async def profile_page(request: StarletteRequest):
-    return templates.TemplateResponse(request, "profile.html", {"active": "profile"})
+    # старый дизайн убран: профиль теперь вкладка на главной
+    return RedirectResponse("/#profile", status_code=307)
+
+
+@app.get("/layout", response_class=HTMLResponse)
+async def layout_demo(request: StarletteRequest):
+    return templates.TemplateResponse(request, "base_layout.html", {})
 
 
 @app.get("/login", response_class=HTMLResponse)
@@ -428,6 +512,9 @@ async def api_voices(user: dict | None = Depends(auth.current_user)):
             "f0": entry.get("f0"),
             "duration": entry.get("duration", 0),
             "ref_text": (entry.get("ref_text") or "")[:160],
+            "sample_url": f"/api/voices/{meta['key']}/sample",
+            "sample_ts": voice_samples.sample_ts(
+                voice_samples.sample_file(meta["key"])),
         })
 
     if user:
@@ -440,8 +527,25 @@ async def api_voices(user: dict | None = Depends(auth.current_user)):
                 "f0": None, "duration": 0,
                 "ref_text": (v["ref_text"] or "")[:160],
                 "created_at": v["created_at"],
+                "sample_url": f"/api/voices/{v['id']}/sample",
+                "sample_ts": voice_samples.sample_ts(
+                    voice_samples.sample_file(v["id"], user["id"])),
             })
     return {"voices": out}
+
+
+@app.get("/api/voices/{voice_id}/sample")
+async def api_voice_sample(voice_id: str,
+                            user: dict | None = Depends(auth.current_user)):
+    """Готовый пример голоса: отдаём файл, поэтому играет сразу."""
+    auth.require_user(user)
+    f = voice_samples.sample_file(voice_id, user["id"])
+    if not f or not f.exists():
+        raise HTTPException(404, "Пример ещё не готов")
+    media = "audio/mpeg" if f.suffix.lower() == ".mp3" else "audio/wav"
+    return StreamingResponse(
+        f.open("rb"), media_type=media,
+        headers={"Cache-Control": "private, max-age=86400"})
 
 
 @app.post("/api/voices/clone")
@@ -586,30 +690,55 @@ async def api_news_search(payload: dict,
     """Найти свежие новости. Reddit медленный — поиск идёт в фоне, прогресс по WS."""
     auth.require_user(user)
     data = payload or {}
-    subs = data.get("subs") or [s["key"] for s in news_mod.SUBS]
-    mode = data.get("mode") or "hot"
+    subs = data.get("subs") or news_mod.rotate_subs(1)
+    mode = data.get("mode") or "new"
+    force = bool(data.get("force"))
     uid = user["id"]
 
     async def work():
         job_id = "news_" + uuid.uuid4().hex[:8]
-        broadcast("news_start", {"job_id": job_id, "subs": subs, "mode": mode})
 
         def progress(text, i, total):
             broadcast("news_progress", {"job_id": job_id, "text": text,
                                          "current": i, "total": total})
 
-        try:
-            posts = await asyncio.to_thread(
-                news_mod.search, subs, mode, True, progress)
-        except Exception as exc:  # noqa: BLE001
-            broadcast("news_end", {"job_id": job_id, "ok": False,
-                                   "error": str(exc), "posts": []})
+        broadcast("news_start", {"job_id": job_id, "subs": subs, "mode": mode})
+
+        # 1. Пул прогрет фоновым воркером — отдаём сразу, без ожидания Reddit
+        posts = news_mod.pool_posts(200, mode)
+
+        # 2. Пул пуст или мал (сервер только запустился) — идём в Reddit
+        if len(posts) < 10:
+            wait = news_mod.cooldown_left()
+            if wait > 3:
+                broadcast("news_end", {
+                    "job_id": job_id, "ok": False, "posts": [],
+                    "error": f"Reddit ограничил запросы — подождите ~{int(wait)} с"})
+                return
+            try:
+                fresh = await asyncio.to_thread(
+                    news_mod.search, subs, mode, True, progress, force, 1)
+                if not fresh and force:
+                    # 429 — дожидаемся паузы и пробуем другой сабреддит
+                    wait = news_mod.cooldown_left()
+                    if wait > 0:
+                        progress(f" Reddit притормозил, ждём {int(wait)} с…", 1, 2)
+                        await asyncio.sleep(min(wait, 90))
+                    alt = news_mod.rotate_subs(1, exclude=subs)
+                    fresh = await asyncio.to_thread(
+                        news_mod.search, alt, mode, True, progress, force, 1)
+                posts = news_mod.merge_posts(posts, fresh, limit=200)
+            except Exception as exc:  # noqa: BLE001
+                broadcast("news_end", {"job_id": job_id, "ok": False,
+                                       "error": str(exc), "posts": []})
+                return
+
+        if not posts:
+            broadcast("news_end", {"job_id": job_id, "ok": True, "posts": []})
             return
 
-        if posts:
-            db.cache_news(uid, posts)
-        broadcast("news_end", {"job_id": job_id, "ok": True,
-                               "posts": db.get_cached_news(uid)})
+        db.cache_news(uid, posts)
+        broadcast("news_end", {"job_id": job_id, "ok": True, "posts": posts})
 
     asyncio.create_task(work())
     return {"ok": True, "message": "Поиск запущен, результаты придут в лог"}
@@ -618,18 +747,38 @@ async def api_news_search(payload: dict,
 @app.post("/api/news/scenario")
 async def api_news_scenario(payload: dict,
                              user: dict | None = Depends(auth.current_user)):
-    """Сгенерировать сценарий по найденной новости."""
+    """Сгенерировать сценарий по найденной новости — с учётом того, что в кадре."""
     auth.require_user(user)
     data = payload or {}
-    title = (data.get("title") or "").strip()
+    title_ru = (data.get("title_ru") or "").strip()
+    title_en = (data.get("title") or "").strip()
+    title = title_ru or title_en
     context = (data.get("context") or "").strip()
+    sub = (data.get("sub") or "").strip()
     link = (data.get("link") or "").strip()
+    video_url = (data.get("video_url") or "").strip()
     if not title:
         raise HTTPException(400, "Не выбрана новость")
 
-    variants = await asyncio.to_thread(llm.generate_variants, title)
+    # Сценарий должен быть про видео, а не про заголовок: скачиваем b-roll
+    # (шаг 2 мог это уже сделать) и ждём подпись кадров.
+    desc = ""
+    if video_url:
+        try:
+            path = await ensure_broll(video_url)
+            if path:
+                info = await asyncio.to_thread(vision.describe, path, 180.0)
+                desc = (info or {}).get("ru", "")
+        except HTTPException:
+            desc = ""      # Reddit не отдал видео — пишем по тексту поста
+        except Exception as exc:  # noqa: BLE001
+            print(f"[scenario] видео не описано: {exc}", flush=True)
+
+    variants = await asyncio.to_thread(
+        llm.generate_variants, title, context, desc, sub)
     if not variants:
-        one = await asyncio.to_thread(llm.generate_scenario, title, context)
+        one = await asyncio.to_thread(
+            llm.generate_scenario, title, context, desc, sub)
         variants = [one] if one else []
 
     if not variants:
@@ -641,7 +790,7 @@ async def api_news_scenario(payload: dict,
                               source="reddit", news_link=link)
         v["id"] = rec["id"]
         saved.append(v)
-    return {"ok": True, "variants": saved}
+    return {"ok": True, "variants": saved, "video": desc}
 
 
 # ---------------------------------------------------------------- scenarios
@@ -770,6 +919,119 @@ async def api_upload(file: UploadFile = File(...),
             fh.write(chunk)
     return {"ok": True, "path": str(dest), "name": dest.name,
             "size": dest.stat().st_size}
+
+
+# ---------------------------------------------------------------- b-roll
+
+_BROLL_ID = re.compile(r"v\.redd\.it/([A-Za-z0-9]+)")
+_BROLL_LOCKS: dict = {}
+
+
+def broll_name(url: str) -> str:
+    """Имя файла b-roll постоянное: шаг 2 и шаг 3 переиспользуют один файл."""
+    m = _BROLL_ID.search(url)
+    key = m.group(1) if m else hashlib.sha1(url.encode("utf-8")).hexdigest()[:10]
+    return f"broll_{key}.mp4"
+
+
+async def ensure_broll(url: str) -> Path | None:
+    """Скачать b-roll, если его ещё нет. -> путь к файлу."""
+    url = (url or "").strip()
+    if not url:
+        return None
+    tmp = WEB / "static" / "tmp"
+    tmp.mkdir(parents=True, exist_ok=True)
+    dest = tmp / broll_name(url)
+
+    lock = _BROLL_LOCKS.get(dest.name)
+    if lock is None:
+        lock = _BROLL_LOCKS[dest.name] = asyncio.Lock()
+
+    async with lock:
+        if dest.exists() and dest.stat().st_size > 0:
+            return dest
+
+        stamp = time.time()
+        for old in tmp.glob("broll_*.mp4"):
+            try:
+                if old != dest and stamp - old.stat().st_mtime > 7200:
+                    old.unlink()
+            except OSError:
+                pass
+
+        def download():
+            return subprocess.run(
+                [PY, str(VP / "reddit_dl.py"), "--url", url, "--out", str(dest)],
+                capture_output=True, text=True, encoding="utf-8",
+                errors="replace", timeout=300,
+            )
+
+        try:
+            proc = await asyncio.to_thread(download)
+        except subprocess.TimeoutExpired as exc:
+            raise HTTPException(504, "Скачивание не уложилось в 5 минут") from exc
+
+        if proc.returncode != 0 or not dest.exists() or dest.stat().st_size == 0:
+            try:
+                dest.unlink()
+            except OSError:
+                pass
+            tail = (proc.stderr or proc.stdout or "").strip()[-400:]
+            raise HTTPException(502, f"Reddit не отдал видео: {tail}")
+        return dest
+
+
+def probe_video(path: Path) -> dict:
+    meta = {"duration": 0.0, "width": 0, "height": 0}
+    try:
+        proc = subprocess.run(
+            ["ffprobe", "-v", "error", "-show_entries",
+             "format=duration:stream=width,height", "-of", "json", str(path)],
+            capture_output=True, text=True, timeout=60,
+        )
+        info = json.loads(proc.stdout or "{}")
+        meta["duration"] = round(float(info.get("format", {}).get("duration") or 0), 2)
+        for st in info.get("streams", []):
+            if st.get("width"):
+                meta["width"], meta["height"] = st["width"], st["height"]
+                break
+    except Exception:  # noqa: BLE001
+        pass
+    return meta
+
+
+@app.post("/api/broll/check")
+async def api_broll_check(payload: dict, user: dict | None = Depends(auth.current_user)):
+    """Шаг 2: скачать b-roll по ссылке Reddit и вернуть параметры файла + ссылку на превью."""
+    auth.require_user(user)
+    url = ((payload or {}).get("video_url") or "").strip()
+    if not url:
+        raise HTTPException(400, "Пустая ссылка на видео")
+    if "v.redd.it" not in url and "reddit.com" not in url:
+        raise HTTPException(400, "Поддерживаются только ссылки Reddit")
+
+    dest = await ensure_broll(url)
+    meta = await asyncio.to_thread(probe_video, dest)
+
+    # что в кадре: BLIP работает в фоне, шаг 3 дождётся результата
+    desc = await asyncio.to_thread(vision.start, dest)
+    return {"ok": True, "url": f"/static/tmp/{dest.name}", "path": str(dest),
+            "size": dest.stat().st_size, **meta,
+            "desc": (desc or {}).get("ru", ""),
+            "desc_ready": bool(desc)}
+
+
+@app.get("/api/broll/desc/{name}")
+async def api_broll_desc(name: str, user: dict | None = Depends(auth.current_user)):
+    """Что в кадре: фронт опрашивает, пока модель не закончит."""
+    auth.require_user(user)
+    if not re.fullmatch(r"broll_[A-Za-z0-9]+\.mp4", name):
+        raise HTTPException(400, "Некорректное имя файла")
+    path = WEB / "static" / "tmp" / name
+    if not path.exists():
+        raise HTTPException(404, "Файл не найден")
+    desc = await asyncio.to_thread(vision.start, path)
+    return {"ok": True, "ready": bool(desc), "desc": (desc or {}).get("ru", "")}
 
 
 @app.post("/api/process")
@@ -904,9 +1166,102 @@ async def health():
     return {"ok": True, "jobs": len(JOBS), "videos": len(list_videos())}
 
 
+@app.post("/api/slicing/start")
+async def api_slicing_start(
+    request: Request,
+    video_file: UploadFile = Form(None),
+    youtubeUrl: str = Form(""),
+    user: dict = Depends(auth.current_user),
+):
+    """Start video slicing job. Either upload a video file or provide a YouTube URL."""
+    auth.require_user(user)
+
+    # ---------- handle uploaded file ----------
+    tmp_dir = WEB / "tmp"
+    tmp_dir.mkdir(parents=True, exist_ok=True)
+    input_path = None
+
+    if video_file:
+        fname = f"{uuid4()}_{video_file.filename}"
+        input_path = tmp_dir / fname
+        async with input_path.open("wb") as out:
+            while chunk := await video_file.read(1024 * 1024):
+                out.write(chunk)
+    elif youtubeUrl.strip():
+        # Download video via yt-dlp (already in requirements)
+        import yt_dlp  # type: ignore
+
+        outtmpl = str(tmp_dir / f"{uuid4()}.mp4")
+        ydl_opts = {"outtmpl": outtmpl, "format": "bestvideo[ext=mp4]+bestaudio[ext=mp4]/best[ext=mp4]"}
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([youtubeUrl.strip()])
+        except Exception as e:
+            raise HTTPException(400, f"Failed to download video: {str(e)}")
+        input_path = Path(outtmpl)
+    else:
+        raise HTTPException(400, "Укажите видеофайл или ссылку YouTube")
+
+    # ---------- start background slicing ----------
+    job_id = str(uuid4())
+    JOBS[job_id] = {
+        "status": "processing",
+        "user_id": user["id"],
+        "input_path": str(input_path),
+        "clips": [],
+    }
+    asyncio.create_task(_run_slicing(job_id, input_path, user["id"]))
+
+    return {"ok": True, "job_id": job_id}
+
+
+async def _run_slicing(job_id: str, input_path: str, user_id: str) -> None:
+    """Split video into 30‑60 s clips using ffmpeg and save to user's videos folder."""
+    import json as _json
+    from pathlib import Path
+
+    up = voices.user_video_dir(user_id)
+    up.mkdir(parents=True, exist_ok=True)
+
+    # probe duration
+    probe = subprocess.run(
+        ["ffprobe", "-v", "quiet", "-show_entries", "format=duration",
+         "-of", "json", input_path],
+        capture_output=True, text=True, check=True,
+    )
+    dur = _json.loads(probe.stdout)["format"]["duration"]
+    duration = float(dur)
+
+    clip_len = 45
+    clips = []
+    for i in range(int(duration // clip_len) + 1):
+        start = i * clip_len
+        end = min(start + clip_len, duration)
+        out_name = f"sliced_{job_id}_{i:03d}.mp4"
+        out_path = up / out_name
+        cmd = [
+            "ffmpeg", "-y",
+            "-i", input_path,
+            "-ss", str(start),
+            "-t", str(end - start),
+            "-c", "copy",
+            str(out_path),
+        ]
+        subprocess.run(cmd, capture_output=True, check=True)
+        clips.append({"filename": out_name, "duration": round(end - start, 1)})
+
+    JOBS[job_id]["status"] = "completed"
+    JOBS[job_id]["clips"] = clips
+
+
 @app.on_event("startup")
 async def on_startup():
     db.init_db()
+    # фоновый пул новостей: Reddit даёт ~1 запрос в минуту, поэтому греем заранее
+    try:
+        news_mod.start_prefetch()
+    except Exception as exc:  # noqa: BLE001
+        print(f"[NEWS] префетч не запустился: {exc}", flush=True)
     # встроенные голоса готовятся в фоне — интерфейс не должен ждать ASR
     def worker():
         try:

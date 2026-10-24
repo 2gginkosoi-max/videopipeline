@@ -86,13 +86,31 @@ def main():
     ]
     r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8",
                        errors="replace")
-    tail = "\n".join((r.stdout or "").strip().splitlines()[-6:])
     if r.returncode != 0 or not out.exists():
-        print(tail)
-        print(f"[ERR] yt-dlp rc={r.returncode}")
-        sys.exit(1)
+        print("[REDDIT] попытка с cookies из браузера...")
+        for browser in ("edge", "chrome", "brave", "vivaldi"):
+            cmd2 = [
+                YTDLP, "--no-warnings", "--no-playlist",
+                "--cookies-from-browser", browser,
+                "--add-header", f"User-Agent:{UA}",
+                "--add-header", "Referer:https://www.reddit.com/",
+                "-f", "bv*+ba/b", "--merge-output-format", "mp4",
+                "-o", str(out), hls,
+            ]
+            r2 = subprocess.run(cmd2, capture_output=True, text=True, encoding="utf-8",
+                                errors="replace")
+            if out.exists() and out.stat().st_size > 0:
+                r = r2
+                break
+        else:
+            err = "\n".join(((r.stderr or r.stdout) or "").strip().splitlines()[-8:])
+            print(err)
+            print(f"[ERR] yt-dlp rc={r.returncode}")
+            sys.exit(1)
+
+    tail = "\n".join((r.stdout or "").strip().splitlines()[-6:])
     print(tail)
-    print(f"[OK] сохранено: {out} ({out.stat().st_size} байт)")
+    print('[OK] сохранено:', out, '(%s байт)' % out.stat().st_size)
 
 
 if __name__ == "__main__":

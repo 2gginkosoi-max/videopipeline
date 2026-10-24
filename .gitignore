@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.so
+
+# ===== Виртуальные окружения =====
+venv/
+.venv/
+env/
+ENV/
 .Python
 build/
 develop-eggs/
@@ -79,3 +85,6 @@ node_modules/
 
 # ===== Python venv (локальная проверка) =====
 .venv/
+
+# ===== Web: временные b-roll клипы (шаг 2) =====
+web/static/tmp/

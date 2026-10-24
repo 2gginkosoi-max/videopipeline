@@ -1,0 +1,214 @@
+<form id="slicingForm" class="assembly-form" autocomplete="off" onsubmit="event.preventDefault();">
+  <!-- Шаг 1: Загрузка видео -->
+  <article class="step-card glass-panel">
+    <header class="step-card__head">
+      <div class="step-card__index">1</div>
+      <div class="step-card__titles">
+        <h3>Видео</h3>
+        <p>Загрузите файл или вставьте ссылку</p>
+      </div>
+    </header>
+    <div class="step-card__body">
+      <div class="field">
+        <label class="field__label">Видео файл</label>
+        <input type="file" name="videoFile" class="field__input" accept="video/*">
+      </div>
+      <div class="field">
+        <label class="field__label">Ссылка YouTube</label>
+        <input type="text" name="youtubeUrl" class="field__input" placeholder="https://www.youtube.com/watch?v=...">
+      </div>
+    </div>
+  </article>
+
+  <!-- Шаг 2: Субтитры -->
+  <article class="step-card glass-panel" style="margin-top:16px;">
+    <header class="step-card__head">
+      <div class="step-card__index">2</div>
+      <div class="step-card__titles">
+        <h3>Субтитры</h3>
+        <p>Выберите стиль</p>
+      </div>
+    </header>
+    <div class="step-card__body">
+      <span class="field__label">Стиль субтитров</span>
+      <div class="subtitle-grid" id="slicingSubtitleGrid">
+        <button type="button" class="subtitle-pill is-active" data-sub="classic">Классика</button>
+        <button type="button" class="subtitle-pill" data-sub="clean">Чистый</button>
+        <button type="button" class="subtitle-pill" data-sub="neon">Неон</button>
+        <button type="button" class="subtitle-pill" data-sub="min">Минимум</button>
+        <button type="button" class="subtitle-pill" data-sub="cinema">Кино</button>
+      </div>
+      <input type="hidden" name="sub_style" value="classic">
+      <div class="sub-preview" id="slicingSubPreview" data-style="classic">
+        <div class="sub-preview__frame">
+          <span class="sub-preview__word" id="subPreviewWord">Медведь</span>
+        </div>
+        <div class="sub-preview__side">
+          <div class="sub-preview__label" id="subPreviewLabel">Классика</div>
+          <div class="sub-preview__hint" id="subPreviewHint">Слово выскакивает с лёгким увеличением, ключевые — красным.</div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Кнопка “Нарезать клипы” -->
+  <div style="margin-top:16px;">
+    <button type="button" class="btn-run" id="slicingStartBtn"><span class="btn__label">Нарезать клипы</span></button>
+  </div>
+
+  <!-- Шаг 2: Результаты -->
+  <article class="step-card glass-panel" style="margin-top:16px;">
+    <header class="step-card__head">
+      <div class="step-card__index">4</div>
+      <div class="step-card__titles">
+        <h3>Клипы</h3>
+        <p>Полученные фрагменты</p>
+      </div>
+    </header>
+    <div class="step-card__body">
+      <ul id="slicingClipsList" class="clip-list"></ul>
+    </div>
+  </article>
+</form>
+
+<script>
+(function() {
+  // Подписи и подсказки для стилей субтитров
+  const styleHints = {
+    classic: 'Слово выскакивает с лёгким увеличением, ключевые — красным.',
+    clean: 'Все слова белые, появляются по одному, в такт голосу — без вспышек.',
+    neon: 'Белое слово с холодным неоновым свечением.',
+    min: 'Мелкий текст без обводки — ничего не отвлекает от кадра.',
+    cinema: 'Шрифт с засечками и разрядкой, как в титрах.'
+  };
+  const styleLabels = {
+    classic: 'Классика',
+    clean: 'Чистый',
+    neon: 'Неон',
+    min: 'Минимум',
+    cinema: 'Кино'
+  };
+
+  function updatePreview(style) {
+    const subPreview = document.getElementById('slicingSubPreview');
+    if (!subPreview) return;
+    subPreview.setAttribute('data-style', style);
+    subPreview.querySelector('.sub-preview__label').textContent = styleLabels[style];
+    subPreview.querySelector('.sub-preview__hint').textContent = styleHints[style];
+
+    // --- запуск анимации слова ---
+    const word = subPreview.querySelector('.sub-preview__word');
+    if (word) {
+        // сбрасываем старые классы анимации
+        word.classList.remove('is-in', 'is-key');
+        // принудительный reflow, чтобы браузер перезапустил анимацию
+        void word.offsetWidth;
+        // добавляем класс запуска анимации (поддерживается для всех стилей)
+        word.classList.add('is-in');
+        // для стиля "Классика" можно добавить класс is-key для выделения ключевого слова,
+        // но здесь мы просто запускаем базовый входной эффект.
+    }
+  }
+
+  const form = document.getElementById('slicingForm');
+  const progressBar = document.getElementById('slicingProgressBar');
+  const progressText = document.getElementById('slicingProgressText');
+  const clipsList = document.getElementById('slicingClipsList');
+  const subtitleGrid = document.getElementById('slicingSubtitleGrid');
+
+  // Инициализация превью при загрузке страницы
+  updatePreview('classic');
+
+  // Визуальный отклик на выбор стиля субтитров + обновление превью
+  subtitleGrid.addEventListener('click', e => {
+    if (e.target.classList.contains('subtitle-pill')) {
+      // --- техничка принудительного перезапуска анимации ---
+      const pill = e.target;
+      pill.classList.remove('is-active');
+      void pill.offsetWidth; // reflow, чтобы браузер перерисовал элемент
+      pill.classList.add('is-active');
+      // ----------------------------------------------------
+
+      // Обновляем превью при смене стиля
+      const style = e.target.getAttribute('data-sub');
+      updatePreview(style);
+    }
+  });
+
+  // Отправка формы через fetch (без перезагрузки страницы)
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    const resp = await fetch('/api/slicing/start', {
+      method: 'POST',
+      body: fd,
+    });
+    const data = await resp.json();
+    if (!data.ok) {
+      alert(data.detail || 'Ошибка');
+      return;
+    }
+    const jobId = data.job_id;
+    const poll = setInterval(async () => {
+      const sr = await fetch(`/api/jobs/${jobId}`);
+      const st = await sr.json();
+      if (st.status === 'processing') {
+        if (st.progress !== undefined) {
+          const pct = Math.round(st.progress * 100);
+          progressBar.style.width = pct + '%';
+          progressText.textContent = `${pct}%`;
+        }
+      } else if (st.status === 'completed') {
+        clearInterval(poll);
+        clipsList.innerHTML = '';
+        (st.clips || []).forEach(c => {
+          const li = document.createElement('li');
+          li.className = 'clip-item';
+          li.innerHTML = `<a href="/static/tmp/${c.filename}" target="_blank">${c.filename}</a> (${c.duration}s)`;
+          clipsList.appendChild(li);
+        });
+      } else if (st.status === 'failed') {
+        clearInterval(poll);
+        alert('Ошибка при обработке видео');
+      }
+    }, 2000);
+  });
+
+  // Обработка клика по кнопки "Нарезать клипы" — блокируем перезагрузку и отправляем запрос
+  const startBtn = document.getElementById('slicingStartBtn');
+  if (startBtn) {
+    startBtn.addEventListener('click', async e => {
+      e.preventDefault(); // гарантированно убираем любое отправление формы
+      const fd = new FormData(form);
+      const resp = await fetch('/api/slicing/start', {
+        method: 'POST',
+        body: fd,
+      });
+      const data = await resp.json();
+      if (!data.ok) {
+        alert(data.detail || 'Ошибка');
+        return;
+      }
+      const jobId = data.job_id;
+      const poll = setInterval(async () => {
+        const sr = await fetch(`/api/jobs/${jobId}`);
+        const st = await sr.json();
+        if (st.status === 'completed') {
+          clearInterval(poll);
+          clipsList.innerHTML = '';
+          (st.clips || []).forEach(c => {
+            const li = document.createElement('li');
+            li.className = 'clip-item';
+            li.innerHTML = `<a href="/static/tmp/${c.filename}" target="_blank">${c.filename}</a> (${c.duration}s)`;
+            clipsList.appendChild(li);
+          });
+        } else if (st.status === 'failed') {
+          clearInterval(poll);
+          alert('Ошибка при обработке видео');
+        }
+      }, 2000);
+    });
+  }
+
+})();
+</script>

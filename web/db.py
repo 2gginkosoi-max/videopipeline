@@ -74,6 +74,13 @@ CREATE TABLE IF NOT EXISTS news_cache (
     video_url   TEXT,
     thumb       TEXT,
     updated     TEXT,
+    title_ru    TEXT DEFAULT '',
+    created_at  TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS news_tr (
+    link        TEXT PRIMARY KEY,
+    title_ru    TEXT NOT NULL,
     created_at  TEXT NOT NULL
 );
 
@@ -106,6 +113,10 @@ def conn() -> sqlite3.Connection:
 def init_db() -> None:
     c = conn()
     c.executescript(SCHEMA)
+    # миграция старых баз: колонка title_ru появилась позже
+    cols = [r[1] for r in c.execute("PRAGMA table_info(news_cache)").fetchall()]
+    if "title_ru" not in cols:
+        c.execute("ALTER TABLE news_cache ADD COLUMN title_ru TEXT DEFAULT ''")
     c.commit()
 
 
@@ -131,7 +142,9 @@ def create_user(username: str, email: str, pass_hash: str, salt: str) -> dict:
     execute(
         "INSERT INTO users (id, username, email, pass_hash, salt, created_at)"
         " VALUES (?,?,?,?,?,?)",
-        (uid, username, email, pass_hash, salt, now()),
+        # пустая почта -> NULL: иначе UNIQUE(email) не даёт завести второго
+        # пользователя без почты
+        (uid, username, (email or "").strip() or None, pass_hash, salt, now()),
     )
     return get_user(uid)
 
@@ -304,10 +317,10 @@ def cache_news(user_id: str, posts: list) -> None:
     for p in posts:
         rows.append((new_id(), user_id, p.get("sub", ""), p.get("title", ""),
                      p.get("link", ""), p.get("video_url", ""), p.get("thumb", ""),
-                     p.get("updated", ""), now()))
+                     p.get("updated", ""), p.get("title_ru", ""), now()))
     conn().executemany(
-        "INSERT INTO news_cache (id, user_id, sub, title, link, video_url, thumb, updated, created_at)"
-        " VALUES (?,?,?,?,?,?,?,?,?)", rows)
+        "INSERT INTO news_cache (id, user_id, sub, title, link, video_url, thumb, updated, title_ru, created_at)"
+        " VALUES (?,?,?,?,?,?,?,?,?,?)", rows)
     conn().commit()
 
 
@@ -323,3 +336,30 @@ def find_cached_news(user_id: str, link: str):
     r = one("SELECT * FROM news_cache WHERE user_id = ? AND link = ? LIMIT 1",
             (user_id, link))
     return dict(r) if r else None
+
+
+# ------------------------------------------------------- переводы заголовков
+
+def get_translations(links: list) -> dict:
+    """link -> title_ru для уже переведённых постов."""
+    if not links:
+        return {}
+    marks = ",".join("?" * len(links))
+    rows = query(f"SELECT link, title_ru FROM news_tr WHERE link IN ({marks})",
+                 tuple(links))
+    return {r["link"]: r["title_ru"] for r in rows}
+
+
+def save_translations(mapping: dict) -> None:
+    """Запомнить переводы, чтобы не гонять LLM повторно."""
+    if not mapping:
+        return
+    rows = [(link, ru, now()) for link, ru in mapping.items() if link and ru]
+    if not rows:
+        return
+    conn().executemany(
+        "INSERT INTO news_tr (link, title_ru, created_at) VALUES (?,?,?)"
+        " ON CONFLICT(link) DO UPDATE SET title_ru = excluded.title_ru",
+        rows,
+    )
+    conn().commit()

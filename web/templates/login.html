@@ -120,8 +120,8 @@
       });
       const d = await res.json().catch(() => null);
       if (!res.ok) throw new Error((d && d.detail) || ("Ошибка " + res.status));
-      // cookie выставляет сервер (httponly) — просто уходим в профиль
-      location.href = "/profile";
+      // cookie выставляет сервер (httponly) — возвращаемся в конвейер
+      location.href = "/";
     } catch (ex) {
       err.textContent = ex.message;
       err.hidden = false;
@@ -130,9 +130,9 @@
     }
   });
 
-  // если уже вошли — сразу в профиль
+  // если уже вошли — сразу в конвейер
   fetch("/api/auth/me").then(r => r.json()).then(d => {
-    if (d && d.user) location.replace("/profile");
+    if (d && d.user) location.replace("/");
   }).catch(() => {});
 })();
 </script>

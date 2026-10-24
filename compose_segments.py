@@ -23,6 +23,34 @@ def get_duration(path: str) -> float:
     return float(r.stdout.strip())
 
 
+def fit_segments(segments, source_dur: float, audio_dur: float) -> list:
+    """Подогнать фрагменты под озвучку и длину исходника.
+
+    Проблема: если b-roll короче озвучки (частый случай с Reddit-видео),
+    таймкоды за концом файла дают пустые кадры, и ролик обрывается на
+    первой фразе. Тогда раскадровку собираем сами: нужное число кусков,
+    старты равномерно по всему исходнику.
+    """
+    if not segments or source_dur <= 0.3 or audio_dur <= 0.1:
+        return segments
+
+    cover = sum(d for _, d in segments)
+    fits = all(s + d <= source_dur + 0.05 for s, d in segments)
+    if fits and cover >= audio_dur - 0.05:
+        return segments
+
+    seg_len = min(2.9, max(0.7, source_dur - 0.15))
+    n = max(1, int(audio_dur / seg_len) + (1 if audio_dur % seg_len > 0.05 else 0))
+    span = max(0.0, source_dur - seg_len)
+    out = []
+    for i in range(n):
+        start = round(i * span / max(1, n - 1), 3) if n > 1 else 0.0
+        out.append((start, round(seg_len, 3)))
+    print(f"   Кадры: исходник {source_dur:.2f} c, озвучка {audio_dur:.2f} c -> "
+          f"{len(out)} фрагментов по {seg_len:.1f} c (авто)")
+    return out
+
+
 def compose(source: str, segments, audio: str, ass: str, out: str,
             crf: int = 18, bitrate: str = "12M", overlays: str = "",
             style: str = "punch", sharpen: str = "") -> bool:
@@ -38,6 +66,8 @@ def compose(source: str, segments, audio: str, ass: str, out: str,
 
     Path(out).parent.mkdir(parents=True, exist_ok=True)
     adur = get_duration(audio)
+    sdur = get_duration(source)
+    segments = fit_segments(segments, sdur, adur)
     print(f"   Аудио: {adur:.2f} сек | фрагментов: {len(segments)}"
           + (f" | unsharp={sharpen}" if sharpen else ""))
 

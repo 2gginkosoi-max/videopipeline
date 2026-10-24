@@ -58,7 +58,10 @@ web/
 │   ├── profile.html     # мои ролики / голоса / сценарии
 │   └── login.html       # вход и регистрация
 ├── static/
-│   ├── css/style.css
+│   ├── css/style.css        # старые страницы (/results, /profile, /login)
+│   ├── css/layout.css       # новый layout: сетка, стекло, карточки
+│   ├── css/components.css   # рабочие компоненты нового layout: модалка, toast,
+│   │                        #   лог, архив, варианты сценария, адаптив
 │   └── js/app.js
 ├── voices/builtin/      # готовые референсы встроенных голосов (+ index.json)
 ├── users/<uid>/         # videos/, voices/, scenario.txt, brief.txt

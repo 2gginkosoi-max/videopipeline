@@ -1,0 +1,128 @@
+<form id="cutForm" class="assembly-form" autocomplete="off">
+  <div class="steps-grid">
+    <article class="step-card glass-panel">
+      <header class="step-card__head">
+        <div class="step-card__index">1</div>
+        <div class="step-card__titles">
+          <h3>Видео</h3>
+          <p>Загрузка исходного видео</p>
+        </div>
+      </header>
+      <div class="step-card__body">
+        <label class="field">
+          <span class="field__label">Файл видео</span>
+          <input type="file" name="video" accept="video/*" required>
+        </label>
+        <div class="hint">MP4, MOV, AVI — до 2 ГБ</div>
+      </div>
+    </article>
+
+    <article class="step-card glass-panel">
+      <header class="step-card__head">
+        <div class="step-card__index">2</div>
+        <div class="step-card__titles">
+          <h3>Субтитры</h3>
+          <p>Стилизация субтитров</p>
+        </div>
+      </header>
+      <div class="step-card__body">
+        <span class="field__label">Стиль субтитров</span>
+        <div class="subtitle-grid" id="subtitleGridCut">
+          <button type="button" class="subtitle-pill is-active" data-sub="classic">Классика</button>
+          <button type="button" class="subtitle-pill" data-sub="clean">Чистый</button>
+          <button type="button" class="subtitle-pill" data-sub="neon">Неон</button>
+          <button type="button" class="subtitle-pill" data-sub="min">Минимум</button>
+          <button type="button" class="subtitle-pill" data-sub="cinema">Кино</button>
+        </div>
+        <input type="hidden" name="sub_style" value="classic">
+        <div class="sub-preview" id="subPreviewCut" data-style="classic">
+          <div class="sub-preview__frame">
+            <span class="sub-preview__word" id="subPreviewWordCut">Медведь</span>
+          </div>
+          <div class="sub-preview__side">
+            <div class="sub-preview__label" id="subPreviewLabelCut">Классика</div>
+            <div class="sub-preview__hint" id="subPreviewHintCut">Слово выскакивает с лёгким увеличением, ключевые — красным.</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="step-card glass-panel">
+      <header class="step-card__head">
+        <div class="step-card__index">3</div>
+        <div class="step-card__titles">
+          <h3>Голос</h3>
+          <p>Генерация TTS или без голоса</p>
+        </div>
+      </header>
+      <div class="step-card__body">
+        <label class="field">
+          <span class="field__label">Выбор голоса</span>
+          <div class="field__row">
+            <select class="field__select" name="voice_id" id="voiceIdCut">
+              <option value="">Загрузка...</option>
+            </select>
+            <button type="button" class="btn-preview" id="voicePreviewBtnCut">▶ Прослушать</button>
+          </div>
+        </label>
+        <label class="field">
+          <span class="field__label">Скорость речи</span>
+          <input class="field__range" type="range" name="factor" min="0.8" max="1.6" step="0.05" value="1.15">
+        </label>
+        <label class="field">
+          <span class="field__label">Голос не нужен</span>
+          <input type="checkbox" name="no_voice" id="noVoiceCut" checked>
+        </label>
+        <div class="voicepreview" id="voicePreviewCut" hidden>
+          <audio id="voiceAudioCut" controls></audio>
+          <span class="hint" id="voicePreviewNameCut"></span>
+        </div>
+      </div>
+    </article>
+
+    <article class="step-card glass-panel">
+      <header class="step-card__head">
+        <div class="step-card__index">4</div>
+        <div class="step-card__titles">
+          <h3>Нарезка</h3>
+          <p>Автоматическое вырезание шортсов (≥30 с)</p>
+        </div>
+      </header>
+      <div class="step-card__body">
+        <label class="field">
+          <span class="field__label">Длина клипа</span>
+          <input class="field__input" type="number" name="clip_length" min="15" max="60" value="30">
+        </label>
+        <div class="hint">Минимальная длина шортса. Видео будет нарезано на фрагменты этой длины.</div>
+      </div>
+    </article>
+
+    <div class="steps-connector" id="stepsConnector"></div>
+
+    <button type="submit" class="btn-run" id="runCutBtn">
+      <span class="btn__label">Нарезать шортсы</span>
+    </button>
+    <button type="button" class="btn btn--ghost" id="clearCutBtn">Очистить</button>
+  </div>
+</form>
+
+<div class="card card--log">
+  <div class="card__head card__head--tight">
+    <span class="step step--live" id="liveDotCut">●</span>
+    <div>
+      <h2>Лог нарезки</h2>
+      <p id="logMetaCut">ожидание запуска</p>
+    </div>
+  </div>
+
+  <div class="terminal" id="logCut">
+    <div class="terminal__body" id="logBodyCut">
+      <div class="terminal__line term-line--dim">// Вывод инструмента нарезки появится здесь</div>
+    </div>
+  </div>
+
+  <div class="card__foot card__foot--tight">
+    <button type="button" class="btn btn--mini" id="copyLogCut">Копировать лог</button>
+    <button type="button" class="btn btn--mini" id="clearLogCut">Очистить</button>
+  </div>
+</div>

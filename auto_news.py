@@ -53,8 +53,6 @@ SUBTITLES = rf"{F5}\subtitles.srt"
 SUBS_ASS = rf"{VP}\output\subs.ass"
 OVERLAYS_ASS = rf"{VP}\output\overlays.ass"
 FINAL = rf"{VP}\output\final_video.mp4"
-FINAL_GOOSE = rf"{VP}\output\final_video_goose.mp4"
-GOOSE = rf"{VP}\assets\goose\goose_anchor.webm"
 BROLL_DIR = rf"{VP}\output\broll"
 BROLL_PLAN = rf"{BROLL_DIR}\plan.json"
 
@@ -99,6 +97,9 @@ def main():
     ap.add_argument("--privacy", default="unlisted", choices=["public", "unlisted", "private"])
     ap.add_argument("--category", default="25", help="25 Новости, 27 Образование, 24 Развлечения")
     ap.add_argument("--bed", default="auto", help="музыкальная подложка: auto|am|c|em|dm")
+    ap.add_argument("--style", default="classic",
+                    choices=["classic", "clean", "neon", "min", "cinema"],
+                    help="стиль субтитров (шаг 8, make_ass.py)")
     ap.add_argument("--overlays", action="store_true",
                     help="УСТАРЕЛО/ОТКЛЮЧЕНО: инфо-карточки по центру запрещены (только нижние субтитры + верхний заголовок)")
     ap.add_argument("--skip-download", action="store_true")
@@ -106,13 +107,6 @@ def main():
     ap.add_argument("--skip-publish", action="store_true")
     ap.add_argument("--sharpen", default="",
                     help="unsharp для мелкого b-roll (360x360), напр. 5:5:1.0:5:5:0.0")
-    ap.add_argument("--goose-file", default=GOOSE,
-                    help="клип гуся-соведущего (по умолчанию assets/goose/goose_anchor.webm)")
-    ap.add_argument("--goose-pos", default="top-right",
-                    choices=["top-right", "mid-right", "low-right", "top-left", "mid-left"],
-                    help="где в кадре живёт гусь-соведущий")
-    ap.add_argument("--no-goose", action="store_true",
-                    help="не добавлять гуся-соведущего (по умолчанию добавляется)")
     ap.add_argument("--voice-ref", default="",
                     help="референс голоса для F5-TTS (wav 5-10 c) — свой клон")
     ap.add_argument("--voice-ref-text", default="",
@@ -124,7 +118,6 @@ def main():
     # Финальный файл можно перенаправить (веб-интерфейс: свой файл на пользователя).
     final_path = Path(a.final) if a.final else Path(FINAL)
     final_str = str(final_path)
-    final_goose = str(final_path.with_name(final_path.stem + "_goose.mp4"))
     final_path.parent.mkdir(parents=True, exist_ok=True)
 
     asset = Path(a.asset)
@@ -149,12 +142,30 @@ def main():
 
     # 1. b-roll
     if not a.skip_download and a.video_url:
-        if asset.exists():
-            print(f"[SKIP] b-roll уже есть: {asset}")
+        # Файл b-roll один на все выпуски, поэтому кэш допустим ТОЛЬКО для того же
+        # ролика: рядом лежит маркер с URL. Иначе прошлый b-roll молча уедет в
+        # новый выпуск — так сценарий про птиц оказался поверх дэшкама с машинами.
+        url_marker = asset.with_name(asset.name + ".url")
+        prev_url = url_marker.read_text(encoding="utf-8-sig").strip() if url_marker.exists() else ""
+        if asset.exists() and prev_url == a.video_url.strip():
+            print(f"[SKIP] b-roll уже скачан для этого же видео: {asset}")
         else:
+            if asset.exists():
+                print(f"[INFO] b-roll другого видео ({prev_url or 'URL неизвестен'}) — качаю заново")
+                asset.unlink()
             asset.parent.mkdir(parents=True, exist_ok=True)
-            run([YTDLP, "--no-warnings", "-f", "bv*+ba/b", "--merge-output-format",
-                 "mp4", "-o", str(asset), a.video_url], "Скачивание b-roll")
+            # Reddit через yt-dlp теперь требует cookies, а reddit_dl.py тянет
+            # тот же ролик по HLS из RSS. Поэтому сначала пробуем его.
+            if "reddit" in a.video_url or "v.redd.it" in a.video_url:
+                run_allow_fail([PY, rf"{VP}\reddit_dl.py", "--url", a.video_url,
+                                "--out", str(asset)], "Скачивание b-roll (Reddit)")
+            if asset.exists() and asset.stat().st_size < 100_000:
+                print("[WARN] файл b-roll подозрительно маленький — перекачиваю")
+                asset.unlink()
+            if not asset.exists():
+                run([YTDLP, "--no-warnings", "-f", "bv*+ba/b", "--merge-output-format",
+                     "mp4", "-o", str(asset), a.video_url], "Скачивание b-roll")
+            url_marker.write_text(a.video_url.strip(), encoding="utf-8")
     if not asset.exists():
         print(f"[ERROR] нет b-roll: {asset}")
         sys.exit(1)
@@ -194,7 +205,8 @@ def main():
     run([PY, rf"{VP}\seo.py", "--brief-file", a.brief_file], "SEO")
 
     # 8. ASS (дизайн субтитров/заголовка — без изменений)
-    run([PY, rf"{VP}\make_ass.py", "--srt", SUBTITLES, "--out", SUBS_ASS], "Сборка ASS")
+    run([PY, rf"{VP}\make_ass.py", "--srt", SUBTITLES, "--out", SUBS_ASS,
+         "--style", a.style], "Сборка ASS")
 
     # 9.5 АРХИВ предыдущего ролика. Монтаж всегда пишет в output\final_video.mp4,
     # поэтому без архива готовый ролик прошлого выпуска исчезает (так потерялся
@@ -219,38 +231,12 @@ def main():
     print("\n[SKIP] оверлеи (инфо-карточки/прогресс-бар) отключены навсегда")
 
     # 10. монтаж
-    # Маркер гуся стираем ДО монтажа: в автопроверку не должен попасть успех
-    # прошлого выпуска, если гусь в этот раз не вписался.
-    goose_marker = Path(VP) / "output" / "goose_overlay.json"
-    try:
-        goose_marker.unlink(missing_ok=True)
-    except OSError:
-        pass
     compose_cmd = ([PY, rf"{VP}\compose_segments.py", "--source", str(asset),
                     "--audio", VOICEOVER_MIX, "--ass", SUBS_ASS] + extra +
                    ["--segments", a.segments, "--out", final_str])
     if a.sharpen:
         compose_cmd += ["--sharpen", a.sharpen]
     run(compose_cmd, "Монтаж видео")
-
-    # 10.5 ГУСЬ-СОВЕДУЩИЙ — фирменный элемент канала «ГУСЬ ПЕРЕВОДИЛА»:
-    #      круглый говорящий гусь в правой части кадра, зацикленный на всю длину
-    #      ролика (assets/goose/goose_anchor.webm). Шаг мягкий: если он не собрался,
-    #      ролик остаётся без гуся и конвейер продолжает работу (не роняем выпуск).
-    if a.no_goose:
-        print("\n[SKIP] гусь-соведущий (--no-goose)")
-    elif not Path(a.goose_file).exists():
-        print(f"\n[WARN] нет клипа гуся: {a.goose_file} — ролик без гуся")
-    else:
-        rc_goose = run_allow_fail(
-            [PY, rf"{VP}\goose_overlay.py", "--video", final_str, "--goose", a.goose_file,
-             "--out", final_goose, "--pos", a.goose_pos],
-            "Гусь-соведущий (круглый оверлей)")
-        if rc_goose == 0 and Path(final_goose).exists():
-            os.replace(final_goose, final_str)     # атомарная подмена готового ролика
-            print(f"[GOOSE] гусь вписан в {final_str}")
-        else:
-            print("[WARN] гусь не вписан — ролик без него")
 
     # 11. автопроверка оригинальности (Правило 5)
     rc = run_allow_fail([PY, rf"{VP}\originality_check.py", "--asset", str(asset),
@@ -260,7 +246,8 @@ def main():
 
     # 12. публикация (только если проверка пройдена)
     if a.skip_publish:
-        print("[SKIP] публикация")
+        # веб всегда работает без публикации — этап в лог не выводим
+        pass
     elif rc != 0:
         print("[BLOCK] Публикация запрещена: автопроверка оригинальности НЕ пройдена.")
         sys.exit(1)
