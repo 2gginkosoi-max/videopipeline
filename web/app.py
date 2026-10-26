@@ -159,6 +159,7 @@ def make_job(cmd: list, meta: dict) -> dict:
         "log": [],
         "stage": "",
         "stage_index": 0,
+        "stages": [],        # [{"label": ..., "step": n}] — для восстановления UI
         "video_id": None,
     }
     JOBS[job["id"]] = job
@@ -360,6 +361,10 @@ async def run_job(job: dict) -> None:
             # Полный вывод auto_news оставляем в job["log"] (для отладки), а в
             # панель справа отдаём ТОЛЬКО этапы: «что сейчас происходит».
             job["log"].append(line)
+            # ошибки/предупреждения показываем в правой панели, иначе причина
+            # остановки видна только в консоли сервера
+            if line.startswith("[ERROR]") or line.startswith("[WARN]"):
+                broadcast("log", {"job_id": job["id"], "line": line})
             m = STAGE_RE.match(line)
             if m:
                 label = m.group(1).strip()
@@ -369,8 +374,10 @@ async def run_job(job: dict) -> None:
                 prev_label = job["stage"]
                 job["stage"] = label
                 job["stage_index"] += 1
+                shown = STAGE_NAMES.get(label, label)
+                job["stages"].append({"label": shown, "step": job["stage_index"]})
                 broadcast("stage", {"job_id": job["id"],
-                                    "label": STAGE_NAMES.get(label, label),
+                                    "label": shown,
                                     "step": job["stage_index"]})
                 # SEO только что закончился — показываем, какие теги он выбрал
                 if prev_label == "SEO":
@@ -580,7 +587,7 @@ async def api_clone_voice(
 
     if not ref:
         src.unlink(missing_ok=True)
-        raise HTTPException(400, "Не удалось выделить голос из файла")
+        raise HTTPException(400, "Не удалось выделить голос: нужна чистая речь 5–10 с без музыки, эха и посторонних голосов")
 
     vname = (name or "").strip() or src.stem
     rec = db.add_voice(user_id=user["id"], name=vname, ref_wav=str(ref),

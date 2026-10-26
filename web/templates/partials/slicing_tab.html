@@ -147,9 +147,25 @@
   const subStyleInput = form ? form.querySelector('input[name="sub_style"]') : null;
   const statusEl = document.getElementById('slicingStatus');
   const startBtn = document.getElementById('slicingStartBtn');
+  const vertBox = form ? form.querySelector('input[name="vertical"]') : null;
+  const subsBox = form ? form.querySelector('input[name="subs"]') : null;
+  const webcamSel = form ? form.querySelector('select[name="webcam"]') : null;
+  const urlInput = form ? form.querySelector('input[name="youtubeUrl"]') : null;
+  const DRAFT_KEY = 'goose_slice_draft_v1';
 
   function setStatus(text) {
     if (statusEl) statusEl.textContent = text;
+  }
+
+  function applyStyle(style) {
+    if (!style) return;
+    if (subStyleInput) subStyleInput.value = style;
+    if (subtitleGrid) {
+      subtitleGrid.querySelectorAll('.subtitle-pill').forEach(p => {
+        p.classList.toggle('is-active', p.getAttribute('data-sub') === style);
+      });
+    }
+    updatePreview(style);
   }
 
   // Инициализация превью при загрузке страницы
@@ -159,13 +175,40 @@
   subtitleGrid.addEventListener('click', e => {
     const pill = e.target.closest('.subtitle-pill');
     if (!pill) return;
-    subtitleGrid.querySelectorAll('.subtitle-pill').forEach(p => p.classList.remove('is-active'));
-    pill.classList.add('is-active');
-
-    const style = pill.getAttribute('data-sub');
-    if (subStyleInput) subStyleInput.value = style;
-    updatePreview(style);
+    applyStyle(pill.getAttribute('data-sub'));
+    saveDraft();
   });
+
+  /* ---- черновик формы: переживает перезагрузку страницы ---- */
+
+  function saveDraft() {
+    if (!form) return;
+    try {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify({
+        youtubeUrl: urlInput ? urlInput.value : '',
+        sub_style: subStyleInput ? subStyleInput.value : 'classic',
+        vertical: vertBox ? vertBox.checked : true,
+        subs: subsBox ? subsBox.checked : true,
+        webcam: webcamSel ? webcamSel.value : 'auto',
+      }));
+    } catch (e) {}
+  }
+
+  function restoreDraft() {
+    let d = null;
+    try { d = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); } catch (e) {}
+    if (!d) return;
+    if (urlInput && d.youtubeUrl) urlInput.value = d.youtubeUrl;
+    if (vertBox && typeof d.vertical === 'boolean') vertBox.checked = d.vertical;
+    if (subsBox && typeof d.subs === 'boolean') subsBox.checked = d.subs;
+    if (webcamSel && d.webcam) webcamSel.value = d.webcam;
+    if (d.sub_style) applyStyle(d.sub_style);
+  }
+
+  if (form) {
+    form.addEventListener('input', saveDraft);
+    form.addEventListener('change', saveDraft);
+  }
 
   function renderClips(clips, jobId) {
     if (!clipsList) return;
@@ -186,6 +229,31 @@
 
   let slicing = false;
 
+  function setBusyUI(on) {
+    slicing = on;
+    if (startBtn) startBtn.disabled = on;
+  }
+
+  async function pollJob(jobId) {
+    for (;;) {
+      await new Promise(r => setTimeout(r, 1500));
+      const sr = await fetch(`/api/jobs/${jobId}`);
+      let st = null;
+      try { st = await sr.json(); } catch (e) { st = null; }
+      if (!sr.ok || !st) throw new Error((st && st.detail) || ('Ошибка ' + sr.status));
+
+      if (st.status === 'completed') {
+        renderClips(st.clips || [], jobId);
+        setStatus(`Готово: ${(st.clips || []).length} клипов`);
+        return st;
+      }
+      if (st.status === 'failed') {
+        throw new Error(st.error || 'не удалось нарезать видео');
+      }
+      setStatus(`Нарезка… ${Math.round((st.progress || 0) * 100)}%`);
+    }
+  }
+
   async function startSlicing() {
     if (slicing) return;
     const fd = new FormData(form);
@@ -197,10 +265,7 @@
       return;
     }
 
-    slicing = true;
-    if (startBtn) startBtn.disabled = true;
-    const vertBox = form.querySelector('input[name="vertical"]');
-    const subsBox = form.querySelector('input[name="subs"]');
+    setBusyUI(true);
     if (vertBox) fd.set('vertical', vertBox.checked ? '1' : '0');
     if (subsBox) fd.set('subs', subsBox.checked ? '1' : '0');
     setStatus('Загрузка видео…');
@@ -213,48 +278,54 @@
       if (!resp.ok || !data || !data.ok) {
         throw new Error((data && data.detail) || ('Ошибка ' + resp.status));
       }
-
-      const jobId = data.job_id;
       setStatus('Нарезка…');
-
-      await new Promise((resolve, reject) => {
-        const poll = setInterval(async () => {
-          try {
-            const sr = await fetch(`/api/jobs/${jobId}`);
-            const st = await sr.json();
-            if (!sr.ok) throw new Error(st.detail || ('Ошибка ' + sr.status));
-
-            if (st.status === 'completed') {
-              clearInterval(poll);
-              renderClips(st.clips || [], jobId);
-              setStatus(`Готово: ${(st.clips || []).length} клипов`);
-              resolve();
-            } else if (st.status === 'failed') {
-              clearInterval(poll);
-              reject(new Error(st.error || 'не удалось нарезать видео'));
-            } else {
-              const pct = Math.round((st.progress || 0) * 100);
-              setStatus(`Нарезка… ${pct}%`);
-            }
-          } catch (err) {
-            clearInterval(poll);
-            reject(err);
-          }
-        }, 1500);
-      });
+      await pollJob(data.job_id);
     } catch (err) {
       const text = (err && err.message) ? err.message : 'неизвестная ошибка';
       const short = text.length > 700 ? text.slice(0, 700) + '…' : text;
       setStatus('Ошибка: ' + short);
       alert('Ошибка нарезки: ' + short);
     } finally {
-      slicing = false;
-      if (startBtn) startBtn.disabled = false;
+      setBusyUI(false);
+    }
+  }
+
+  /* После перезагрузки страницы задача на сервере жива — возвращаем её в UI. */
+  async function restoreSlicingJob() {
+    restoreDraft();
+
+    let jobs = [];
+    try {
+      const r = await fetch('/api/jobs');
+      if (!r.ok) return;
+      jobs = ((await r.json()).jobs) || [];
+    } catch (e) { return; }
+
+    const job = jobs.find(j => j.meta && j.meta.kind === 'slicing');
+    if (!job) return;
+
+    const finished = job.finished ? new Date(job.finished).getTime() : 0;
+    if (job.status !== 'processing' && Number.isFinite(finished)
+        && Date.now() - finished > 24 * 3600 * 1000) return;
+
+    if (job.status === 'completed') {
+      renderClips(job.clips || [], job.id);
+      setStatus(`Готово: ${(job.clips || []).length} клипов`);
+    } else if (job.status === 'failed') {
+      setStatus('Ошибка: ' + (job.error || 'не удалось нарезать видео'));
+    } else {
+      setBusyUI(true);
+      setStatus(`Нарезка… ${Math.round((job.progress || 0) * 100)}%`);
+      try { await pollJob(job.id); }
+      catch (err) { setStatus('Ошибка: ' + err.message); }
+      finally { setBusyUI(false); }
     }
   }
 
   form.addEventListener('submit', e => { e.preventDefault(); startSlicing(); });
   if (startBtn) startBtn.addEventListener('click', e => { e.preventDefault(); startSlicing(); });
+
+  restoreSlicingJob();
 
 })();
 </script>

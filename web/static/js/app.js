@@ -12,6 +12,7 @@
     voiceFilter: "all",
     selectedVoice: null,
     busy: false,
+    wsSeen: false,     // пришли живые события WS — восстановление не нужно
   };
 
   /* ------------------------------------------------ toast */
@@ -815,6 +816,7 @@
   }
 
   function handleMsg(msg) {
+    if (msg.kind !== "hello") state.wsSeen = true;
     switch (msg.kind) {
       case "hello":
         break;
@@ -1011,6 +1013,7 @@
     const clr = $("#clearBtn");
     if (clr) clr.addEventListener("click", () => {
       form.reset();
+      try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
       const info = $("#dropFile");
       if (info) info.hidden = true;
       const t = $(".drop__title", $("#drop"));
@@ -1342,18 +1345,136 @@
     }, true);
   }
 
+  /* ------------------------------------------------ восстановление после F5 */
+
+  /* Черновик формы сборки: переживает перезагрузку страницы (файлы браузер
+     сохранить не даёт, но текст/голос/настройки — да). */
+  const DRAFT_KEY = "goose_form_draft_v1";
+
+  function collectDraft() {
+    const form = $("#runForm");
+    if (!form) return null;
+    const data = {};
+    $$("input, textarea, select", form).forEach((el) => {
+      if (!el.name || el.type === "file") return;
+      data[el.name] = el.type === "checkbox" ? el.checked : el.value;
+    });
+    return data;
+  }
+
+  function saveDraft() {
+    try { localStorage.setItem(DRAFT_KEY, JSON.stringify(collectDraft())); } catch (e) {}
+  }
+
+  function restoreDraft() {
+    let data = null;
+    try { data = JSON.parse(localStorage.getItem(DRAFT_KEY) || "null"); } catch (e) {}
+    if (!data) return;
+    const form = $("#runForm");
+    if (!form) return;
+    $$("input, textarea, select", form).forEach((el) => {
+      if (!el.name || el.type === "file" || !(el.name in data)) return;
+      if (el.type === "checkbox") el.checked = !!data[el.name];
+      else if (el.tagName === "SELECT") {
+        // значение может появиться позже (голоса грузятся асинхронно)
+        if (Array.from(el.options).some((o) => o.value === data[el.name])) {
+          el.value = data[el.name];
+        }
+      } else {
+        el.value = data[el.name];
+      }
+    });
+    const ta = $("textarea[name=script]");
+    if (ta) ta.dispatchEvent(new Event("input"));
+  }
+
+  function initDraft() {
+    const form = $("#runForm");
+    if (!form) return;
+    restoreDraft();
+    let timer = null;
+    const touch = () => { clearTimeout(timer); timer = setTimeout(saveDraft, 300); };
+    form.addEventListener("input", touch);
+    form.addEventListener("change", touch);
+  }
+
+  /* Правая панель: этапы последней сборки. Живые события WS важнее — если они
+     уже пришли, ничего не перерисовываем. */
+  function restorePipeline(job) {
+    const body = $("#logBody");
+    if (!body || state.wsSeen) return;
+
+    const running = job.status === "running" || job.status === "queued";
+    if (!running && job.finished) {
+      const finished = new Date(job.finished).getTime();
+      if (Number.isFinite(finished) && Date.now() - finished > 6 * 3600 * 1000) return;
+    }
+
+    body.innerHTML = "";
+    const stages = job.stages || [];
+    stages.forEach((st, i) => {
+      const last = i === stages.length - 1;
+      const row = document.createElement("div");
+      row.className = "job-step " + (running && last ? "is-active" : "is-done");
+      if (st.step) row.dataset.step = st.step;
+      row.innerHTML = '<span class="job-step__dot"></span>' +
+                      '<span class="job-step__label"></span>' +
+                      '<span class="job-step__time">—</span>';
+      row.querySelector(".job-step__label").textContent = st.label;
+      body.appendChild(row);
+    });
+
+    if (running) {
+      setBusy(true);
+      setLive(true, job.stage || "выполняется…");
+      const term = $("#log");
+      if (term) term.scrollTop = term.scrollHeight;
+    } else if (stages.length) {
+      finishStages(job.status === "done" ? "готово" : "остановлено");
+    }
+  }
+
+  async function restoreAfterReload() {
+    if (!state.user) return;
+
+    try {
+      const d = await api("/api/jobs");
+      const jobs = (d && d.jobs) || [];
+      const pipeline = jobs.find((j) => !(j.meta && j.meta.kind === "slicing"));
+      if (pipeline) restorePipeline(pipeline);
+    } catch (e) {}
+
+    // последняя выдача новостей хранится на сервере в кэше
+    try {
+      const box = $("#newsItems");
+      if (box && !box.children.length) {
+        const n = await api("/api/news");
+        if (n && (n.posts || []).length) {
+          renderNews(n.posts);
+          const hint = $("#newsHint");
+          if (hint) hint.textContent = "Показаны последние найденные";
+        }
+      }
+    } catch (e) {}
+  }
+
   /* ------------------------------------------------ init */
 
   document.addEventListener("DOMContentLoaded", () => {
     // Один сломанный инициализатор не должен убивать весь интерфейс.
-    const steps = [initAddressBarGuard, initCounter, initUpload, initForm, initLogButtons,
+    const steps = [initAddressBarGuard, initCounter, initUpload, initForm, initDraft, initLogButtons,
       initVoiceTabs, initVoiceSelect, initClone, initNews, initScenarioTools,
       initUserMenu, initResults, restoreScript, initSubtitlePreview];
     for (const step of steps) {
       try { step(); } catch (e) { console.error("[init]", step.name, e); }
     }
     state.mePromise = loadMe();
-    state.mePromise.then(() => { loadVoices(); loadMyStats(); });
+    state.mePromise.then(async () => {
+      await loadVoices();
+      restoreDraft();      // голоса уже в списке — можно выбрать прежний
+      loadMyStats();
+      await restoreAfterReload();
+    });
     connectWS();
   });
 

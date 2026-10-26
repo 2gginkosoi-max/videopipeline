@@ -246,6 +246,34 @@ def pick_speech_window(segments: list, target: float = REF_SECONDS) -> tuple:
     return (start, end, text)
 
 
+# Референс должен быть коротким и обязательно с текстом, который реально
+# звучит в этом файле: F5-TTS копирует пару «аудио + текст», и если текст
+# длиннее аудио (или распознан с ошибками), модель начинает «выдумывать».
+MIN_REF_SECONDS = 3.0
+MAX_REF_SECONDS = 12.0
+MIN_REF_WORDS = 4
+
+
+def _validate_reference(ref_wav: Path) -> tuple:
+    """Проверить вырезанный референс и вернуть текст ИМЕННО этого файла."""
+    data, sr = read_wav_mono(ref_wav)
+    duration = (len(data) / sr) if data is not None and sr else 0.0
+    if duration < MIN_REF_SECONDS:
+        print(f"[VOICE] референс слишком короткий: {duration:.1f} c")
+        return False, ""
+
+    # Транскрибируем уже вырезанный кусок, а не исходник: текст обязан
+    # совпадать с аудио по длительности и содержанию.
+    text = transcribe(ref_wav).strip()
+    word_count = len(re.findall(r"[\wА-Яа-яЁё]+", text))
+    print(f"[VOICE] референс: {duration:.1f} c, слов {word_count}: "
+          f"{text[:90]}")
+    if word_count < MIN_REF_WORDS:
+        print("[VOICE] в референсе не слышно чистой речи — нужен другой фрагмент")
+        return False, ""
+    return True, text
+
+
 def make_reference(src_path, dst_wav, target: float = REF_SECONDS) -> tuple:
     """Сделать референс из любого исходника. -> (ok, ref_text)"""
     src_path = Path(src_path)
@@ -257,26 +285,28 @@ def make_reference(src_path, dst_wav, target: float = REF_SECONDS) -> tuple:
     total = (len(data) / sr) if data is not None and sr else 0.0
 
     if total <= target * 1.25:
-        # короткий клик — берём целиком
-        if not extract_wav(raw, dst_wav):
+        # короткий клип — берём целиком
+        ok = extract_wav(raw, dst_wav)
+    else:
+        # длинный — ищем речевой отрезок по таймкодам Whisper
+        segments = transcribe_segments_any(raw)
+        win = pick_speech_window(segments, target)
+        if not win:
             raw.unlink(missing_ok=True)
             return False, ""
-        raw.unlink(missing_ok=True)
-        text = transcribe(dst_wav)
-        return True, text
+        start, end, _old_text = win
+        ok = extract_wav(raw, dst_wav, start=start,
+                         duration=min(end - start, MAX_REF_SECONDS))
 
-    # длинный — ищем речевой отрезок по таймкодам Whisper
-    segments = transcribe_segments_any(raw)
-    win = pick_speech_window(segments, target)
-    if not win:
-        raw.unlink(missing_ok=True)
-        return False, ""
-    start, end, text = win
-    ok = extract_wav(raw, dst_wav, start=start, duration=end - start)
     raw.unlink(missing_ok=True)
     if not ok:
         return False, ""
-    return True, text.strip()
+
+    good, text = _validate_reference(Path(dst_wav))
+    if not good:
+        Path(dst_wav).unlink(missing_ok=True)
+        return False, ""
+    return True, text
 
 
 def clone_from_file(src_path, name: str, gender: str = "auto") -> tuple:
@@ -288,6 +318,8 @@ def clone_from_file(src_path, name: str, gender: str = "auto") -> tuple:
     ok, text = make_reference(src_path, ref)
     if not ok:
         src_path.unlink(missing_ok=True)
+        ref.unlink(missing_ok=True)
+        ref.with_suffix(".txt").unlink(missing_ok=True)
         return None, None, "unknown", 0.0
 
     ref.with_suffix(".txt").write_text(text + "\n", encoding="utf-8")

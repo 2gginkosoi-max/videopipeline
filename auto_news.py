@@ -185,6 +185,28 @@ def main():
             print(f"[VOICE] свой голос: {a.voice_ref}")
         run(say_cmd, "Озвучка F5-TTS")
 
+    # 3.5. проверка озвучки: F5 иногда теряет хвост длинного текста, и тогда
+    # монтаж/субтитры (они строятся по аудио) получаются мусорными.
+    if Path(VOICEOVER).exists() and Path(SCRIPT_CLEAN).exists():
+        check_rc = run_allow_fail(
+            [PY, rf"{VP}\voice_check.py",
+             "--wav", VOICEOVER, "--script", SCRIPT_CLEAN,
+             "--min-coverage", "90"],
+            "Проверка озвучки (ASR vs сценарий)")
+        if check_rc != 0:
+            allow_bad = os.environ.get("ALLOW_BAD_VOICE", "").strip().lower() in (
+                "1", "true", "yes", "on")
+            if allow_bad:
+                print("[WARN] проверка озвучки провалена, продолжаю (ALLOW_BAD_VOICE=1)")
+            else:
+                print("[ERROR] озвучка не совпадает со сценарием — сборку останавливаю,")
+                print("        чтобы не отдать ролик с обрезанным/неразборчивым голосом.")
+                print("        Перегенерируйте озвучку, сократите сценарий или поставьте")
+                print("        ALLOW_BAD_VOICE=1, если хотите собрать как есть.")
+                sys.exit(1)
+    else:
+        print("[WARN] проверка озвучки пропущена: нет voiceover.wav или script_clean.txt")
+
     # 4. ускорение
     run([PY, rf"{VP}\speed_up.py", "--in", VOICEOVER, "--out", VOICEOVER_FAST,
          "--factor", str(a.factor)], "Ускорение темпа (atempo)")
