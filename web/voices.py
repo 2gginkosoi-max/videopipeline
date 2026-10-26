@@ -6,9 +6,11 @@ F5-TTS — модель клонирования: «голос» = рефере�
 """
 
 import json
+import os
 import re
 import subprocess
 import sys
+import threading
 import wave
 from pathlib import Path
 
@@ -175,8 +177,60 @@ def _parse_srt(srt_path: Path) -> list:
     return out
 
 
+_fw_lock = threading.Lock()
+_fw_model = None
+
+
+def _fw_model_get():
+    """Ленивая загрузка faster-whisper (общая на процесс)."""
+    global _fw_model
+    with _fw_lock:
+        if _fw_model is not None:
+            return _fw_model
+        from faster_whisper import WhisperModel  # type: ignore
+
+        name = os.environ.get("WHISPER_MODEL", "small").strip() or "small"
+        local = os.environ.get("WHISPER_MODEL_DIR", "").strip()
+        device = os.environ.get("WHISPER_DEVICE", "").strip()
+        compute = os.environ.get("WHISPER_COMPUTE", "").strip()
+        if not device:
+            device = "cpu"
+            try:
+                import ctranslate2  # type: ignore
+                if ctranslate2.get_cuda_device_count() > 0:
+                    device = "cuda"
+            except Exception:  # noqa: BLE001
+                pass
+        if not compute:
+            compute = "float16" if device == "cuda" else "int8"
+        _fw_model = WhisperModel(local or name, device=device, compute_type=compute)
+        return _fw_model
+
+
+def _fw_segments(wav_path, language=None) -> list:
+    """Распознавание через faster-whisper (если stt.py из F5 недоступен)."""
+    try:
+        from faster_whisper import WhisperModel  # noqa: F401
+    except Exception:  # noqa: BLE001
+        return []
+    try:
+        model = _fw_model_get()
+        segments, _ = model.transcribe(
+            str(wav_path), language=language, vad_filter=True, beam_size=1,
+            condition_on_previous_text=False)
+        return [(float(s.start), float(s.end), s.text.strip())
+                for s in segments if s.text.strip()]
+    except Exception as exc:  # noqa: BLE001
+        print(f"[VOICE] faster-whisper не смог: {exc}", flush=True)
+        return []
+
+
 def transcribe_segments(wav_path, language: str = "ru") -> list:
     """Whisper по файлу -> [(start, end, text)] с таймкодами."""
+    if not Path(STT).exists():
+        segs = _fw_segments(wav_path, None if language == "auto" else language)
+        if segs:
+            return segs
     srt = Path(wav_path).with_suffix(".asr.srt")
     cmd = [PY, STT, "--audio", str(wav_path), "--srt", str(srt), "--model", "small"]
     if language != "auto":
